@@ -1,0 +1,18 @@
+{
+  "creators": [
+    {
+      "affiliation": "ANULUM",
+      "name": "\u0160otek, Miroslav",
+      "orcid": "0009-0009-3560-0851"
+    }
+  ],
+  "description": "Repository validation infrastructure and architecture for planned portable evidence manifests. No qualified evidence runtime is released.",
+  "keywords": [
+    "evidence provenance",
+    "repository validation",
+    "neuromorphic computing"
+  ],
+  "license": "AGPL-3.0-or-later",
+  "title": "Evidence Manifest Toolkit",
+  "upload_type": "software"
+}

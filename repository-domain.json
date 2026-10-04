@@ -1,0 +1,32 @@
+{
+  "capabilities": [],
+  "claims": [],
+  "domain_runtime_dependencies": [],
+  "evidence_maturity": "architecture_only",
+  "lifecycle": "local_scaffold",
+  "owner_group": "SC-NEUROMORPHIC-COMPUTING-SYSTEMS",
+  "planned_owned_schema_ids": [
+    "evidence_manifest_toolkit.adapter_conformance.v1",
+    "evidence_manifest_toolkit.group_certificate.v1",
+    "evidence_manifest_toolkit.manifest.v1",
+    "evidence_manifest_toolkit.registry_snapshot.v1",
+    "evidence_manifest_toolkit.signed_statement.v1",
+    "evidence_manifest_toolkit.studio_mapping.v1",
+    "evidence_manifest_toolkit.target_descriptor.v1",
+    "evidence_manifest_toolkit.trust_snapshot.v1"
+  ],
+  "qualified_owned_schema_ids": [],
+  "repository_name": "EVIDENCE-MANIFEST-TOOLKIT",
+  "tooling_python": {
+    "actual_version": "3.13.16",
+    "design_baseline": "3.13",
+    "development_lock_sha256": "c286e1845d961044d33225f86c24739d5d730508bd7e64c77b477c45b543dd62",
+    "supported_range": ">=3.13.16,<3.14"
+  },
+  "validation_profile": {
+    "id": "gotm.enterprise-repository-tier0.local-scaffold",
+    "profile_sha256": "f453a70eae008c41f8d26a1f495ec3636f64739bcedb9caac0bdf8774300905c",
+    "revision": "2026-10-04",
+    "standard_sha256": "8421674a61444474447fad2f4d2bfc54dc5a1ea12ae988785e57dbcab385938c"
+  }
+}
