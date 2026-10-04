@@ -24,7 +24,7 @@ from tests.test_preflight import ROLES
 
 
 def independent_wire(gate: str = "repository_metadata") -> dict[str, Json]:
-    """Author a transport fixture independently of production serialisation."""
+    """Create a transport fixture independently of production serialisation."""
     return {
         "report_schema": "emt.local-scaffold-guard-report.v1",
         "gate": gate,

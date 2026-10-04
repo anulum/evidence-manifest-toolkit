@@ -14,6 +14,15 @@ Assets are original source/configuration bytes, attribution, exact development p
 
 Trust comes from reviewed guard source and verified tool producers. Caller repository input is untrusted. No received file chooses an executable or plugin. JSON/YAML parsing is bounded and offline. Native tool output is privately captured under explicit byte and time limits. Linux groups are created by the caller and only those owned groups are terminated and reaped; unrelated processes remain outside that authority.
 
+Process cleanup covers the child's original process group. Trusted executables
+must keep their descendants in that group. A descendant that calls `setsid()`
+or changes its process group is outside the termination and reaping guarantee;
+the runner is not a sandbox for hostile executables. On Linux, `run_process`
+enables `PR_SET_CHILD_SUBREAPER` on its calling process and leaves it enabled.
+Callers must account for that process-wide state and separately own any
+session-escaping descendants. The runner never signals or waits for arbitrary
+children outside the owned group.
+
 A supplied workflow outcome file is an untrusted local projection. It cannot
 bypass graph validation, introduce roles or callbacks, or authenticate a hosted
 run. An owner using genuine host receipts must independently establish their

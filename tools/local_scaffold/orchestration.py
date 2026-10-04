@@ -250,7 +250,7 @@ def configured_roles(root: Path) -> tuple[Role, ...]:
                 "--config",
                 configuration,
                 "--select",
-                "D100,D101,D102,D103,D104,D105,D107",
+                "D",
                 *source_paths,
             ),
             "infrastructure_tests_coverage": (
@@ -263,7 +263,7 @@ def configured_roles(root: Path) -> tuple[Role, ...]:
                 "--confcutdir",
                 str(trusted_source / "tests"),
                 "-n",
-                "8",
+                "0",
                 "--dist=worksteal",
                 "--basetemp=.tool-cache/test-runs",
                 "--cov=tools",

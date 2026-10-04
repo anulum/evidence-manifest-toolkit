@@ -31,12 +31,12 @@ ADVERSE = "workflow_policy.aggregate-skipped"
 
 
 def successful() -> dict[str, Json]:
-    """Author an independent exact six-role positive input."""
+    """Create an independent exact six-role positive input."""
     return dict.fromkeys(ROLES, "success")
 
 
 def input_cases() -> list[tuple[str, Json, int, str | None]]:
-    """Author every role/status pair and each independent closed-shape refusal."""
+    """Create every role/status pair and each independent closed-shape refusal."""
     cases: list[tuple[str, Json, int, str | None]] = [("all-six-success", successful(), 0, None)]
     for role in ROLES:
         for status in ("failure", "cancelled", "skipped", "not_run"):

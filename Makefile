@@ -7,6 +7,7 @@
 # EVIDENCE-MANIFEST-TOOLKIT — source and configuration provenance
 
 PYTHON := .venv/bin/python
+TEST_WORKERS ?= 0
 
 .PHONY: quality test docs preflight inventory-generate inventory source-analysis static-security dependency-security secret-scan workflow-security sbom supply-chain
 
@@ -14,10 +15,10 @@ quality:
 	$(PYTHON) -m ruff check tools tests
 	$(PYTHON) -m ruff format --check tools tests
 	$(PYTHON) -m mypy tools tests
-	$(PYTHON) -m ruff check --select D100,D101,D102,D103,D104,D105,D107 tools tests
+	$(PYTHON) -m ruff check --select D tools tests
 
 test:
-	$(PYTHON) -m pytest -n 8 --dist=worksteal --basetemp=.tool-cache/tests --cov=tools --cov-branch --cov-fail-under=100 --cov-report=term-missing tests
+	nice -n 10 $(PYTHON) -m pytest -n $(TEST_WORKERS) --dist=worksteal --basetemp=.tool-cache/tests --cov=tools --cov-branch --cov-fail-under=100 --cov-report=term-missing tests
 
 docs:
 	$(PYTHON) tools/check_documentation.py --root . --json

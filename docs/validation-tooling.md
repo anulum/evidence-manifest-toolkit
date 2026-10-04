@@ -12,6 +12,19 @@ EVIDENCE-MANIFEST-TOOLKIT — source and configuration provenance
 
 Public guard commands are documented in `VALIDATION.md` in the source root. Each leaf emits the exact seven-field local diagnostic report. Inventory has separate generation and verification operations; preflight never generates or recursively invokes itself. The process API accepts explicitly trusted argument lists and qualifies only orchestration when tested with finite child programs.
 
+`make quality` and the native documentation role enforce the full Ruff `D`
+rules with the NumPy convention. `make test` defaults to serial execution
+(`TEST_WORKERS=0`) at niceness 10. A caller with allocated resources may set
+`TEST_WORKERS` explicitly; the local preflight test role also defaults to
+serial execution. Full-suite runs remain separate from focused local checks.
+
+`run_process` terminates and reaps only descendants that stay in the child's
+original process group. Trusted commands must preserve that membership.
+Session-escaping descendants require separate caller-owned cleanup. The Linux
+subreaper flag remains enabled on the calling process after the operation;
+unrelated children are outside the runner's wait and signal scope. See the
+threat model for this execution boundary.
+
 The native documentation configuration excludes private working documents and
 assets from the generated site and search index. The documentation guard checks
 the actual renderer output for private paths before accepting its native success.
