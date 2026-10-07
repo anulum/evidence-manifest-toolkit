@@ -3560,7 +3560,7 @@
   "python": "3.13.16",
   "schema_revision": "emt.local-development-provenance.v1",
   "security_audit": {
-    "produced_at": "2026-10-03T23:03:54.153735+00:00",
+    "produced_at": "2026-10-07T15:08:20.922765+00:00",
     "producer": "pip-audit",
     "sha256": "3bf24d1cc9e4d4448e1f48d85cc49636fa0fe980a022ad2c5ff93d850d695418",
     "version": "2.10.1"
