@@ -21,7 +21,9 @@ from packaging.specifiers import SpecifierSet
 from packaging.utils import InvalidName, canonicalize_name
 
 from .inputs import json_object, read_bytes, read_text, yaml_object
+from .maintained_dependency import check_maintained_dependency
 from .metadata import installed_graph
+from .package_metadata import check_package_metadata, direct_input_pins
 from .policy import (
     EXPECTED_GRAPH,
     LOCK_SHA256,
@@ -29,6 +31,7 @@ from .policy import (
     PROVENANCE_SHA256,
     PYTHON_SUPPORTED_RANGE,
 )
+from .quality_configuration import check_quality_configuration
 from .reports import Fault, Report
 
 
@@ -59,7 +62,7 @@ def native_tool(role: str) -> Path:
     return repository / name
 
 
-def verify(root: Path, report: Report) -> None:
+def verify_sources_and_producers(root: Path, report: Report) -> None:
     """Inspect the whole lock, direct inputs, producer/licence bindings and hooks.
 
     Parameters
@@ -75,8 +78,7 @@ def verify(root: Path, report: Report) -> None:
         Raised for unavailable/malformed bounded inputs or invalid producer configuration.
     """
     if platform.python_version() not in SpecifierSet(PYTHON_SUPPORTED_RANGE):
-        report.add("dependency_alignment.incompatible-patch", "dependency-provenance.json")
-        return
+        raise Fault("dependency_alignment.incompatible-patch", "dependency-provenance.json")
     lock = read_text(root, "requirements-dev.txt")
     if hashlib.sha256(lock.encode()).hexdigest() != LOCK_SHA256:
         report.add("dependency_alignment.missing-hash", "requirements-dev.txt")
@@ -92,12 +94,7 @@ def verify(root: Path, report: Report) -> None:
         locked[key] = version
     if locked != EXPECTED_GRAPH:
         report.add("dependency_alignment.missing-transitive", "requirements-dev.txt")
-    direct = dict(
-        (canonicalize_name(name), version)
-        for name, version in re.findall(
-            r"(?m)^([\w.-]+)==([^\s]+)$", read_text(root, "requirements-dev.in")
-        )
-    )
+    direct = direct_input_pins(root)
     provenance_bytes = read_bytes(root, "dependency-provenance.json")
     if hashlib.sha256(provenance_bytes).hexdigest() != PROVENANCE_SHA256:
         report.add("dependency_alignment.licence-drift", "dependency-provenance.json")
@@ -131,7 +128,9 @@ def verify(root: Path, report: Report) -> None:
         elif hashlib.sha256(metadata.encode()).hexdigest() != record.get("metadata_sha256"):
             report.add("dependency_alignment.wrong-producer", "dependency-provenance.json")
         artifact = record.get("source_artifact")
-        if not isinstance(artifact, dict) or not isinstance(artifact.get("url"), str):
+        if key == "rfc8785" and record.get("version") == "0.1.4+emt.1":
+            check_maintained_dependency(root, artifact, lock, report)
+        elif not isinstance(artifact, dict) or not isinstance(artifact.get("url"), str):
             report.add("dependency_alignment.mutable-download", "dependency-provenance.json")
         elif not str(artifact["url"]).startswith("https://files.pythonhosted.org/packages/"):
             report.add("dependency_alignment.mutable-download", "dependency-provenance.json")
@@ -141,8 +140,7 @@ def verify(root: Path, report: Report) -> None:
         configuration = tomllib.loads(read_text(root, "pyproject.toml"))
     except tomllib.TOMLDecodeError as error:
         raise Fault("configuration_invalid", "pyproject.toml", 4) from error
-    if "project" in configuration or "build-system" in configuration:
-        report.add("dependency_alignment.runtime-dep", "pyproject.toml")
+    check_package_metadata(configuration, report)
     tooling = configuration.get("tool")
     typing = tooling.get("mypy") if isinstance(tooling, dict) else None
     if (
@@ -151,28 +149,26 @@ def verify(root: Path, report: Report) -> None:
         or typing.get("python_version") != "3.13"
     ):
         report.add("dependency_alignment.hook-drift", "pyproject.toml")
-    hooks = yaml_object(root, ".pre-commit-config.yaml")
-    if hooks.get("default_language_version") != {"python": "python3.13"}:
-        report.add("dependency_alignment.hook-drift", ".pre-commit-config.yaml")
-    repositories = hooks.get("repos")
-    if not isinstance(repositories, list) or len(repositories) != 1:
-        report.add("dependency_alignment.hook-drift", ".pre-commit-config.yaml")
-    elif not isinstance(repositories[0], dict) or repositories[0].get("repo") != "local":
-        report.add("dependency_alignment.hook-drift", ".pre-commit-config.yaml")
-    else:
-        entries = repositories[0].get("hooks")
-        if not isinstance(entries, list):
-            report.add("dependency_alignment.hook-drift", ".pre-commit-config.yaml")
-        else:
-            for entry in entries:
-                if (
-                    not isinstance(entry, dict)
-                    or entry.get("language") != "system"
-                    or "additional_dependencies" in entry
-                ):
-                    report.add("dependency_alignment.hook-drift", ".pre-commit-config.yaml")
-                elif not str(entry.get("entry", "")).startswith(".venv/bin/python "):
-                    report.add("dependency_alignment.hook-drift", ".pre-commit-config.yaml")
+    check_quality_configuration(yaml_object(root, ".pre-commit-config.yaml"), report)
+
+
+def verify(root: Path, report: Report) -> None:
+    """Check all installed sources and separately admitted current registry advisories.
+
+    Parameters
+    ----------
+    root : Path
+        Inspected inputs, never a producer or admission authority.
+    report : Report
+        Receives complete source, producer and current advisory refusals.
+
+    Raises
+    ------
+    Fault
+        Required original inputs or the current trusted admission are unavailable,
+        unsafe, invalid or changed.
+    """
+    verify_sources_and_producers(root, report)
     from .security import verify as verify_security
 
     verify_security(root, report)

@@ -1,0 +1,928 @@
+{
+  "entries": [
+    {
+      "schema_id": "evidence_manifest_toolkit.group_certificate.v1",
+      "definition_uri": "urn:gotm:design:evidence_manifest_toolkit.group_certificate.v1",
+      "instance_schema_id": "evidence_manifest_toolkit.group_certificate.v1",
+      "schema_ref": {
+        "digest": "sha256:743ef73415c8c5d5b9dea7de91860d44a96c4fc5fb5d686f997a7c55c0dc0c21",
+        "byte_length": "1913",
+        "media_type": "application/schema+json",
+        "digest_basis": "raw_bytes"
+      },
+      "entry_jcs_digest": "sha256:c86c541d8f6b3d90f691e63241acbd63a0507843ede0e6f146dfe4e8937a68f7"
+    },
+    {
+      "schema_id": "evidence_manifest_toolkit.manifest.v1",
+      "definition_uri": "urn:gotm:design:evidence_manifest_toolkit.manifest.v1",
+      "instance_schema_id": "evidence_manifest_toolkit.manifest.v1",
+      "schema_ref": {
+        "digest": "sha256:fb15fde1718a628cb1511d8a7f15cde8dae02b185b8ab688ea34b0b1110d52ef",
+        "byte_length": "21684",
+        "media_type": "application/schema+json",
+        "digest_basis": "raw_bytes"
+      },
+      "entry_jcs_digest": "sha256:99a686692a75c6d2238b72bc8d8edf0e1901cc754dd9193c6f9f4a0e1bf69ba8"
+    },
+    {
+      "schema_id": "evidence_manifest_toolkit.registry_snapshot.v1",
+      "definition_uri": "urn:gotm:design:evidence_manifest_toolkit.registry_snapshot.v1",
+      "instance_schema_id": "evidence_manifest_toolkit.registry_snapshot.v1",
+      "schema_ref": {
+        "digest": "sha256:4e1e2a80ed2b9838cb81352b70da06fc8c335e55f5299211c4f518afb0e0f7c8",
+        "byte_length": "14405",
+        "media_type": "application/schema+json",
+        "digest_basis": "raw_bytes"
+      },
+      "entry_jcs_digest": "sha256:94542f3d3660f2eaf0ce910db5f7d3edc89a25c1cf506e51106ff7c2619bbf2c"
+    },
+    {
+      "schema_id": "evidence_manifest_toolkit.signed_statement.v1",
+      "definition_uri": "urn:gotm:design:evidence_manifest_toolkit.signed_statement.v1",
+      "instance_schema_id": "evidence_manifest_toolkit.signed_statement.v1",
+      "schema_ref": {
+        "digest": "sha256:50e8ddf441de6b86c2c921b70097dfe62b4279e23f3a8a28bc62661a22c2d8b7",
+        "byte_length": "3485",
+        "media_type": "application/schema+json",
+        "digest_basis": "raw_bytes"
+      },
+      "entry_jcs_digest": "sha256:3d78fd5e591a2c616726e7e18f341405705dda3fc2eef9a5b163054d74376a03"
+    },
+    {
+      "schema_id": "evidence_manifest_toolkit.trust_snapshot.v1",
+      "definition_uri": "urn:gotm:design:evidence_manifest_toolkit.trust_snapshot.v1",
+      "instance_schema_id": "evidence_manifest_toolkit.trust_snapshot.v1",
+      "schema_ref": {
+        "digest": "sha256:b3e75e2c8a479ffd7713ca65224a8dd62081fd6bd3da15204fc04022969d7fff",
+        "byte_length": "5943",
+        "media_type": "application/schema+json",
+        "digest_basis": "raw_bytes"
+      },
+      "entry_jcs_digest": "sha256:5f8ca7af5030a5bd5b398aa524d0c2c35d9135dec2f5f31ba7cb05480645bf06"
+    },
+    {
+      "schema_id": "experiment_ledger.quantum_amendment.v1",
+      "definition_uri": "urn:gotm:design:experiment_ledger.quantum_amendment.v1",
+      "instance_schema_id": "experiment_ledger.quantum_amendment.v1",
+      "schema_ref": {
+        "digest": "sha256:9debf5903af5c329de990108e2d9f272f9b88e7372fe7d0930bf37ea3955de78",
+        "byte_length": "6605",
+        "media_type": "application/schema+json",
+        "digest_basis": "raw_bytes"
+      },
+      "entry_jcs_digest": "sha256:d3caade72ba0bf218ab4655c4e46c2f05f2e75a2279ffd01475a0f01838c4263"
+    },
+    {
+      "schema_id": "experiment_ledger.quantum_prereg.v1",
+      "definition_uri": "urn:gotm:design:experiment_ledger.quantum_prereg.v1",
+      "instance_schema_id": "experiment_ledger.quantum_prereg.v1",
+      "schema_ref": {
+        "digest": "sha256:5b782f81a600d3d17ddd322d1e55a359ba2b85475e7c0484296cb676d037102e",
+        "byte_length": "8935",
+        "media_type": "application/schema+json",
+        "digest_basis": "raw_bytes"
+      },
+      "entry_jcs_digest": "sha256:fbc953b1046cd9622328b2a3a25ba01d4a65797fd24dfb55e984959a907519c1"
+    },
+    {
+      "schema_id": "experiment_ledger.quantum_result_link.v1",
+      "definition_uri": "urn:gotm:design:experiment_ledger.quantum_result_link.v1",
+      "instance_schema_id": "experiment_ledger.quantum_result_link.v1",
+      "schema_ref": {
+        "digest": "sha256:44e99049b1ba5306d02be1800d413a53faa6d862def57a57a58e93c3f2b6bd31",
+        "byte_length": "5791",
+        "media_type": "application/schema+json",
+        "digest_basis": "raw_bytes"
+      },
+      "entry_jcs_digest": "sha256:15c4812b579b475202be762cc9b4106e92d0ecf9ddbc2f75da49d68a352fd29a"
+    },
+    {
+      "schema_id": "qpu_result_pack.bundle.v2",
+      "definition_uri": "urn:gotm:design:qpu_result_pack.bundle.v2",
+      "instance_schema_id": "qpu_result_pack.bundle.v2",
+      "schema_ref": {
+        "digest": "sha256:117662b239526302e864d104b7aa9c031e6ff65bdb9c5b28c78d382cc2f803ff",
+        "byte_length": "26100",
+        "media_type": "application/schema+json",
+        "digest_basis": "raw_bytes"
+      },
+      "entry_jcs_digest": "sha256:767c026c967b0e36e2a6a4774ddc34a243d88edd6d85e073709353ef79ac3389"
+    },
+    {
+      "schema_id": "qpu_result_pack.case_inventory.v1",
+      "definition_uri": "urn:gotm:design:qpu_result_pack.case_inventory.v1",
+      "instance_schema_id": "qpu_result_pack.case_inventory.v1",
+      "schema_ref": {
+        "digest": "sha256:73f72d0b7df2a65cefaf96bddcb0f01f5cc4e02d0f2b8dc22bd110151cafe14d",
+        "byte_length": "2677",
+        "media_type": "application/schema+json",
+        "digest_basis": "raw_bytes"
+      },
+      "entry_jcs_digest": "sha256:d58cd249ec69ebd941e7d40034470945364ff33bcb735e62a99c4f7c202cc45c"
+    },
+    {
+      "schema_id": "qpu_result_pack.case_records.v1",
+      "definition_uri": "urn:gotm:design:qpu_result_pack.case_records.v1",
+      "instance_schema_id": "qpu_result_pack.case_records.v1",
+      "schema_ref": {
+        "digest": "sha256:820e7b962ff7e546dbc9df60ab37b6223baa178fcfb22b907482d901808e8086",
+        "byte_length": "3906",
+        "media_type": "application/schema+json",
+        "digest_basis": "raw_bytes"
+      },
+      "entry_jcs_digest": "sha256:c1b064c1bb2eaf4f7bd2aa22a6ffabdeb9b5bd8f203fb6f35d4af2d87519188f"
+    },
+    {
+      "schema_id": "urn:gotm:design:qpu_result_pack.closure.calibration_campaign_context.v7",
+      "definition_uri": "urn:gotm:design:qpu_result_pack.closure.calibration_campaign_context.v7",
+      "instance_schema_id": "urn:gotm:design:qpu_result_pack.closure.calibration_campaign_context.v7",
+      "schema_ref": {
+        "digest": "sha256:c0cb965f778c912b4254d04ae2c9552d9288b75a7cbd342ac6f996b1ac562af3",
+        "byte_length": "36722",
+        "media_type": "application/schema+json",
+        "digest_basis": "raw_bytes"
+      },
+      "entry_jcs_digest": "sha256:56e92bf0f8f4947e59a74b1123a7a6c7ccc4c8d19f4e6b139799b807d21f06f0"
+    },
+    {
+      "schema_id": "urn:gotm:design:qpu_result_pack.closure.cancellation_inventory.v4",
+      "definition_uri": "urn:gotm:design:qpu_result_pack.closure.cancellation_inventory.v4",
+      "instance_schema_id": "urn:gotm:design:qpu_result_pack.closure.cancellation_inventory.v4",
+      "schema_ref": {
+        "digest": "sha256:98bb3cf5ab262b7041e72b4c5d0cf979efa8fe90bea44e28238653dd287f3962",
+        "byte_length": "3403",
+        "media_type": "application/schema+json",
+        "digest_basis": "raw_bytes"
+      },
+      "entry_jcs_digest": "sha256:b74bca64e712632144cdf5449d7e7b1c5957f606a452b7c62ee83e5b4ffe9d6c"
+    },
+    {
+      "schema_id": "urn:gotm:design:qpu_result_pack.closure.cancellation_signal.v4",
+      "definition_uri": "urn:gotm:design:qpu_result_pack.closure.cancellation_signal.v4",
+      "instance_schema_id": "urn:gotm:design:qpu_result_pack.closure.cancellation_signal.v4",
+      "schema_ref": {
+        "digest": "sha256:55e1b66baa3a6cfad177beaca3dad24aea8f08128899d706a51de59630f9da49",
+        "byte_length": "1950",
+        "media_type": "application/schema+json",
+        "digest_basis": "raw_bytes"
+      },
+      "entry_jcs_digest": "sha256:56636572d8f1493e1c44daa5c655f34606c41e346cf81bce502b8001a3cdb1b3"
+    },
+    {
+      "schema_id": "urn:gotm:design:qpu_result_pack.closure.capture_source_qualification_core.v4",
+      "definition_uri": "urn:gotm:design:qpu_result_pack.closure.capture_source_qualification_core.v4",
+      "instance_schema_id": "urn:gotm:design:qpu_result_pack.closure.capture_source_qualification_core.v4",
+      "schema_ref": {
+        "digest": "sha256:03731576ab5ba189e90456e184fab9f5d70e1899a9241bfb74dc6b85a82818dc",
+        "byte_length": "5365",
+        "media_type": "application/schema+json",
+        "digest_basis": "raw_bytes"
+      },
+      "entry_jcs_digest": "sha256:aa327ca1cb1ee0c9a0dfb3ebfe7ce7d7c560f45d9ff48721dedfe434cc44ad31"
+    },
+    {
+      "schema_id": "urn:gotm:design:qpu_result_pack.closure.captured_quantity_source.v7",
+      "definition_uri": "urn:gotm:design:qpu_result_pack.closure.captured_quantity_source.v7",
+      "instance_schema_id": "urn:gotm:design:qpu_result_pack.closure.captured_quantity_source.v7",
+      "schema_ref": {
+        "digest": "sha256:85cef9a913f59f3affb1107c4c23a75e6a2d4e499f205156870ab35dc8c9f751",
+        "byte_length": "4157",
+        "media_type": "application/schema+json",
+        "digest_basis": "raw_bytes"
+      },
+      "entry_jcs_digest": "sha256:a4d53cbb874edae2090d7c1d1c4fb36e94dcf13da09f87c89d028f417c4d17dd"
+    },
+    {
+      "schema_id": "urn:gotm:design:qpu_result_pack.closure.case_inventory_core.v4",
+      "definition_uri": "urn:gotm:design:qpu_result_pack.closure.case_inventory_core.v4",
+      "instance_schema_id": "urn:gotm:design:qpu_result_pack.closure.case_inventory_core.v4",
+      "schema_ref": {
+        "digest": "sha256:99c76167690801912cbf094265f09f637751a5f0db837b02fb1314a092cc293f",
+        "byte_length": "5425",
+        "media_type": "application/schema+json",
+        "digest_basis": "raw_bytes"
+      },
+      "entry_jcs_digest": "sha256:94a89a87e2cb2f24996417805e98f0376c9109c3e19121b9d90e7e716e054f99"
+    },
+    {
+      "schema_id": "urn:gotm:design:qpu_result_pack.closure.clock_interval_qualification_core.v4",
+      "definition_uri": "urn:gotm:design:qpu_result_pack.closure.clock_interval_qualification_core.v4",
+      "instance_schema_id": "urn:gotm:design:qpu_result_pack.closure.clock_interval_qualification_core.v4",
+      "schema_ref": {
+        "digest": "sha256:36a873e4a0ec042c27142cc7a80bc20f57c71c7daa79db903556bd17b6f6a2ea",
+        "byte_length": "5491",
+        "media_type": "application/schema+json",
+        "digest_basis": "raw_bytes"
+      },
+      "entry_jcs_digest": "sha256:af038a6632f5fb3930d2fac98b733776fdfe13067549fec3d2ab17bd942410f5"
+    },
+    {
+      "schema_id": "urn:gotm:design:qpu_result_pack.closure.clock_observation.v4",
+      "definition_uri": "urn:gotm:design:qpu_result_pack.closure.clock_observation.v4",
+      "instance_schema_id": "urn:gotm:design:qpu_result_pack.closure.clock_observation.v4",
+      "schema_ref": {
+        "digest": "sha256:fab0e870219eece7337cc65d4e66aa1787fbf45acdf32dcbb4b5077605077bd2",
+        "byte_length": "3743",
+        "media_type": "application/schema+json",
+        "digest_basis": "raw_bytes"
+      },
+      "entry_jcs_digest": "sha256:97325d3bc0bcbceb78250febc642943f712a540ebe8acdcacd9a5d88b2337e5a"
+    },
+    {
+      "schema_id": "urn:gotm:design:qpu_result_pack.closure.common_envelope_projection.v6",
+      "definition_uri": "urn:gotm:design:qpu_result_pack.closure.common_envelope_projection.v6",
+      "instance_schema_id": null,
+      "schema_ref": {
+        "digest": "sha256:52b6f117ff9003be80112d36ce370f59f15ff6699d49aebadfba77e3cf794499",
+        "byte_length": "660",
+        "media_type": "application/schema+json",
+        "digest_basis": "raw_bytes"
+      },
+      "entry_jcs_digest": "sha256:bc534d685dd6d2d9f11ee22cf1a3145b23c1cd46ca86e652dfc65fc44ff00d12"
+    },
+    {
+      "schema_id": "urn:gotm:design:qpu_result_pack.closure.common_report_projection.v6",
+      "definition_uri": "urn:gotm:design:qpu_result_pack.closure.common_report_projection.v6",
+      "instance_schema_id": null,
+      "schema_ref": {
+        "digest": "sha256:467844edf7ebc764b0850935f8f260adcc2e3c39b2163a943515c35dcdc60695",
+        "byte_length": "10706",
+        "media_type": "application/schema+json",
+        "digest_basis": "raw_bytes"
+      },
+      "entry_jcs_digest": "sha256:f111466b7779eefde2d85f2cac6ee49731a6f2fb5b33c84ad247b66c8a579fa2"
+    },
+    {
+      "schema_id": "urn:gotm:design:qpu_result_pack.closure.common_trust_context.v6",
+      "definition_uri": "urn:gotm:design:qpu_result_pack.closure.common_trust_context.v6",
+      "instance_schema_id": null,
+      "schema_ref": {
+        "digest": "sha256:5464a4f333e0729a1f65bb2f222e92f927882695f6399baee26414d212652fd3",
+        "byte_length": "1814",
+        "media_type": "application/schema+json",
+        "digest_basis": "raw_bytes"
+      },
+      "entry_jcs_digest": "sha256:4620f01c4c389be905d45536987ed38e00915613efb34cd118a26ba564755464"
+    },
+    {
+      "schema_id": "urn:gotm:design:qpu_result_pack.closure.containment_observation.v4",
+      "definition_uri": "urn:gotm:design:qpu_result_pack.closure.containment_observation.v4",
+      "instance_schema_id": "urn:gotm:design:qpu_result_pack.closure.containment_observation.v4",
+      "schema_ref": {
+        "digest": "sha256:35ae272df2b1a66ea4ad4bda94dcdb679ac51c8cab9022d5db906c3187d4c23d",
+        "byte_length": "4145",
+        "media_type": "application/schema+json",
+        "digest_basis": "raw_bytes"
+      },
+      "entry_jcs_digest": "sha256:28b35942c33715e232d1a43263c24d63619b3f47f788b4a17c67fa6691e46d70"
+    },
+    {
+      "schema_id": "urn:gotm:design:qpu_result_pack.closure.current_source_mapping.v7",
+      "definition_uri": "urn:gotm:design:qpu_result_pack.closure.current_source_mapping.v7",
+      "instance_schema_id": "urn:gotm:design:qpu_result_pack.closure.current_source_mapping.v7",
+      "schema_ref": {
+        "digest": "sha256:11f5e74936eb93af54f3063fbc8b1e0523425bc8c4054813b13a7cacce7c188f",
+        "byte_length": "8284",
+        "media_type": "application/schema+json",
+        "digest_basis": "raw_bytes"
+      },
+      "entry_jcs_digest": "sha256:3c024f845852c00776cbc4fe0dbec713fa719875f05e5bc90fab04a559d0f390"
+    },
+    {
+      "schema_id": "urn:gotm:design:qpu_result_pack.closure.current_source_observation.v7",
+      "definition_uri": "urn:gotm:design:qpu_result_pack.closure.current_source_observation.v7",
+      "instance_schema_id": "urn:gotm:design:qpu_result_pack.closure.current_source_observation.v7",
+      "schema_ref": {
+        "digest": "sha256:772f5bcc2a17414e4231b673ac48eeb96b72a6290263eef8ed725d8f28c91d12",
+        "byte_length": "14276",
+        "media_type": "application/schema+json",
+        "digest_basis": "raw_bytes"
+      },
+      "entry_jcs_digest": "sha256:ad9dd6bcf3b6638a32634303e74f6df3439bacd83dbf3c8453f82eb49f01623f"
+    },
+    {
+      "schema_id": "urn:gotm:design:qpu_result_pack.closure.duration_observation.v4",
+      "definition_uri": "urn:gotm:design:qpu_result_pack.closure.duration_observation.v4",
+      "instance_schema_id": "urn:gotm:design:qpu_result_pack.closure.duration_observation.v4",
+      "schema_ref": {
+        "digest": "sha256:1a2f1a1f820a13aa05b2ab1ddc65e25b6f35ef51214cc78346cc9734cb73de13",
+        "byte_length": "2474",
+        "media_type": "application/schema+json",
+        "digest_basis": "raw_bytes"
+      },
+      "entry_jcs_digest": "sha256:64af21ed8d1aba7c5108cc2ea88632fea3469531ab596ca3a78b7fe720f952e3"
+    },
+    {
+      "schema_id": "urn:gotm:design:qpu_result_pack.closure.evaluation_inputs.v7",
+      "definition_uri": "urn:gotm:design:qpu_result_pack.closure.evaluation_inputs.v7",
+      "instance_schema_id": "urn:gotm:design:qpu_result_pack.closure.evaluation_inputs.v7",
+      "schema_ref": {
+        "digest": "sha256:ba97e6139d94f8eba5ea55b128ab9822a0f097e86732b8fcd34e2ede427b92dd",
+        "byte_length": "114611",
+        "media_type": "application/schema+json",
+        "digest_basis": "raw_bytes"
+      },
+      "entry_jcs_digest": "sha256:8e01aaf076ccf90bc7880d453a4d7a9355b41c596c24f95f246debd82899e546"
+    },
+    {
+      "schema_id": "urn:gotm:design:qpu_result_pack.closure.evaluation_raw_observation.v7",
+      "definition_uri": "urn:gotm:design:qpu_result_pack.closure.evaluation_raw_observation.v7",
+      "instance_schema_id": "urn:gotm:design:qpu_result_pack.closure.evaluation_raw_observation.v7",
+      "schema_ref": {
+        "digest": "sha256:96c65b960bf4d12234599407055734f2bcb50a5f94883de4eb6435554fa20bbf",
+        "byte_length": "20324",
+        "media_type": "application/schema+json",
+        "digest_basis": "raw_bytes"
+      },
+      "entry_jcs_digest": "sha256:9f42ee989a59409527484ba18a74b19d13795eb68ed215e8165c8669554b507a"
+    },
+    {
+      "schema_id": "urn:gotm:design:qpu_result_pack.closure.evaluation_request.v7",
+      "definition_uri": "urn:gotm:design:qpu_result_pack.closure.evaluation_request.v7",
+      "instance_schema_id": "urn:gotm:design:qpu_result_pack.closure.evaluation_request.v7",
+      "schema_ref": {
+        "digest": "sha256:abf882f6fa2c1f438741f28447c7eed54782194a5f76d3c76880c802604232c3",
+        "byte_length": "51752",
+        "media_type": "application/schema+json",
+        "digest_basis": "raw_bytes"
+      },
+      "entry_jcs_digest": "sha256:4715b727773e79f05aecf7661cb486a47f29863ec67a9e8edf7debbf8c7884d2"
+    },
+    {
+      "schema_id": "urn:gotm:design:qpu_result_pack.closure.evaluation_role_manifest.v7",
+      "definition_uri": "urn:gotm:design:qpu_result_pack.closure.evaluation_role_manifest.v7",
+      "instance_schema_id": "urn:gotm:design:qpu_result_pack.closure.evaluation_role_manifest.v7",
+      "schema_ref": {
+        "digest": "sha256:db593c8310f227caa498823d68d83857118015355e5c2d15a3a300359a3e1a5d",
+        "byte_length": "34833",
+        "media_type": "application/schema+json",
+        "digest_basis": "raw_bytes"
+      },
+      "entry_jcs_digest": "sha256:f023dfe56e40b3b4f275a6c02521e9b343951286ae853169c25fffaf1bf87a2c"
+    },
+    {
+      "schema_id": "urn:gotm:design:qpu_result_pack.closure.execution_qualification_core.v4",
+      "definition_uri": "urn:gotm:design:qpu_result_pack.closure.execution_qualification_core.v4",
+      "instance_schema_id": "urn:gotm:design:qpu_result_pack.closure.execution_qualification_core.v4",
+      "schema_ref": {
+        "digest": "sha256:1fda0d61538d68c80b7d21819ad451e9af6e2a398f2e03bb008ec8643c95bf6c",
+        "byte_length": "5691",
+        "media_type": "application/schema+json",
+        "digest_basis": "raw_bytes"
+      },
+      "entry_jcs_digest": "sha256:9a1f49c4a27fac69924dd0096ee8b233552205b3f455132e6e40fa90c251cc99"
+    },
+    {
+      "schema_id": "urn:gotm:design:qpu_result_pack.closure.input_inventory.v4",
+      "definition_uri": "urn:gotm:design:qpu_result_pack.closure.input_inventory.v4",
+      "instance_schema_id": "urn:gotm:design:qpu_result_pack.closure.input_inventory.v4",
+      "schema_ref": {
+        "digest": "sha256:770c73e3253d2d256834c7c27bead0a8b58e9ab3fb61628f8463b266d4a09a9d",
+        "byte_length": "2864",
+        "media_type": "application/schema+json",
+        "digest_basis": "raw_bytes"
+      },
+      "entry_jcs_digest": "sha256:97aee272d288f87e47fedf06d9e18dee6dd80e657a2b9b7807f23d8be51d0170"
+    },
+    {
+      "schema_id": "urn:gotm:design:qpu_result_pack.closure.measurement_map_core.v4",
+      "definition_uri": "urn:gotm:design:qpu_result_pack.closure.measurement_map_core.v4",
+      "instance_schema_id": "urn:gotm:design:qpu_result_pack.closure.measurement_map_core.v4",
+      "schema_ref": {
+        "digest": "sha256:cf0e200e39892a8d940384a14b9c3fd347cecead5f242a12a9ecda7052294dbc",
+        "byte_length": "5898",
+        "media_type": "application/schema+json",
+        "digest_basis": "raw_bytes"
+      },
+      "entry_jcs_digest": "sha256:f7930d2db42a1a153d0f0f5c4943d1a2871a09e968b812b5bd6d36d72cbc7ca2"
+    },
+    {
+      "schema_id": "urn:gotm:design:qpu_result_pack.closure.measurement_qualification_core.v4",
+      "definition_uri": "urn:gotm:design:qpu_result_pack.closure.measurement_qualification_core.v4",
+      "instance_schema_id": "urn:gotm:design:qpu_result_pack.closure.measurement_qualification_core.v4",
+      "schema_ref": {
+        "digest": "sha256:2af0d735d1cfe6478d3d7d6ad4200058c322076f7158eb61d3815a37d5dbc6a2",
+        "byte_length": "5427",
+        "media_type": "application/schema+json",
+        "digest_basis": "raw_bytes"
+      },
+      "entry_jcs_digest": "sha256:5f3c4d0be1932f37b1a9b6c432585c4e325751018bf55610a649d6bb4c8741e8"
+    },
+    {
+      "schema_id": "urn:gotm:design:qpu_result_pack.closure.numeric_inventory_core.v4",
+      "definition_uri": "urn:gotm:design:qpu_result_pack.closure.numeric_inventory_core.v4",
+      "instance_schema_id": "urn:gotm:design:qpu_result_pack.closure.numeric_inventory_core.v4",
+      "schema_ref": {
+        "digest": "sha256:d14be4c1ebebd3c96e841ece7db43bd5fac248fd0a767e03f8c18e7e43ab17e7",
+        "byte_length": "5590",
+        "media_type": "application/schema+json",
+        "digest_basis": "raw_bytes"
+      },
+      "entry_jcs_digest": "sha256:e73483b83575137b2809567770fbb2eccbedcad5a471627b22ad0b961d3ede39"
+    },
+    {
+      "schema_id": "urn:gotm:design:qpu_result_pack.closure.preregistration_context.v7",
+      "definition_uri": "urn:gotm:design:qpu_result_pack.closure.preregistration_context.v7",
+      "instance_schema_id": "urn:gotm:design:qpu_result_pack.closure.preregistration_context.v7",
+      "schema_ref": {
+        "digest": "sha256:e4afef7ee8a88da85b599875e8b2a8cadcdea0a63d319e7a3e3df94eda3b2283",
+        "byte_length": "46856",
+        "media_type": "application/schema+json",
+        "digest_basis": "raw_bytes"
+      },
+      "entry_jcs_digest": "sha256:9fb9612eee5622a99c567c6e5cd3ec7ca2acbd12269068fb4c1d2c7734692aed"
+    },
+    {
+      "schema_id": "urn:gotm:design:qpu_result_pack.closure.prior_case_applicability.v7",
+      "definition_uri": "urn:gotm:design:qpu_result_pack.closure.prior_case_applicability.v7",
+      "instance_schema_id": "urn:gotm:design:qpu_result_pack.closure.prior_case_applicability.v7",
+      "schema_ref": {
+        "digest": "sha256:7e4d6e2f0986a12f251940920dd375c136ff09ab228fd4fbaee4a5cc9187281e",
+        "byte_length": "12595",
+        "media_type": "application/schema+json",
+        "digest_basis": "raw_bytes"
+      },
+      "entry_jcs_digest": "sha256:0d6b91bc5860885c64bb142e4c0971ff9df0e9adb587abec8156e0f3935b59ed"
+    },
+    {
+      "schema_id": "urn:gotm:design:qpu_result_pack.closure.process_audit.v4",
+      "definition_uri": "urn:gotm:design:qpu_result_pack.closure.process_audit.v4",
+      "instance_schema_id": "urn:gotm:design:qpu_result_pack.closure.process_audit.v4",
+      "schema_ref": {
+        "digest": "sha256:9a5899aa85b6711584f238e0bf0d80534b946e1f3114a4193dc57b8e685f43c6",
+        "byte_length": "3574",
+        "media_type": "application/schema+json",
+        "digest_basis": "raw_bytes"
+      },
+      "entry_jcs_digest": "sha256:0ed07564e34b08b39d318ef8ac6a930c971da21f582d73c6e3fa9b3f31b8f2c6"
+    },
+    {
+      "schema_id": "urn:gotm:design:qpu_result_pack.closure.process_end.v4",
+      "definition_uri": "urn:gotm:design:qpu_result_pack.closure.process_end.v4",
+      "instance_schema_id": "urn:gotm:design:qpu_result_pack.closure.process_end.v4",
+      "schema_ref": {
+        "digest": "sha256:3a1661ae0ff76590e0e2ad820feacdfc302e473d285b1b8b696aa7a432f1d862",
+        "byte_length": "4689",
+        "media_type": "application/schema+json",
+        "digest_basis": "raw_bytes"
+      },
+      "entry_jcs_digest": "sha256:a58f047cf33fa1f01b9a1586f3fbd5561a014b0d1e5bbb62a2b4febcea9a883c"
+    },
+    {
+      "schema_id": "urn:gotm:design:qpu_result_pack.closure.process_invocation.v4",
+      "definition_uri": "urn:gotm:design:qpu_result_pack.closure.process_invocation.v4",
+      "instance_schema_id": "urn:gotm:design:qpu_result_pack.closure.process_invocation.v4",
+      "schema_ref": {
+        "digest": "sha256:53840f0e95831855753d9cbf79b178ff95a700eda52d9b1cc7c614cd35dee86c",
+        "byte_length": "4482",
+        "media_type": "application/schema+json",
+        "digest_basis": "raw_bytes"
+      },
+      "entry_jcs_digest": "sha256:3d1b46bbcc4802dfaa2bcfb3d28cd1efe9508cd73bc11b0379a6cdeb8f19f923"
+    },
+    {
+      "schema_id": "urn:gotm:design:qpu_result_pack.closure.process_start.v4",
+      "definition_uri": "urn:gotm:design:qpu_result_pack.closure.process_start.v4",
+      "instance_schema_id": "urn:gotm:design:qpu_result_pack.closure.process_start.v4",
+      "schema_ref": {
+        "digest": "sha256:6f465ee2bf9e6589ff6d16ea0f647b05589b17596ffa3c602dddde1285fe7a46",
+        "byte_length": "1839",
+        "media_type": "application/schema+json",
+        "digest_basis": "raw_bytes"
+      },
+      "entry_jcs_digest": "sha256:d74ef6d2df5ec764e884fb472b98ac733447e3339b47edb765b4517549d6f5c5"
+    },
+    {
+      "schema_id": "urn:gotm:design:qpu_result_pack.closure.projection_definition.v7",
+      "definition_uri": "urn:gotm:design:qpu_result_pack.closure.projection_definition.v7",
+      "instance_schema_id": "urn:gotm:design:qpu_result_pack.closure.projection_definition.v7",
+      "schema_ref": {
+        "digest": "sha256:f0d9c7e77042372f86728a846d13633c80b63e198f0cc234b9c0b477026bb159",
+        "byte_length": "5711",
+        "media_type": "application/schema+json",
+        "digest_basis": "raw_bytes"
+      },
+      "entry_jcs_digest": "sha256:6db1e8617c53338c381c94f04bbe94ee9ae65f5415a5a1e8e52fb1880c050652"
+    },
+    {
+      "schema_id": "urn:gotm:design:qpu_result_pack.closure.projection_observation.v7",
+      "definition_uri": "urn:gotm:design:qpu_result_pack.closure.projection_observation.v7",
+      "instance_schema_id": "urn:gotm:design:qpu_result_pack.closure.projection_observation.v7",
+      "schema_ref": {
+        "digest": "sha256:b0b912d580ee2b14b8e781afe08a129b78ba465f92c9f26d9426f25789b34580",
+        "byte_length": "4577",
+        "media_type": "application/schema+json",
+        "digest_basis": "raw_bytes"
+      },
+      "entry_jcs_digest": "sha256:07c00299be63c50d9bc5fa38b848fbcc96ff8359e122664e423d8e14a9e691bc"
+    },
+    {
+      "schema_id": "urn:gotm:design:qpu_result_pack.closure.qualification_receipt.v4",
+      "definition_uri": "urn:gotm:design:qpu_result_pack.closure.qualification_receipt.v4",
+      "instance_schema_id": "urn:gotm:design:qpu_result_pack.closure.qualification_receipt.v4",
+      "schema_ref": {
+        "digest": "sha256:2d6b9028657b6980c5fa8768a4bfd1d0a2f873053be9c5828e95cca17c24201d",
+        "byte_length": "8949",
+        "media_type": "application/schema+json",
+        "digest_basis": "raw_bytes"
+      },
+      "entry_jcs_digest": "sha256:1979d9e394d870ec8c042f558e8bfdf72477a011bcd1494e59d768179188f17c"
+    },
+    {
+      "schema_id": "urn:gotm:design:qpu_result_pack.closure.qualification_vectors.v4",
+      "definition_uri": "urn:gotm:design:qpu_result_pack.closure.qualification_vectors.v4",
+      "instance_schema_id": "urn:gotm:design:qpu_result_pack.closure.qualification_vectors.v4",
+      "schema_ref": {
+        "digest": "sha256:4d082b9fc8fbb1ec41a7877861f3e9c51fdbed9aeaf206b24636d0e4b1dfdc7e",
+        "byte_length": "3398",
+        "media_type": "application/schema+json",
+        "digest_basis": "raw_bytes"
+      },
+      "entry_jcs_digest": "sha256:f46cc968ae064936866cbdfcc2496dd7d242add7c10ef9146e034ca80d26f52e"
+    },
+    {
+      "schema_id": "urn:gotm:design:qpu_result_pack.closure.raw_output_validation.v4",
+      "definition_uri": "urn:gotm:design:qpu_result_pack.closure.raw_output_validation.v4",
+      "instance_schema_id": "urn:gotm:design:qpu_result_pack.closure.raw_output_validation.v4",
+      "schema_ref": {
+        "digest": "sha256:c0781b8c49c6f25fefc9c0c84d560b3e98acba8d1129d281a90780edf384ba29",
+        "byte_length": "4963",
+        "media_type": "application/schema+json",
+        "digest_basis": "raw_bytes"
+      },
+      "entry_jcs_digest": "sha256:6b1a4c8d56915cdb45021383a57fa96fce2eb9b69ee38f21fe0095928b9b23ac"
+    },
+    {
+      "schema_id": "urn:gotm:design:qpu_result_pack.closure.recorded_quantity.v7",
+      "definition_uri": "urn:gotm:design:qpu_result_pack.closure.recorded_quantity.v7",
+      "instance_schema_id": null,
+      "schema_ref": {
+        "digest": "sha256:c37d53861ef69e56c8746641fad66343b9c537c5628ba772bcfdfda9762a1a58",
+        "byte_length": "461",
+        "media_type": "application/schema+json",
+        "digest_basis": "raw_bytes"
+      },
+      "entry_jcs_digest": "sha256:a1cec678699cddc1a7369b1e2144ad5159c553de5c808e6655395a944cf30c0e"
+    },
+    {
+      "schema_id": "urn:gotm:design:qpu_result_pack.closure.report_projection_recipe.v6",
+      "definition_uri": "urn:gotm:design:qpu_result_pack.closure.report_projection_recipe.v6",
+      "instance_schema_id": "urn:gotm:design:qpu_result_pack.closure.report_projection_recipe.v6",
+      "schema_ref": {
+        "digest": "sha256:d4964b456e18d8b794a2f868a14d1df77ae1bdbc20cd072c63d5157171d28e38",
+        "byte_length": "5878",
+        "media_type": "application/schema+json",
+        "digest_basis": "raw_bytes"
+      },
+      "entry_jcs_digest": "sha256:b1fed0817a951317bc974543874958ffda0f8b0f6f6763334f3519d0a453c59b"
+    },
+    {
+      "schema_id": "urn:gotm:design:qpu_result_pack.closure.scalar_precision_qualification_core.v4",
+      "definition_uri": "urn:gotm:design:qpu_result_pack.closure.scalar_precision_qualification_core.v4",
+      "instance_schema_id": "urn:gotm:design:qpu_result_pack.closure.scalar_precision_qualification_core.v4",
+      "schema_ref": {
+        "digest": "sha256:cc9e8cd4dbbe31d0423bf8767876e0fffb15bf6d277fdded6f0835b4e07f0ace",
+        "byte_length": "5822",
+        "media_type": "application/schema+json",
+        "digest_basis": "raw_bytes"
+      },
+      "entry_jcs_digest": "sha256:d7b771369162881f952b672eabbc3a2fcd74b5573117fe160788eb0a85ae98a0"
+    },
+    {
+      "schema_id": "urn:gotm:design:qpu_result_pack.closure.scope_binding_policy.v6",
+      "definition_uri": "urn:gotm:design:qpu_result_pack.closure.scope_binding_policy.v6",
+      "instance_schema_id": "urn:gotm:design:qpu_result_pack.closure.scope_binding_policy.v6",
+      "schema_ref": {
+        "digest": "sha256:0e4c6c49c6525250c30f47860d6b988494fdd4c2e9a92301827488b96aee7158",
+        "byte_length": "4792",
+        "media_type": "application/schema+json",
+        "digest_basis": "raw_bytes"
+      },
+      "entry_jcs_digest": "sha256:301d820597bcd868d7945b1853dbcdac325df899b876c77377e0efae8cf5aff9"
+    },
+    {
+      "schema_id": "urn:gotm:design:qpu_result_pack.closure.source_inventory.v4",
+      "definition_uri": "urn:gotm:design:qpu_result_pack.closure.source_inventory.v4",
+      "instance_schema_id": "urn:gotm:design:qpu_result_pack.closure.source_inventory.v4",
+      "schema_ref": {
+        "digest": "sha256:8d36ba318caa313fde52f899fdcf15ebbfcf5dfe245639d7651f2131fffcc2ca",
+        "byte_length": "9285",
+        "media_type": "application/schema+json",
+        "digest_basis": "raw_bytes"
+      },
+      "entry_jcs_digest": "sha256:a52883e029ec2d2ffeea5703ce8e027342e2a7278b75186fb94a2f8987f61b06"
+    },
+    {
+      "schema_id": "urn:gotm:design:qpu_result_pack.closure.subject_scope.v7",
+      "definition_uri": "urn:gotm:design:qpu_result_pack.closure.subject_scope.v7",
+      "instance_schema_id": "urn:gotm:design:qpu_result_pack.closure.subject_scope.v7",
+      "schema_ref": {
+        "digest": "sha256:d4ee498f08022e1d3c7fb164b60d0d28ac125e44f529c7a63e0bdc782626753d",
+        "byte_length": "5781",
+        "media_type": "application/schema+json",
+        "digest_basis": "raw_bytes"
+      },
+      "entry_jcs_digest": "sha256:efa5d70159aacb4125a31b87d16f637d09b4c814c895b91d13463cd756f1dc7c"
+    },
+    {
+      "schema_id": "urn:gotm:design:qpu_result_pack.closure.verification_policy_qualification_core.v4",
+      "definition_uri": "urn:gotm:design:qpu_result_pack.closure.verification_policy_qualification_core.v4",
+      "instance_schema_id": "urn:gotm:design:qpu_result_pack.closure.verification_policy_qualification_core.v4",
+      "schema_ref": {
+        "digest": "sha256:2a40434c3d71f465e6c66e95a5929a31a28e8830929c52b1cde9ff04b199e32b",
+        "byte_length": "11263",
+        "media_type": "application/schema+json",
+        "digest_basis": "raw_bytes"
+      },
+      "entry_jcs_digest": "sha256:226bb035daf4f93300031189b5fdcbab7bc5f9c5ac168c452d61c23c4aea1c9d"
+    },
+    {
+      "schema_id": "qpu_result_pack.custody_draft.v1",
+      "definition_uri": "urn:gotm:design:qpu_result_pack.custody_draft.v1",
+      "instance_schema_id": "qpu_result_pack.custody_draft.v1",
+      "schema_ref": {
+        "digest": "sha256:23a7ebc40dbada4e6e1bc059ab8d5d3263a9d105df365a9840ac2495ef293858",
+        "byte_length": "33330",
+        "media_type": "application/schema+json",
+        "digest_basis": "raw_bytes"
+      },
+      "entry_jcs_digest": "sha256:bf78098ed1a4a80f1f24bfecf77a67e5160870197c2f343c96b8b7d58e51e7bb"
+    },
+    {
+      "schema_id": "qpu_result_pack.derivation_execution.v1",
+      "definition_uri": "urn:gotm:design:qpu_result_pack.derivation_execution.v1",
+      "instance_schema_id": "qpu_result_pack.derivation_execution.v1",
+      "schema_ref": {
+        "digest": "sha256:3c81116515d641fc103c22fa3cc8120ac9f106c448db404b5501a4e496855725",
+        "byte_length": "3804",
+        "media_type": "application/schema+json",
+        "digest_basis": "raw_bytes"
+      },
+      "entry_jcs_digest": "sha256:a57bafadbdf897c43296f4934ccf414582242ed3d054ae7b9dda5de158ef182d"
+    },
+    {
+      "schema_id": "qpu_result_pack.derivation_output.v1",
+      "definition_uri": "urn:gotm:design:qpu_result_pack.derivation_output.v1",
+      "instance_schema_id": "qpu_result_pack.derivation_output.v1",
+      "schema_ref": {
+        "digest": "sha256:d3b2f47394b37c162eda342ce4106818ca2ea0d8a6ed56c24c3997ec0b76f216",
+        "byte_length": "5928",
+        "media_type": "application/schema+json",
+        "digest_basis": "raw_bytes"
+      },
+      "entry_jcs_digest": "sha256:e0c2acdcfd79514e73551babe29176b5e66108b63ff79910b14a88cf999ea639"
+    },
+    {
+      "schema_id": "qpu_result_pack.derivation_spec.v1",
+      "definition_uri": "urn:gotm:design:qpu_result_pack.derivation_spec.v1",
+      "instance_schema_id": "qpu_result_pack.derivation_spec.v1",
+      "schema_ref": {
+        "digest": "sha256:89c95f424a8324a6d9d8e2ae21233c73718416342134807ba9cc464adf52a5e3",
+        "byte_length": "4309",
+        "media_type": "application/schema+json",
+        "digest_basis": "raw_bytes"
+      },
+      "entry_jcs_digest": "sha256:3fe2d3aef17a965ccb69c0cbe889278f97de1373b576e01a09e86d6af5033626"
+    },
+    {
+      "schema_id": "qpu_result_pack.local_refusal.v3",
+      "definition_uri": "urn:gotm:design:qpu_result_pack.local_refusal.v3",
+      "instance_schema_id": "qpu_result_pack.local_refusal.v3",
+      "schema_ref": {
+        "digest": "sha256:a408d5eb8eb1a721ed40d7aaf4a6498130daa50d4ebfe267d4ecb2a261d405b6",
+        "byte_length": "3098",
+        "media_type": "application/schema+json",
+        "digest_basis": "raw_bytes"
+      },
+      "entry_jcs_digest": "sha256:9aedc9a4632506d4e5e0c2a0342e50e0ba385e72911b0fb3edfa07c32222de7a"
+    },
+    {
+      "schema_id": "qpu_result_pack.measurement_map.v1",
+      "definition_uri": "urn:gotm:design:qpu_result_pack.measurement_map.v1",
+      "instance_schema_id": "qpu_result_pack.measurement_map.v1",
+      "schema_ref": {
+        "digest": "sha256:885904f1fe29bc51e51e0c811f69acd7e05e025c53a4d4fc47656b738838052a",
+        "byte_length": "4389",
+        "media_type": "application/schema+json",
+        "digest_basis": "raw_bytes"
+      },
+      "entry_jcs_digest": "sha256:e63553b6861d46a7f1dba7a2e9a3093cf93ae6fcf121ee848e39a755faa1cc0e"
+    },
+    {
+      "schema_id": "qpu_result_pack.normalisation_record.v1",
+      "definition_uri": "urn:gotm:design:qpu_result_pack.normalisation_record.v1",
+      "instance_schema_id": "qpu_result_pack.normalisation_record.v1",
+      "schema_ref": {
+        "digest": "sha256:db0fbc948c44e441409aec90034402f179a30037cf9a4ddd35f82e24e0315b9a",
+        "byte_length": "2412",
+        "media_type": "application/schema+json",
+        "digest_basis": "raw_bytes"
+      },
+      "entry_jcs_digest": "sha256:af7bc1f24e7e408e3b9c9cc8f0c3633dd57061b924c0ca46a1785f6ccc0471df"
+    },
+    {
+      "schema_id": "qpu_result_pack.numeric_inventory.v1",
+      "definition_uri": "urn:gotm:design:qpu_result_pack.numeric_inventory.v1",
+      "instance_schema_id": "qpu_result_pack.numeric_inventory.v1",
+      "schema_ref": {
+        "digest": "sha256:ddc829ee91450fde60c1f1cd5a933615383b37e548ef3dd8b94bedc0ff6fa551",
+        "byte_length": "2817",
+        "media_type": "application/schema+json",
+        "digest_basis": "raw_bytes"
+      },
+      "entry_jcs_digest": "sha256:35137814fb498a2050eb00a3d229232941ede146fbf0dd757c8b22207927b507"
+    },
+    {
+      "schema_id": "qpu_result_pack.policy.v1",
+      "definition_uri": "urn:gotm:design:qpu_result_pack.policy.v1",
+      "instance_schema_id": "qpu_result_pack.policy.v1",
+      "schema_ref": {
+        "digest": "sha256:b24c415733a9f1c4bb2a81b12e7bba9d00a1942f3c9e96d1f9dd0926275b9c46",
+        "byte_length": "2693",
+        "media_type": "application/schema+json",
+        "digest_basis": "raw_bytes"
+      },
+      "entry_jcs_digest": "sha256:9443fd935cb69599b2e0f9b608a8e37febd34d2f7387df0d44c682565c3068dc"
+    },
+    {
+      "schema_id": "urn:gotm:design:qpu_result_pack.profile.capture_source_qualification.v3",
+      "definition_uri": "urn:gotm:design:qpu_result_pack.profile.capture_source_qualification.v3",
+      "instance_schema_id": "urn:gotm:design:qpu_result_pack.profile.capture_source_qualification.v3",
+      "schema_ref": {
+        "digest": "sha256:c132cd817bf2c3d44d9546a86b8031d37b4ead66bb3e598c25c20720486e798f",
+        "byte_length": "5173",
+        "media_type": "application/schema+json",
+        "digest_basis": "raw_bytes"
+      },
+      "entry_jcs_digest": "sha256:e1fd2610ac781bee8cbf78948100f50f98e972342ecdf482d10c15b0c78604da"
+    },
+    {
+      "schema_id": "urn:gotm:design:qpu_result_pack.profile.clock_interval_qualification.v3",
+      "definition_uri": "urn:gotm:design:qpu_result_pack.profile.clock_interval_qualification.v3",
+      "instance_schema_id": "urn:gotm:design:qpu_result_pack.profile.clock_interval_qualification.v3",
+      "schema_ref": {
+        "digest": "sha256:a1ac9d5222e0c1230cbf2597737607cf62b55d6301f97d4204aa17aefd2d5c0f",
+        "byte_length": "5323",
+        "media_type": "application/schema+json",
+        "digest_basis": "raw_bytes"
+      },
+      "entry_jcs_digest": "sha256:b665fabdfa30d235bb573452729bad3b9ee7a4f3ed42d0821063a6373c31d62c"
+    },
+    {
+      "schema_id": "urn:gotm:design:qpu_result_pack.profile.execution_qualification.v3",
+      "definition_uri": "urn:gotm:design:qpu_result_pack.profile.execution_qualification.v3",
+      "instance_schema_id": "urn:gotm:design:qpu_result_pack.profile.execution_qualification.v3",
+      "schema_ref": {
+        "digest": "sha256:c9f67a244dc60bfbb9361269d1964c27e0ed546ef45fe7cc305c22aeba03fef1",
+        "byte_length": "5474",
+        "media_type": "application/schema+json",
+        "digest_basis": "raw_bytes"
+      },
+      "entry_jcs_digest": "sha256:c1bbc7b57f0081648ef23e1cd355e306347f17e81fdf163366cdaf6b57edceda"
+    },
+    {
+      "schema_id": "urn:gotm:design:qpu_result_pack.profile.measurement_qualification.v3",
+      "definition_uri": "urn:gotm:design:qpu_result_pack.profile.measurement_qualification.v3",
+      "instance_schema_id": "urn:gotm:design:qpu_result_pack.profile.measurement_qualification.v3",
+      "schema_ref": {
+        "digest": "sha256:db47f9d993240d0930e49336da60f13b958449cd46315d7c43bde4403c70c887",
+        "byte_length": "5268",
+        "media_type": "application/schema+json",
+        "digest_basis": "raw_bytes"
+      },
+      "entry_jcs_digest": "sha256:a21c97ccb70aeab63c7262a59371940ced8b3b01644acb61143257d8273293d1"
+    },
+    {
+      "schema_id": "urn:gotm:design:qpu_result_pack.profile.scalar_precision_qualification.v3",
+      "definition_uri": "urn:gotm:design:qpu_result_pack.profile.scalar_precision_qualification.v3",
+      "instance_schema_id": "urn:gotm:design:qpu_result_pack.profile.scalar_precision_qualification.v3",
+      "schema_ref": {
+        "digest": "sha256:244faf7dbba6e36113afec11f46e2077487ae108ea5056a3a40f9b43da34a777",
+        "byte_length": "5564",
+        "media_type": "application/schema+json",
+        "digest_basis": "raw_bytes"
+      },
+      "entry_jcs_digest": "sha256:b30a33063f33b8c4f7de7ef292f16466e9420211601ae9a22908e08c678189e3"
+    },
+    {
+      "schema_id": "urn:gotm:design:qpu_result_pack.profile.verification_policy_qualification.v3",
+      "definition_uri": "urn:gotm:design:qpu_result_pack.profile.verification_policy_qualification.v3",
+      "instance_schema_id": "urn:gotm:design:qpu_result_pack.profile.verification_policy_qualification.v3",
+      "schema_ref": {
+        "digest": "sha256:b247a284626d5b012986644ac7ae175832c00c6d5b2792cbff21b44fd9913c6c",
+        "byte_length": "10296",
+        "media_type": "application/schema+json",
+        "digest_basis": "raw_bytes"
+      },
+      "entry_jcs_digest": "sha256:eca0aafed815ff1eb4e8147bdc0608dea94c816ce9304add809794f8091a449f"
+    },
+    {
+      "schema_id": "qpu_result_pack.raw_counts.v1",
+      "definition_uri": "urn:gotm:design:qpu_result_pack.raw_counts.v1",
+      "instance_schema_id": "qpu_result_pack.raw_counts.v1",
+      "schema_ref": {
+        "digest": "sha256:9bea5002b511d0b3ca4b24780fadb13b3622510b79d125c59601c7bc13883599",
+        "byte_length": "1388",
+        "media_type": "application/schema+json",
+        "digest_basis": "raw_bytes"
+      },
+      "entry_jcs_digest": "sha256:d2f0bb1fc1e4ab032627f3f1de9a8d0eeabdb07bfb3a79e1bffd81cf2610147c"
+    },
+    {
+      "schema_id": "qpu_result_pack.verification.v1",
+      "definition_uri": "urn:gotm:design:qpu_result_pack.verification.v1",
+      "instance_schema_id": "qpu_result_pack.verification.v1",
+      "schema_ref": {
+        "digest": "sha256:d0d9bbfb7d9732306d5a1b982f77da17d6012fb700453d506ccf3e2e8003d44c",
+        "byte_length": "19530",
+        "media_type": "application/schema+json",
+        "digest_basis": "raw_bytes"
+      },
+      "entry_jcs_digest": "sha256:634b1c80da3a3b7aca0a9144ecde9b99bb16a0c59039a99c76501b642b500b69"
+    },
+    {
+      "schema_id": "urn:gotm:design:studio.qpu-result-pack-witness.v2",
+      "definition_uri": "urn:gotm:design:studio.qpu-result-pack-witness.v2",
+      "instance_schema_id": null,
+      "schema_ref": {
+        "digest": "sha256:e2ec7bd7d0f934e4926ca9495b709448183c8aac2d0365160821ab6a2c70b15d",
+        "byte_length": "3361",
+        "media_type": "application/schema+json",
+        "digest_basis": "raw_bytes"
+      },
+      "entry_jcs_digest": "sha256:f8343e7a5cbe4bc2496ffa51a91f5e7c924e79dbdfa3f84f85a3255177e2de7d"
+    },
+    {
+      "schema_id": "studio.qpu-result-pack.native-detail.v4",
+      "definition_uri": "urn:gotm:design:studio.qpu-result-pack.native-detail.v4",
+      "instance_schema_id": "studio.qpu-result-pack.native-detail.v4",
+      "schema_ref": {
+        "digest": "sha256:a36084ba87d29111e8867ca4e59d5df7fe4c2540b034207478fb24fd87efddab",
+        "byte_length": "20942",
+        "media_type": "application/schema+json",
+        "digest_basis": "raw_bytes"
+      },
+      "entry_jcs_digest": "sha256:4f77a8251ed1efec9c856642d71742975fc7a62d12a799166c78cbc294838e81"
+    },
+    {
+      "schema_id": "urn:gotm:design:qpu_result_pack.closure.common_trust_context.v7",
+      "definition_uri": "urn:gotm:design:qpu_result_pack.closure.common_trust_context.v7",
+      "instance_schema_id": null,
+      "schema_ref": {
+        "digest": "sha256:d0c58428be871d9aff1a7207a70995fdc89e9dac030b4bfaebb5241ff69f9673",
+        "byte_length": "7412",
+        "media_type": "application/schema+json",
+        "digest_basis": "raw_bytes"
+      },
+      "entry_jcs_digest": "sha256:51fb52fc7979aab3f44e697bfbbdd1e8fa86d8d31cb538513505324925c067b0"
+    },
+    {
+      "schema_id": "urn:gotm:design:qpu_result_pack.closure.evaluation_request.v8",
+      "definition_uri": "urn:gotm:design:qpu_result_pack.closure.evaluation_request.v8",
+      "instance_schema_id": "urn:gotm:design:qpu_result_pack.closure.evaluation_request.v8",
+      "schema_ref": {
+        "digest": "sha256:f1fadc52c692e8e91f3097dae7b51d5247297be04f5f3bf0d4bc4c8f26ff56ba",
+        "byte_length": "78077",
+        "media_type": "application/schema+json",
+        "digest_basis": "raw_bytes"
+      },
+      "entry_jcs_digest": "sha256:f81ce5e52af08aa008f5f05bc11f2313b3d4877543e483f3b0d8ee632e6cbf38"
+    },
+    {
+      "schema_id": "urn:gotm:design:qpu_result_pack.closure.evaluation_inputs.v8",
+      "definition_uri": "urn:gotm:design:qpu_result_pack.closure.evaluation_inputs.v8",
+      "instance_schema_id": "urn:gotm:design:qpu_result_pack.closure.evaluation_inputs.v8",
+      "schema_ref": {
+        "digest": "sha256:db543a46b613ba3e2fe2535d9ef0976e926aa9df414994bcde8a46f5cf8e8fcc",
+        "byte_length": "142061",
+        "media_type": "application/schema+json",
+        "digest_basis": "raw_bytes"
+      },
+      "entry_jcs_digest": "sha256:569ebcdd7fba1ebaa939ecc682f19adbb55310d2a5ed2ed4edf4517711d0160b"
+    },
+    {
+      "schema_id": "urn:gotm:design:qpu_result_pack.closure.evaluation_raw_observation.v8",
+      "definition_uri": "urn:gotm:design:qpu_result_pack.closure.evaluation_raw_observation.v8",
+      "instance_schema_id": "urn:gotm:design:qpu_result_pack.closure.evaluation_raw_observation.v8",
+      "schema_ref": {
+        "digest": "sha256:ce109d9f6b61f4e0e8c89b63a82dfabc260d5fa62b79df20318070c018c71eec",
+        "byte_length": "20404",
+        "media_type": "application/schema+json",
+        "digest_basis": "raw_bytes"
+      },
+      "entry_jcs_digest": "sha256:3cc7bcc38cd451aad85faad70000facee8957556aff5f96c73944781b84c0a4f"
+    },
+    {
+      "schema_id": "urn:gotm:design:qpu_result_pack.closure.evaluation_role_manifest.v8",
+      "definition_uri": "urn:gotm:design:qpu_result_pack.closure.evaluation_role_manifest.v8",
+      "instance_schema_id": "urn:gotm:design:qpu_result_pack.closure.evaluation_role_manifest.v8",
+      "schema_ref": {
+        "digest": "sha256:c593b885121c8ec22fda6d7c3426abd09aee031b1af09da384a203cdfef9413e",
+        "byte_length": "37251",
+        "media_type": "application/schema+json",
+        "digest_basis": "raw_bytes"
+      },
+      "entry_jcs_digest": "sha256:3ff73c3be4d7120face3eaf7d8900973c07e01aeba05e3233b1221475950f847"
+    }
+  ]
+}

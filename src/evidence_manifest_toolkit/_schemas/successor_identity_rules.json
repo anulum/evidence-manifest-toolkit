@@ -1,0 +1,269 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Three private whole method-policy formats for the ONE authority successor",
+  "description": "SOURCE_ONLY_UNREGISTERED_METHOD_POLICIES. No additional public schema identifiers or live policy installation.",
+  "oneOf": [
+    {
+      "$ref": "#/$defs/foreign_rule"
+    },
+    {
+      "$ref": "#/$defs/identity_rule"
+    },
+    {
+      "$ref": "#/$defs/validation_rule"
+    }
+  ],
+  "$defs": {
+    "blob": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "digest": {
+          "type": "string",
+          "pattern": "^sha256:[0-9a-f]{64}$"
+        },
+        "byte_length": {
+          "type": "string",
+          "pattern": "^(0|[1-9][0-9]*)$",
+          "maxLength": 256
+        },
+        "media_type": {
+          "type": "string",
+          "minLength": 1
+        },
+        "digest_basis": {
+          "enum": [
+            "raw_bytes",
+            "jcs_content"
+          ]
+        },
+        "schema_id": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "digest",
+        "byte_length",
+        "media_type",
+        "digest_basis"
+      ]
+    },
+    "foreign_rule": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "format_version": {
+          "const": "emt-foreign-github-identity-rule-source-r1"
+        },
+        "verifier_implementation_qualification_ref": {
+          "$ref": "#/$defs/blob"
+        },
+        "complete_argv_and_field_mapping_rule_ref": {
+          "$ref": "#/$defs/blob"
+        },
+        "expected_repository_and_immutable_ids_ref": {
+          "$ref": "#/$defs/blob"
+        },
+        "expected_signer_workflow_and_commit_ref": {
+          "$ref": "#/$defs/blob"
+        },
+        "expected_oidc_issuer": {
+          "const": "https://token.actions.githubusercontent.com"
+        },
+        "expected_runner_environment": {
+          "const": "github-hosted"
+        },
+        "expected_predicate_type": {
+          "const": "https://slsa.dev/provenance/v1"
+        },
+        "independent_trusted_root_acquisition_rule_ref": {
+          "$ref": "#/$defs/blob"
+        },
+        "raw_artifact_subject_rule": {
+          "const": "full_raw_artifact_sha256_and_length"
+        },
+        "maximum_verifier_wall_time_ms": {
+          "type": "string",
+          "pattern": "^[1-9][0-9]*$",
+          "maxLength": 256
+        },
+        "maximum_verifier_stdout_bytes": {
+          "type": "string",
+          "pattern": "^[1-9][0-9]*$",
+          "maxLength": 256
+        },
+        "maximum_verifier_stderr_bytes": {
+          "type": "string",
+          "pattern": "^[1-9][0-9]*$",
+          "maxLength": 256
+        },
+        "verification_network_rule": {
+          "const": "offline_pinned_bundle_and_root_inputs_only"
+        },
+        "root_refresh_rule_ref": {
+          "$ref": "#/$defs/blob"
+        },
+        "required_authenticated_field_mapping_ref": {
+          "$ref": "#/$defs/blob"
+        }
+      },
+      "required": [
+        "format_version",
+        "verifier_implementation_qualification_ref",
+        "complete_argv_and_field_mapping_rule_ref",
+        "expected_repository_and_immutable_ids_ref",
+        "expected_signer_workflow_and_commit_ref",
+        "expected_oidc_issuer",
+        "expected_runner_environment",
+        "expected_predicate_type",
+        "independent_trusted_root_acquisition_rule_ref",
+        "raw_artifact_subject_rule",
+        "maximum_verifier_wall_time_ms",
+        "maximum_verifier_stdout_bytes",
+        "maximum_verifier_stderr_bytes",
+        "verification_network_rule",
+        "root_refresh_rule_ref",
+        "required_authenticated_field_mapping_ref"
+      ]
+    },
+    "identity_rule": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "format_version": {
+          "const": "emt-seat-identity-rule-source-r1"
+        },
+        "custody_class": {
+          "enum": [
+            "unsigned_declared",
+            "software_local_unprotected",
+            "protected_delegated"
+          ]
+        },
+        "permitted_identity_classes": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "enum": [
+              "declared_by_launcher_under_the_seat_account",
+              "vendor_by_client_program_only",
+              "endpoint_observed"
+            ]
+          }
+        },
+        "launcher_or_observer_procedure_ref": {
+          "$ref": "#/$defs/blob"
+        },
+        "client_catalogue_source_ref": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/blob"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "actual_key_possession_rule_ref": {
+          "$ref": "#/$defs/blob"
+        },
+        "vendor_comparison_rule": {
+          "const": "exact_accepted_vendor_identity_no_alias_or_case_repair"
+        },
+        "key_comparison_rule": {
+          "const": "actual_public_key_identity_equality_refuses_when_required"
+        },
+        "required_claim_limitations_rule_ref": {
+          "$ref": "#/$defs/blob"
+        }
+      },
+      "required": [
+        "format_version",
+        "custody_class",
+        "permitted_identity_classes",
+        "launcher_or_observer_procedure_ref",
+        "client_catalogue_source_ref",
+        "actual_key_possession_rule_ref",
+        "vendor_comparison_rule",
+        "key_comparison_rule",
+        "required_claim_limitations_rule_ref"
+      ]
+    },
+    "validation_rule": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "format_version": {
+          "const": "emt-independent-validation-rule-source-r1"
+        },
+        "profile_class": {
+          "enum": [
+            "unsigned_declared",
+            "software_local_unprotected",
+            "protected_delegated"
+          ]
+        },
+        "permitted_record_classes": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "enum": [
+              "unsigned_declared_reproduction",
+              "software_local_reproduction",
+              "protected_native_seat_reproduction",
+              "github_hosted_verified_run_identity"
+            ]
+          }
+        },
+        "whole_subject_and_parent_reconstruction_rule_ref": {
+          "$ref": "#/$defs/blob"
+        },
+        "independent_identity_policy_ref": {
+          "$ref": "#/$defs/blob"
+        },
+        "run_and_seal_before_comparison_procedure_ref": {
+          "$ref": "#/$defs/blob"
+        },
+        "comparison_rule_ref": {
+          "$ref": "#/$defs/blob"
+        },
+        "required_nonuse_classes": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "enum": [
+              "procedural_nonuse",
+              "enforced_isolation"
+            ]
+          }
+        },
+        "required_time_binding_rule_ref": {
+          "$ref": "#/$defs/blob"
+        },
+        "native_or_foreign_authorization_rule_ref": {
+          "$ref": "#/$defs/blob"
+        },
+        "exact_claim_limitations_and_report_mapping_ref": {
+          "$ref": "#/$defs/blob"
+        }
+      },
+      "required": [
+        "format_version",
+        "profile_class",
+        "permitted_record_classes",
+        "whole_subject_and_parent_reconstruction_rule_ref",
+        "independent_identity_policy_ref",
+        "run_and_seal_before_comparison_procedure_ref",
+        "comparison_rule_ref",
+        "required_nonuse_classes",
+        "required_time_binding_rule_ref",
+        "native_or_foreign_authorization_rule_ref",
+        "exact_claim_limitations_and_report_mapping_ref"
+      ]
+    }
+  }
+}

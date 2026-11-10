@@ -1,0 +1,371 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Independent protected control rule and selected finite operation source, proposal r6",
+  "description": "Private closed source configurations only; no native schema IDs or runtime/crypto qualification. Whole method/source/parent/scope/time checks remain mandatory.",
+  "oneOf": [
+    {
+      "$ref": "#/$defs/control_rule"
+    },
+    {
+      "$ref": "#/$defs/control_selection"
+    }
+  ],
+  "$defs": {
+    "blob": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "digest": {
+          "type": "string",
+          "pattern": "^sha256:[0-9a-f]{64}$"
+        },
+        "byte_length": {
+          "type": "string",
+          "pattern": "^(0|[1-9][0-9]*)$",
+          "maxLength": 256
+        },
+        "media_type": {
+          "type": "string",
+          "minLength": 1
+        },
+        "digest_basis": {
+          "enum": [
+            "raw_bytes",
+            "jcs_content"
+          ]
+        },
+        "schema_id": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "digest",
+        "byte_length",
+        "media_type",
+        "digest_basis"
+      ]
+    },
+    "control_rule": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "format_version": {
+          "const": "emt-protected-control-rule-source-r6"
+        },
+        "independent_root_selection_ref": {
+          "$ref": "#/$defs/blob"
+        },
+        "scope_source_ref": {
+          "$ref": "#/$defs/blob"
+        },
+        "controller_identity_rule_ref": {
+          "$ref": "#/$defs/blob"
+        },
+        "protected_custody_rule_ref": {
+          "$ref": "#/$defs/blob"
+        },
+        "bootstrap_rule_ref": {
+          "$ref": "#/$defs/blob"
+        },
+        "certificate_rule_ref": {
+          "$ref": "#/$defs/blob"
+        },
+        "snapshot_rule_ref": {
+          "$ref": "#/$defs/blob"
+        },
+        "revocation_rule_ref": {
+          "$ref": "#/$defs/blob"
+        },
+        "rotation_rule_ref": {
+          "$ref": "#/$defs/blob"
+        },
+        "whole_conditions_and_limitations_ref": {
+          "$ref": "#/$defs/blob"
+        },
+        "implementation_method_ref": {
+          "$ref": "#/$defs/blob"
+        },
+        "implementation_environment_ref": {
+          "$ref": "#/$defs/blob"
+        },
+        "whole_legacy_base_policy_ref": {
+          "$ref": "#/$defs/blob",
+          "description": "Entire earlier time-independent ordinary B, clock_qualification_ref explicitly null, fixed before rule/grant; never final invocation P."
+        }
+      },
+      "required": [
+        "format_version",
+        "independent_root_selection_ref",
+        "whole_legacy_base_policy_ref",
+        "scope_source_ref",
+        "controller_identity_rule_ref",
+        "protected_custody_rule_ref",
+        "bootstrap_rule_ref",
+        "certificate_rule_ref",
+        "snapshot_rule_ref",
+        "revocation_rule_ref",
+        "rotation_rule_ref",
+        "whole_conditions_and_limitations_ref",
+        "implementation_method_ref",
+        "implementation_environment_ref"
+      ]
+    },
+    "control_selection": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "format_version": {
+          "const": "emt-protected-control-selection-source-r6"
+        },
+        "control_rule_ref": {
+          "$ref": "#/$defs/blob"
+        },
+        "entries": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/control_entry"
+          },
+          "uniqueItems": true
+        }
+      },
+      "required": [
+        "format_version",
+        "control_rule_ref",
+        "entries"
+      ]
+    },
+    "control_entry": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "operation": {
+          "enum": [
+            "authority_grant",
+            "issue_certificate",
+            "rotate_authority",
+            "issue_snapshot",
+            "revoke_descendants"
+          ]
+        },
+        "target_ref": {
+          "$ref": "#/$defs/blob"
+        },
+        "statement_ref": {
+          "allOf": [
+            {
+              "$ref": "#/$defs/blob"
+            },
+            {
+              "properties": {
+                "schema_id": {
+                  "const": "evidence_manifest_toolkit.signed_statement.v2"
+                },
+                "digest_basis": {
+                  "const": "jcs_content"
+                }
+              },
+              "required": [
+                "schema_id"
+              ]
+            }
+          ]
+        },
+        "envelope_digest": {
+          "type": "string",
+          "pattern": "^sha256:[0-9a-f]{64}$"
+        },
+        "authorizing_state_ref": {
+          "$ref": "#/$defs/blob"
+        },
+        "authorization_ref": {
+          "$ref": "#/$defs/blob"
+        },
+        "scope_ref": {
+          "$ref": "#/$defs/blob"
+        },
+        "signer_key_id": {
+          "type": "string",
+          "pattern": "^ed25519:[0-9a-f]{64}$"
+        }
+      },
+      "required": [
+        "operation",
+        "target_ref",
+        "statement_ref",
+        "envelope_digest",
+        "authorizing_state_ref",
+        "authorization_ref",
+        "scope_ref",
+        "signer_key_id"
+      ],
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "operation": {
+                "const": "authority_grant"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "target_ref": {
+                "allOf": [
+                  {
+                    "$ref": "#/$defs/blob"
+                  },
+                  {
+                    "properties": {
+                      "schema_id": {
+                        "const": "evidence_manifest_toolkit.authority_grant.v2"
+                      },
+                      "digest_basis": {
+                        "const": "jcs_content"
+                      }
+                    },
+                    "required": [
+                      "schema_id"
+                    ]
+                  }
+                ]
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "operation": {
+                "const": "issue_certificate"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "target_ref": {
+                "allOf": [
+                  {
+                    "$ref": "#/$defs/blob"
+                  },
+                  {
+                    "properties": {
+                      "schema_id": {
+                        "const": "evidence_manifest_toolkit.delegated_certificate.v2"
+                      },
+                      "digest_basis": {
+                        "const": "jcs_content"
+                      }
+                    },
+                    "required": [
+                      "schema_id"
+                    ]
+                  }
+                ]
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "operation": {
+                "const": "rotate_authority"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "target_ref": {
+                "allOf": [
+                  {
+                    "$ref": "#/$defs/blob"
+                  },
+                  {
+                    "properties": {
+                      "schema_id": {
+                        "const": "evidence_manifest_toolkit.authority_rotation.v2"
+                      },
+                      "digest_basis": {
+                        "const": "jcs_content"
+                      }
+                    },
+                    "required": [
+                      "schema_id"
+                    ]
+                  }
+                ]
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "operation": {
+                "const": "issue_snapshot"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "target_ref": {
+                "allOf": [
+                  {
+                    "$ref": "#/$defs/blob"
+                  },
+                  {
+                    "properties": {
+                      "schema_id": {
+                        "const": "evidence_manifest_toolkit.authority_snapshot.v2"
+                      },
+                      "digest_basis": {
+                        "const": "jcs_content"
+                      }
+                    },
+                    "required": [
+                      "schema_id"
+                    ]
+                  }
+                ]
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "operation": {
+                "const": "revoke_descendants"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "target_ref": {
+                "allOf": [
+                  {
+                    "$ref": "#/$defs/blob"
+                  },
+                  {
+                    "properties": {
+                      "schema_id": {
+                        "const": "evidence_manifest_toolkit.authority_snapshot.v2"
+                      },
+                      "digest_basis": {
+                        "const": "jcs_content"
+                      }
+                    },
+                    "required": [
+                      "schema_id"
+                    ]
+                  }
+                ]
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}

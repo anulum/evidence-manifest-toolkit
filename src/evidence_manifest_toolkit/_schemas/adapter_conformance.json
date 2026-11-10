@@ -1,0 +1,226 @@
+{
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "schema_id": {
+      "const": "evidence_manifest_toolkit.adapter_conformance.v1"
+    },
+    "descriptor_ref": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "digest": {
+          "type": "string",
+          "pattern": "^sha256:[0-9a-f]{64}$"
+        },
+        "byte_length": {
+          "type": "string",
+          "pattern": "^(0|[1-9][0-9]*)$",
+          "maxLength": 256
+        },
+        "media_type": {
+          "type": "string",
+          "minLength": 1
+        },
+        "digest_basis": {
+          "enum": [
+            "raw_bytes",
+            "jcs_content"
+          ]
+        },
+        "schema_id": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "digest",
+        "byte_length",
+        "media_type",
+        "digest_basis"
+      ]
+    },
+    "adapter_source_ref": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "digest": {
+          "type": "string",
+          "pattern": "^sha256:[0-9a-f]{64}$"
+        },
+        "byte_length": {
+          "type": "string",
+          "pattern": "^(0|[1-9][0-9]*)$",
+          "maxLength": 256
+        },
+        "media_type": {
+          "type": "string",
+          "minLength": 1
+        },
+        "digest_basis": {
+          "enum": [
+            "raw_bytes",
+            "jcs_content"
+          ]
+        },
+        "schema_id": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "digest",
+        "byte_length",
+        "media_type",
+        "digest_basis"
+      ]
+    },
+    "profile_ref": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "digest": {
+          "type": "string",
+          "pattern": "^sha256:[0-9a-f]{64}$"
+        },
+        "byte_length": {
+          "type": "string",
+          "pattern": "^(0|[1-9][0-9]*)$",
+          "maxLength": 256
+        },
+        "media_type": {
+          "type": "string",
+          "minLength": 1
+        },
+        "digest_basis": {
+          "enum": [
+            "raw_bytes",
+            "jcs_content"
+          ]
+        },
+        "schema_id": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "digest",
+        "byte_length",
+        "media_type",
+        "digest_basis"
+      ]
+    },
+    "vectors_ref": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "digest": {
+          "type": "string",
+          "pattern": "^sha256:[0-9a-f]{64}$"
+        },
+        "byte_length": {
+          "type": "string",
+          "pattern": "^(0|[1-9][0-9]*)$",
+          "maxLength": 256
+        },
+        "media_type": {
+          "type": "string",
+          "minLength": 1
+        },
+        "digest_basis": {
+          "enum": [
+            "raw_bytes",
+            "jcs_content"
+          ]
+        },
+        "schema_id": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "digest",
+        "byte_length",
+        "media_type",
+        "digest_basis"
+      ]
+    },
+    "results": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "capability": {
+            "enum": [
+              "timebase",
+              "event_transport",
+              "power_monitor",
+              "fault_control",
+              "run_control",
+              "boot_reset"
+            ]
+          },
+          "verdict": {
+            "enum": [
+              "passed",
+              "failed",
+              "unavailable"
+            ]
+          },
+          "evidence_ref": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "digest": {
+                "type": "string",
+                "pattern": "^sha256:[0-9a-f]{64}$"
+              },
+              "byte_length": {
+                "type": "string",
+                "pattern": "^(0|[1-9][0-9]*)$",
+                "maxLength": 256
+              },
+              "media_type": {
+                "type": "string",
+                "minLength": 1
+              },
+              "digest_basis": {
+                "enum": [
+                  "raw_bytes",
+                  "jcs_content"
+                ]
+              },
+              "schema_id": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "required": [
+              "digest",
+              "byte_length",
+              "media_type",
+              "digest_basis"
+            ]
+          }
+        },
+        "required": [
+          "capability",
+          "verdict",
+          "evidence_ref"
+        ]
+      },
+      "minItems": 1
+    }
+  },
+  "required": [
+    "schema_id",
+    "descriptor_ref",
+    "adapter_source_ref",
+    "profile_ref",
+    "vectors_ref",
+    "results"
+  ],
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:gotm:schema:evidence_manifest_toolkit.adapter_conformance.v1"
+}

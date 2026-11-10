@@ -1,0 +1,1579 @@
+{
+  "cases": [
+    {
+      "case_id": "raw-zero-optional-omitted",
+      "source_kind": "public_mapping_success",
+      "input_kind": "mapping",
+      "input": {
+        "digest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "byte_length": "0",
+        "media_type": "application/octet-stream",
+        "digest_basis": "raw_bytes"
+      },
+      "expected_fields": {
+        "digest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "byte_length": "0",
+        "media_type": "application/octet-stream",
+        "digest_basis": "raw_bytes",
+        "schema_id": null
+      },
+      "expected_wire": {
+        "digest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "byte_length": "0",
+        "media_type": "application/octet-stream",
+        "digest_basis": "raw_bytes"
+      },
+      "representations": [
+        "dict",
+        "read_only_mapping"
+      ],
+      "applies_to": [
+        "from_mapping",
+        "to_mapping"
+      ],
+      "qualification": "shape_only_unverified_declaration"
+    },
+    {
+      "case_id": "jcs-schema-declaration",
+      "source_kind": "public_mapping_success",
+      "input_kind": "mapping",
+      "input": {
+        "digest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "byte_length": "0",
+        "media_type": "application/octet-stream",
+        "digest_basis": "jcs_content",
+        "schema_id": "unregistered.fixture.v1"
+      },
+      "expected_fields": {
+        "digest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "byte_length": "0",
+        "media_type": "application/octet-stream",
+        "digest_basis": "jcs_content",
+        "schema_id": "unregistered.fixture.v1"
+      },
+      "expected_wire": {
+        "digest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "byte_length": "0",
+        "media_type": "application/octet-stream",
+        "digest_basis": "jcs_content",
+        "schema_id": "unregistered.fixture.v1"
+      },
+      "representations": [
+        "dict",
+        "read_only_mapping"
+      ],
+      "applies_to": [
+        "from_mapping",
+        "to_mapping"
+      ],
+      "qualification": "shape_only_unverified_declaration"
+    },
+    {
+      "case_id": "length-exact256",
+      "source_kind": "public_mapping_success",
+      "input_kind": "mapping",
+      "input": {
+        "digest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "byte_length": "9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999",
+        "media_type": "application/octet-stream",
+        "digest_basis": "raw_bytes"
+      },
+      "expected_fields": {
+        "digest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "byte_length": "9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999",
+        "media_type": "application/octet-stream",
+        "digest_basis": "raw_bytes",
+        "schema_id": null
+      },
+      "expected_wire": {
+        "digest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "byte_length": "9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999",
+        "media_type": "application/octet-stream",
+        "digest_basis": "raw_bytes"
+      },
+      "representations": [
+        "dict",
+        "read_only_mapping"
+      ],
+      "applies_to": [
+        "from_mapping",
+        "to_mapping"
+      ],
+      "qualification": "shape_only_unverified_declaration"
+    },
+    {
+      "case_id": "unicode-scalars-retained",
+      "source_kind": "public_mapping_success",
+      "input_kind": "mapping",
+      "input": {
+        "digest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "byte_length": "0",
+        "media_type": "e\u0301/\ud83d\ude42",
+        "digest_basis": "raw_bytes",
+        "schema_id": "\u00e9.\ud83d\ude42"
+      },
+      "expected_fields": {
+        "digest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "byte_length": "0",
+        "media_type": "e\u0301/\ud83d\ude42",
+        "digest_basis": "raw_bytes",
+        "schema_id": "\u00e9.\ud83d\ude42"
+      },
+      "expected_wire": {
+        "digest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "byte_length": "0",
+        "media_type": "e\u0301/\ud83d\ude42",
+        "digest_basis": "raw_bytes",
+        "schema_id": "\u00e9.\ud83d\ude42"
+      },
+      "representations": [
+        "dict",
+        "read_only_mapping"
+      ],
+      "applies_to": [
+        "from_mapping",
+        "to_mapping"
+      ],
+      "qualification": "shape_only_unverified_declaration"
+    },
+    {
+      "case_id": "nonempty-whitespace-declarations",
+      "source_kind": "public_mapping_success",
+      "input_kind": "mapping",
+      "input": {
+        "digest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "byte_length": "0",
+        "media_type": " ",
+        "digest_basis": "raw_bytes",
+        "schema_id": " "
+      },
+      "expected_fields": {
+        "digest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "byte_length": "0",
+        "media_type": " ",
+        "digest_basis": "raw_bytes",
+        "schema_id": " "
+      },
+      "expected_wire": {
+        "digest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "byte_length": "0",
+        "media_type": " ",
+        "digest_basis": "raw_bytes",
+        "schema_id": " "
+      },
+      "representations": [
+        "dict",
+        "read_only_mapping"
+      ],
+      "applies_to": [
+        "from_mapping",
+        "to_mapping"
+      ],
+      "qualification": "shape_only_unverified_declaration"
+    },
+    {
+      "case_id": "control-characters-retained",
+      "source_kind": "public_mapping_success",
+      "input_kind": "mapping",
+      "input": {
+        "digest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "byte_length": "0",
+        "media_type": "application/\u0000\n",
+        "digest_basis": "raw_bytes",
+        "schema_id": "test\tdeclared"
+      },
+      "expected_fields": {
+        "digest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "byte_length": "0",
+        "media_type": "application/\u0000\n",
+        "digest_basis": "raw_bytes",
+        "schema_id": "test\tdeclared"
+      },
+      "expected_wire": {
+        "digest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "byte_length": "0",
+        "media_type": "application/\u0000\n",
+        "digest_basis": "raw_bytes",
+        "schema_id": "test\tdeclared"
+      },
+      "representations": [
+        "dict",
+        "read_only_mapping"
+      ],
+      "applies_to": [
+        "from_mapping",
+        "to_mapping"
+      ],
+      "qualification": "shape_only_unverified_declaration"
+    },
+    {
+      "case_id": "nonmapping-none",
+      "source_kind": "public_mapping_refusal",
+      "input_kind": "nonmapping",
+      "input": null,
+      "applies_to": [
+        "from_mapping"
+      ],
+      "expected_exception": "InputRefused",
+      "expected_reason": {
+        "code": "invalid_schema",
+        "subject_digest": null,
+        "claim_id": null,
+        "pointer": "",
+        "detail": "Invalid reference declaration."
+      },
+      "recovery_case_id": "raw-zero-optional-omitted"
+    },
+    {
+      "case_id": "nonmapping-array",
+      "source_kind": "public_mapping_refusal",
+      "input_kind": "nonmapping",
+      "input": [],
+      "applies_to": [
+        "from_mapping"
+      ],
+      "expected_exception": "InputRefused",
+      "expected_reason": {
+        "code": "invalid_schema",
+        "subject_digest": null,
+        "claim_id": null,
+        "pointer": "",
+        "detail": "Invalid reference declaration."
+      },
+      "recovery_case_id": "raw-zero-optional-omitted"
+    },
+    {
+      "case_id": "nonmapping-text",
+      "source_kind": "public_mapping_refusal",
+      "input_kind": "nonmapping",
+      "input": "{}",
+      "applies_to": [
+        "from_mapping"
+      ],
+      "expected_exception": "InputRefused",
+      "expected_reason": {
+        "code": "invalid_schema",
+        "subject_digest": null,
+        "claim_id": null,
+        "pointer": "",
+        "detail": "Invalid reference declaration."
+      },
+      "recovery_case_id": "raw-zero-optional-omitted"
+    },
+    {
+      "case_id": "nonmapping-integer",
+      "source_kind": "public_mapping_refusal",
+      "input_kind": "nonmapping",
+      "input": 0,
+      "applies_to": [
+        "from_mapping"
+      ],
+      "expected_exception": "InputRefused",
+      "expected_reason": {
+        "code": "invalid_schema",
+        "subject_digest": null,
+        "claim_id": null,
+        "pointer": "",
+        "detail": "Invalid reference declaration."
+      },
+      "recovery_case_id": "raw-zero-optional-omitted"
+    },
+    {
+      "case_id": "nonmapping-bool",
+      "source_kind": "public_mapping_refusal",
+      "input_kind": "nonmapping",
+      "input": true,
+      "applies_to": [
+        "from_mapping"
+      ],
+      "expected_exception": "InputRefused",
+      "expected_reason": {
+        "code": "invalid_schema",
+        "subject_digest": null,
+        "claim_id": null,
+        "pointer": "",
+        "detail": "Invalid reference declaration."
+      },
+      "recovery_case_id": "raw-zero-optional-omitted"
+    },
+    {
+      "case_id": "missing-digest",
+      "source_kind": "public_mapping_refusal",
+      "input_kind": "mapping",
+      "input": {
+        "byte_length": "0",
+        "media_type": "application/octet-stream",
+        "digest_basis": "raw_bytes"
+      },
+      "applies_to": [
+        "from_mapping"
+      ],
+      "expected_exception": "InputRefused",
+      "expected_reason": {
+        "code": "invalid_schema",
+        "subject_digest": null,
+        "claim_id": null,
+        "pointer": "",
+        "detail": "Invalid reference declaration."
+      },
+      "recovery_case_id": "raw-zero-optional-omitted"
+    },
+    {
+      "case_id": "missing-byte_length",
+      "source_kind": "public_mapping_refusal",
+      "input_kind": "mapping",
+      "input": {
+        "digest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "media_type": "application/octet-stream",
+        "digest_basis": "raw_bytes"
+      },
+      "applies_to": [
+        "from_mapping"
+      ],
+      "expected_exception": "InputRefused",
+      "expected_reason": {
+        "code": "invalid_schema",
+        "subject_digest": null,
+        "claim_id": null,
+        "pointer": "",
+        "detail": "Invalid reference declaration."
+      },
+      "recovery_case_id": "raw-zero-optional-omitted"
+    },
+    {
+      "case_id": "missing-media_type",
+      "source_kind": "public_mapping_refusal",
+      "input_kind": "mapping",
+      "input": {
+        "digest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "byte_length": "0",
+        "digest_basis": "raw_bytes"
+      },
+      "applies_to": [
+        "from_mapping"
+      ],
+      "expected_exception": "InputRefused",
+      "expected_reason": {
+        "code": "invalid_schema",
+        "subject_digest": null,
+        "claim_id": null,
+        "pointer": "",
+        "detail": "Invalid reference declaration."
+      },
+      "recovery_case_id": "raw-zero-optional-omitted"
+    },
+    {
+      "case_id": "missing-digest_basis",
+      "source_kind": "public_mapping_refusal",
+      "input_kind": "mapping",
+      "input": {
+        "digest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "byte_length": "0",
+        "media_type": "application/octet-stream"
+      },
+      "applies_to": [
+        "from_mapping"
+      ],
+      "expected_exception": "InputRefused",
+      "expected_reason": {
+        "code": "invalid_schema",
+        "subject_digest": null,
+        "claim_id": null,
+        "pointer": "",
+        "detail": "Invalid reference declaration."
+      },
+      "recovery_case_id": "raw-zero-optional-omitted"
+    },
+    {
+      "case_id": "extra-locator",
+      "source_kind": "public_mapping_refusal",
+      "input_kind": "mapping",
+      "input": {
+        "digest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "byte_length": "0",
+        "media_type": "application/octet-stream",
+        "digest_basis": "raw_bytes",
+        "locator": "secret/path"
+      },
+      "applies_to": [
+        "from_mapping"
+      ],
+      "expected_exception": "InputRefused",
+      "expected_reason": {
+        "code": "invalid_schema",
+        "subject_digest": null,
+        "claim_id": null,
+        "pointer": "",
+        "detail": "Invalid reference declaration."
+      },
+      "recovery_case_id": "raw-zero-optional-omitted"
+    },
+    {
+      "case_id": "extra-escaped-key",
+      "source_kind": "public_mapping_refusal",
+      "input_kind": "mapping",
+      "input": {
+        "digest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "byte_length": "0",
+        "media_type": "application/octet-stream",
+        "digest_basis": "raw_bytes",
+        "~/extra": "x"
+      },
+      "applies_to": [
+        "from_mapping"
+      ],
+      "expected_exception": "InputRefused",
+      "expected_reason": {
+        "code": "invalid_schema",
+        "subject_digest": null,
+        "claim_id": null,
+        "pointer": "",
+        "detail": "Invalid reference declaration."
+      },
+      "recovery_case_id": "raw-zero-optional-omitted"
+    },
+    {
+      "case_id": "nonstring-key",
+      "source_kind": "public_mapping_refusal",
+      "input_kind": "mapping_nonstring_key",
+      "input": {
+        "entries": [
+          [
+            1,
+            "x"
+          ],
+          [
+            "digest",
+            "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          ],
+          [
+            "byte_length",
+            "0"
+          ],
+          [
+            "media_type",
+            "application/octet-stream"
+          ],
+          [
+            "digest_basis",
+            "raw_bytes"
+          ]
+        ]
+      },
+      "applies_to": [
+        "from_mapping"
+      ],
+      "expected_exception": "InputRefused",
+      "expected_reason": {
+        "code": "invalid_schema",
+        "subject_digest": null,
+        "claim_id": null,
+        "pointer": "",
+        "detail": "Invalid reference declaration."
+      },
+      "recovery_case_id": "raw-zero-optional-omitted"
+    },
+    {
+      "case_id": "digest-type-null",
+      "source_kind": "public_mapping_refusal",
+      "input_kind": "mapping",
+      "input": {
+        "digest": null,
+        "byte_length": "0",
+        "media_type": "application/octet-stream",
+        "digest_basis": "raw_bytes"
+      },
+      "applies_to": [
+        "from_mapping",
+        "to_mapping"
+      ],
+      "expected_exception": "InputRefused",
+      "expected_reason": {
+        "code": "invalid_schema",
+        "subject_digest": null,
+        "claim_id": null,
+        "pointer": "",
+        "detail": "Invalid reference declaration."
+      },
+      "recovery_case_id": "raw-zero-optional-omitted"
+    },
+    {
+      "case_id": "digest-type-integer",
+      "source_kind": "public_mapping_refusal",
+      "input_kind": "mapping",
+      "input": {
+        "digest": 0,
+        "byte_length": "0",
+        "media_type": "application/octet-stream",
+        "digest_basis": "raw_bytes"
+      },
+      "applies_to": [
+        "from_mapping",
+        "to_mapping"
+      ],
+      "expected_exception": "InputRefused",
+      "expected_reason": {
+        "code": "invalid_schema",
+        "subject_digest": null,
+        "claim_id": null,
+        "pointer": "",
+        "detail": "Invalid reference declaration."
+      },
+      "recovery_case_id": "raw-zero-optional-omitted"
+    },
+    {
+      "case_id": "digest-type-bool",
+      "source_kind": "public_mapping_refusal",
+      "input_kind": "mapping",
+      "input": {
+        "digest": false,
+        "byte_length": "0",
+        "media_type": "application/octet-stream",
+        "digest_basis": "raw_bytes"
+      },
+      "applies_to": [
+        "from_mapping",
+        "to_mapping"
+      ],
+      "expected_exception": "InputRefused",
+      "expected_reason": {
+        "code": "invalid_schema",
+        "subject_digest": null,
+        "claim_id": null,
+        "pointer": "",
+        "detail": "Invalid reference declaration."
+      },
+      "recovery_case_id": "raw-zero-optional-omitted"
+    },
+    {
+      "case_id": "digest-type-array",
+      "source_kind": "public_mapping_refusal",
+      "input_kind": "mapping",
+      "input": {
+        "digest": [],
+        "byte_length": "0",
+        "media_type": "application/octet-stream",
+        "digest_basis": "raw_bytes"
+      },
+      "applies_to": [
+        "from_mapping",
+        "to_mapping"
+      ],
+      "expected_exception": "InputRefused",
+      "expected_reason": {
+        "code": "invalid_schema",
+        "subject_digest": null,
+        "claim_id": null,
+        "pointer": "",
+        "detail": "Invalid reference declaration."
+      },
+      "recovery_case_id": "raw-zero-optional-omitted"
+    },
+    {
+      "case_id": "byte_length-type-null",
+      "source_kind": "public_mapping_refusal",
+      "input_kind": "mapping",
+      "input": {
+        "digest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "byte_length": null,
+        "media_type": "application/octet-stream",
+        "digest_basis": "raw_bytes"
+      },
+      "applies_to": [
+        "from_mapping",
+        "to_mapping"
+      ],
+      "expected_exception": "InputRefused",
+      "expected_reason": {
+        "code": "invalid_schema",
+        "subject_digest": null,
+        "claim_id": null,
+        "pointer": "",
+        "detail": "Invalid reference declaration."
+      },
+      "recovery_case_id": "raw-zero-optional-omitted"
+    },
+    {
+      "case_id": "byte_length-type-integer",
+      "source_kind": "public_mapping_refusal",
+      "input_kind": "mapping",
+      "input": {
+        "digest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "byte_length": 0,
+        "media_type": "application/octet-stream",
+        "digest_basis": "raw_bytes"
+      },
+      "applies_to": [
+        "from_mapping",
+        "to_mapping"
+      ],
+      "expected_exception": "InputRefused",
+      "expected_reason": {
+        "code": "invalid_schema",
+        "subject_digest": null,
+        "claim_id": null,
+        "pointer": "",
+        "detail": "Invalid reference declaration."
+      },
+      "recovery_case_id": "raw-zero-optional-omitted"
+    },
+    {
+      "case_id": "byte_length-type-bool",
+      "source_kind": "public_mapping_refusal",
+      "input_kind": "mapping",
+      "input": {
+        "digest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "byte_length": false,
+        "media_type": "application/octet-stream",
+        "digest_basis": "raw_bytes"
+      },
+      "applies_to": [
+        "from_mapping",
+        "to_mapping"
+      ],
+      "expected_exception": "InputRefused",
+      "expected_reason": {
+        "code": "invalid_schema",
+        "subject_digest": null,
+        "claim_id": null,
+        "pointer": "",
+        "detail": "Invalid reference declaration."
+      },
+      "recovery_case_id": "raw-zero-optional-omitted"
+    },
+    {
+      "case_id": "byte_length-type-array",
+      "source_kind": "public_mapping_refusal",
+      "input_kind": "mapping",
+      "input": {
+        "digest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "byte_length": [],
+        "media_type": "application/octet-stream",
+        "digest_basis": "raw_bytes"
+      },
+      "applies_to": [
+        "from_mapping",
+        "to_mapping"
+      ],
+      "expected_exception": "InputRefused",
+      "expected_reason": {
+        "code": "invalid_schema",
+        "subject_digest": null,
+        "claim_id": null,
+        "pointer": "",
+        "detail": "Invalid reference declaration."
+      },
+      "recovery_case_id": "raw-zero-optional-omitted"
+    },
+    {
+      "case_id": "media_type-type-null",
+      "source_kind": "public_mapping_refusal",
+      "input_kind": "mapping",
+      "input": {
+        "digest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "byte_length": "0",
+        "media_type": null,
+        "digest_basis": "raw_bytes"
+      },
+      "applies_to": [
+        "from_mapping",
+        "to_mapping"
+      ],
+      "expected_exception": "InputRefused",
+      "expected_reason": {
+        "code": "invalid_schema",
+        "subject_digest": null,
+        "claim_id": null,
+        "pointer": "",
+        "detail": "Invalid reference declaration."
+      },
+      "recovery_case_id": "raw-zero-optional-omitted"
+    },
+    {
+      "case_id": "media_type-type-integer",
+      "source_kind": "public_mapping_refusal",
+      "input_kind": "mapping",
+      "input": {
+        "digest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "byte_length": "0",
+        "media_type": 0,
+        "digest_basis": "raw_bytes"
+      },
+      "applies_to": [
+        "from_mapping",
+        "to_mapping"
+      ],
+      "expected_exception": "InputRefused",
+      "expected_reason": {
+        "code": "invalid_schema",
+        "subject_digest": null,
+        "claim_id": null,
+        "pointer": "",
+        "detail": "Invalid reference declaration."
+      },
+      "recovery_case_id": "raw-zero-optional-omitted"
+    },
+    {
+      "case_id": "media_type-type-bool",
+      "source_kind": "public_mapping_refusal",
+      "input_kind": "mapping",
+      "input": {
+        "digest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "byte_length": "0",
+        "media_type": false,
+        "digest_basis": "raw_bytes"
+      },
+      "applies_to": [
+        "from_mapping",
+        "to_mapping"
+      ],
+      "expected_exception": "InputRefused",
+      "expected_reason": {
+        "code": "invalid_schema",
+        "subject_digest": null,
+        "claim_id": null,
+        "pointer": "",
+        "detail": "Invalid reference declaration."
+      },
+      "recovery_case_id": "raw-zero-optional-omitted"
+    },
+    {
+      "case_id": "media_type-type-array",
+      "source_kind": "public_mapping_refusal",
+      "input_kind": "mapping",
+      "input": {
+        "digest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "byte_length": "0",
+        "media_type": [],
+        "digest_basis": "raw_bytes"
+      },
+      "applies_to": [
+        "from_mapping",
+        "to_mapping"
+      ],
+      "expected_exception": "InputRefused",
+      "expected_reason": {
+        "code": "invalid_schema",
+        "subject_digest": null,
+        "claim_id": null,
+        "pointer": "",
+        "detail": "Invalid reference declaration."
+      },
+      "recovery_case_id": "raw-zero-optional-omitted"
+    },
+    {
+      "case_id": "digest_basis-type-null",
+      "source_kind": "public_mapping_refusal",
+      "input_kind": "mapping",
+      "input": {
+        "digest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "byte_length": "0",
+        "media_type": "application/octet-stream",
+        "digest_basis": null
+      },
+      "applies_to": [
+        "from_mapping",
+        "to_mapping"
+      ],
+      "expected_exception": "InputRefused",
+      "expected_reason": {
+        "code": "invalid_schema",
+        "subject_digest": null,
+        "claim_id": null,
+        "pointer": "",
+        "detail": "Invalid reference declaration."
+      },
+      "recovery_case_id": "raw-zero-optional-omitted"
+    },
+    {
+      "case_id": "digest_basis-type-integer",
+      "source_kind": "public_mapping_refusal",
+      "input_kind": "mapping",
+      "input": {
+        "digest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "byte_length": "0",
+        "media_type": "application/octet-stream",
+        "digest_basis": 0
+      },
+      "applies_to": [
+        "from_mapping",
+        "to_mapping"
+      ],
+      "expected_exception": "InputRefused",
+      "expected_reason": {
+        "code": "invalid_schema",
+        "subject_digest": null,
+        "claim_id": null,
+        "pointer": "",
+        "detail": "Invalid reference declaration."
+      },
+      "recovery_case_id": "raw-zero-optional-omitted"
+    },
+    {
+      "case_id": "digest_basis-type-bool",
+      "source_kind": "public_mapping_refusal",
+      "input_kind": "mapping",
+      "input": {
+        "digest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "byte_length": "0",
+        "media_type": "application/octet-stream",
+        "digest_basis": false
+      },
+      "applies_to": [
+        "from_mapping",
+        "to_mapping"
+      ],
+      "expected_exception": "InputRefused",
+      "expected_reason": {
+        "code": "invalid_schema",
+        "subject_digest": null,
+        "claim_id": null,
+        "pointer": "",
+        "detail": "Invalid reference declaration."
+      },
+      "recovery_case_id": "raw-zero-optional-omitted"
+    },
+    {
+      "case_id": "digest_basis-type-array",
+      "source_kind": "public_mapping_refusal",
+      "input_kind": "mapping",
+      "input": {
+        "digest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "byte_length": "0",
+        "media_type": "application/octet-stream",
+        "digest_basis": []
+      },
+      "applies_to": [
+        "from_mapping",
+        "to_mapping"
+      ],
+      "expected_exception": "InputRefused",
+      "expected_reason": {
+        "code": "invalid_schema",
+        "subject_digest": null,
+        "claim_id": null,
+        "pointer": "",
+        "detail": "Invalid reference declaration."
+      },
+      "recovery_case_id": "raw-zero-optional-omitted"
+    },
+    {
+      "case_id": "schema_id-type-null",
+      "source_kind": "public_mapping_refusal",
+      "input_kind": "mapping",
+      "input": {
+        "digest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "byte_length": "0",
+        "media_type": "application/octet-stream",
+        "digest_basis": "raw_bytes",
+        "schema_id": null
+      },
+      "applies_to": [
+        "from_mapping"
+      ],
+      "expected_exception": "InputRefused",
+      "expected_reason": {
+        "code": "invalid_schema",
+        "subject_digest": null,
+        "claim_id": null,
+        "pointer": "",
+        "detail": "Invalid reference declaration."
+      },
+      "recovery_case_id": "raw-zero-optional-omitted"
+    },
+    {
+      "case_id": "schema_id-type-integer",
+      "source_kind": "public_mapping_refusal",
+      "input_kind": "mapping",
+      "input": {
+        "digest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "byte_length": "0",
+        "media_type": "application/octet-stream",
+        "digest_basis": "raw_bytes",
+        "schema_id": 0
+      },
+      "applies_to": [
+        "from_mapping",
+        "to_mapping"
+      ],
+      "expected_exception": "InputRefused",
+      "expected_reason": {
+        "code": "invalid_schema",
+        "subject_digest": null,
+        "claim_id": null,
+        "pointer": "",
+        "detail": "Invalid reference declaration."
+      },
+      "recovery_case_id": "raw-zero-optional-omitted"
+    },
+    {
+      "case_id": "schema_id-type-bool",
+      "source_kind": "public_mapping_refusal",
+      "input_kind": "mapping",
+      "input": {
+        "digest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "byte_length": "0",
+        "media_type": "application/octet-stream",
+        "digest_basis": "raw_bytes",
+        "schema_id": false
+      },
+      "applies_to": [
+        "from_mapping",
+        "to_mapping"
+      ],
+      "expected_exception": "InputRefused",
+      "expected_reason": {
+        "code": "invalid_schema",
+        "subject_digest": null,
+        "claim_id": null,
+        "pointer": "",
+        "detail": "Invalid reference declaration."
+      },
+      "recovery_case_id": "raw-zero-optional-omitted"
+    },
+    {
+      "case_id": "schema_id-type-array",
+      "source_kind": "public_mapping_refusal",
+      "input_kind": "mapping",
+      "input": {
+        "digest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "byte_length": "0",
+        "media_type": "application/octet-stream",
+        "digest_basis": "raw_bytes",
+        "schema_id": []
+      },
+      "applies_to": [
+        "from_mapping",
+        "to_mapping"
+      ],
+      "expected_exception": "InputRefused",
+      "expected_reason": {
+        "code": "invalid_schema",
+        "subject_digest": null,
+        "claim_id": null,
+        "pointer": "",
+        "detail": "Invalid reference declaration."
+      },
+      "recovery_case_id": "raw-zero-optional-omitted"
+    },
+    {
+      "case_id": "digest-uppercase",
+      "source_kind": "public_mapping_refusal",
+      "input_kind": "mapping",
+      "input": {
+        "digest": "sha256:AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+        "byte_length": "0",
+        "media_type": "application/octet-stream",
+        "digest_basis": "raw_bytes"
+      },
+      "applies_to": [
+        "from_mapping",
+        "to_mapping"
+      ],
+      "expected_exception": "InputRefused",
+      "expected_reason": {
+        "code": "invalid_schema",
+        "subject_digest": null,
+        "claim_id": null,
+        "pointer": "",
+        "detail": "Invalid reference declaration."
+      },
+      "recovery_case_id": "raw-zero-optional-omitted"
+    },
+    {
+      "case_id": "digest-prefix-case",
+      "source_kind": "public_mapping_refusal",
+      "input_kind": "mapping",
+      "input": {
+        "digest": "SHA256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "byte_length": "0",
+        "media_type": "application/octet-stream",
+        "digest_basis": "raw_bytes"
+      },
+      "applies_to": [
+        "from_mapping",
+        "to_mapping"
+      ],
+      "expected_exception": "InputRefused",
+      "expected_reason": {
+        "code": "invalid_schema",
+        "subject_digest": null,
+        "claim_id": null,
+        "pointer": "",
+        "detail": "Invalid reference declaration."
+      },
+      "recovery_case_id": "raw-zero-optional-omitted"
+    },
+    {
+      "case_id": "digest-short",
+      "source_kind": "public_mapping_refusal",
+      "input_kind": "mapping",
+      "input": {
+        "digest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "byte_length": "0",
+        "media_type": "application/octet-stream",
+        "digest_basis": "raw_bytes"
+      },
+      "applies_to": [
+        "from_mapping",
+        "to_mapping"
+      ],
+      "expected_exception": "InputRefused",
+      "expected_reason": {
+        "code": "invalid_schema",
+        "subject_digest": null,
+        "claim_id": null,
+        "pointer": "",
+        "detail": "Invalid reference declaration."
+      },
+      "recovery_case_id": "raw-zero-optional-omitted"
+    },
+    {
+      "case_id": "digest-long",
+      "source_kind": "public_mapping_refusal",
+      "input_kind": "mapping",
+      "input": {
+        "digest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "byte_length": "0",
+        "media_type": "application/octet-stream",
+        "digest_basis": "raw_bytes"
+      },
+      "applies_to": [
+        "from_mapping",
+        "to_mapping"
+      ],
+      "expected_exception": "InputRefused",
+      "expected_reason": {
+        "code": "invalid_schema",
+        "subject_digest": null,
+        "claim_id": null,
+        "pointer": "",
+        "detail": "Invalid reference declaration."
+      },
+      "recovery_case_id": "raw-zero-optional-omitted"
+    },
+    {
+      "case_id": "digest-nonhex",
+      "source_kind": "public_mapping_refusal",
+      "input_kind": "mapping",
+      "input": {
+        "digest": "sha256:gggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggg",
+        "byte_length": "0",
+        "media_type": "application/octet-stream",
+        "digest_basis": "raw_bytes"
+      },
+      "applies_to": [
+        "from_mapping",
+        "to_mapping"
+      ],
+      "expected_exception": "InputRefused",
+      "expected_reason": {
+        "code": "invalid_schema",
+        "subject_digest": null,
+        "claim_id": null,
+        "pointer": "",
+        "detail": "Invalid reference declaration."
+      },
+      "recovery_case_id": "raw-zero-optional-omitted"
+    },
+    {
+      "case_id": "digest-newline",
+      "source_kind": "public_mapping_refusal",
+      "input_kind": "mapping",
+      "input": {
+        "digest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\n",
+        "byte_length": "0",
+        "media_type": "application/octet-stream",
+        "digest_basis": "raw_bytes"
+      },
+      "applies_to": [
+        "from_mapping",
+        "to_mapping"
+      ],
+      "expected_exception": "InputRefused",
+      "expected_reason": {
+        "code": "invalid_schema",
+        "subject_digest": null,
+        "claim_id": null,
+        "pointer": "",
+        "detail": "Invalid reference declaration."
+      },
+      "recovery_case_id": "raw-zero-optional-omitted"
+    },
+    {
+      "case_id": "length-empty",
+      "source_kind": "public_mapping_refusal",
+      "input_kind": "mapping",
+      "input": {
+        "digest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "byte_length": "",
+        "media_type": "application/octet-stream",
+        "digest_basis": "raw_bytes"
+      },
+      "applies_to": [
+        "from_mapping",
+        "to_mapping"
+      ],
+      "expected_exception": "InputRefused",
+      "expected_reason": {
+        "code": "invalid_schema",
+        "subject_digest": null,
+        "claim_id": null,
+        "pointer": "",
+        "detail": "Invalid reference declaration."
+      },
+      "recovery_case_id": "raw-zero-optional-omitted"
+    },
+    {
+      "case_id": "length-leadingzero",
+      "source_kind": "public_mapping_refusal",
+      "input_kind": "mapping",
+      "input": {
+        "digest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "byte_length": "00",
+        "media_type": "application/octet-stream",
+        "digest_basis": "raw_bytes"
+      },
+      "applies_to": [
+        "from_mapping",
+        "to_mapping"
+      ],
+      "expected_exception": "InputRefused",
+      "expected_reason": {
+        "code": "invalid_schema",
+        "subject_digest": null,
+        "claim_id": null,
+        "pointer": "",
+        "detail": "Invalid reference declaration."
+      },
+      "recovery_case_id": "raw-zero-optional-omitted"
+    },
+    {
+      "case_id": "length-negative",
+      "source_kind": "public_mapping_refusal",
+      "input_kind": "mapping",
+      "input": {
+        "digest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "byte_length": "-1",
+        "media_type": "application/octet-stream",
+        "digest_basis": "raw_bytes"
+      },
+      "applies_to": [
+        "from_mapping",
+        "to_mapping"
+      ],
+      "expected_exception": "InputRefused",
+      "expected_reason": {
+        "code": "invalid_schema",
+        "subject_digest": null,
+        "claim_id": null,
+        "pointer": "",
+        "detail": "Invalid reference declaration."
+      },
+      "recovery_case_id": "raw-zero-optional-omitted"
+    },
+    {
+      "case_id": "length-plus",
+      "source_kind": "public_mapping_refusal",
+      "input_kind": "mapping",
+      "input": {
+        "digest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "byte_length": "+1",
+        "media_type": "application/octet-stream",
+        "digest_basis": "raw_bytes"
+      },
+      "applies_to": [
+        "from_mapping",
+        "to_mapping"
+      ],
+      "expected_exception": "InputRefused",
+      "expected_reason": {
+        "code": "invalid_schema",
+        "subject_digest": null,
+        "claim_id": null,
+        "pointer": "",
+        "detail": "Invalid reference declaration."
+      },
+      "recovery_case_id": "raw-zero-optional-omitted"
+    },
+    {
+      "case_id": "length-decimal",
+      "source_kind": "public_mapping_refusal",
+      "input_kind": "mapping",
+      "input": {
+        "digest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "byte_length": "1.0",
+        "media_type": "application/octet-stream",
+        "digest_basis": "raw_bytes"
+      },
+      "applies_to": [
+        "from_mapping",
+        "to_mapping"
+      ],
+      "expected_exception": "InputRefused",
+      "expected_reason": {
+        "code": "invalid_schema",
+        "subject_digest": null,
+        "claim_id": null,
+        "pointer": "",
+        "detail": "Invalid reference declaration."
+      },
+      "recovery_case_id": "raw-zero-optional-omitted"
+    },
+    {
+      "case_id": "length-exponent",
+      "source_kind": "public_mapping_refusal",
+      "input_kind": "mapping",
+      "input": {
+        "digest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "byte_length": "1e0",
+        "media_type": "application/octet-stream",
+        "digest_basis": "raw_bytes"
+      },
+      "applies_to": [
+        "from_mapping",
+        "to_mapping"
+      ],
+      "expected_exception": "InputRefused",
+      "expected_reason": {
+        "code": "invalid_schema",
+        "subject_digest": null,
+        "claim_id": null,
+        "pointer": "",
+        "detail": "Invalid reference declaration."
+      },
+      "recovery_case_id": "raw-zero-optional-omitted"
+    },
+    {
+      "case_id": "length-leading-space",
+      "source_kind": "public_mapping_refusal",
+      "input_kind": "mapping",
+      "input": {
+        "digest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "byte_length": " 1",
+        "media_type": "application/octet-stream",
+        "digest_basis": "raw_bytes"
+      },
+      "applies_to": [
+        "from_mapping",
+        "to_mapping"
+      ],
+      "expected_exception": "InputRefused",
+      "expected_reason": {
+        "code": "invalid_schema",
+        "subject_digest": null,
+        "claim_id": null,
+        "pointer": "",
+        "detail": "Invalid reference declaration."
+      },
+      "recovery_case_id": "raw-zero-optional-omitted"
+    },
+    {
+      "case_id": "length-trailing-newline",
+      "source_kind": "public_mapping_refusal",
+      "input_kind": "mapping",
+      "input": {
+        "digest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "byte_length": "1\n",
+        "media_type": "application/octet-stream",
+        "digest_basis": "raw_bytes"
+      },
+      "applies_to": [
+        "from_mapping",
+        "to_mapping"
+      ],
+      "expected_exception": "InputRefused",
+      "expected_reason": {
+        "code": "invalid_schema",
+        "subject_digest": null,
+        "claim_id": null,
+        "pointer": "",
+        "detail": "Invalid reference declaration."
+      },
+      "recovery_case_id": "raw-zero-optional-omitted"
+    },
+    {
+      "case_id": "length-unicode-digit",
+      "source_kind": "public_mapping_refusal",
+      "input_kind": "mapping",
+      "input": {
+        "digest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "byte_length": "\u0661",
+        "media_type": "application/octet-stream",
+        "digest_basis": "raw_bytes"
+      },
+      "applies_to": [
+        "from_mapping",
+        "to_mapping"
+      ],
+      "expected_exception": "InputRefused",
+      "expected_reason": {
+        "code": "invalid_schema",
+        "subject_digest": null,
+        "claim_id": null,
+        "pointer": "",
+        "detail": "Invalid reference declaration."
+      },
+      "recovery_case_id": "raw-zero-optional-omitted"
+    },
+    {
+      "case_id": "length-over256",
+      "source_kind": "public_mapping_refusal",
+      "input_kind": "mapping",
+      "input": {
+        "digest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "byte_length": "99999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999",
+        "media_type": "application/octet-stream",
+        "digest_basis": "raw_bytes"
+      },
+      "applies_to": [
+        "from_mapping",
+        "to_mapping"
+      ],
+      "expected_exception": "InputRefused",
+      "expected_reason": {
+        "code": "invalid_schema",
+        "subject_digest": null,
+        "claim_id": null,
+        "pointer": "",
+        "detail": "Invalid reference declaration."
+      },
+      "recovery_case_id": "raw-zero-optional-omitted"
+    },
+    {
+      "case_id": "media-empty",
+      "source_kind": "public_mapping_refusal",
+      "input_kind": "mapping",
+      "input": {
+        "digest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "byte_length": "0",
+        "media_type": "",
+        "digest_basis": "raw_bytes"
+      },
+      "applies_to": [
+        "from_mapping",
+        "to_mapping"
+      ],
+      "expected_exception": "InputRefused",
+      "expected_reason": {
+        "code": "invalid_schema",
+        "subject_digest": null,
+        "claim_id": null,
+        "pointer": "",
+        "detail": "Invalid reference declaration."
+      },
+      "recovery_case_id": "raw-zero-optional-omitted"
+    },
+    {
+      "case_id": "basis-case",
+      "source_kind": "public_mapping_refusal",
+      "input_kind": "mapping",
+      "input": {
+        "digest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "byte_length": "0",
+        "media_type": "application/octet-stream",
+        "digest_basis": "RAW_BYTES"
+      },
+      "applies_to": [
+        "from_mapping",
+        "to_mapping"
+      ],
+      "expected_exception": "InputRefused",
+      "expected_reason": {
+        "code": "invalid_schema",
+        "subject_digest": null,
+        "claim_id": null,
+        "pointer": "",
+        "detail": "Invalid reference declaration."
+      },
+      "recovery_case_id": "raw-zero-optional-omitted"
+    },
+    {
+      "case_id": "basis-alias",
+      "source_kind": "public_mapping_refusal",
+      "input_kind": "mapping",
+      "input": {
+        "digest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "byte_length": "0",
+        "media_type": "application/octet-stream",
+        "digest_basis": "jcs"
+      },
+      "applies_to": [
+        "from_mapping",
+        "to_mapping"
+      ],
+      "expected_exception": "InputRefused",
+      "expected_reason": {
+        "code": "invalid_schema",
+        "subject_digest": null,
+        "claim_id": null,
+        "pointer": "",
+        "detail": "Invalid reference declaration."
+      },
+      "recovery_case_id": "raw-zero-optional-omitted"
+    },
+    {
+      "case_id": "basis-newline",
+      "source_kind": "public_mapping_refusal",
+      "input_kind": "mapping",
+      "input": {
+        "digest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "byte_length": "0",
+        "media_type": "application/octet-stream",
+        "digest_basis": "raw_bytes\n"
+      },
+      "applies_to": [
+        "from_mapping",
+        "to_mapping"
+      ],
+      "expected_exception": "InputRefused",
+      "expected_reason": {
+        "code": "invalid_schema",
+        "subject_digest": null,
+        "claim_id": null,
+        "pointer": "",
+        "detail": "Invalid reference declaration."
+      },
+      "recovery_case_id": "raw-zero-optional-omitted"
+    },
+    {
+      "case_id": "schema-empty",
+      "source_kind": "public_mapping_refusal",
+      "input_kind": "mapping",
+      "input": {
+        "digest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "byte_length": "0",
+        "media_type": "application/octet-stream",
+        "digest_basis": "raw_bytes",
+        "schema_id": ""
+      },
+      "applies_to": [
+        "from_mapping",
+        "to_mapping"
+      ],
+      "expected_exception": "InputRefused",
+      "expected_reason": {
+        "code": "invalid_schema",
+        "subject_digest": null,
+        "claim_id": null,
+        "pointer": "",
+        "detail": "Invalid reference declaration."
+      },
+      "recovery_case_id": "raw-zero-optional-omitted"
+    },
+    {
+      "case_id": "media_type-high-surrogate",
+      "source_kind": "public_mapping_refusal",
+      "input_kind": "mapping",
+      "input": {
+        "digest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "byte_length": "0",
+        "media_type": "x\ud800",
+        "digest_basis": "raw_bytes"
+      },
+      "applies_to": [
+        "from_mapping",
+        "to_mapping"
+      ],
+      "expected_exception": "InputRefused",
+      "expected_reason": {
+        "code": "invalid_schema",
+        "subject_digest": null,
+        "claim_id": null,
+        "pointer": "",
+        "detail": "Invalid reference declaration."
+      },
+      "recovery_case_id": "raw-zero-optional-omitted"
+    },
+    {
+      "case_id": "media_type-low-surrogate",
+      "source_kind": "public_mapping_refusal",
+      "input_kind": "mapping",
+      "input": {
+        "digest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "byte_length": "0",
+        "media_type": "x\udfff",
+        "digest_basis": "raw_bytes"
+      },
+      "applies_to": [
+        "from_mapping",
+        "to_mapping"
+      ],
+      "expected_exception": "InputRefused",
+      "expected_reason": {
+        "code": "invalid_schema",
+        "subject_digest": null,
+        "claim_id": null,
+        "pointer": "",
+        "detail": "Invalid reference declaration."
+      },
+      "recovery_case_id": "raw-zero-optional-omitted"
+    },
+    {
+      "case_id": "schema_id-high-surrogate",
+      "source_kind": "public_mapping_refusal",
+      "input_kind": "mapping",
+      "input": {
+        "digest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "byte_length": "0",
+        "media_type": "application/octet-stream",
+        "digest_basis": "raw_bytes",
+        "schema_id": "x\ud800"
+      },
+      "applies_to": [
+        "from_mapping",
+        "to_mapping"
+      ],
+      "expected_exception": "InputRefused",
+      "expected_reason": {
+        "code": "invalid_schema",
+        "subject_digest": null,
+        "claim_id": null,
+        "pointer": "",
+        "detail": "Invalid reference declaration."
+      },
+      "recovery_case_id": "raw-zero-optional-omitted"
+    },
+    {
+      "case_id": "schema_id-low-surrogate",
+      "source_kind": "public_mapping_refusal",
+      "input_kind": "mapping",
+      "input": {
+        "digest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "byte_length": "0",
+        "media_type": "application/octet-stream",
+        "digest_basis": "raw_bytes",
+        "schema_id": "x\udfff"
+      },
+      "applies_to": [
+        "from_mapping",
+        "to_mapping"
+      ],
+      "expected_exception": "InputRefused",
+      "expected_reason": {
+        "code": "invalid_schema",
+        "subject_digest": null,
+        "claim_id": null,
+        "pointer": "",
+        "detail": "Invalid reference declaration."
+      },
+      "recovery_case_id": "raw-zero-optional-omitted"
+    }
+  ],
+  "constructor_optional_none": {
+    "input_fields": {
+      "digest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "byte_length": "0",
+      "media_type": "application/octet-stream",
+      "digest_basis": "raw_bytes",
+      "schema_id": null
+    },
+    "expected_wire": {
+      "digest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "byte_length": "0",
+      "media_type": "application/octet-stream",
+      "digest_basis": "raw_bytes"
+    },
+    "applies_to": "to_mapping_only"
+  }
+}

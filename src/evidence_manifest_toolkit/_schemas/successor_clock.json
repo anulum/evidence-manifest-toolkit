@@ -1,0 +1,854 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Complete class-bearing evaluation Clock, proposal r4",
+  "description": "SOURCE_ONLY_UNREGISTERED; whole companion method supplies semantic predicates, not an installed or qualified Clock.",
+  "oneOf": [
+    {
+      "$ref": "#/$defs/profile"
+    },
+    {
+      "$ref": "#/$defs/acceptance_body"
+    },
+    {
+      "$ref": "#/$defs/evaluation_subject"
+    },
+    {
+      "$ref": "#/$defs/evaluation_witness"
+    },
+    {
+      "$ref": "#/$defs/first_sample"
+    }
+  ],
+  "$defs": {
+    "blob": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "digest": {
+          "type": "string",
+          "pattern": "^sha256:[0-9a-f]{64}$"
+        },
+        "byte_length": {
+          "type": "string",
+          "pattern": "^(0|[1-9][0-9]*)$",
+          "maxLength": 256
+        },
+        "media_type": {
+          "type": "string",
+          "minLength": 1
+        },
+        "digest_basis": {
+          "enum": [
+            "raw_bytes",
+            "jcs_content"
+          ]
+        },
+        "schema_id": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "digest",
+        "byte_length",
+        "media_type",
+        "digest_basis"
+      ]
+    },
+    "sample": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "utc_lexeme": {
+          "type": "string",
+          "pattern": "^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])T([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9](\\.[0-9]{1,9})?Z$"
+        },
+        "utc_epoch_ns": {
+          "type": "string",
+          "pattern": "^(0|-?[1-9][0-9]*)$",
+          "maxLength": 256
+        },
+        "monotonic_ticks": {
+          "type": "string",
+          "pattern": "^(0|[1-9][0-9]*)$",
+          "maxLength": 256
+        },
+        "clock_sample_raw_ref": {
+          "$ref": "#/$defs/blob"
+        },
+        "accuracy_radius_ns": {
+          "type": "string",
+          "pattern": "^(0|[1-9][0-9]*)$",
+          "maxLength": 256
+        },
+        "mapping_error_bound_ns": {
+          "type": "string",
+          "pattern": "^(0|[1-9][0-9]*)$",
+          "maxLength": 256
+        },
+        "quantization_error_bound_ns": {
+          "type": "string",
+          "pattern": "^(0|[1-9][0-9]*)$",
+          "maxLength": 256
+        }
+      },
+      "required": [
+        "utc_lexeme",
+        "utc_epoch_ns",
+        "monotonic_ticks",
+        "clock_sample_raw_ref",
+        "accuracy_radius_ns",
+        "mapping_error_bound_ns",
+        "quantization_error_bound_ns"
+      ]
+    },
+    "rate": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "numerator": {
+          "type": "string",
+          "pattern": "^[1-9][0-9]*$",
+          "maxLength": 256
+        },
+        "denominator": {
+          "type": "string",
+          "pattern": "^[1-9][0-9]*$",
+          "maxLength": 256
+        }
+      },
+      "required": [
+        "numerator",
+        "denominator"
+      ]
+    },
+    "profile": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "format_version": {
+          "const": "autonomous-evaluation-clock-profile-source-r4"
+        },
+        "time_source": {
+          "const": "workstation_system_clock_ntp"
+        },
+        "host_identity_ref": {
+          "$ref": "#/$defs/blob"
+        },
+        "controller_identity_ref": {
+          "$ref": "#/$defs/blob"
+        },
+        "observer_identity_ref": {
+          "$ref": "#/$defs/blob"
+        },
+        "accepted_ntp_configuration_ref": {
+          "$ref": "#/$defs/blob"
+        },
+        "acquisition_rule_ref": {
+          "$ref": "#/$defs/blob"
+        },
+        "implementation_environment_ref": {
+          "$ref": "#/$defs/blob"
+        },
+        "monotonic_mapping_rule_ref": {
+          "$ref": "#/$defs/blob"
+        },
+        "uncertainty_derivation_rule_ref": {
+          "$ref": "#/$defs/blob"
+        },
+        "issuer_identity_ref": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/blob"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "issuer_authorization_ref": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/blob"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "independence_rule_ref": {
+          "$ref": "#/$defs/blob"
+        },
+        "maximum_uncertainty_ns": {
+          "const": "5000000000"
+        },
+        "renewal_rule": {
+          "const": "one_utc_civil_year_feb29_clamped_to_feb28"
+        },
+        "coordinate_encoding": {
+          "const": "exact_proleptic_gregorian_civil_nanoseconds_without_leap_second_lexemes"
+        },
+        "custody_class": {
+          "enum": [
+            "unsigned_declared",
+            "software_local_unprotected",
+            "protected_delegated"
+          ]
+        },
+        "daemon_field_mapping_rule_ref": {
+          "$ref": "#/$defs/blob"
+        },
+        "ntp_resolution_and_rotation_rule_ref": {
+          "$ref": "#/$defs/blob"
+        },
+        "automatic_reacceptance_rule_ref": {
+          "$ref": "#/$defs/blob"
+        },
+        "holdover_drift_bound_rule_ref": {
+          "$ref": "#/$defs/blob"
+        },
+        "handoff_rule": {
+          "const": "fixed_at_verify_entry_extend_by_actual_monotonic_elapsed_and_complete_error_budget"
+        }
+      },
+      "required": [
+        "format_version",
+        "time_source",
+        "host_identity_ref",
+        "controller_identity_ref",
+        "observer_identity_ref",
+        "accepted_ntp_configuration_ref",
+        "acquisition_rule_ref",
+        "implementation_environment_ref",
+        "monotonic_mapping_rule_ref",
+        "uncertainty_derivation_rule_ref",
+        "issuer_identity_ref",
+        "issuer_authorization_ref",
+        "independence_rule_ref",
+        "maximum_uncertainty_ns",
+        "renewal_rule",
+        "coordinate_encoding",
+        "custody_class",
+        "daemon_field_mapping_rule_ref",
+        "ntp_resolution_and_rotation_rule_ref",
+        "automatic_reacceptance_rule_ref",
+        "holdover_drift_bound_rule_ref",
+        "handoff_rule"
+      ],
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "custody_class": {
+                "enum": [
+                  "software_local_unprotected",
+                  "protected_delegated"
+                ]
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "issuer_identity_ref": {
+                "$ref": "#/$defs/blob"
+              },
+              "issuer_authorization_ref": {
+                "$ref": "#/$defs/blob"
+              }
+            }
+          }
+        }
+      ]
+    },
+    "acceptance_body": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "format_version": {
+          "const": "autonomous-evaluation-clock-acceptance-source-r4"
+        },
+        "profile_ref": {
+          "$ref": "#/$defs/blob"
+        },
+        "host_identity_ref": {
+          "$ref": "#/$defs/blob"
+        },
+        "controller_identity_ref": {
+          "$ref": "#/$defs/blob"
+        },
+        "observer_identity_ref": {
+          "$ref": "#/$defs/blob"
+        },
+        "issuer_identity_ref": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/blob"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "issuer_authorization_ref": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/blob"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "raw_synchronization_refs": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/blob"
+          }
+        },
+        "rule_implementation_ref": {
+          "$ref": "#/$defs/blob"
+        },
+        "monotonic_domain_ref": {
+          "$ref": "#/$defs/blob"
+        },
+        "ticks_per_second": {
+          "$ref": "#/$defs/rate"
+        },
+        "before": {
+          "$ref": "#/$defs/sample"
+        },
+        "after": {
+          "$ref": "#/$defs/sample"
+        },
+        "acceptance_utc_lower_ns": {
+          "type": "string",
+          "pattern": "^(0|-?[1-9][0-9]*)$",
+          "maxLength": 256
+        },
+        "acceptance_utc_upper_ns": {
+          "type": "string",
+          "pattern": "^(0|-?[1-9][0-9]*)$",
+          "maxLength": 256
+        },
+        "valid_from": {
+          "type": "string",
+          "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-5][0-9](\\.[0-9]{1,9})?Z$"
+        },
+        "valid_until": {
+          "type": "string",
+          "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-5][0-9](\\.[0-9]{1,9})?Z$"
+        },
+        "checks": {
+          "type": "array",
+          "minItems": 6,
+          "maxItems": 6,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "check_id": {
+                "enum": [
+                  "whole_source_match",
+                  "controller_source_match",
+                  "synchronization_and_mapping",
+                  "proven_uncertainty_budget",
+                  "selected_class_authority_and_time",
+                  "acyclic_whole_target"
+                ]
+              },
+              "result": {
+                "enum": [
+                  "pass",
+                  "fail",
+                  "unavailable"
+                ]
+              },
+              "evidence_refs": {
+                "type": "array",
+                "minItems": 1,
+                "items": {
+                  "$ref": "#/$defs/blob"
+                }
+              }
+            },
+            "required": [
+              "check_id",
+              "result",
+              "evidence_refs"
+            ]
+          },
+          "description": "Six different exact check IDs; outcomes and selected-class obligations recomputed from complete sources. Strings are observations, never acceptance Booleans.",
+          "allOf": [
+            {
+              "contains": {
+                "type": "object",
+                "properties": {
+                  "check_id": {
+                    "const": "whole_source_match"
+                  }
+                },
+                "required": [
+                  "check_id"
+                ]
+              },
+              "minContains": 1,
+              "maxContains": 1
+            },
+            {
+              "contains": {
+                "type": "object",
+                "properties": {
+                  "check_id": {
+                    "const": "controller_source_match"
+                  }
+                },
+                "required": [
+                  "check_id"
+                ]
+              },
+              "minContains": 1,
+              "maxContains": 1
+            },
+            {
+              "contains": {
+                "type": "object",
+                "properties": {
+                  "check_id": {
+                    "const": "synchronization_and_mapping"
+                  }
+                },
+                "required": [
+                  "check_id"
+                ]
+              },
+              "minContains": 1,
+              "maxContains": 1
+            },
+            {
+              "contains": {
+                "type": "object",
+                "properties": {
+                  "check_id": {
+                    "const": "proven_uncertainty_budget"
+                  }
+                },
+                "required": [
+                  "check_id"
+                ]
+              },
+              "minContains": 1,
+              "maxContains": 1
+            },
+            {
+              "contains": {
+                "type": "object",
+                "properties": {
+                  "check_id": {
+                    "const": "selected_class_authority_and_time"
+                  }
+                },
+                "required": [
+                  "check_id"
+                ]
+              },
+              "minContains": 1,
+              "maxContains": 1
+            },
+            {
+              "contains": {
+                "type": "object",
+                "properties": {
+                  "check_id": {
+                    "const": "acyclic_whole_target"
+                  }
+                },
+                "required": [
+                  "check_id"
+                ]
+              },
+              "minContains": 1,
+              "maxContains": 1
+            }
+          ]
+        },
+        "measured_ntp_offset_ns": {
+          "type": "string",
+          "pattern": "^(0|-?[1-9][0-9]*)$",
+          "maxLength": 256
+        },
+        "custody_class": {
+          "enum": [
+            "unsigned_declared",
+            "software_local_unprotected",
+            "protected_delegated"
+          ]
+        }
+      },
+      "required": [
+        "format_version",
+        "profile_ref",
+        "host_identity_ref",
+        "controller_identity_ref",
+        "observer_identity_ref",
+        "issuer_identity_ref",
+        "issuer_authorization_ref",
+        "raw_synchronization_refs",
+        "rule_implementation_ref",
+        "monotonic_domain_ref",
+        "ticks_per_second",
+        "before",
+        "after",
+        "acceptance_utc_lower_ns",
+        "acceptance_utc_upper_ns",
+        "valid_from",
+        "valid_until",
+        "checks",
+        "measured_ntp_offset_ns",
+        "custody_class"
+      ],
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "custody_class": {
+                "enum": [
+                  "software_local_unprotected",
+                  "protected_delegated"
+                ]
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "issuer_identity_ref": {
+                "$ref": "#/$defs/blob"
+              },
+              "issuer_authorization_ref": {
+                "$ref": "#/$defs/blob"
+              }
+            }
+          }
+        }
+      ]
+    },
+    "evaluation_subject": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "format_version": {
+          "const": "autonomous-evaluation-clock-subject-source-r4"
+        },
+        "request_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "content_ref": {
+          "$ref": "#/$defs/blob"
+        },
+        "ordered_receipt_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/blob"
+          }
+        },
+        "schema_registry_ref": {
+          "$ref": "#/$defs/blob"
+        },
+        "whole_trust_context_ref": {
+          "$ref": "#/$defs/blob"
+        },
+        "whole_limits_ref": {
+          "$ref": "#/$defs/blob"
+        },
+        "whole_base_policy_ref": {
+          "$ref": "#/$defs/blob"
+        },
+        "verification_controller_identity_ref": {
+          "$ref": "#/$defs/blob"
+        },
+        "custody_class": {
+          "enum": [
+            "unsigned_declared",
+            "software_local_unprotected",
+            "protected_delegated"
+          ]
+        },
+        "first_sample_source_ref": {
+          "$ref": "#/$defs/blob"
+        }
+      },
+      "required": [
+        "format_version",
+        "request_id",
+        "content_ref",
+        "ordered_receipt_refs",
+        "schema_registry_ref",
+        "whole_trust_context_ref",
+        "whole_limits_ref",
+        "whole_base_policy_ref",
+        "verification_controller_identity_ref",
+        "custody_class",
+        "first_sample_source_ref"
+      ]
+    },
+    "evaluation_witness": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "format_version": {
+          "const": "autonomous-evaluation-clock-witness-source-r4"
+        },
+        "subject_ref": {
+          "$ref": "#/$defs/blob"
+        },
+        "request_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "caller_utc_lexeme": {
+          "type": "string",
+          "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-5][0-9](\\.[0-9]{1,9})?Z$"
+        },
+        "profile_ref": {
+          "$ref": "#/$defs/blob"
+        },
+        "acceptance_body_ref": {
+          "$ref": "#/$defs/blob"
+        },
+        "acceptance_statement_ref": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/blob"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "ordered_acceptance_receipt_refs": {
+          "type": "array",
+          "minItems": 0,
+          "items": {
+            "$ref": "#/$defs/blob"
+          }
+        },
+        "controller_identity_ref": {
+          "$ref": "#/$defs/blob"
+        },
+        "observer_identity_ref": {
+          "$ref": "#/$defs/blob"
+        },
+        "raw_synchronization_refs": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/blob"
+          }
+        },
+        "monotonic_domain_ref": {
+          "$ref": "#/$defs/blob"
+        },
+        "ticks_per_second": {
+          "$ref": "#/$defs/rate"
+        },
+        "before": {
+          "$ref": "#/$defs/sample"
+        },
+        "after": {
+          "$ref": "#/$defs/sample"
+        },
+        "use_sample_raw_ref": {
+          "$ref": "#/$defs/blob"
+        },
+        "use_monotonic_ticks": {
+          "type": "string",
+          "pattern": "^(0|[1-9][0-9]*)$",
+          "maxLength": 256
+        },
+        "event_utc_lower_ns": {
+          "type": "string",
+          "pattern": "^(0|-?[1-9][0-9]*)$",
+          "maxLength": 256
+        },
+        "event_utc_upper_ns": {
+          "type": "string",
+          "pattern": "^(0|-?[1-9][0-9]*)$",
+          "maxLength": 256
+        },
+        "use_utc_upper_ns": {
+          "type": "string",
+          "pattern": "^(0|-?[1-9][0-9]*)$",
+          "maxLength": 256
+        },
+        "assurance": {
+          "const": "captured_unqualified_until_full_predicate_passes"
+        },
+        "custody_class": {
+          "enum": [
+            "unsigned_declared",
+            "software_local_unprotected",
+            "protected_delegated"
+          ]
+        },
+        "identity_class": {
+          "enum": [
+            "declared_by_launcher_under_the_seat_account",
+            "vendor_by_client_program_only",
+            "endpoint_observed"
+          ]
+        },
+        "whole_conditions_and_limitations_ref": {
+          "$ref": "#/$defs/blob"
+        },
+        "holdover_and_use_error_derivation_ref": {
+          "$ref": "#/$defs/blob"
+        },
+        "complete_authorization_obligations_ref": {
+          "$ref": "#/$defs/blob"
+        },
+        "use_error_bound_ns": {
+          "type": "string",
+          "pattern": "^(0|[1-9][0-9]*)$",
+          "maxLength": 256
+        },
+        "first_sample_source_ref": {
+          "$ref": "#/$defs/blob"
+        },
+        "evaluation_origin": {
+          "const": "first_actual_before_sample_frozen_before_whole_context"
+        }
+      },
+      "required": [
+        "format_version",
+        "subject_ref",
+        "request_id",
+        "caller_utc_lexeme",
+        "profile_ref",
+        "acceptance_body_ref",
+        "acceptance_statement_ref",
+        "ordered_acceptance_receipt_refs",
+        "controller_identity_ref",
+        "observer_identity_ref",
+        "raw_synchronization_refs",
+        "monotonic_domain_ref",
+        "ticks_per_second",
+        "before",
+        "after",
+        "use_sample_raw_ref",
+        "use_monotonic_ticks",
+        "event_utc_lower_ns",
+        "event_utc_upper_ns",
+        "use_utc_upper_ns",
+        "assurance",
+        "custody_class",
+        "identity_class",
+        "whole_conditions_and_limitations_ref",
+        "holdover_and_use_error_derivation_ref",
+        "complete_authorization_obligations_ref",
+        "use_error_bound_ns",
+        "first_sample_source_ref",
+        "evaluation_origin"
+      ],
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "custody_class": {
+                "enum": [
+                  "software_local_unprotected",
+                  "protected_delegated"
+                ]
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "acceptance_statement_ref": {
+                "$ref": "#/$defs/blob"
+              },
+              "ordered_acceptance_receipt_refs": {
+                "type": "array",
+                "minItems": 1,
+                "items": {
+                  "$ref": "#/$defs/blob"
+                }
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "custody_class": {
+                "const": "unsigned_declared"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "ordered_acceptance_receipt_refs": {
+                "type": "array",
+                "maxItems": 0
+              }
+            }
+          }
+        }
+      ]
+    },
+    "first_sample": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "format_version": {
+          "const": "autonomous-evaluation-clock-first-sample-source-r4"
+        },
+        "request_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "utc_lexeme": {
+          "type": "string",
+          "pattern": "^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])T([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9](\\.[0-9]{1,9})?Z$"
+        },
+        "utc_epoch_ns": {
+          "type": "string",
+          "pattern": "^(0|-?[1-9][0-9]*)$",
+          "maxLength": 256
+        },
+        "monotonic_ticks": {
+          "type": "string",
+          "pattern": "^(0|[1-9][0-9]*)$",
+          "maxLength": 256
+        },
+        "boot_domain_ref": {
+          "$ref": "#/$defs/blob"
+        },
+        "verification_controller_identity_ref": {
+          "$ref": "#/$defs/blob"
+        },
+        "process_start_identity_ref": {
+          "$ref": "#/$defs/blob"
+        },
+        "source_profile_ref": {
+          "$ref": "#/$defs/blob"
+        },
+        "raw_sample_ref": {
+          "$ref": "#/$defs/blob"
+        }
+      },
+      "required": [
+        "format_version",
+        "request_id",
+        "utc_lexeme",
+        "utc_epoch_ns",
+        "monotonic_ticks",
+        "boot_domain_ref",
+        "verification_controller_identity_ref",
+        "process_start_identity_ref",
+        "source_profile_ref",
+        "raw_sample_ref"
+      ]
+    }
+  }
+}

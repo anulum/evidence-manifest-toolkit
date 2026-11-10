@@ -1,0 +1,16 @@
+{
+  "policy_ref": {
+    "digest": "sha256:6d663438288ccc3ef079b71fca60596d18beecb748f87a278efa898050dcd5e8",
+    "byte_length": "1252",
+    "media_type": "application/json",
+    "digest_basis": "raw_bytes"
+  },
+  "required_claim_ids": [
+    "common8-author-input",
+    "common8-author-input-second"
+  ],
+  "required_purposes": [
+    "evidence"
+  ],
+  "required_reference_paths": []
+}

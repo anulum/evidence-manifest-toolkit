@@ -21,6 +21,7 @@ from .dependencies import native_tool
 from .inputs import parse_json, relative_path, root_directory
 from .policy import LEAF_SECONDS, PREFLIGHT_SECONDS, ROLES
 from .processes import run_process
+from .quality_configuration import PYTHON_SOURCE_DIRECTORIES
 from .reports import Check, DiagnosticLimit, Exit, Fault, Report, status_for, validate_child
 
 
@@ -191,7 +192,7 @@ def configured_roles(root: Path) -> tuple[Role, ...]:
         ".tool-cache/sbom.json",
     ):
         relative_path(trusted_source, name)
-    source_paths = (str(root / "tools"), str(root / "tests"))
+    source_paths = tuple(str(relative_path(root, name)) for name in PYTHON_SOURCE_DIRECTORIES)
     guard_launcher = (
         "import runpy,sys;sys.path.insert(0,sys.argv.pop(1));"
         "runpy.run_path(sys.argv.pop(1),run_name='__main__')"
@@ -267,6 +268,7 @@ def configured_roles(root: Path) -> tuple[Role, ...]:
                 "--dist=worksteal",
                 "--basetemp=.tool-cache/test-runs",
                 "--cov=tools",
+                "--cov=evidence_manifest_toolkit",
                 "--cov-branch",
                 "--cov-fail-under=100",
                 "--cov-report=term-missing",

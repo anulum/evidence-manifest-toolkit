@@ -1,0 +1,168 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Whole raw launch record emitted by the pinned released launcher",
+  "description": "Private implementation-method source candidate for existing native publisher data. No new Common evidence carrier/schema ID, registry entry, native identity or run qualification. Exact original numeric token and source-law checks accompany this shape.",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "schema": {
+      "const": "session-launch-record-v1"
+    },
+    "seat": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 256,
+      "pattern": "^[^\\u0000-\\u001f\\u007f]+$"
+    },
+    "recorded_at": {
+      "type": "string",
+      "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\\.[0-9]{6}Z$"
+    },
+    "host": {
+      "type": "string"
+    },
+    "system": {
+      "type": "string"
+    },
+    "command_name": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 256,
+      "pattern": "^[^\\u0000-\\u001f\\u007f]+$"
+    },
+    "command_words": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "command_sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "executable": {
+      "$ref": "#/$defs/file"
+    },
+    "process": {
+      "$ref": "#/$defs/process"
+    },
+    "launcher_pid": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "declared_vendor": {
+      "anyOf": [
+        {
+          "const": ""
+        },
+        {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256,
+          "pattern": "^[^\\u0000-\\u001f\\u007f]+$"
+        }
+      ]
+    },
+    "seat_public_key": {
+      "anyOf": [
+        {
+          "const": ""
+        },
+        {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256,
+          "pattern": "^[^\\u0000-\\u001f\\u007f]+$"
+        }
+      ]
+    },
+    "evidence_class": {
+      "const": "declared_by_launcher_under_the_seat_account"
+    }
+  },
+  "required": [
+    "schema",
+    "seat",
+    "recorded_at",
+    "host",
+    "system",
+    "command_name",
+    "command_words",
+    "command_sha256",
+    "executable",
+    "process",
+    "launcher_pid",
+    "declared_vendor",
+    "seat_public_key",
+    "evidence_class"
+  ],
+  "$defs": {
+    "file": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "type": "string"
+        },
+        "size": {
+          "type": "integer",
+          "minimum": -1
+        },
+        "sha256": {
+          "anyOf": [
+            {
+              "const": ""
+            },
+            {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            }
+          ]
+        },
+        "unavailable": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "path",
+        "size",
+        "sha256",
+        "unavailable"
+      ]
+    },
+    "process": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "pid": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "boot": {
+          "type": "string"
+        },
+        "started": {
+          "type": "string"
+        },
+        "image": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/file"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "unavailable": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "pid",
+        "boot",
+        "started",
+        "image",
+        "unavailable"
+      ]
+    }
+  }
+}

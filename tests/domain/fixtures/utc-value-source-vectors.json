@@ -1,0 +1,3572 @@
+{
+  "same_entire_original97_input_and_expected_scope": {
+    "path": "custody/owner-acceptance/owner_acceptance_profiles_2026-10-02T234358Z/UTC_whole_supported_source_leap_history_choice_2026-10-11T124826869230Z/COMPLETE_UTC_SUPPORTED_SOURCE_DATATYPE_CASES_ALL27_LEAPS_AND_EXACT_ORDER_BOUNDARIES.author.json",
+    "byte_length": 76819,
+    "sha256": "9584481906a3180dc70d27f6b3c09882b0c84a38de55b2b92598f8058cd0aa66"
+  },
+  "entire_constructor_cases": [
+    {
+      "entire_original_source_case": {
+        "id": "known-positive-leap/1972-06-30/integer",
+        "entire_Utc_input": "1972-06-30T23:59:60Z",
+        "source_role": "UTC datatype/calendar predicate only; not an EMT fixture or qualified clock",
+        "expected": {
+          "admitted": true,
+          "exact_key": [
+            1972,
+            6,
+            30,
+            23,
+            59,
+            60,
+            ""
+          ],
+          "original_wire_string_unchanged": true
+        },
+        "authoritative_step": {
+          "utc_day": "1972-06-30",
+          "effective_midnight": "1972-07-01",
+          "signed_step_seconds": 1,
+          "offset_before": 10,
+          "offset_after": 11
+        }
+      },
+      "constructor_input_kind": "str",
+      "entire_constructor_input": "1972-06-30T23:59:60Z",
+      "expected_entire_wire_string": "1972-06-30T23:59:60Z",
+      "expected_str_compatible_value": true,
+      "authority_or_Clock_qualification": false
+    },
+    {
+      "entire_original_source_case": {
+        "id": "known-positive-leap/1972-06-30/000000001",
+        "entire_Utc_input": "1972-06-30T23:59:60.000000001Z",
+        "source_role": "UTC datatype/calendar predicate only; not an EMT fixture or qualified clock",
+        "expected": {
+          "admitted": true,
+          "exact_key": [
+            1972,
+            6,
+            30,
+            23,
+            59,
+            60,
+            "000000001"
+          ],
+          "original_wire_string_unchanged": true
+        },
+        "authoritative_step": {
+          "utc_day": "1972-06-30",
+          "effective_midnight": "1972-07-01",
+          "signed_step_seconds": 1,
+          "offset_before": 10,
+          "offset_after": 11
+        }
+      },
+      "constructor_input_kind": "str",
+      "entire_constructor_input": "1972-06-30T23:59:60.000000001Z",
+      "expected_entire_wire_string": "1972-06-30T23:59:60.000000001Z",
+      "expected_str_compatible_value": true,
+      "authority_or_Clock_qualification": false
+    },
+    {
+      "entire_original_source_case": {
+        "id": "known-positive-leap/1972-06-30/999999999999999999999999999",
+        "entire_Utc_input": "1972-06-30T23:59:60.999999999999999999999999999Z",
+        "source_role": "UTC datatype/calendar predicate only; not an EMT fixture or qualified clock",
+        "expected": {
+          "admitted": true,
+          "exact_key": [
+            1972,
+            6,
+            30,
+            23,
+            59,
+            60,
+            "999999999999999999999999999"
+          ],
+          "original_wire_string_unchanged": true
+        },
+        "authoritative_step": {
+          "utc_day": "1972-06-30",
+          "effective_midnight": "1972-07-01",
+          "signed_step_seconds": 1,
+          "offset_before": 10,
+          "offset_after": 11
+        }
+      },
+      "constructor_input_kind": "str",
+      "entire_constructor_input": "1972-06-30T23:59:60.999999999999999999999999999Z",
+      "expected_entire_wire_string": "1972-06-30T23:59:60.999999999999999999999999999Z",
+      "expected_str_compatible_value": true,
+      "authority_or_Clock_qualification": false
+    },
+    {
+      "entire_original_source_case": {
+        "id": "known-positive-leap/1972-12-31/integer",
+        "entire_Utc_input": "1972-12-31T23:59:60Z",
+        "source_role": "UTC datatype/calendar predicate only; not an EMT fixture or qualified clock",
+        "expected": {
+          "admitted": true,
+          "exact_key": [
+            1972,
+            12,
+            31,
+            23,
+            59,
+            60,
+            ""
+          ],
+          "original_wire_string_unchanged": true
+        },
+        "authoritative_step": {
+          "utc_day": "1972-12-31",
+          "effective_midnight": "1973-01-01",
+          "signed_step_seconds": 1,
+          "offset_before": 11,
+          "offset_after": 12
+        }
+      },
+      "constructor_input_kind": "str",
+      "entire_constructor_input": "1972-12-31T23:59:60Z",
+      "expected_entire_wire_string": "1972-12-31T23:59:60Z",
+      "expected_str_compatible_value": true,
+      "authority_or_Clock_qualification": false
+    },
+    {
+      "entire_original_source_case": {
+        "id": "known-positive-leap/1972-12-31/000000001",
+        "entire_Utc_input": "1972-12-31T23:59:60.000000001Z",
+        "source_role": "UTC datatype/calendar predicate only; not an EMT fixture or qualified clock",
+        "expected": {
+          "admitted": true,
+          "exact_key": [
+            1972,
+            12,
+            31,
+            23,
+            59,
+            60,
+            "000000001"
+          ],
+          "original_wire_string_unchanged": true
+        },
+        "authoritative_step": {
+          "utc_day": "1972-12-31",
+          "effective_midnight": "1973-01-01",
+          "signed_step_seconds": 1,
+          "offset_before": 11,
+          "offset_after": 12
+        }
+      },
+      "constructor_input_kind": "str",
+      "entire_constructor_input": "1972-12-31T23:59:60.000000001Z",
+      "expected_entire_wire_string": "1972-12-31T23:59:60.000000001Z",
+      "expected_str_compatible_value": true,
+      "authority_or_Clock_qualification": false
+    },
+    {
+      "entire_original_source_case": {
+        "id": "known-positive-leap/1972-12-31/999999999999999999999999999",
+        "entire_Utc_input": "1972-12-31T23:59:60.999999999999999999999999999Z",
+        "source_role": "UTC datatype/calendar predicate only; not an EMT fixture or qualified clock",
+        "expected": {
+          "admitted": true,
+          "exact_key": [
+            1972,
+            12,
+            31,
+            23,
+            59,
+            60,
+            "999999999999999999999999999"
+          ],
+          "original_wire_string_unchanged": true
+        },
+        "authoritative_step": {
+          "utc_day": "1972-12-31",
+          "effective_midnight": "1973-01-01",
+          "signed_step_seconds": 1,
+          "offset_before": 11,
+          "offset_after": 12
+        }
+      },
+      "constructor_input_kind": "str",
+      "entire_constructor_input": "1972-12-31T23:59:60.999999999999999999999999999Z",
+      "expected_entire_wire_string": "1972-12-31T23:59:60.999999999999999999999999999Z",
+      "expected_str_compatible_value": true,
+      "authority_or_Clock_qualification": false
+    },
+    {
+      "entire_original_source_case": {
+        "id": "known-positive-leap/1973-12-31/integer",
+        "entire_Utc_input": "1973-12-31T23:59:60Z",
+        "source_role": "UTC datatype/calendar predicate only; not an EMT fixture or qualified clock",
+        "expected": {
+          "admitted": true,
+          "exact_key": [
+            1973,
+            12,
+            31,
+            23,
+            59,
+            60,
+            ""
+          ],
+          "original_wire_string_unchanged": true
+        },
+        "authoritative_step": {
+          "utc_day": "1973-12-31",
+          "effective_midnight": "1974-01-01",
+          "signed_step_seconds": 1,
+          "offset_before": 12,
+          "offset_after": 13
+        }
+      },
+      "constructor_input_kind": "str",
+      "entire_constructor_input": "1973-12-31T23:59:60Z",
+      "expected_entire_wire_string": "1973-12-31T23:59:60Z",
+      "expected_str_compatible_value": true,
+      "authority_or_Clock_qualification": false
+    },
+    {
+      "entire_original_source_case": {
+        "id": "known-positive-leap/1973-12-31/000000001",
+        "entire_Utc_input": "1973-12-31T23:59:60.000000001Z",
+        "source_role": "UTC datatype/calendar predicate only; not an EMT fixture or qualified clock",
+        "expected": {
+          "admitted": true,
+          "exact_key": [
+            1973,
+            12,
+            31,
+            23,
+            59,
+            60,
+            "000000001"
+          ],
+          "original_wire_string_unchanged": true
+        },
+        "authoritative_step": {
+          "utc_day": "1973-12-31",
+          "effective_midnight": "1974-01-01",
+          "signed_step_seconds": 1,
+          "offset_before": 12,
+          "offset_after": 13
+        }
+      },
+      "constructor_input_kind": "str",
+      "entire_constructor_input": "1973-12-31T23:59:60.000000001Z",
+      "expected_entire_wire_string": "1973-12-31T23:59:60.000000001Z",
+      "expected_str_compatible_value": true,
+      "authority_or_Clock_qualification": false
+    },
+    {
+      "entire_original_source_case": {
+        "id": "known-positive-leap/1973-12-31/999999999999999999999999999",
+        "entire_Utc_input": "1973-12-31T23:59:60.999999999999999999999999999Z",
+        "source_role": "UTC datatype/calendar predicate only; not an EMT fixture or qualified clock",
+        "expected": {
+          "admitted": true,
+          "exact_key": [
+            1973,
+            12,
+            31,
+            23,
+            59,
+            60,
+            "999999999999999999999999999"
+          ],
+          "original_wire_string_unchanged": true
+        },
+        "authoritative_step": {
+          "utc_day": "1973-12-31",
+          "effective_midnight": "1974-01-01",
+          "signed_step_seconds": 1,
+          "offset_before": 12,
+          "offset_after": 13
+        }
+      },
+      "constructor_input_kind": "str",
+      "entire_constructor_input": "1973-12-31T23:59:60.999999999999999999999999999Z",
+      "expected_entire_wire_string": "1973-12-31T23:59:60.999999999999999999999999999Z",
+      "expected_str_compatible_value": true,
+      "authority_or_Clock_qualification": false
+    },
+    {
+      "entire_original_source_case": {
+        "id": "known-positive-leap/1974-12-31/integer",
+        "entire_Utc_input": "1974-12-31T23:59:60Z",
+        "source_role": "UTC datatype/calendar predicate only; not an EMT fixture or qualified clock",
+        "expected": {
+          "admitted": true,
+          "exact_key": [
+            1974,
+            12,
+            31,
+            23,
+            59,
+            60,
+            ""
+          ],
+          "original_wire_string_unchanged": true
+        },
+        "authoritative_step": {
+          "utc_day": "1974-12-31",
+          "effective_midnight": "1975-01-01",
+          "signed_step_seconds": 1,
+          "offset_before": 13,
+          "offset_after": 14
+        }
+      },
+      "constructor_input_kind": "str",
+      "entire_constructor_input": "1974-12-31T23:59:60Z",
+      "expected_entire_wire_string": "1974-12-31T23:59:60Z",
+      "expected_str_compatible_value": true,
+      "authority_or_Clock_qualification": false
+    },
+    {
+      "entire_original_source_case": {
+        "id": "known-positive-leap/1974-12-31/000000001",
+        "entire_Utc_input": "1974-12-31T23:59:60.000000001Z",
+        "source_role": "UTC datatype/calendar predicate only; not an EMT fixture or qualified clock",
+        "expected": {
+          "admitted": true,
+          "exact_key": [
+            1974,
+            12,
+            31,
+            23,
+            59,
+            60,
+            "000000001"
+          ],
+          "original_wire_string_unchanged": true
+        },
+        "authoritative_step": {
+          "utc_day": "1974-12-31",
+          "effective_midnight": "1975-01-01",
+          "signed_step_seconds": 1,
+          "offset_before": 13,
+          "offset_after": 14
+        }
+      },
+      "constructor_input_kind": "str",
+      "entire_constructor_input": "1974-12-31T23:59:60.000000001Z",
+      "expected_entire_wire_string": "1974-12-31T23:59:60.000000001Z",
+      "expected_str_compatible_value": true,
+      "authority_or_Clock_qualification": false
+    },
+    {
+      "entire_original_source_case": {
+        "id": "known-positive-leap/1974-12-31/999999999999999999999999999",
+        "entire_Utc_input": "1974-12-31T23:59:60.999999999999999999999999999Z",
+        "source_role": "UTC datatype/calendar predicate only; not an EMT fixture or qualified clock",
+        "expected": {
+          "admitted": true,
+          "exact_key": [
+            1974,
+            12,
+            31,
+            23,
+            59,
+            60,
+            "999999999999999999999999999"
+          ],
+          "original_wire_string_unchanged": true
+        },
+        "authoritative_step": {
+          "utc_day": "1974-12-31",
+          "effective_midnight": "1975-01-01",
+          "signed_step_seconds": 1,
+          "offset_before": 13,
+          "offset_after": 14
+        }
+      },
+      "constructor_input_kind": "str",
+      "entire_constructor_input": "1974-12-31T23:59:60.999999999999999999999999999Z",
+      "expected_entire_wire_string": "1974-12-31T23:59:60.999999999999999999999999999Z",
+      "expected_str_compatible_value": true,
+      "authority_or_Clock_qualification": false
+    },
+    {
+      "entire_original_source_case": {
+        "id": "known-positive-leap/1975-12-31/integer",
+        "entire_Utc_input": "1975-12-31T23:59:60Z",
+        "source_role": "UTC datatype/calendar predicate only; not an EMT fixture or qualified clock",
+        "expected": {
+          "admitted": true,
+          "exact_key": [
+            1975,
+            12,
+            31,
+            23,
+            59,
+            60,
+            ""
+          ],
+          "original_wire_string_unchanged": true
+        },
+        "authoritative_step": {
+          "utc_day": "1975-12-31",
+          "effective_midnight": "1976-01-01",
+          "signed_step_seconds": 1,
+          "offset_before": 14,
+          "offset_after": 15
+        }
+      },
+      "constructor_input_kind": "str",
+      "entire_constructor_input": "1975-12-31T23:59:60Z",
+      "expected_entire_wire_string": "1975-12-31T23:59:60Z",
+      "expected_str_compatible_value": true,
+      "authority_or_Clock_qualification": false
+    },
+    {
+      "entire_original_source_case": {
+        "id": "known-positive-leap/1975-12-31/000000001",
+        "entire_Utc_input": "1975-12-31T23:59:60.000000001Z",
+        "source_role": "UTC datatype/calendar predicate only; not an EMT fixture or qualified clock",
+        "expected": {
+          "admitted": true,
+          "exact_key": [
+            1975,
+            12,
+            31,
+            23,
+            59,
+            60,
+            "000000001"
+          ],
+          "original_wire_string_unchanged": true
+        },
+        "authoritative_step": {
+          "utc_day": "1975-12-31",
+          "effective_midnight": "1976-01-01",
+          "signed_step_seconds": 1,
+          "offset_before": 14,
+          "offset_after": 15
+        }
+      },
+      "constructor_input_kind": "str",
+      "entire_constructor_input": "1975-12-31T23:59:60.000000001Z",
+      "expected_entire_wire_string": "1975-12-31T23:59:60.000000001Z",
+      "expected_str_compatible_value": true,
+      "authority_or_Clock_qualification": false
+    },
+    {
+      "entire_original_source_case": {
+        "id": "known-positive-leap/1975-12-31/999999999999999999999999999",
+        "entire_Utc_input": "1975-12-31T23:59:60.999999999999999999999999999Z",
+        "source_role": "UTC datatype/calendar predicate only; not an EMT fixture or qualified clock",
+        "expected": {
+          "admitted": true,
+          "exact_key": [
+            1975,
+            12,
+            31,
+            23,
+            59,
+            60,
+            "999999999999999999999999999"
+          ],
+          "original_wire_string_unchanged": true
+        },
+        "authoritative_step": {
+          "utc_day": "1975-12-31",
+          "effective_midnight": "1976-01-01",
+          "signed_step_seconds": 1,
+          "offset_before": 14,
+          "offset_after": 15
+        }
+      },
+      "constructor_input_kind": "str",
+      "entire_constructor_input": "1975-12-31T23:59:60.999999999999999999999999999Z",
+      "expected_entire_wire_string": "1975-12-31T23:59:60.999999999999999999999999999Z",
+      "expected_str_compatible_value": true,
+      "authority_or_Clock_qualification": false
+    },
+    {
+      "entire_original_source_case": {
+        "id": "known-positive-leap/1976-12-31/integer",
+        "entire_Utc_input": "1976-12-31T23:59:60Z",
+        "source_role": "UTC datatype/calendar predicate only; not an EMT fixture or qualified clock",
+        "expected": {
+          "admitted": true,
+          "exact_key": [
+            1976,
+            12,
+            31,
+            23,
+            59,
+            60,
+            ""
+          ],
+          "original_wire_string_unchanged": true
+        },
+        "authoritative_step": {
+          "utc_day": "1976-12-31",
+          "effective_midnight": "1977-01-01",
+          "signed_step_seconds": 1,
+          "offset_before": 15,
+          "offset_after": 16
+        }
+      },
+      "constructor_input_kind": "str",
+      "entire_constructor_input": "1976-12-31T23:59:60Z",
+      "expected_entire_wire_string": "1976-12-31T23:59:60Z",
+      "expected_str_compatible_value": true,
+      "authority_or_Clock_qualification": false
+    },
+    {
+      "entire_original_source_case": {
+        "id": "known-positive-leap/1976-12-31/000000001",
+        "entire_Utc_input": "1976-12-31T23:59:60.000000001Z",
+        "source_role": "UTC datatype/calendar predicate only; not an EMT fixture or qualified clock",
+        "expected": {
+          "admitted": true,
+          "exact_key": [
+            1976,
+            12,
+            31,
+            23,
+            59,
+            60,
+            "000000001"
+          ],
+          "original_wire_string_unchanged": true
+        },
+        "authoritative_step": {
+          "utc_day": "1976-12-31",
+          "effective_midnight": "1977-01-01",
+          "signed_step_seconds": 1,
+          "offset_before": 15,
+          "offset_after": 16
+        }
+      },
+      "constructor_input_kind": "str",
+      "entire_constructor_input": "1976-12-31T23:59:60.000000001Z",
+      "expected_entire_wire_string": "1976-12-31T23:59:60.000000001Z",
+      "expected_str_compatible_value": true,
+      "authority_or_Clock_qualification": false
+    },
+    {
+      "entire_original_source_case": {
+        "id": "known-positive-leap/1976-12-31/999999999999999999999999999",
+        "entire_Utc_input": "1976-12-31T23:59:60.999999999999999999999999999Z",
+        "source_role": "UTC datatype/calendar predicate only; not an EMT fixture or qualified clock",
+        "expected": {
+          "admitted": true,
+          "exact_key": [
+            1976,
+            12,
+            31,
+            23,
+            59,
+            60,
+            "999999999999999999999999999"
+          ],
+          "original_wire_string_unchanged": true
+        },
+        "authoritative_step": {
+          "utc_day": "1976-12-31",
+          "effective_midnight": "1977-01-01",
+          "signed_step_seconds": 1,
+          "offset_before": 15,
+          "offset_after": 16
+        }
+      },
+      "constructor_input_kind": "str",
+      "entire_constructor_input": "1976-12-31T23:59:60.999999999999999999999999999Z",
+      "expected_entire_wire_string": "1976-12-31T23:59:60.999999999999999999999999999Z",
+      "expected_str_compatible_value": true,
+      "authority_or_Clock_qualification": false
+    },
+    {
+      "entire_original_source_case": {
+        "id": "known-positive-leap/1977-12-31/integer",
+        "entire_Utc_input": "1977-12-31T23:59:60Z",
+        "source_role": "UTC datatype/calendar predicate only; not an EMT fixture or qualified clock",
+        "expected": {
+          "admitted": true,
+          "exact_key": [
+            1977,
+            12,
+            31,
+            23,
+            59,
+            60,
+            ""
+          ],
+          "original_wire_string_unchanged": true
+        },
+        "authoritative_step": {
+          "utc_day": "1977-12-31",
+          "effective_midnight": "1978-01-01",
+          "signed_step_seconds": 1,
+          "offset_before": 16,
+          "offset_after": 17
+        }
+      },
+      "constructor_input_kind": "str",
+      "entire_constructor_input": "1977-12-31T23:59:60Z",
+      "expected_entire_wire_string": "1977-12-31T23:59:60Z",
+      "expected_str_compatible_value": true,
+      "authority_or_Clock_qualification": false
+    },
+    {
+      "entire_original_source_case": {
+        "id": "known-positive-leap/1977-12-31/000000001",
+        "entire_Utc_input": "1977-12-31T23:59:60.000000001Z",
+        "source_role": "UTC datatype/calendar predicate only; not an EMT fixture or qualified clock",
+        "expected": {
+          "admitted": true,
+          "exact_key": [
+            1977,
+            12,
+            31,
+            23,
+            59,
+            60,
+            "000000001"
+          ],
+          "original_wire_string_unchanged": true
+        },
+        "authoritative_step": {
+          "utc_day": "1977-12-31",
+          "effective_midnight": "1978-01-01",
+          "signed_step_seconds": 1,
+          "offset_before": 16,
+          "offset_after": 17
+        }
+      },
+      "constructor_input_kind": "str",
+      "entire_constructor_input": "1977-12-31T23:59:60.000000001Z",
+      "expected_entire_wire_string": "1977-12-31T23:59:60.000000001Z",
+      "expected_str_compatible_value": true,
+      "authority_or_Clock_qualification": false
+    },
+    {
+      "entire_original_source_case": {
+        "id": "known-positive-leap/1977-12-31/999999999999999999999999999",
+        "entire_Utc_input": "1977-12-31T23:59:60.999999999999999999999999999Z",
+        "source_role": "UTC datatype/calendar predicate only; not an EMT fixture or qualified clock",
+        "expected": {
+          "admitted": true,
+          "exact_key": [
+            1977,
+            12,
+            31,
+            23,
+            59,
+            60,
+            "999999999999999999999999999"
+          ],
+          "original_wire_string_unchanged": true
+        },
+        "authoritative_step": {
+          "utc_day": "1977-12-31",
+          "effective_midnight": "1978-01-01",
+          "signed_step_seconds": 1,
+          "offset_before": 16,
+          "offset_after": 17
+        }
+      },
+      "constructor_input_kind": "str",
+      "entire_constructor_input": "1977-12-31T23:59:60.999999999999999999999999999Z",
+      "expected_entire_wire_string": "1977-12-31T23:59:60.999999999999999999999999999Z",
+      "expected_str_compatible_value": true,
+      "authority_or_Clock_qualification": false
+    },
+    {
+      "entire_original_source_case": {
+        "id": "known-positive-leap/1978-12-31/integer",
+        "entire_Utc_input": "1978-12-31T23:59:60Z",
+        "source_role": "UTC datatype/calendar predicate only; not an EMT fixture or qualified clock",
+        "expected": {
+          "admitted": true,
+          "exact_key": [
+            1978,
+            12,
+            31,
+            23,
+            59,
+            60,
+            ""
+          ],
+          "original_wire_string_unchanged": true
+        },
+        "authoritative_step": {
+          "utc_day": "1978-12-31",
+          "effective_midnight": "1979-01-01",
+          "signed_step_seconds": 1,
+          "offset_before": 17,
+          "offset_after": 18
+        }
+      },
+      "constructor_input_kind": "str",
+      "entire_constructor_input": "1978-12-31T23:59:60Z",
+      "expected_entire_wire_string": "1978-12-31T23:59:60Z",
+      "expected_str_compatible_value": true,
+      "authority_or_Clock_qualification": false
+    },
+    {
+      "entire_original_source_case": {
+        "id": "known-positive-leap/1978-12-31/000000001",
+        "entire_Utc_input": "1978-12-31T23:59:60.000000001Z",
+        "source_role": "UTC datatype/calendar predicate only; not an EMT fixture or qualified clock",
+        "expected": {
+          "admitted": true,
+          "exact_key": [
+            1978,
+            12,
+            31,
+            23,
+            59,
+            60,
+            "000000001"
+          ],
+          "original_wire_string_unchanged": true
+        },
+        "authoritative_step": {
+          "utc_day": "1978-12-31",
+          "effective_midnight": "1979-01-01",
+          "signed_step_seconds": 1,
+          "offset_before": 17,
+          "offset_after": 18
+        }
+      },
+      "constructor_input_kind": "str",
+      "entire_constructor_input": "1978-12-31T23:59:60.000000001Z",
+      "expected_entire_wire_string": "1978-12-31T23:59:60.000000001Z",
+      "expected_str_compatible_value": true,
+      "authority_or_Clock_qualification": false
+    },
+    {
+      "entire_original_source_case": {
+        "id": "known-positive-leap/1978-12-31/999999999999999999999999999",
+        "entire_Utc_input": "1978-12-31T23:59:60.999999999999999999999999999Z",
+        "source_role": "UTC datatype/calendar predicate only; not an EMT fixture or qualified clock",
+        "expected": {
+          "admitted": true,
+          "exact_key": [
+            1978,
+            12,
+            31,
+            23,
+            59,
+            60,
+            "999999999999999999999999999"
+          ],
+          "original_wire_string_unchanged": true
+        },
+        "authoritative_step": {
+          "utc_day": "1978-12-31",
+          "effective_midnight": "1979-01-01",
+          "signed_step_seconds": 1,
+          "offset_before": 17,
+          "offset_after": 18
+        }
+      },
+      "constructor_input_kind": "str",
+      "entire_constructor_input": "1978-12-31T23:59:60.999999999999999999999999999Z",
+      "expected_entire_wire_string": "1978-12-31T23:59:60.999999999999999999999999999Z",
+      "expected_str_compatible_value": true,
+      "authority_or_Clock_qualification": false
+    },
+    {
+      "entire_original_source_case": {
+        "id": "known-positive-leap/1979-12-31/integer",
+        "entire_Utc_input": "1979-12-31T23:59:60Z",
+        "source_role": "UTC datatype/calendar predicate only; not an EMT fixture or qualified clock",
+        "expected": {
+          "admitted": true,
+          "exact_key": [
+            1979,
+            12,
+            31,
+            23,
+            59,
+            60,
+            ""
+          ],
+          "original_wire_string_unchanged": true
+        },
+        "authoritative_step": {
+          "utc_day": "1979-12-31",
+          "effective_midnight": "1980-01-01",
+          "signed_step_seconds": 1,
+          "offset_before": 18,
+          "offset_after": 19
+        }
+      },
+      "constructor_input_kind": "str",
+      "entire_constructor_input": "1979-12-31T23:59:60Z",
+      "expected_entire_wire_string": "1979-12-31T23:59:60Z",
+      "expected_str_compatible_value": true,
+      "authority_or_Clock_qualification": false
+    },
+    {
+      "entire_original_source_case": {
+        "id": "known-positive-leap/1979-12-31/000000001",
+        "entire_Utc_input": "1979-12-31T23:59:60.000000001Z",
+        "source_role": "UTC datatype/calendar predicate only; not an EMT fixture or qualified clock",
+        "expected": {
+          "admitted": true,
+          "exact_key": [
+            1979,
+            12,
+            31,
+            23,
+            59,
+            60,
+            "000000001"
+          ],
+          "original_wire_string_unchanged": true
+        },
+        "authoritative_step": {
+          "utc_day": "1979-12-31",
+          "effective_midnight": "1980-01-01",
+          "signed_step_seconds": 1,
+          "offset_before": 18,
+          "offset_after": 19
+        }
+      },
+      "constructor_input_kind": "str",
+      "entire_constructor_input": "1979-12-31T23:59:60.000000001Z",
+      "expected_entire_wire_string": "1979-12-31T23:59:60.000000001Z",
+      "expected_str_compatible_value": true,
+      "authority_or_Clock_qualification": false
+    },
+    {
+      "entire_original_source_case": {
+        "id": "known-positive-leap/1979-12-31/999999999999999999999999999",
+        "entire_Utc_input": "1979-12-31T23:59:60.999999999999999999999999999Z",
+        "source_role": "UTC datatype/calendar predicate only; not an EMT fixture or qualified clock",
+        "expected": {
+          "admitted": true,
+          "exact_key": [
+            1979,
+            12,
+            31,
+            23,
+            59,
+            60,
+            "999999999999999999999999999"
+          ],
+          "original_wire_string_unchanged": true
+        },
+        "authoritative_step": {
+          "utc_day": "1979-12-31",
+          "effective_midnight": "1980-01-01",
+          "signed_step_seconds": 1,
+          "offset_before": 18,
+          "offset_after": 19
+        }
+      },
+      "constructor_input_kind": "str",
+      "entire_constructor_input": "1979-12-31T23:59:60.999999999999999999999999999Z",
+      "expected_entire_wire_string": "1979-12-31T23:59:60.999999999999999999999999999Z",
+      "expected_str_compatible_value": true,
+      "authority_or_Clock_qualification": false
+    },
+    {
+      "entire_original_source_case": {
+        "id": "known-positive-leap/1981-06-30/integer",
+        "entire_Utc_input": "1981-06-30T23:59:60Z",
+        "source_role": "UTC datatype/calendar predicate only; not an EMT fixture or qualified clock",
+        "expected": {
+          "admitted": true,
+          "exact_key": [
+            1981,
+            6,
+            30,
+            23,
+            59,
+            60,
+            ""
+          ],
+          "original_wire_string_unchanged": true
+        },
+        "authoritative_step": {
+          "utc_day": "1981-06-30",
+          "effective_midnight": "1981-07-01",
+          "signed_step_seconds": 1,
+          "offset_before": 19,
+          "offset_after": 20
+        }
+      },
+      "constructor_input_kind": "str",
+      "entire_constructor_input": "1981-06-30T23:59:60Z",
+      "expected_entire_wire_string": "1981-06-30T23:59:60Z",
+      "expected_str_compatible_value": true,
+      "authority_or_Clock_qualification": false
+    },
+    {
+      "entire_original_source_case": {
+        "id": "known-positive-leap/1981-06-30/000000001",
+        "entire_Utc_input": "1981-06-30T23:59:60.000000001Z",
+        "source_role": "UTC datatype/calendar predicate only; not an EMT fixture or qualified clock",
+        "expected": {
+          "admitted": true,
+          "exact_key": [
+            1981,
+            6,
+            30,
+            23,
+            59,
+            60,
+            "000000001"
+          ],
+          "original_wire_string_unchanged": true
+        },
+        "authoritative_step": {
+          "utc_day": "1981-06-30",
+          "effective_midnight": "1981-07-01",
+          "signed_step_seconds": 1,
+          "offset_before": 19,
+          "offset_after": 20
+        }
+      },
+      "constructor_input_kind": "str",
+      "entire_constructor_input": "1981-06-30T23:59:60.000000001Z",
+      "expected_entire_wire_string": "1981-06-30T23:59:60.000000001Z",
+      "expected_str_compatible_value": true,
+      "authority_or_Clock_qualification": false
+    },
+    {
+      "entire_original_source_case": {
+        "id": "known-positive-leap/1981-06-30/999999999999999999999999999",
+        "entire_Utc_input": "1981-06-30T23:59:60.999999999999999999999999999Z",
+        "source_role": "UTC datatype/calendar predicate only; not an EMT fixture or qualified clock",
+        "expected": {
+          "admitted": true,
+          "exact_key": [
+            1981,
+            6,
+            30,
+            23,
+            59,
+            60,
+            "999999999999999999999999999"
+          ],
+          "original_wire_string_unchanged": true
+        },
+        "authoritative_step": {
+          "utc_day": "1981-06-30",
+          "effective_midnight": "1981-07-01",
+          "signed_step_seconds": 1,
+          "offset_before": 19,
+          "offset_after": 20
+        }
+      },
+      "constructor_input_kind": "str",
+      "entire_constructor_input": "1981-06-30T23:59:60.999999999999999999999999999Z",
+      "expected_entire_wire_string": "1981-06-30T23:59:60.999999999999999999999999999Z",
+      "expected_str_compatible_value": true,
+      "authority_or_Clock_qualification": false
+    },
+    {
+      "entire_original_source_case": {
+        "id": "known-positive-leap/1982-06-30/integer",
+        "entire_Utc_input": "1982-06-30T23:59:60Z",
+        "source_role": "UTC datatype/calendar predicate only; not an EMT fixture or qualified clock",
+        "expected": {
+          "admitted": true,
+          "exact_key": [
+            1982,
+            6,
+            30,
+            23,
+            59,
+            60,
+            ""
+          ],
+          "original_wire_string_unchanged": true
+        },
+        "authoritative_step": {
+          "utc_day": "1982-06-30",
+          "effective_midnight": "1982-07-01",
+          "signed_step_seconds": 1,
+          "offset_before": 20,
+          "offset_after": 21
+        }
+      },
+      "constructor_input_kind": "str",
+      "entire_constructor_input": "1982-06-30T23:59:60Z",
+      "expected_entire_wire_string": "1982-06-30T23:59:60Z",
+      "expected_str_compatible_value": true,
+      "authority_or_Clock_qualification": false
+    },
+    {
+      "entire_original_source_case": {
+        "id": "known-positive-leap/1982-06-30/000000001",
+        "entire_Utc_input": "1982-06-30T23:59:60.000000001Z",
+        "source_role": "UTC datatype/calendar predicate only; not an EMT fixture or qualified clock",
+        "expected": {
+          "admitted": true,
+          "exact_key": [
+            1982,
+            6,
+            30,
+            23,
+            59,
+            60,
+            "000000001"
+          ],
+          "original_wire_string_unchanged": true
+        },
+        "authoritative_step": {
+          "utc_day": "1982-06-30",
+          "effective_midnight": "1982-07-01",
+          "signed_step_seconds": 1,
+          "offset_before": 20,
+          "offset_after": 21
+        }
+      },
+      "constructor_input_kind": "str",
+      "entire_constructor_input": "1982-06-30T23:59:60.000000001Z",
+      "expected_entire_wire_string": "1982-06-30T23:59:60.000000001Z",
+      "expected_str_compatible_value": true,
+      "authority_or_Clock_qualification": false
+    },
+    {
+      "entire_original_source_case": {
+        "id": "known-positive-leap/1982-06-30/999999999999999999999999999",
+        "entire_Utc_input": "1982-06-30T23:59:60.999999999999999999999999999Z",
+        "source_role": "UTC datatype/calendar predicate only; not an EMT fixture or qualified clock",
+        "expected": {
+          "admitted": true,
+          "exact_key": [
+            1982,
+            6,
+            30,
+            23,
+            59,
+            60,
+            "999999999999999999999999999"
+          ],
+          "original_wire_string_unchanged": true
+        },
+        "authoritative_step": {
+          "utc_day": "1982-06-30",
+          "effective_midnight": "1982-07-01",
+          "signed_step_seconds": 1,
+          "offset_before": 20,
+          "offset_after": 21
+        }
+      },
+      "constructor_input_kind": "str",
+      "entire_constructor_input": "1982-06-30T23:59:60.999999999999999999999999999Z",
+      "expected_entire_wire_string": "1982-06-30T23:59:60.999999999999999999999999999Z",
+      "expected_str_compatible_value": true,
+      "authority_or_Clock_qualification": false
+    },
+    {
+      "entire_original_source_case": {
+        "id": "known-positive-leap/1983-06-30/integer",
+        "entire_Utc_input": "1983-06-30T23:59:60Z",
+        "source_role": "UTC datatype/calendar predicate only; not an EMT fixture or qualified clock",
+        "expected": {
+          "admitted": true,
+          "exact_key": [
+            1983,
+            6,
+            30,
+            23,
+            59,
+            60,
+            ""
+          ],
+          "original_wire_string_unchanged": true
+        },
+        "authoritative_step": {
+          "utc_day": "1983-06-30",
+          "effective_midnight": "1983-07-01",
+          "signed_step_seconds": 1,
+          "offset_before": 21,
+          "offset_after": 22
+        }
+      },
+      "constructor_input_kind": "str",
+      "entire_constructor_input": "1983-06-30T23:59:60Z",
+      "expected_entire_wire_string": "1983-06-30T23:59:60Z",
+      "expected_str_compatible_value": true,
+      "authority_or_Clock_qualification": false
+    },
+    {
+      "entire_original_source_case": {
+        "id": "known-positive-leap/1983-06-30/000000001",
+        "entire_Utc_input": "1983-06-30T23:59:60.000000001Z",
+        "source_role": "UTC datatype/calendar predicate only; not an EMT fixture or qualified clock",
+        "expected": {
+          "admitted": true,
+          "exact_key": [
+            1983,
+            6,
+            30,
+            23,
+            59,
+            60,
+            "000000001"
+          ],
+          "original_wire_string_unchanged": true
+        },
+        "authoritative_step": {
+          "utc_day": "1983-06-30",
+          "effective_midnight": "1983-07-01",
+          "signed_step_seconds": 1,
+          "offset_before": 21,
+          "offset_after": 22
+        }
+      },
+      "constructor_input_kind": "str",
+      "entire_constructor_input": "1983-06-30T23:59:60.000000001Z",
+      "expected_entire_wire_string": "1983-06-30T23:59:60.000000001Z",
+      "expected_str_compatible_value": true,
+      "authority_or_Clock_qualification": false
+    },
+    {
+      "entire_original_source_case": {
+        "id": "known-positive-leap/1983-06-30/999999999999999999999999999",
+        "entire_Utc_input": "1983-06-30T23:59:60.999999999999999999999999999Z",
+        "source_role": "UTC datatype/calendar predicate only; not an EMT fixture or qualified clock",
+        "expected": {
+          "admitted": true,
+          "exact_key": [
+            1983,
+            6,
+            30,
+            23,
+            59,
+            60,
+            "999999999999999999999999999"
+          ],
+          "original_wire_string_unchanged": true
+        },
+        "authoritative_step": {
+          "utc_day": "1983-06-30",
+          "effective_midnight": "1983-07-01",
+          "signed_step_seconds": 1,
+          "offset_before": 21,
+          "offset_after": 22
+        }
+      },
+      "constructor_input_kind": "str",
+      "entire_constructor_input": "1983-06-30T23:59:60.999999999999999999999999999Z",
+      "expected_entire_wire_string": "1983-06-30T23:59:60.999999999999999999999999999Z",
+      "expected_str_compatible_value": true,
+      "authority_or_Clock_qualification": false
+    },
+    {
+      "entire_original_source_case": {
+        "id": "known-positive-leap/1985-06-30/integer",
+        "entire_Utc_input": "1985-06-30T23:59:60Z",
+        "source_role": "UTC datatype/calendar predicate only; not an EMT fixture or qualified clock",
+        "expected": {
+          "admitted": true,
+          "exact_key": [
+            1985,
+            6,
+            30,
+            23,
+            59,
+            60,
+            ""
+          ],
+          "original_wire_string_unchanged": true
+        },
+        "authoritative_step": {
+          "utc_day": "1985-06-30",
+          "effective_midnight": "1985-07-01",
+          "signed_step_seconds": 1,
+          "offset_before": 22,
+          "offset_after": 23
+        }
+      },
+      "constructor_input_kind": "str",
+      "entire_constructor_input": "1985-06-30T23:59:60Z",
+      "expected_entire_wire_string": "1985-06-30T23:59:60Z",
+      "expected_str_compatible_value": true,
+      "authority_or_Clock_qualification": false
+    },
+    {
+      "entire_original_source_case": {
+        "id": "known-positive-leap/1985-06-30/000000001",
+        "entire_Utc_input": "1985-06-30T23:59:60.000000001Z",
+        "source_role": "UTC datatype/calendar predicate only; not an EMT fixture or qualified clock",
+        "expected": {
+          "admitted": true,
+          "exact_key": [
+            1985,
+            6,
+            30,
+            23,
+            59,
+            60,
+            "000000001"
+          ],
+          "original_wire_string_unchanged": true
+        },
+        "authoritative_step": {
+          "utc_day": "1985-06-30",
+          "effective_midnight": "1985-07-01",
+          "signed_step_seconds": 1,
+          "offset_before": 22,
+          "offset_after": 23
+        }
+      },
+      "constructor_input_kind": "str",
+      "entire_constructor_input": "1985-06-30T23:59:60.000000001Z",
+      "expected_entire_wire_string": "1985-06-30T23:59:60.000000001Z",
+      "expected_str_compatible_value": true,
+      "authority_or_Clock_qualification": false
+    },
+    {
+      "entire_original_source_case": {
+        "id": "known-positive-leap/1985-06-30/999999999999999999999999999",
+        "entire_Utc_input": "1985-06-30T23:59:60.999999999999999999999999999Z",
+        "source_role": "UTC datatype/calendar predicate only; not an EMT fixture or qualified clock",
+        "expected": {
+          "admitted": true,
+          "exact_key": [
+            1985,
+            6,
+            30,
+            23,
+            59,
+            60,
+            "999999999999999999999999999"
+          ],
+          "original_wire_string_unchanged": true
+        },
+        "authoritative_step": {
+          "utc_day": "1985-06-30",
+          "effective_midnight": "1985-07-01",
+          "signed_step_seconds": 1,
+          "offset_before": 22,
+          "offset_after": 23
+        }
+      },
+      "constructor_input_kind": "str",
+      "entire_constructor_input": "1985-06-30T23:59:60.999999999999999999999999999Z",
+      "expected_entire_wire_string": "1985-06-30T23:59:60.999999999999999999999999999Z",
+      "expected_str_compatible_value": true,
+      "authority_or_Clock_qualification": false
+    },
+    {
+      "entire_original_source_case": {
+        "id": "known-positive-leap/1987-12-31/integer",
+        "entire_Utc_input": "1987-12-31T23:59:60Z",
+        "source_role": "UTC datatype/calendar predicate only; not an EMT fixture or qualified clock",
+        "expected": {
+          "admitted": true,
+          "exact_key": [
+            1987,
+            12,
+            31,
+            23,
+            59,
+            60,
+            ""
+          ],
+          "original_wire_string_unchanged": true
+        },
+        "authoritative_step": {
+          "utc_day": "1987-12-31",
+          "effective_midnight": "1988-01-01",
+          "signed_step_seconds": 1,
+          "offset_before": 23,
+          "offset_after": 24
+        }
+      },
+      "constructor_input_kind": "str",
+      "entire_constructor_input": "1987-12-31T23:59:60Z",
+      "expected_entire_wire_string": "1987-12-31T23:59:60Z",
+      "expected_str_compatible_value": true,
+      "authority_or_Clock_qualification": false
+    },
+    {
+      "entire_original_source_case": {
+        "id": "known-positive-leap/1987-12-31/000000001",
+        "entire_Utc_input": "1987-12-31T23:59:60.000000001Z",
+        "source_role": "UTC datatype/calendar predicate only; not an EMT fixture or qualified clock",
+        "expected": {
+          "admitted": true,
+          "exact_key": [
+            1987,
+            12,
+            31,
+            23,
+            59,
+            60,
+            "000000001"
+          ],
+          "original_wire_string_unchanged": true
+        },
+        "authoritative_step": {
+          "utc_day": "1987-12-31",
+          "effective_midnight": "1988-01-01",
+          "signed_step_seconds": 1,
+          "offset_before": 23,
+          "offset_after": 24
+        }
+      },
+      "constructor_input_kind": "str",
+      "entire_constructor_input": "1987-12-31T23:59:60.000000001Z",
+      "expected_entire_wire_string": "1987-12-31T23:59:60.000000001Z",
+      "expected_str_compatible_value": true,
+      "authority_or_Clock_qualification": false
+    },
+    {
+      "entire_original_source_case": {
+        "id": "known-positive-leap/1987-12-31/999999999999999999999999999",
+        "entire_Utc_input": "1987-12-31T23:59:60.999999999999999999999999999Z",
+        "source_role": "UTC datatype/calendar predicate only; not an EMT fixture or qualified clock",
+        "expected": {
+          "admitted": true,
+          "exact_key": [
+            1987,
+            12,
+            31,
+            23,
+            59,
+            60,
+            "999999999999999999999999999"
+          ],
+          "original_wire_string_unchanged": true
+        },
+        "authoritative_step": {
+          "utc_day": "1987-12-31",
+          "effective_midnight": "1988-01-01",
+          "signed_step_seconds": 1,
+          "offset_before": 23,
+          "offset_after": 24
+        }
+      },
+      "constructor_input_kind": "str",
+      "entire_constructor_input": "1987-12-31T23:59:60.999999999999999999999999999Z",
+      "expected_entire_wire_string": "1987-12-31T23:59:60.999999999999999999999999999Z",
+      "expected_str_compatible_value": true,
+      "authority_or_Clock_qualification": false
+    },
+    {
+      "entire_original_source_case": {
+        "id": "known-positive-leap/1989-12-31/integer",
+        "entire_Utc_input": "1989-12-31T23:59:60Z",
+        "source_role": "UTC datatype/calendar predicate only; not an EMT fixture or qualified clock",
+        "expected": {
+          "admitted": true,
+          "exact_key": [
+            1989,
+            12,
+            31,
+            23,
+            59,
+            60,
+            ""
+          ],
+          "original_wire_string_unchanged": true
+        },
+        "authoritative_step": {
+          "utc_day": "1989-12-31",
+          "effective_midnight": "1990-01-01",
+          "signed_step_seconds": 1,
+          "offset_before": 24,
+          "offset_after": 25
+        }
+      },
+      "constructor_input_kind": "str",
+      "entire_constructor_input": "1989-12-31T23:59:60Z",
+      "expected_entire_wire_string": "1989-12-31T23:59:60Z",
+      "expected_str_compatible_value": true,
+      "authority_or_Clock_qualification": false
+    },
+    {
+      "entire_original_source_case": {
+        "id": "known-positive-leap/1989-12-31/000000001",
+        "entire_Utc_input": "1989-12-31T23:59:60.000000001Z",
+        "source_role": "UTC datatype/calendar predicate only; not an EMT fixture or qualified clock",
+        "expected": {
+          "admitted": true,
+          "exact_key": [
+            1989,
+            12,
+            31,
+            23,
+            59,
+            60,
+            "000000001"
+          ],
+          "original_wire_string_unchanged": true
+        },
+        "authoritative_step": {
+          "utc_day": "1989-12-31",
+          "effective_midnight": "1990-01-01",
+          "signed_step_seconds": 1,
+          "offset_before": 24,
+          "offset_after": 25
+        }
+      },
+      "constructor_input_kind": "str",
+      "entire_constructor_input": "1989-12-31T23:59:60.000000001Z",
+      "expected_entire_wire_string": "1989-12-31T23:59:60.000000001Z",
+      "expected_str_compatible_value": true,
+      "authority_or_Clock_qualification": false
+    },
+    {
+      "entire_original_source_case": {
+        "id": "known-positive-leap/1989-12-31/999999999999999999999999999",
+        "entire_Utc_input": "1989-12-31T23:59:60.999999999999999999999999999Z",
+        "source_role": "UTC datatype/calendar predicate only; not an EMT fixture or qualified clock",
+        "expected": {
+          "admitted": true,
+          "exact_key": [
+            1989,
+            12,
+            31,
+            23,
+            59,
+            60,
+            "999999999999999999999999999"
+          ],
+          "original_wire_string_unchanged": true
+        },
+        "authoritative_step": {
+          "utc_day": "1989-12-31",
+          "effective_midnight": "1990-01-01",
+          "signed_step_seconds": 1,
+          "offset_before": 24,
+          "offset_after": 25
+        }
+      },
+      "constructor_input_kind": "str",
+      "entire_constructor_input": "1989-12-31T23:59:60.999999999999999999999999999Z",
+      "expected_entire_wire_string": "1989-12-31T23:59:60.999999999999999999999999999Z",
+      "expected_str_compatible_value": true,
+      "authority_or_Clock_qualification": false
+    },
+    {
+      "entire_original_source_case": {
+        "id": "known-positive-leap/1990-12-31/integer",
+        "entire_Utc_input": "1990-12-31T23:59:60Z",
+        "source_role": "UTC datatype/calendar predicate only; not an EMT fixture or qualified clock",
+        "expected": {
+          "admitted": true,
+          "exact_key": [
+            1990,
+            12,
+            31,
+            23,
+            59,
+            60,
+            ""
+          ],
+          "original_wire_string_unchanged": true
+        },
+        "authoritative_step": {
+          "utc_day": "1990-12-31",
+          "effective_midnight": "1991-01-01",
+          "signed_step_seconds": 1,
+          "offset_before": 25,
+          "offset_after": 26
+        }
+      },
+      "constructor_input_kind": "str",
+      "entire_constructor_input": "1990-12-31T23:59:60Z",
+      "expected_entire_wire_string": "1990-12-31T23:59:60Z",
+      "expected_str_compatible_value": true,
+      "authority_or_Clock_qualification": false
+    },
+    {
+      "entire_original_source_case": {
+        "id": "known-positive-leap/1990-12-31/000000001",
+        "entire_Utc_input": "1990-12-31T23:59:60.000000001Z",
+        "source_role": "UTC datatype/calendar predicate only; not an EMT fixture or qualified clock",
+        "expected": {
+          "admitted": true,
+          "exact_key": [
+            1990,
+            12,
+            31,
+            23,
+            59,
+            60,
+            "000000001"
+          ],
+          "original_wire_string_unchanged": true
+        },
+        "authoritative_step": {
+          "utc_day": "1990-12-31",
+          "effective_midnight": "1991-01-01",
+          "signed_step_seconds": 1,
+          "offset_before": 25,
+          "offset_after": 26
+        }
+      },
+      "constructor_input_kind": "str",
+      "entire_constructor_input": "1990-12-31T23:59:60.000000001Z",
+      "expected_entire_wire_string": "1990-12-31T23:59:60.000000001Z",
+      "expected_str_compatible_value": true,
+      "authority_or_Clock_qualification": false
+    },
+    {
+      "entire_original_source_case": {
+        "id": "known-positive-leap/1990-12-31/999999999999999999999999999",
+        "entire_Utc_input": "1990-12-31T23:59:60.999999999999999999999999999Z",
+        "source_role": "UTC datatype/calendar predicate only; not an EMT fixture or qualified clock",
+        "expected": {
+          "admitted": true,
+          "exact_key": [
+            1990,
+            12,
+            31,
+            23,
+            59,
+            60,
+            "999999999999999999999999999"
+          ],
+          "original_wire_string_unchanged": true
+        },
+        "authoritative_step": {
+          "utc_day": "1990-12-31",
+          "effective_midnight": "1991-01-01",
+          "signed_step_seconds": 1,
+          "offset_before": 25,
+          "offset_after": 26
+        }
+      },
+      "constructor_input_kind": "str",
+      "entire_constructor_input": "1990-12-31T23:59:60.999999999999999999999999999Z",
+      "expected_entire_wire_string": "1990-12-31T23:59:60.999999999999999999999999999Z",
+      "expected_str_compatible_value": true,
+      "authority_or_Clock_qualification": false
+    },
+    {
+      "entire_original_source_case": {
+        "id": "known-positive-leap/1992-06-30/integer",
+        "entire_Utc_input": "1992-06-30T23:59:60Z",
+        "source_role": "UTC datatype/calendar predicate only; not an EMT fixture or qualified clock",
+        "expected": {
+          "admitted": true,
+          "exact_key": [
+            1992,
+            6,
+            30,
+            23,
+            59,
+            60,
+            ""
+          ],
+          "original_wire_string_unchanged": true
+        },
+        "authoritative_step": {
+          "utc_day": "1992-06-30",
+          "effective_midnight": "1992-07-01",
+          "signed_step_seconds": 1,
+          "offset_before": 26,
+          "offset_after": 27
+        }
+      },
+      "constructor_input_kind": "str",
+      "entire_constructor_input": "1992-06-30T23:59:60Z",
+      "expected_entire_wire_string": "1992-06-30T23:59:60Z",
+      "expected_str_compatible_value": true,
+      "authority_or_Clock_qualification": false
+    },
+    {
+      "entire_original_source_case": {
+        "id": "known-positive-leap/1992-06-30/000000001",
+        "entire_Utc_input": "1992-06-30T23:59:60.000000001Z",
+        "source_role": "UTC datatype/calendar predicate only; not an EMT fixture or qualified clock",
+        "expected": {
+          "admitted": true,
+          "exact_key": [
+            1992,
+            6,
+            30,
+            23,
+            59,
+            60,
+            "000000001"
+          ],
+          "original_wire_string_unchanged": true
+        },
+        "authoritative_step": {
+          "utc_day": "1992-06-30",
+          "effective_midnight": "1992-07-01",
+          "signed_step_seconds": 1,
+          "offset_before": 26,
+          "offset_after": 27
+        }
+      },
+      "constructor_input_kind": "str",
+      "entire_constructor_input": "1992-06-30T23:59:60.000000001Z",
+      "expected_entire_wire_string": "1992-06-30T23:59:60.000000001Z",
+      "expected_str_compatible_value": true,
+      "authority_or_Clock_qualification": false
+    },
+    {
+      "entire_original_source_case": {
+        "id": "known-positive-leap/1992-06-30/999999999999999999999999999",
+        "entire_Utc_input": "1992-06-30T23:59:60.999999999999999999999999999Z",
+        "source_role": "UTC datatype/calendar predicate only; not an EMT fixture or qualified clock",
+        "expected": {
+          "admitted": true,
+          "exact_key": [
+            1992,
+            6,
+            30,
+            23,
+            59,
+            60,
+            "999999999999999999999999999"
+          ],
+          "original_wire_string_unchanged": true
+        },
+        "authoritative_step": {
+          "utc_day": "1992-06-30",
+          "effective_midnight": "1992-07-01",
+          "signed_step_seconds": 1,
+          "offset_before": 26,
+          "offset_after": 27
+        }
+      },
+      "constructor_input_kind": "str",
+      "entire_constructor_input": "1992-06-30T23:59:60.999999999999999999999999999Z",
+      "expected_entire_wire_string": "1992-06-30T23:59:60.999999999999999999999999999Z",
+      "expected_str_compatible_value": true,
+      "authority_or_Clock_qualification": false
+    },
+    {
+      "entire_original_source_case": {
+        "id": "known-positive-leap/1993-06-30/integer",
+        "entire_Utc_input": "1993-06-30T23:59:60Z",
+        "source_role": "UTC datatype/calendar predicate only; not an EMT fixture or qualified clock",
+        "expected": {
+          "admitted": true,
+          "exact_key": [
+            1993,
+            6,
+            30,
+            23,
+            59,
+            60,
+            ""
+          ],
+          "original_wire_string_unchanged": true
+        },
+        "authoritative_step": {
+          "utc_day": "1993-06-30",
+          "effective_midnight": "1993-07-01",
+          "signed_step_seconds": 1,
+          "offset_before": 27,
+          "offset_after": 28
+        }
+      },
+      "constructor_input_kind": "str",
+      "entire_constructor_input": "1993-06-30T23:59:60Z",
+      "expected_entire_wire_string": "1993-06-30T23:59:60Z",
+      "expected_str_compatible_value": true,
+      "authority_or_Clock_qualification": false
+    },
+    {
+      "entire_original_source_case": {
+        "id": "known-positive-leap/1993-06-30/000000001",
+        "entire_Utc_input": "1993-06-30T23:59:60.000000001Z",
+        "source_role": "UTC datatype/calendar predicate only; not an EMT fixture or qualified clock",
+        "expected": {
+          "admitted": true,
+          "exact_key": [
+            1993,
+            6,
+            30,
+            23,
+            59,
+            60,
+            "000000001"
+          ],
+          "original_wire_string_unchanged": true
+        },
+        "authoritative_step": {
+          "utc_day": "1993-06-30",
+          "effective_midnight": "1993-07-01",
+          "signed_step_seconds": 1,
+          "offset_before": 27,
+          "offset_after": 28
+        }
+      },
+      "constructor_input_kind": "str",
+      "entire_constructor_input": "1993-06-30T23:59:60.000000001Z",
+      "expected_entire_wire_string": "1993-06-30T23:59:60.000000001Z",
+      "expected_str_compatible_value": true,
+      "authority_or_Clock_qualification": false
+    },
+    {
+      "entire_original_source_case": {
+        "id": "known-positive-leap/1993-06-30/999999999999999999999999999",
+        "entire_Utc_input": "1993-06-30T23:59:60.999999999999999999999999999Z",
+        "source_role": "UTC datatype/calendar predicate only; not an EMT fixture or qualified clock",
+        "expected": {
+          "admitted": true,
+          "exact_key": [
+            1993,
+            6,
+            30,
+            23,
+            59,
+            60,
+            "999999999999999999999999999"
+          ],
+          "original_wire_string_unchanged": true
+        },
+        "authoritative_step": {
+          "utc_day": "1993-06-30",
+          "effective_midnight": "1993-07-01",
+          "signed_step_seconds": 1,
+          "offset_before": 27,
+          "offset_after": 28
+        }
+      },
+      "constructor_input_kind": "str",
+      "entire_constructor_input": "1993-06-30T23:59:60.999999999999999999999999999Z",
+      "expected_entire_wire_string": "1993-06-30T23:59:60.999999999999999999999999999Z",
+      "expected_str_compatible_value": true,
+      "authority_or_Clock_qualification": false
+    },
+    {
+      "entire_original_source_case": {
+        "id": "known-positive-leap/1994-06-30/integer",
+        "entire_Utc_input": "1994-06-30T23:59:60Z",
+        "source_role": "UTC datatype/calendar predicate only; not an EMT fixture or qualified clock",
+        "expected": {
+          "admitted": true,
+          "exact_key": [
+            1994,
+            6,
+            30,
+            23,
+            59,
+            60,
+            ""
+          ],
+          "original_wire_string_unchanged": true
+        },
+        "authoritative_step": {
+          "utc_day": "1994-06-30",
+          "effective_midnight": "1994-07-01",
+          "signed_step_seconds": 1,
+          "offset_before": 28,
+          "offset_after": 29
+        }
+      },
+      "constructor_input_kind": "str",
+      "entire_constructor_input": "1994-06-30T23:59:60Z",
+      "expected_entire_wire_string": "1994-06-30T23:59:60Z",
+      "expected_str_compatible_value": true,
+      "authority_or_Clock_qualification": false
+    },
+    {
+      "entire_original_source_case": {
+        "id": "known-positive-leap/1994-06-30/000000001",
+        "entire_Utc_input": "1994-06-30T23:59:60.000000001Z",
+        "source_role": "UTC datatype/calendar predicate only; not an EMT fixture or qualified clock",
+        "expected": {
+          "admitted": true,
+          "exact_key": [
+            1994,
+            6,
+            30,
+            23,
+            59,
+            60,
+            "000000001"
+          ],
+          "original_wire_string_unchanged": true
+        },
+        "authoritative_step": {
+          "utc_day": "1994-06-30",
+          "effective_midnight": "1994-07-01",
+          "signed_step_seconds": 1,
+          "offset_before": 28,
+          "offset_after": 29
+        }
+      },
+      "constructor_input_kind": "str",
+      "entire_constructor_input": "1994-06-30T23:59:60.000000001Z",
+      "expected_entire_wire_string": "1994-06-30T23:59:60.000000001Z",
+      "expected_str_compatible_value": true,
+      "authority_or_Clock_qualification": false
+    },
+    {
+      "entire_original_source_case": {
+        "id": "known-positive-leap/1994-06-30/999999999999999999999999999",
+        "entire_Utc_input": "1994-06-30T23:59:60.999999999999999999999999999Z",
+        "source_role": "UTC datatype/calendar predicate only; not an EMT fixture or qualified clock",
+        "expected": {
+          "admitted": true,
+          "exact_key": [
+            1994,
+            6,
+            30,
+            23,
+            59,
+            60,
+            "999999999999999999999999999"
+          ],
+          "original_wire_string_unchanged": true
+        },
+        "authoritative_step": {
+          "utc_day": "1994-06-30",
+          "effective_midnight": "1994-07-01",
+          "signed_step_seconds": 1,
+          "offset_before": 28,
+          "offset_after": 29
+        }
+      },
+      "constructor_input_kind": "str",
+      "entire_constructor_input": "1994-06-30T23:59:60.999999999999999999999999999Z",
+      "expected_entire_wire_string": "1994-06-30T23:59:60.999999999999999999999999999Z",
+      "expected_str_compatible_value": true,
+      "authority_or_Clock_qualification": false
+    },
+    {
+      "entire_original_source_case": {
+        "id": "known-positive-leap/1995-12-31/integer",
+        "entire_Utc_input": "1995-12-31T23:59:60Z",
+        "source_role": "UTC datatype/calendar predicate only; not an EMT fixture or qualified clock",
+        "expected": {
+          "admitted": true,
+          "exact_key": [
+            1995,
+            12,
+            31,
+            23,
+            59,
+            60,
+            ""
+          ],
+          "original_wire_string_unchanged": true
+        },
+        "authoritative_step": {
+          "utc_day": "1995-12-31",
+          "effective_midnight": "1996-01-01",
+          "signed_step_seconds": 1,
+          "offset_before": 29,
+          "offset_after": 30
+        }
+      },
+      "constructor_input_kind": "str",
+      "entire_constructor_input": "1995-12-31T23:59:60Z",
+      "expected_entire_wire_string": "1995-12-31T23:59:60Z",
+      "expected_str_compatible_value": true,
+      "authority_or_Clock_qualification": false
+    },
+    {
+      "entire_original_source_case": {
+        "id": "known-positive-leap/1995-12-31/000000001",
+        "entire_Utc_input": "1995-12-31T23:59:60.000000001Z",
+        "source_role": "UTC datatype/calendar predicate only; not an EMT fixture or qualified clock",
+        "expected": {
+          "admitted": true,
+          "exact_key": [
+            1995,
+            12,
+            31,
+            23,
+            59,
+            60,
+            "000000001"
+          ],
+          "original_wire_string_unchanged": true
+        },
+        "authoritative_step": {
+          "utc_day": "1995-12-31",
+          "effective_midnight": "1996-01-01",
+          "signed_step_seconds": 1,
+          "offset_before": 29,
+          "offset_after": 30
+        }
+      },
+      "constructor_input_kind": "str",
+      "entire_constructor_input": "1995-12-31T23:59:60.000000001Z",
+      "expected_entire_wire_string": "1995-12-31T23:59:60.000000001Z",
+      "expected_str_compatible_value": true,
+      "authority_or_Clock_qualification": false
+    },
+    {
+      "entire_original_source_case": {
+        "id": "known-positive-leap/1995-12-31/999999999999999999999999999",
+        "entire_Utc_input": "1995-12-31T23:59:60.999999999999999999999999999Z",
+        "source_role": "UTC datatype/calendar predicate only; not an EMT fixture or qualified clock",
+        "expected": {
+          "admitted": true,
+          "exact_key": [
+            1995,
+            12,
+            31,
+            23,
+            59,
+            60,
+            "999999999999999999999999999"
+          ],
+          "original_wire_string_unchanged": true
+        },
+        "authoritative_step": {
+          "utc_day": "1995-12-31",
+          "effective_midnight": "1996-01-01",
+          "signed_step_seconds": 1,
+          "offset_before": 29,
+          "offset_after": 30
+        }
+      },
+      "constructor_input_kind": "str",
+      "entire_constructor_input": "1995-12-31T23:59:60.999999999999999999999999999Z",
+      "expected_entire_wire_string": "1995-12-31T23:59:60.999999999999999999999999999Z",
+      "expected_str_compatible_value": true,
+      "authority_or_Clock_qualification": false
+    },
+    {
+      "entire_original_source_case": {
+        "id": "known-positive-leap/1997-06-30/integer",
+        "entire_Utc_input": "1997-06-30T23:59:60Z",
+        "source_role": "UTC datatype/calendar predicate only; not an EMT fixture or qualified clock",
+        "expected": {
+          "admitted": true,
+          "exact_key": [
+            1997,
+            6,
+            30,
+            23,
+            59,
+            60,
+            ""
+          ],
+          "original_wire_string_unchanged": true
+        },
+        "authoritative_step": {
+          "utc_day": "1997-06-30",
+          "effective_midnight": "1997-07-01",
+          "signed_step_seconds": 1,
+          "offset_before": 30,
+          "offset_after": 31
+        }
+      },
+      "constructor_input_kind": "str",
+      "entire_constructor_input": "1997-06-30T23:59:60Z",
+      "expected_entire_wire_string": "1997-06-30T23:59:60Z",
+      "expected_str_compatible_value": true,
+      "authority_or_Clock_qualification": false
+    },
+    {
+      "entire_original_source_case": {
+        "id": "known-positive-leap/1997-06-30/000000001",
+        "entire_Utc_input": "1997-06-30T23:59:60.000000001Z",
+        "source_role": "UTC datatype/calendar predicate only; not an EMT fixture or qualified clock",
+        "expected": {
+          "admitted": true,
+          "exact_key": [
+            1997,
+            6,
+            30,
+            23,
+            59,
+            60,
+            "000000001"
+          ],
+          "original_wire_string_unchanged": true
+        },
+        "authoritative_step": {
+          "utc_day": "1997-06-30",
+          "effective_midnight": "1997-07-01",
+          "signed_step_seconds": 1,
+          "offset_before": 30,
+          "offset_after": 31
+        }
+      },
+      "constructor_input_kind": "str",
+      "entire_constructor_input": "1997-06-30T23:59:60.000000001Z",
+      "expected_entire_wire_string": "1997-06-30T23:59:60.000000001Z",
+      "expected_str_compatible_value": true,
+      "authority_or_Clock_qualification": false
+    },
+    {
+      "entire_original_source_case": {
+        "id": "known-positive-leap/1997-06-30/999999999999999999999999999",
+        "entire_Utc_input": "1997-06-30T23:59:60.999999999999999999999999999Z",
+        "source_role": "UTC datatype/calendar predicate only; not an EMT fixture or qualified clock",
+        "expected": {
+          "admitted": true,
+          "exact_key": [
+            1997,
+            6,
+            30,
+            23,
+            59,
+            60,
+            "999999999999999999999999999"
+          ],
+          "original_wire_string_unchanged": true
+        },
+        "authoritative_step": {
+          "utc_day": "1997-06-30",
+          "effective_midnight": "1997-07-01",
+          "signed_step_seconds": 1,
+          "offset_before": 30,
+          "offset_after": 31
+        }
+      },
+      "constructor_input_kind": "str",
+      "entire_constructor_input": "1997-06-30T23:59:60.999999999999999999999999999Z",
+      "expected_entire_wire_string": "1997-06-30T23:59:60.999999999999999999999999999Z",
+      "expected_str_compatible_value": true,
+      "authority_or_Clock_qualification": false
+    },
+    {
+      "entire_original_source_case": {
+        "id": "known-positive-leap/1998-12-31/integer",
+        "entire_Utc_input": "1998-12-31T23:59:60Z",
+        "source_role": "UTC datatype/calendar predicate only; not an EMT fixture or qualified clock",
+        "expected": {
+          "admitted": true,
+          "exact_key": [
+            1998,
+            12,
+            31,
+            23,
+            59,
+            60,
+            ""
+          ],
+          "original_wire_string_unchanged": true
+        },
+        "authoritative_step": {
+          "utc_day": "1998-12-31",
+          "effective_midnight": "1999-01-01",
+          "signed_step_seconds": 1,
+          "offset_before": 31,
+          "offset_after": 32
+        }
+      },
+      "constructor_input_kind": "str",
+      "entire_constructor_input": "1998-12-31T23:59:60Z",
+      "expected_entire_wire_string": "1998-12-31T23:59:60Z",
+      "expected_str_compatible_value": true,
+      "authority_or_Clock_qualification": false
+    },
+    {
+      "entire_original_source_case": {
+        "id": "known-positive-leap/1998-12-31/000000001",
+        "entire_Utc_input": "1998-12-31T23:59:60.000000001Z",
+        "source_role": "UTC datatype/calendar predicate only; not an EMT fixture or qualified clock",
+        "expected": {
+          "admitted": true,
+          "exact_key": [
+            1998,
+            12,
+            31,
+            23,
+            59,
+            60,
+            "000000001"
+          ],
+          "original_wire_string_unchanged": true
+        },
+        "authoritative_step": {
+          "utc_day": "1998-12-31",
+          "effective_midnight": "1999-01-01",
+          "signed_step_seconds": 1,
+          "offset_before": 31,
+          "offset_after": 32
+        }
+      },
+      "constructor_input_kind": "str",
+      "entire_constructor_input": "1998-12-31T23:59:60.000000001Z",
+      "expected_entire_wire_string": "1998-12-31T23:59:60.000000001Z",
+      "expected_str_compatible_value": true,
+      "authority_or_Clock_qualification": false
+    },
+    {
+      "entire_original_source_case": {
+        "id": "known-positive-leap/1998-12-31/999999999999999999999999999",
+        "entire_Utc_input": "1998-12-31T23:59:60.999999999999999999999999999Z",
+        "source_role": "UTC datatype/calendar predicate only; not an EMT fixture or qualified clock",
+        "expected": {
+          "admitted": true,
+          "exact_key": [
+            1998,
+            12,
+            31,
+            23,
+            59,
+            60,
+            "999999999999999999999999999"
+          ],
+          "original_wire_string_unchanged": true
+        },
+        "authoritative_step": {
+          "utc_day": "1998-12-31",
+          "effective_midnight": "1999-01-01",
+          "signed_step_seconds": 1,
+          "offset_before": 31,
+          "offset_after": 32
+        }
+      },
+      "constructor_input_kind": "str",
+      "entire_constructor_input": "1998-12-31T23:59:60.999999999999999999999999999Z",
+      "expected_entire_wire_string": "1998-12-31T23:59:60.999999999999999999999999999Z",
+      "expected_str_compatible_value": true,
+      "authority_or_Clock_qualification": false
+    },
+    {
+      "entire_original_source_case": {
+        "id": "known-positive-leap/2005-12-31/integer",
+        "entire_Utc_input": "2005-12-31T23:59:60Z",
+        "source_role": "UTC datatype/calendar predicate only; not an EMT fixture or qualified clock",
+        "expected": {
+          "admitted": true,
+          "exact_key": [
+            2005,
+            12,
+            31,
+            23,
+            59,
+            60,
+            ""
+          ],
+          "original_wire_string_unchanged": true
+        },
+        "authoritative_step": {
+          "utc_day": "2005-12-31",
+          "effective_midnight": "2006-01-01",
+          "signed_step_seconds": 1,
+          "offset_before": 32,
+          "offset_after": 33
+        }
+      },
+      "constructor_input_kind": "str",
+      "entire_constructor_input": "2005-12-31T23:59:60Z",
+      "expected_entire_wire_string": "2005-12-31T23:59:60Z",
+      "expected_str_compatible_value": true,
+      "authority_or_Clock_qualification": false
+    },
+    {
+      "entire_original_source_case": {
+        "id": "known-positive-leap/2005-12-31/000000001",
+        "entire_Utc_input": "2005-12-31T23:59:60.000000001Z",
+        "source_role": "UTC datatype/calendar predicate only; not an EMT fixture or qualified clock",
+        "expected": {
+          "admitted": true,
+          "exact_key": [
+            2005,
+            12,
+            31,
+            23,
+            59,
+            60,
+            "000000001"
+          ],
+          "original_wire_string_unchanged": true
+        },
+        "authoritative_step": {
+          "utc_day": "2005-12-31",
+          "effective_midnight": "2006-01-01",
+          "signed_step_seconds": 1,
+          "offset_before": 32,
+          "offset_after": 33
+        }
+      },
+      "constructor_input_kind": "str",
+      "entire_constructor_input": "2005-12-31T23:59:60.000000001Z",
+      "expected_entire_wire_string": "2005-12-31T23:59:60.000000001Z",
+      "expected_str_compatible_value": true,
+      "authority_or_Clock_qualification": false
+    },
+    {
+      "entire_original_source_case": {
+        "id": "known-positive-leap/2005-12-31/999999999999999999999999999",
+        "entire_Utc_input": "2005-12-31T23:59:60.999999999999999999999999999Z",
+        "source_role": "UTC datatype/calendar predicate only; not an EMT fixture or qualified clock",
+        "expected": {
+          "admitted": true,
+          "exact_key": [
+            2005,
+            12,
+            31,
+            23,
+            59,
+            60,
+            "999999999999999999999999999"
+          ],
+          "original_wire_string_unchanged": true
+        },
+        "authoritative_step": {
+          "utc_day": "2005-12-31",
+          "effective_midnight": "2006-01-01",
+          "signed_step_seconds": 1,
+          "offset_before": 32,
+          "offset_after": 33
+        }
+      },
+      "constructor_input_kind": "str",
+      "entire_constructor_input": "2005-12-31T23:59:60.999999999999999999999999999Z",
+      "expected_entire_wire_string": "2005-12-31T23:59:60.999999999999999999999999999Z",
+      "expected_str_compatible_value": true,
+      "authority_or_Clock_qualification": false
+    },
+    {
+      "entire_original_source_case": {
+        "id": "known-positive-leap/2008-12-31/integer",
+        "entire_Utc_input": "2008-12-31T23:59:60Z",
+        "source_role": "UTC datatype/calendar predicate only; not an EMT fixture or qualified clock",
+        "expected": {
+          "admitted": true,
+          "exact_key": [
+            2008,
+            12,
+            31,
+            23,
+            59,
+            60,
+            ""
+          ],
+          "original_wire_string_unchanged": true
+        },
+        "authoritative_step": {
+          "utc_day": "2008-12-31",
+          "effective_midnight": "2009-01-01",
+          "signed_step_seconds": 1,
+          "offset_before": 33,
+          "offset_after": 34
+        }
+      },
+      "constructor_input_kind": "str",
+      "entire_constructor_input": "2008-12-31T23:59:60Z",
+      "expected_entire_wire_string": "2008-12-31T23:59:60Z",
+      "expected_str_compatible_value": true,
+      "authority_or_Clock_qualification": false
+    },
+    {
+      "entire_original_source_case": {
+        "id": "known-positive-leap/2008-12-31/000000001",
+        "entire_Utc_input": "2008-12-31T23:59:60.000000001Z",
+        "source_role": "UTC datatype/calendar predicate only; not an EMT fixture or qualified clock",
+        "expected": {
+          "admitted": true,
+          "exact_key": [
+            2008,
+            12,
+            31,
+            23,
+            59,
+            60,
+            "000000001"
+          ],
+          "original_wire_string_unchanged": true
+        },
+        "authoritative_step": {
+          "utc_day": "2008-12-31",
+          "effective_midnight": "2009-01-01",
+          "signed_step_seconds": 1,
+          "offset_before": 33,
+          "offset_after": 34
+        }
+      },
+      "constructor_input_kind": "str",
+      "entire_constructor_input": "2008-12-31T23:59:60.000000001Z",
+      "expected_entire_wire_string": "2008-12-31T23:59:60.000000001Z",
+      "expected_str_compatible_value": true,
+      "authority_or_Clock_qualification": false
+    },
+    {
+      "entire_original_source_case": {
+        "id": "known-positive-leap/2008-12-31/999999999999999999999999999",
+        "entire_Utc_input": "2008-12-31T23:59:60.999999999999999999999999999Z",
+        "source_role": "UTC datatype/calendar predicate only; not an EMT fixture or qualified clock",
+        "expected": {
+          "admitted": true,
+          "exact_key": [
+            2008,
+            12,
+            31,
+            23,
+            59,
+            60,
+            "999999999999999999999999999"
+          ],
+          "original_wire_string_unchanged": true
+        },
+        "authoritative_step": {
+          "utc_day": "2008-12-31",
+          "effective_midnight": "2009-01-01",
+          "signed_step_seconds": 1,
+          "offset_before": 33,
+          "offset_after": 34
+        }
+      },
+      "constructor_input_kind": "str",
+      "entire_constructor_input": "2008-12-31T23:59:60.999999999999999999999999999Z",
+      "expected_entire_wire_string": "2008-12-31T23:59:60.999999999999999999999999999Z",
+      "expected_str_compatible_value": true,
+      "authority_or_Clock_qualification": false
+    },
+    {
+      "entire_original_source_case": {
+        "id": "known-positive-leap/2012-06-30/integer",
+        "entire_Utc_input": "2012-06-30T23:59:60Z",
+        "source_role": "UTC datatype/calendar predicate only; not an EMT fixture or qualified clock",
+        "expected": {
+          "admitted": true,
+          "exact_key": [
+            2012,
+            6,
+            30,
+            23,
+            59,
+            60,
+            ""
+          ],
+          "original_wire_string_unchanged": true
+        },
+        "authoritative_step": {
+          "utc_day": "2012-06-30",
+          "effective_midnight": "2012-07-01",
+          "signed_step_seconds": 1,
+          "offset_before": 34,
+          "offset_after": 35
+        }
+      },
+      "constructor_input_kind": "str",
+      "entire_constructor_input": "2012-06-30T23:59:60Z",
+      "expected_entire_wire_string": "2012-06-30T23:59:60Z",
+      "expected_str_compatible_value": true,
+      "authority_or_Clock_qualification": false
+    },
+    {
+      "entire_original_source_case": {
+        "id": "known-positive-leap/2012-06-30/000000001",
+        "entire_Utc_input": "2012-06-30T23:59:60.000000001Z",
+        "source_role": "UTC datatype/calendar predicate only; not an EMT fixture or qualified clock",
+        "expected": {
+          "admitted": true,
+          "exact_key": [
+            2012,
+            6,
+            30,
+            23,
+            59,
+            60,
+            "000000001"
+          ],
+          "original_wire_string_unchanged": true
+        },
+        "authoritative_step": {
+          "utc_day": "2012-06-30",
+          "effective_midnight": "2012-07-01",
+          "signed_step_seconds": 1,
+          "offset_before": 34,
+          "offset_after": 35
+        }
+      },
+      "constructor_input_kind": "str",
+      "entire_constructor_input": "2012-06-30T23:59:60.000000001Z",
+      "expected_entire_wire_string": "2012-06-30T23:59:60.000000001Z",
+      "expected_str_compatible_value": true,
+      "authority_or_Clock_qualification": false
+    },
+    {
+      "entire_original_source_case": {
+        "id": "known-positive-leap/2012-06-30/999999999999999999999999999",
+        "entire_Utc_input": "2012-06-30T23:59:60.999999999999999999999999999Z",
+        "source_role": "UTC datatype/calendar predicate only; not an EMT fixture or qualified clock",
+        "expected": {
+          "admitted": true,
+          "exact_key": [
+            2012,
+            6,
+            30,
+            23,
+            59,
+            60,
+            "999999999999999999999999999"
+          ],
+          "original_wire_string_unchanged": true
+        },
+        "authoritative_step": {
+          "utc_day": "2012-06-30",
+          "effective_midnight": "2012-07-01",
+          "signed_step_seconds": 1,
+          "offset_before": 34,
+          "offset_after": 35
+        }
+      },
+      "constructor_input_kind": "str",
+      "entire_constructor_input": "2012-06-30T23:59:60.999999999999999999999999999Z",
+      "expected_entire_wire_string": "2012-06-30T23:59:60.999999999999999999999999999Z",
+      "expected_str_compatible_value": true,
+      "authority_or_Clock_qualification": false
+    },
+    {
+      "entire_original_source_case": {
+        "id": "known-positive-leap/2015-06-30/integer",
+        "entire_Utc_input": "2015-06-30T23:59:60Z",
+        "source_role": "UTC datatype/calendar predicate only; not an EMT fixture or qualified clock",
+        "expected": {
+          "admitted": true,
+          "exact_key": [
+            2015,
+            6,
+            30,
+            23,
+            59,
+            60,
+            ""
+          ],
+          "original_wire_string_unchanged": true
+        },
+        "authoritative_step": {
+          "utc_day": "2015-06-30",
+          "effective_midnight": "2015-07-01",
+          "signed_step_seconds": 1,
+          "offset_before": 35,
+          "offset_after": 36
+        }
+      },
+      "constructor_input_kind": "str",
+      "entire_constructor_input": "2015-06-30T23:59:60Z",
+      "expected_entire_wire_string": "2015-06-30T23:59:60Z",
+      "expected_str_compatible_value": true,
+      "authority_or_Clock_qualification": false
+    },
+    {
+      "entire_original_source_case": {
+        "id": "known-positive-leap/2015-06-30/000000001",
+        "entire_Utc_input": "2015-06-30T23:59:60.000000001Z",
+        "source_role": "UTC datatype/calendar predicate only; not an EMT fixture or qualified clock",
+        "expected": {
+          "admitted": true,
+          "exact_key": [
+            2015,
+            6,
+            30,
+            23,
+            59,
+            60,
+            "000000001"
+          ],
+          "original_wire_string_unchanged": true
+        },
+        "authoritative_step": {
+          "utc_day": "2015-06-30",
+          "effective_midnight": "2015-07-01",
+          "signed_step_seconds": 1,
+          "offset_before": 35,
+          "offset_after": 36
+        }
+      },
+      "constructor_input_kind": "str",
+      "entire_constructor_input": "2015-06-30T23:59:60.000000001Z",
+      "expected_entire_wire_string": "2015-06-30T23:59:60.000000001Z",
+      "expected_str_compatible_value": true,
+      "authority_or_Clock_qualification": false
+    },
+    {
+      "entire_original_source_case": {
+        "id": "known-positive-leap/2015-06-30/999999999999999999999999999",
+        "entire_Utc_input": "2015-06-30T23:59:60.999999999999999999999999999Z",
+        "source_role": "UTC datatype/calendar predicate only; not an EMT fixture or qualified clock",
+        "expected": {
+          "admitted": true,
+          "exact_key": [
+            2015,
+            6,
+            30,
+            23,
+            59,
+            60,
+            "999999999999999999999999999"
+          ],
+          "original_wire_string_unchanged": true
+        },
+        "authoritative_step": {
+          "utc_day": "2015-06-30",
+          "effective_midnight": "2015-07-01",
+          "signed_step_seconds": 1,
+          "offset_before": 35,
+          "offset_after": 36
+        }
+      },
+      "constructor_input_kind": "str",
+      "entire_constructor_input": "2015-06-30T23:59:60.999999999999999999999999999Z",
+      "expected_entire_wire_string": "2015-06-30T23:59:60.999999999999999999999999999Z",
+      "expected_str_compatible_value": true,
+      "authority_or_Clock_qualification": false
+    },
+    {
+      "entire_original_source_case": {
+        "id": "known-positive-leap/2016-12-31/integer",
+        "entire_Utc_input": "2016-12-31T23:59:60Z",
+        "source_role": "UTC datatype/calendar predicate only; not an EMT fixture or qualified clock",
+        "expected": {
+          "admitted": true,
+          "exact_key": [
+            2016,
+            12,
+            31,
+            23,
+            59,
+            60,
+            ""
+          ],
+          "original_wire_string_unchanged": true
+        },
+        "authoritative_step": {
+          "utc_day": "2016-12-31",
+          "effective_midnight": "2017-01-01",
+          "signed_step_seconds": 1,
+          "offset_before": 36,
+          "offset_after": 37
+        }
+      },
+      "constructor_input_kind": "str",
+      "entire_constructor_input": "2016-12-31T23:59:60Z",
+      "expected_entire_wire_string": "2016-12-31T23:59:60Z",
+      "expected_str_compatible_value": true,
+      "authority_or_Clock_qualification": false
+    },
+    {
+      "entire_original_source_case": {
+        "id": "known-positive-leap/2016-12-31/000000001",
+        "entire_Utc_input": "2016-12-31T23:59:60.000000001Z",
+        "source_role": "UTC datatype/calendar predicate only; not an EMT fixture or qualified clock",
+        "expected": {
+          "admitted": true,
+          "exact_key": [
+            2016,
+            12,
+            31,
+            23,
+            59,
+            60,
+            "000000001"
+          ],
+          "original_wire_string_unchanged": true
+        },
+        "authoritative_step": {
+          "utc_day": "2016-12-31",
+          "effective_midnight": "2017-01-01",
+          "signed_step_seconds": 1,
+          "offset_before": 36,
+          "offset_after": 37
+        }
+      },
+      "constructor_input_kind": "str",
+      "entire_constructor_input": "2016-12-31T23:59:60.000000001Z",
+      "expected_entire_wire_string": "2016-12-31T23:59:60.000000001Z",
+      "expected_str_compatible_value": true,
+      "authority_or_Clock_qualification": false
+    },
+    {
+      "entire_original_source_case": {
+        "id": "known-positive-leap/2016-12-31/999999999999999999999999999",
+        "entire_Utc_input": "2016-12-31T23:59:60.999999999999999999999999999Z",
+        "source_role": "UTC datatype/calendar predicate only; not an EMT fixture or qualified clock",
+        "expected": {
+          "admitted": true,
+          "exact_key": [
+            2016,
+            12,
+            31,
+            23,
+            59,
+            60,
+            "999999999999999999999999999"
+          ],
+          "original_wire_string_unchanged": true
+        },
+        "authoritative_step": {
+          "utc_day": "2016-12-31",
+          "effective_midnight": "2017-01-01",
+          "signed_step_seconds": 1,
+          "offset_before": 36,
+          "offset_after": 37
+        }
+      },
+      "constructor_input_kind": "str",
+      "entire_constructor_input": "2016-12-31T23:59:60.999999999999999999999999999Z",
+      "expected_entire_wire_string": "2016-12-31T23:59:60.999999999999999999999999999Z",
+      "expected_str_compatible_value": true,
+      "authority_or_Clock_qualification": false
+    },
+    {
+      "entire_original_source_case": {
+        "id": "calendar-overflow",
+        "entire_Utc_input": "2026-02-30T12:00:00Z",
+        "expected": {
+          "admitted": false,
+          "existing_code": "invalid_schema"
+        }
+      },
+      "constructor_input_kind": "str",
+      "entire_constructor_input": "2026-02-30T12:00:00Z",
+      "expected_exception_class": "InputRefused",
+      "expected_entire_Reason": {
+        "code": "invalid_schema",
+        "subject_digest": null,
+        "claim_id": null,
+        "pointer": "",
+        "detail": "Invalid UTC calendar fields."
+      },
+      "entire_valid_constructor_recovery": "2026-02-28T12:00:00Z"
+    },
+    {
+      "entire_original_source_case": {
+        "id": "non-leap-century",
+        "entire_Utc_input": "1900-02-29T00:00:00Z",
+        "expected": {
+          "admitted": false,
+          "existing_code": "invalid_schema"
+        }
+      },
+      "constructor_input_kind": "str",
+      "entire_constructor_input": "1900-02-29T00:00:00Z",
+      "expected_exception_class": "InputRefused",
+      "expected_entire_Reason": {
+        "code": "invalid_schema",
+        "subject_digest": null,
+        "claim_id": null,
+        "pointer": "",
+        "detail": "Invalid UTC calendar fields."
+      },
+      "entire_valid_constructor_recovery": "2026-02-28T12:00:00Z"
+    },
+    {
+      "entire_original_source_case": {
+        "id": "positive-century",
+        "entire_Utc_input": "2000-02-29T00:00:00Z",
+        "expected": {
+          "admitted": true,
+          "exact_key": [
+            2000,
+            2,
+            29,
+            0,
+            0,
+            0,
+            ""
+          ]
+        }
+      },
+      "constructor_input_kind": "str",
+      "entire_constructor_input": "2000-02-29T00:00:00Z",
+      "expected_entire_wire_string": "2000-02-29T00:00:00Z",
+      "expected_str_compatible_value": true,
+      "authority_or_Clock_qualification": false
+    },
+    {
+      "entire_original_source_case": {
+        "id": "four-digit-year-zero",
+        "entire_Utc_input": "0000-02-29T00:00:00Z",
+        "expected": {
+          "admitted": true,
+          "exact_key": [
+            0,
+            2,
+            29,
+            0,
+            0,
+            0,
+            ""
+          ],
+          "real_historical_clock_qualification": false
+        }
+      },
+      "constructor_input_kind": "str",
+      "entire_constructor_input": "0000-02-29T00:00:00Z",
+      "expected_entire_wire_string": "0000-02-29T00:00:00Z",
+      "expected_str_compatible_value": true,
+      "authority_or_Clock_qualification": false
+    },
+    {
+      "entire_original_source_case": {
+        "id": "future-unannounced-leap",
+        "entire_Utc_input": "2027-06-30T23:59:60Z",
+        "expected": {
+          "admitted": false,
+          "existing_code": "unsupported_profile",
+          "source_cause": "No actual pinned announcement for this step"
+        }
+      },
+      "constructor_input_kind": "str",
+      "entire_constructor_input": "2027-06-30T23:59:60Z",
+      "expected_exception_class": "InputRefused",
+      "expected_entire_Reason": {
+        "code": "unsupported_profile",
+        "subject_digest": null,
+        "claim_id": null,
+        "pointer": "",
+        "detail": "Leap-second source history does not cover the declared day."
+      },
+      "entire_valid_constructor_recovery": "2026-02-28T12:00:00Z"
+    },
+    {
+      "entire_original_source_case": {
+        "id": "C72-explicit-no-leap",
+        "entire_Utc_input": "2026-12-31T23:59:60Z",
+        "expected": {
+          "admitted": false,
+          "existing_code": "invalid_schema",
+          "source_cause": "Pinned C72 explicitly rules out a leap on this date"
+        }
+      },
+      "constructor_input_kind": "str",
+      "entire_constructor_input": "2026-12-31T23:59:60Z",
+      "expected_exception_class": "InputRefused",
+      "expected_entire_Reason": {
+        "code": "invalid_schema",
+        "subject_digest": null,
+        "claim_id": null,
+        "pointer": "",
+        "detail": "No leap second occurs on the declared day."
+      },
+      "entire_valid_constructor_recovery": "2026-02-28T12:00:00Z"
+    },
+    {
+      "entire_original_source_case": {
+        "id": "known-covered-nonleap-day",
+        "entire_Utc_input": "2025-12-31T23:59:60Z",
+        "expected": {
+          "admitted": false,
+          "existing_code": "invalid_schema"
+        }
+      },
+      "constructor_input_kind": "str",
+      "entire_constructor_input": "2025-12-31T23:59:60Z",
+      "expected_exception_class": "InputRefused",
+      "expected_entire_Reason": {
+        "code": "invalid_schema",
+        "subject_digest": null,
+        "claim_id": null,
+        "pointer": "",
+        "detail": "No leap second occurs on the declared day."
+      },
+      "entire_valid_constructor_recovery": "2026-02-28T12:00:00Z"
+    },
+    {
+      "entire_original_source_case": {
+        "id": "outside-pinned-leap-history",
+        "entire_Utc_input": "1969-12-31T23:59:60Z",
+        "expected": {
+          "admitted": false,
+          "existing_code": "unsupported_profile"
+        }
+      },
+      "constructor_input_kind": "str",
+      "entire_constructor_input": "1969-12-31T23:59:60Z",
+      "expected_exception_class": "InputRefused",
+      "expected_entire_Reason": {
+        "code": "unsupported_profile",
+        "subject_digest": null,
+        "claim_id": null,
+        "pointer": "",
+        "detail": "Leap-second source history does not cover the declared day."
+      },
+      "entire_valid_constructor_recovery": "2026-02-28T12:00:00Z"
+    },
+    {
+      "entire_original_source_case": {
+        "id": "lowercase-zone",
+        "entire_Utc_input": "2026-02-28T12:00:00z",
+        "expected": {
+          "admitted": false,
+          "existing_code": "invalid_schema"
+        }
+      },
+      "constructor_input_kind": "str",
+      "entire_constructor_input": "2026-02-28T12:00:00z",
+      "expected_exception_class": "InputRefused",
+      "expected_entire_Reason": {
+        "code": "invalid_schema",
+        "subject_digest": null,
+        "claim_id": null,
+        "pointer": "",
+        "detail": "Invalid UTC timestamp."
+      },
+      "entire_valid_constructor_recovery": "2026-02-28T12:00:00Z"
+    },
+    {
+      "entire_original_source_case": {
+        "id": "offset",
+        "entire_Utc_input": "2026-02-28T12:00:00+00:00",
+        "expected": {
+          "admitted": false,
+          "existing_code": "invalid_schema"
+        }
+      },
+      "constructor_input_kind": "str",
+      "entire_constructor_input": "2026-02-28T12:00:00+00:00",
+      "expected_exception_class": "InputRefused",
+      "expected_entire_Reason": {
+        "code": "invalid_schema",
+        "subject_digest": null,
+        "claim_id": null,
+        "pointer": "",
+        "detail": "Invalid UTC timestamp."
+      },
+      "entire_valid_constructor_recovery": "2026-02-28T12:00:00Z"
+    },
+    {
+      "entire_original_source_case": {
+        "id": "space",
+        "entire_Utc_input": "2026-02-28 12:00:00Z",
+        "expected": {
+          "admitted": false,
+          "existing_code": "invalid_schema"
+        }
+      },
+      "constructor_input_kind": "str",
+      "entire_constructor_input": "2026-02-28 12:00:00Z",
+      "expected_exception_class": "InputRefused",
+      "expected_entire_Reason": {
+        "code": "invalid_schema",
+        "subject_digest": null,
+        "claim_id": null,
+        "pointer": "",
+        "detail": "Invalid UTC timestamp."
+      },
+      "entire_valid_constructor_recovery": "2026-02-28T12:00:00Z"
+    },
+    {
+      "entire_original_source_case": {
+        "id": "hour24",
+        "entire_Utc_input": "2026-02-28T24:00:00Z",
+        "expected": {
+          "admitted": false,
+          "existing_code": "invalid_schema"
+        }
+      },
+      "constructor_input_kind": "str",
+      "entire_constructor_input": "2026-02-28T24:00:00Z",
+      "expected_exception_class": "InputRefused",
+      "expected_entire_Reason": {
+        "code": "invalid_schema",
+        "subject_digest": null,
+        "claim_id": null,
+        "pointer": "",
+        "detail": "Invalid UTC calendar fields."
+      },
+      "entire_valid_constructor_recovery": "2026-02-28T12:00:00Z"
+    },
+    {
+      "entire_original_source_case": {
+        "id": "minute60",
+        "entire_Utc_input": "2026-02-28T12:60:00Z",
+        "expected": {
+          "admitted": false,
+          "existing_code": "invalid_schema"
+        }
+      },
+      "constructor_input_kind": "str",
+      "entire_constructor_input": "2026-02-28T12:60:00Z",
+      "expected_exception_class": "InputRefused",
+      "expected_entire_Reason": {
+        "code": "invalid_schema",
+        "subject_digest": null,
+        "claim_id": null,
+        "pointer": "",
+        "detail": "Invalid UTC calendar fields."
+      },
+      "entire_valid_constructor_recovery": "2026-02-28T12:00:00Z"
+    },
+    {
+      "entire_original_source_case": {
+        "id": "second61",
+        "entire_Utc_input": "2016-12-31T23:59:61Z",
+        "expected": {
+          "admitted": false,
+          "existing_code": "invalid_schema"
+        }
+      },
+      "constructor_input_kind": "str",
+      "entire_constructor_input": "2016-12-31T23:59:61Z",
+      "expected_exception_class": "InputRefused",
+      "expected_entire_Reason": {
+        "code": "invalid_schema",
+        "subject_digest": null,
+        "claim_id": null,
+        "pointer": "",
+        "detail": "Invalid UTC calendar fields."
+      },
+      "entire_valid_constructor_recovery": "2026-02-28T12:00:00Z"
+    },
+    {
+      "entire_original_source_case": {
+        "id": "empty-fraction",
+        "entire_Utc_input": "2026-02-28T12:00:00.Z",
+        "expected": {
+          "admitted": false,
+          "existing_code": "invalid_schema"
+        }
+      },
+      "constructor_input_kind": "str",
+      "entire_constructor_input": "2026-02-28T12:00:00.Z",
+      "expected_exception_class": "InputRefused",
+      "expected_entire_Reason": {
+        "code": "invalid_schema",
+        "subject_digest": null,
+        "claim_id": null,
+        "pointer": "",
+        "detail": "Invalid UTC timestamp."
+      },
+      "entire_valid_constructor_recovery": "2026-02-28T12:00:00Z"
+    },
+    {
+      "entire_original_source_case": {
+        "id": "wrong-leap-hour",
+        "entire_Utc_input": "2016-12-31T12:59:60Z",
+        "expected": {
+          "admitted": false,
+          "existing_code": "invalid_schema"
+        }
+      },
+      "constructor_input_kind": "str",
+      "entire_constructor_input": "2016-12-31T12:59:60Z",
+      "expected_exception_class": "InputRefused",
+      "expected_entire_Reason": {
+        "code": "invalid_schema",
+        "subject_digest": null,
+        "claim_id": null,
+        "pointer": "",
+        "detail": "Invalid leap-second time."
+      },
+      "entire_valid_constructor_recovery": "2026-02-28T12:00:00Z"
+    },
+    {
+      "constructor_input_kind": "None",
+      "entire_constructor_input": null,
+      "expected_exception_class": "InputRefused",
+      "expected_entire_Reason": {
+        "code": "invalid_schema",
+        "subject_digest": null,
+        "claim_id": null,
+        "pointer": "",
+        "detail": "UTC value must be a string."
+      },
+      "entire_valid_constructor_recovery": "2026-02-28T12:00:00Z"
+    },
+    {
+      "constructor_input_kind": "bool",
+      "entire_constructor_input": true,
+      "expected_exception_class": "InputRefused",
+      "expected_entire_Reason": {
+        "code": "invalid_schema",
+        "subject_digest": null,
+        "claim_id": null,
+        "pointer": "",
+        "detail": "UTC value must be a string."
+      },
+      "entire_valid_constructor_recovery": "2026-02-28T12:00:00Z"
+    },
+    {
+      "constructor_input_kind": "int",
+      "entire_constructor_input": 0,
+      "expected_exception_class": "InputRefused",
+      "expected_entire_Reason": {
+        "code": "invalid_schema",
+        "subject_digest": null,
+        "claim_id": null,
+        "pointer": "",
+        "detail": "UTC value must be a string."
+      },
+      "entire_valid_constructor_recovery": "2026-02-28T12:00:00Z"
+    },
+    {
+      "constructor_input_kind": "bytes",
+      "entire_constructor_input": {
+        "base64url": "MjAyNi0wMi0yOFQxMjowMDowMFo"
+      },
+      "expected_exception_class": "InputRefused",
+      "expected_entire_Reason": {
+        "code": "invalid_schema",
+        "subject_digest": null,
+        "claim_id": null,
+        "pointer": "",
+        "detail": "UTC value must be a string."
+      },
+      "entire_valid_constructor_recovery": "2026-02-28T12:00:00Z"
+    }
+  ],
+  "constructor_case_count": 101,
+  "entire_original86_comparison_pairs": [
+    {
+      "left": "1972-06-30T23:59:59.999999999Z",
+      "right": "1972-06-30T23:59:60Z",
+      "expected_exact_order": "less"
+    },
+    {
+      "left": "1972-06-30T23:59:60Z",
+      "right": "1972-06-30T23:59:60.999999999Z",
+      "expected_exact_order": "less"
+    },
+    {
+      "left": "1972-06-30T23:59:60.999999999Z",
+      "right": "1972-07-01T00:00:00Z",
+      "expected_exact_order": "less"
+    },
+    {
+      "left": "1972-12-31T23:59:59.999999999Z",
+      "right": "1972-12-31T23:59:60Z",
+      "expected_exact_order": "less"
+    },
+    {
+      "left": "1972-12-31T23:59:60Z",
+      "right": "1972-12-31T23:59:60.999999999Z",
+      "expected_exact_order": "less"
+    },
+    {
+      "left": "1972-12-31T23:59:60.999999999Z",
+      "right": "1973-01-01T00:00:00Z",
+      "expected_exact_order": "less"
+    },
+    {
+      "left": "1973-12-31T23:59:59.999999999Z",
+      "right": "1973-12-31T23:59:60Z",
+      "expected_exact_order": "less"
+    },
+    {
+      "left": "1973-12-31T23:59:60Z",
+      "right": "1973-12-31T23:59:60.999999999Z",
+      "expected_exact_order": "less"
+    },
+    {
+      "left": "1973-12-31T23:59:60.999999999Z",
+      "right": "1974-01-01T00:00:00Z",
+      "expected_exact_order": "less"
+    },
+    {
+      "left": "1974-12-31T23:59:59.999999999Z",
+      "right": "1974-12-31T23:59:60Z",
+      "expected_exact_order": "less"
+    },
+    {
+      "left": "1974-12-31T23:59:60Z",
+      "right": "1974-12-31T23:59:60.999999999Z",
+      "expected_exact_order": "less"
+    },
+    {
+      "left": "1974-12-31T23:59:60.999999999Z",
+      "right": "1975-01-01T00:00:00Z",
+      "expected_exact_order": "less"
+    },
+    {
+      "left": "1975-12-31T23:59:59.999999999Z",
+      "right": "1975-12-31T23:59:60Z",
+      "expected_exact_order": "less"
+    },
+    {
+      "left": "1975-12-31T23:59:60Z",
+      "right": "1975-12-31T23:59:60.999999999Z",
+      "expected_exact_order": "less"
+    },
+    {
+      "left": "1975-12-31T23:59:60.999999999Z",
+      "right": "1976-01-01T00:00:00Z",
+      "expected_exact_order": "less"
+    },
+    {
+      "left": "1976-12-31T23:59:59.999999999Z",
+      "right": "1976-12-31T23:59:60Z",
+      "expected_exact_order": "less"
+    },
+    {
+      "left": "1976-12-31T23:59:60Z",
+      "right": "1976-12-31T23:59:60.999999999Z",
+      "expected_exact_order": "less"
+    },
+    {
+      "left": "1976-12-31T23:59:60.999999999Z",
+      "right": "1977-01-01T00:00:00Z",
+      "expected_exact_order": "less"
+    },
+    {
+      "left": "1977-12-31T23:59:59.999999999Z",
+      "right": "1977-12-31T23:59:60Z",
+      "expected_exact_order": "less"
+    },
+    {
+      "left": "1977-12-31T23:59:60Z",
+      "right": "1977-12-31T23:59:60.999999999Z",
+      "expected_exact_order": "less"
+    },
+    {
+      "left": "1977-12-31T23:59:60.999999999Z",
+      "right": "1978-01-01T00:00:00Z",
+      "expected_exact_order": "less"
+    },
+    {
+      "left": "1978-12-31T23:59:59.999999999Z",
+      "right": "1978-12-31T23:59:60Z",
+      "expected_exact_order": "less"
+    },
+    {
+      "left": "1978-12-31T23:59:60Z",
+      "right": "1978-12-31T23:59:60.999999999Z",
+      "expected_exact_order": "less"
+    },
+    {
+      "left": "1978-12-31T23:59:60.999999999Z",
+      "right": "1979-01-01T00:00:00Z",
+      "expected_exact_order": "less"
+    },
+    {
+      "left": "1979-12-31T23:59:59.999999999Z",
+      "right": "1979-12-31T23:59:60Z",
+      "expected_exact_order": "less"
+    },
+    {
+      "left": "1979-12-31T23:59:60Z",
+      "right": "1979-12-31T23:59:60.999999999Z",
+      "expected_exact_order": "less"
+    },
+    {
+      "left": "1979-12-31T23:59:60.999999999Z",
+      "right": "1980-01-01T00:00:00Z",
+      "expected_exact_order": "less"
+    },
+    {
+      "left": "1981-06-30T23:59:59.999999999Z",
+      "right": "1981-06-30T23:59:60Z",
+      "expected_exact_order": "less"
+    },
+    {
+      "left": "1981-06-30T23:59:60Z",
+      "right": "1981-06-30T23:59:60.999999999Z",
+      "expected_exact_order": "less"
+    },
+    {
+      "left": "1981-06-30T23:59:60.999999999Z",
+      "right": "1981-07-01T00:00:00Z",
+      "expected_exact_order": "less"
+    },
+    {
+      "left": "1982-06-30T23:59:59.999999999Z",
+      "right": "1982-06-30T23:59:60Z",
+      "expected_exact_order": "less"
+    },
+    {
+      "left": "1982-06-30T23:59:60Z",
+      "right": "1982-06-30T23:59:60.999999999Z",
+      "expected_exact_order": "less"
+    },
+    {
+      "left": "1982-06-30T23:59:60.999999999Z",
+      "right": "1982-07-01T00:00:00Z",
+      "expected_exact_order": "less"
+    },
+    {
+      "left": "1983-06-30T23:59:59.999999999Z",
+      "right": "1983-06-30T23:59:60Z",
+      "expected_exact_order": "less"
+    },
+    {
+      "left": "1983-06-30T23:59:60Z",
+      "right": "1983-06-30T23:59:60.999999999Z",
+      "expected_exact_order": "less"
+    },
+    {
+      "left": "1983-06-30T23:59:60.999999999Z",
+      "right": "1983-07-01T00:00:00Z",
+      "expected_exact_order": "less"
+    },
+    {
+      "left": "1985-06-30T23:59:59.999999999Z",
+      "right": "1985-06-30T23:59:60Z",
+      "expected_exact_order": "less"
+    },
+    {
+      "left": "1985-06-30T23:59:60Z",
+      "right": "1985-06-30T23:59:60.999999999Z",
+      "expected_exact_order": "less"
+    },
+    {
+      "left": "1985-06-30T23:59:60.999999999Z",
+      "right": "1985-07-01T00:00:00Z",
+      "expected_exact_order": "less"
+    },
+    {
+      "left": "1987-12-31T23:59:59.999999999Z",
+      "right": "1987-12-31T23:59:60Z",
+      "expected_exact_order": "less"
+    },
+    {
+      "left": "1987-12-31T23:59:60Z",
+      "right": "1987-12-31T23:59:60.999999999Z",
+      "expected_exact_order": "less"
+    },
+    {
+      "left": "1987-12-31T23:59:60.999999999Z",
+      "right": "1988-01-01T00:00:00Z",
+      "expected_exact_order": "less"
+    },
+    {
+      "left": "1989-12-31T23:59:59.999999999Z",
+      "right": "1989-12-31T23:59:60Z",
+      "expected_exact_order": "less"
+    },
+    {
+      "left": "1989-12-31T23:59:60Z",
+      "right": "1989-12-31T23:59:60.999999999Z",
+      "expected_exact_order": "less"
+    },
+    {
+      "left": "1989-12-31T23:59:60.999999999Z",
+      "right": "1990-01-01T00:00:00Z",
+      "expected_exact_order": "less"
+    },
+    {
+      "left": "1990-12-31T23:59:59.999999999Z",
+      "right": "1990-12-31T23:59:60Z",
+      "expected_exact_order": "less"
+    },
+    {
+      "left": "1990-12-31T23:59:60Z",
+      "right": "1990-12-31T23:59:60.999999999Z",
+      "expected_exact_order": "less"
+    },
+    {
+      "left": "1990-12-31T23:59:60.999999999Z",
+      "right": "1991-01-01T00:00:00Z",
+      "expected_exact_order": "less"
+    },
+    {
+      "left": "1992-06-30T23:59:59.999999999Z",
+      "right": "1992-06-30T23:59:60Z",
+      "expected_exact_order": "less"
+    },
+    {
+      "left": "1992-06-30T23:59:60Z",
+      "right": "1992-06-30T23:59:60.999999999Z",
+      "expected_exact_order": "less"
+    },
+    {
+      "left": "1992-06-30T23:59:60.999999999Z",
+      "right": "1992-07-01T00:00:00Z",
+      "expected_exact_order": "less"
+    },
+    {
+      "left": "1993-06-30T23:59:59.999999999Z",
+      "right": "1993-06-30T23:59:60Z",
+      "expected_exact_order": "less"
+    },
+    {
+      "left": "1993-06-30T23:59:60Z",
+      "right": "1993-06-30T23:59:60.999999999Z",
+      "expected_exact_order": "less"
+    },
+    {
+      "left": "1993-06-30T23:59:60.999999999Z",
+      "right": "1993-07-01T00:00:00Z",
+      "expected_exact_order": "less"
+    },
+    {
+      "left": "1994-06-30T23:59:59.999999999Z",
+      "right": "1994-06-30T23:59:60Z",
+      "expected_exact_order": "less"
+    },
+    {
+      "left": "1994-06-30T23:59:60Z",
+      "right": "1994-06-30T23:59:60.999999999Z",
+      "expected_exact_order": "less"
+    },
+    {
+      "left": "1994-06-30T23:59:60.999999999Z",
+      "right": "1994-07-01T00:00:00Z",
+      "expected_exact_order": "less"
+    },
+    {
+      "left": "1995-12-31T23:59:59.999999999Z",
+      "right": "1995-12-31T23:59:60Z",
+      "expected_exact_order": "less"
+    },
+    {
+      "left": "1995-12-31T23:59:60Z",
+      "right": "1995-12-31T23:59:60.999999999Z",
+      "expected_exact_order": "less"
+    },
+    {
+      "left": "1995-12-31T23:59:60.999999999Z",
+      "right": "1996-01-01T00:00:00Z",
+      "expected_exact_order": "less"
+    },
+    {
+      "left": "1997-06-30T23:59:59.999999999Z",
+      "right": "1997-06-30T23:59:60Z",
+      "expected_exact_order": "less"
+    },
+    {
+      "left": "1997-06-30T23:59:60Z",
+      "right": "1997-06-30T23:59:60.999999999Z",
+      "expected_exact_order": "less"
+    },
+    {
+      "left": "1997-06-30T23:59:60.999999999Z",
+      "right": "1997-07-01T00:00:00Z",
+      "expected_exact_order": "less"
+    },
+    {
+      "left": "1998-12-31T23:59:59.999999999Z",
+      "right": "1998-12-31T23:59:60Z",
+      "expected_exact_order": "less"
+    },
+    {
+      "left": "1998-12-31T23:59:60Z",
+      "right": "1998-12-31T23:59:60.999999999Z",
+      "expected_exact_order": "less"
+    },
+    {
+      "left": "1998-12-31T23:59:60.999999999Z",
+      "right": "1999-01-01T00:00:00Z",
+      "expected_exact_order": "less"
+    },
+    {
+      "left": "2005-12-31T23:59:59.999999999Z",
+      "right": "2005-12-31T23:59:60Z",
+      "expected_exact_order": "less"
+    },
+    {
+      "left": "2005-12-31T23:59:60Z",
+      "right": "2005-12-31T23:59:60.999999999Z",
+      "expected_exact_order": "less"
+    },
+    {
+      "left": "2005-12-31T23:59:60.999999999Z",
+      "right": "2006-01-01T00:00:00Z",
+      "expected_exact_order": "less"
+    },
+    {
+      "left": "2008-12-31T23:59:59.999999999Z",
+      "right": "2008-12-31T23:59:60Z",
+      "expected_exact_order": "less"
+    },
+    {
+      "left": "2008-12-31T23:59:60Z",
+      "right": "2008-12-31T23:59:60.999999999Z",
+      "expected_exact_order": "less"
+    },
+    {
+      "left": "2008-12-31T23:59:60.999999999Z",
+      "right": "2009-01-01T00:00:00Z",
+      "expected_exact_order": "less"
+    },
+    {
+      "left": "2012-06-30T23:59:59.999999999Z",
+      "right": "2012-06-30T23:59:60Z",
+      "expected_exact_order": "less"
+    },
+    {
+      "left": "2012-06-30T23:59:60Z",
+      "right": "2012-06-30T23:59:60.999999999Z",
+      "expected_exact_order": "less"
+    },
+    {
+      "left": "2012-06-30T23:59:60.999999999Z",
+      "right": "2012-07-01T00:00:00Z",
+      "expected_exact_order": "less"
+    },
+    {
+      "left": "2015-06-30T23:59:59.999999999Z",
+      "right": "2015-06-30T23:59:60Z",
+      "expected_exact_order": "less"
+    },
+    {
+      "left": "2015-06-30T23:59:60Z",
+      "right": "2015-06-30T23:59:60.999999999Z",
+      "expected_exact_order": "less"
+    },
+    {
+      "left": "2015-06-30T23:59:60.999999999Z",
+      "right": "2015-07-01T00:00:00Z",
+      "expected_exact_order": "less"
+    },
+    {
+      "left": "2016-12-31T23:59:59.999999999Z",
+      "right": "2016-12-31T23:59:60Z",
+      "expected_exact_order": "less"
+    },
+    {
+      "left": "2016-12-31T23:59:60Z",
+      "right": "2016-12-31T23:59:60.999999999Z",
+      "expected_exact_order": "less"
+    },
+    {
+      "left": "2016-12-31T23:59:60.999999999Z",
+      "right": "2017-01-01T00:00:00Z",
+      "expected_exact_order": "less"
+    },
+    {
+      "left": "2026-02-28T12:00:00.000000001Z",
+      "right": "2026-02-28T12:00:00.000000002Z",
+      "expected_exact_order": "less"
+    },
+    {
+      "left": "2026-02-28T12:00:00.1Z",
+      "right": "2026-02-28T12:00:00.10Z",
+      "expected_exact_order": "equal",
+      "raw_signed_strings_equal": false
+    },
+    {
+      "left": "2026-02-28T12:00:00.1Z",
+      "right": "2026-02-28T12:00:00.11Z",
+      "expected_exact_order": "less"
+    },
+    {
+      "left": "2026-02-28T12:00:00.09Z",
+      "right": "2026-02-28T12:00:00.1Z",
+      "expected_exact_order": "less"
+    },
+    {
+      "left": "2026-02-28T12:00:00Z",
+      "right": "2026-02-28t12:00:00.000Z",
+      "expected_exact_order": "equal",
+      "raw_signed_strings_equal": false
+    }
+  ],
+  "comparison_count": 86,
+  "comparison_method_result_map": {
+    "less": -1,
+    "equal": 0,
+    "greater": 1
+  },
+  "entire_original_Utc_method_and_history": {
+    "path": "custody/owner-acceptance/owner_acceptance_profiles_2026-10-02T234358Z/UTC_whole_supported_source_leap_history_choice_2026-10-11T124826869230Z/COMPLETE_ORIGINAL_UTC_SUPPORTED_SOURCE_CALENDAR_FRACTION_AND_ACTUAL_LEAP_HISTORY_METHOD.author.md",
+    "byte_length": 5243,
+    "sha256": "606d598ef5b391de3667340d71b45d2c382a928a3a5418d2d01122fab49fa7ea"
+  },
+  "all9_native_and2_public_fields": [
+    {
+      "schema_source": {
+        "path": "custody/owner-acceptance/tool_contract_settlement_2026-10-02T014859+0200/schema_drafts/evidence_manifest_toolkit.group_certificate.v1.schema.json",
+        "byte_length": 1913,
+        "sha256": "743ef73415c8c5d5b9dea7de91860d44a96c4fc5fb5d686f997a7c55c0dc0c21"
+      },
+      "schema_pointer": "/properties/not_before",
+      "complete_constraint": {
+        "type": "string",
+        "format": "date-time",
+        "pattern": "Z$"
+      }
+    },
+    {
+      "schema_source": {
+        "path": "custody/owner-acceptance/tool_contract_settlement_2026-10-02T014859+0200/schema_drafts/evidence_manifest_toolkit.group_certificate.v1.schema.json",
+        "byte_length": 1913,
+        "sha256": "743ef73415c8c5d5b9dea7de91860d44a96c4fc5fb5d686f997a7c55c0dc0c21"
+      },
+      "schema_pointer": "/properties/not_after",
+      "complete_constraint": {
+        "type": "string",
+        "format": "date-time",
+        "pattern": "Z$"
+      }
+    },
+    {
+      "schema_source": {
+        "path": "custody/owner-acceptance/tool_contract_settlement_2026-10-02T014859+0200/schema_drafts/evidence_manifest_toolkit.manifest.v1.schema.json",
+        "byte_length": 21684,
+        "sha256": "fb15fde1718a628cb1511d8a7f15cde8dae02b185b8ab688ea34b0b1110d52ef"
+      },
+      "schema_pointer": "/properties/created_at",
+      "complete_constraint": {
+        "type": "string",
+        "format": "date-time",
+        "pattern": "Z$"
+      }
+    },
+    {
+      "schema_source": {
+        "path": "custody/owner-acceptance/tool_contract_settlement_2026-10-02T014859+0200/schema_drafts/evidence_manifest_toolkit.signed_statement.v1.schema.json",
+        "byte_length": 3485,
+        "sha256": "50e8ddf441de6b86c2c921b70097dfe62b4279e23f3a8a28bc62661a22c2d8b7"
+      },
+      "schema_pointer": "/properties/claimed_signed_at",
+      "complete_constraint": {
+        "type": "string",
+        "format": "date-time",
+        "pattern": "Z$"
+      }
+    },
+    {
+      "schema_source": {
+        "path": "custody/owner-acceptance/tool_contract_settlement_2026-10-02T014859+0200/schema_drafts/evidence_manifest_toolkit.studio_mapping.v1.schema.json",
+        "byte_length": 12177,
+        "sha256": "361e046fedc4e71020c7b40b822ba19961207a818eca50c1fe9cf2bb073a5d48"
+      },
+      "schema_pointer": "/properties/evaluation_time",
+      "complete_constraint": {
+        "type": "string",
+        "format": "date-time",
+        "pattern": "Z$"
+      }
+    },
+    {
+      "schema_source": {
+        "path": "custody/owner-acceptance/tool_contract_settlement_2026-10-02T014859+0200/schema_drafts/evidence_manifest_toolkit.studio_mapping.v1.schema.json",
+        "byte_length": 12177,
+        "sha256": "361e046fedc4e71020c7b40b822ba19961207a818eca50c1fe9cf2bb073a5d48"
+      },
+      "schema_pointer": "/properties/freshness_evaluation/properties/evaluated_at",
+      "complete_constraint": {
+        "type": "string",
+        "format": "date-time",
+        "pattern": "Z$"
+      }
+    },
+    {
+      "schema_source": {
+        "path": "custody/owner-acceptance/tool_contract_settlement_2026-10-02T014859+0200/schema_drafts/evidence_manifest_toolkit.trust_snapshot.v1.schema.json",
+        "byte_length": 5943,
+        "sha256": "b3e75e2c8a479ffd7713ca65224a8dd62081fd6bd3da15204fc04022969d7fff"
+      },
+      "schema_pointer": "/properties/issued_at",
+      "complete_constraint": {
+        "type": "string",
+        "format": "date-time",
+        "pattern": "Z$"
+      }
+    },
+    {
+      "schema_source": {
+        "path": "custody/owner-acceptance/tool_contract_settlement_2026-10-02T014859+0200/schema_drafts/evidence_manifest_toolkit.trust_snapshot.v1.schema.json",
+        "byte_length": 5943,
+        "sha256": "b3e75e2c8a479ffd7713ca65224a8dd62081fd6bd3da15204fc04022969d7fff"
+      },
+      "schema_pointer": "/properties/expires_at",
+      "complete_constraint": {
+        "type": "string",
+        "format": "date-time",
+        "pattern": "Z$"
+      }
+    },
+    {
+      "schema_source": {
+        "path": "custody/owner-acceptance/tool_contract_settlement_2026-10-02T014859+0200/schema_drafts/evidence_manifest_toolkit.trust_snapshot.v1.schema.json",
+        "byte_length": 5943,
+        "sha256": "b3e75e2c8a479ffd7713ca65224a8dd62081fd6bd3da15204fc04022969d7fff"
+      },
+      "schema_pointer": "/properties/revocations/items/properties/reported_at",
+      "complete_constraint": {
+        "type": "string",
+        "format": "date-time",
+        "pattern": "Z$"
+      }
+    },
+    "SigningRequest.statement_fields.claimed_signed_at",
+    "TrustContext.evaluation_time"
+  ],
+  "existing_value_type": "Utc(str)",
+  "fields": [],
+  "existing_root_functions": 6,
+  "existing_CLI_commands": 4,
+  "actual_primary_Utc_Clock_provider_or_Signer_calls": 0,
+  "clock_qualified": false,
+  "whole_goal_complete": false
+}

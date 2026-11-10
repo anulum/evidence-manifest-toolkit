@@ -12,7 +12,6 @@ from __future__ import annotations
 
 import ast
 import hashlib
-import json
 import os
 import re
 import shutil
@@ -25,10 +24,12 @@ from urllib.parse import unquote, urlsplit
 import markdown
 
 from .bindings import DOCUMENTATION_TEMPLATE_SHA256
+from .documentation_projection import project_documentation_configuration
 from .identity import SPDX_PREFIX
 from .inputs import read_bytes, read_text, relative_path, yaml_object
 from .inventory import owned_tree
-from .policy import ASSETS, FUNDING, HEADER, MAX_FILE, MKDOCS_SHA256
+from .ownership_header import has_native_header
+from .policy import ASSETS, FUNDING, MAX_FILE, MKDOCS_SHA256
 from .processes import run_process
 from .production_names import check_text
 from .reports import Fault, Report
@@ -151,7 +152,7 @@ def verify(root: Path, report: Report) -> None:
         rendered = page(text)
         visible = " ".join(rendered.visible)
         check_text(visible, name, report)
-        if not text.startswith("<!--\n" + "\n".join(HEADER) + "\n-->") or SPDX_PREFIX in visible:
+        if not has_native_header(text, style="invisible") or SPDX_PREFIX in visible:
             report.add("documentation.visible-provenance", name)
         if re.search(
             r"(?:\.coordination/|agentic-shared/|codex-[0-9a-f]|gpt-[0-9]|/home/|/media/)", text
@@ -220,21 +221,9 @@ def verify(root: Path, report: Report) -> None:
             templates = workspace / "overrides"
             templates.mkdir()
             (templates / "main.html").write_bytes(template)
-            projected = (
-                configuration.decode()
-                .replace(
-                    "watch: [tools]",
-                    "docs_dir: "
-                    + json.dumps(str(root / "docs"))
-                    + "\nwatch: ["
-                    + json.dumps(str(root / "tools"))
-                    + "]",
-                )
-                .replace("  custom_dir: overrides", "  custom_dir: " + json.dumps(str(templates)))
-                .replace("paths: [tools]", "paths: [" + json.dumps(str(root / "tools")) + "]")
-            )
+            projected = project_documentation_configuration(configuration, root, templates)
             config = workspace / "mkdocs.yml"
-            config.write_text(projected)
+            config.write_bytes(projected)
             result = run_process(
                 [
                     sys.executable,

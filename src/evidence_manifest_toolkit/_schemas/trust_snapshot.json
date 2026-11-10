@@ -1,0 +1,254 @@
+{
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "schema_id": {
+      "const": "evidence_manifest_toolkit.trust_snapshot.v1"
+    },
+    "issuer_root_key_id": {
+      "type": "string",
+      "pattern": "^ed25519:[0-9a-f]{64}$"
+    },
+    "sequence": {
+      "type": "string",
+      "pattern": "^(0|[1-9][0-9]*)$",
+      "maxLength": 256
+    },
+    "issued_at": {
+      "type": "string",
+      "format": "date-time",
+      "pattern": "Z$"
+    },
+    "expires_at": {
+      "type": "string",
+      "format": "date-time",
+      "pattern": "Z$"
+    },
+    "group_certificate_refs": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "digest": {
+            "type": "string",
+            "pattern": "^sha256:[0-9a-f]{64}$"
+          },
+          "byte_length": {
+            "type": "string",
+            "pattern": "^(0|[1-9][0-9]*)$",
+            "maxLength": 256
+          },
+          "media_type": {
+            "type": "string",
+            "minLength": 1
+          },
+          "digest_basis": {
+            "enum": [
+              "raw_bytes",
+              "jcs_content"
+            ]
+          },
+          "schema_id": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "required": [
+          "digest",
+          "byte_length",
+          "media_type",
+          "digest_basis"
+        ]
+      },
+      "minItems": 0
+    },
+    "revocations": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "key_id": {
+            "type": "string",
+            "pattern": "^ed25519:[0-9a-f]{64}$"
+          },
+          "reason": {
+            "enum": [
+              "compromise",
+              "retirement",
+              "policy_change"
+            ]
+          },
+          "reported_at": {
+            "type": "string",
+            "format": "date-time",
+            "pattern": "Z$"
+          },
+          "compromise_window": {
+            "enum": [
+              "known",
+              "unknown"
+            ]
+          },
+          "compromise_time_bounds_ref": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "digest": {
+                "type": "string",
+                "pattern": "^sha256:[0-9a-f]{64}$"
+              },
+              "byte_length": {
+                "type": "string",
+                "pattern": "^(0|[1-9][0-9]*)$",
+                "maxLength": 256
+              },
+              "media_type": {
+                "type": "string",
+                "minLength": 1
+              },
+              "digest_basis": {
+                "enum": [
+                  "raw_bytes",
+                  "jcs_content"
+                ]
+              },
+              "schema_id": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "required": [
+              "digest",
+              "byte_length",
+              "media_type",
+              "digest_basis"
+            ]
+          }
+        },
+        "required": [
+          "key_id",
+          "reason",
+          "reported_at",
+          "compromise_window"
+        ],
+        "allOf": [
+          {
+            "if": {
+              "properties": {
+                "compromise_window": {
+                  "const": "known"
+                }
+              }
+            },
+            "then": {
+              "required": [
+                "compromise_time_bounds_ref"
+              ]
+            },
+            "else": {
+              "not": {
+                "required": [
+                  "compromise_time_bounds_ref"
+                ]
+              }
+            }
+          }
+        ]
+      },
+      "minItems": 0
+    },
+    "accepted_profile_ids": {
+      "type": "array",
+      "items": {
+        "const": "evidence_manifest_toolkit.jcs_sha256_ed25519.v1"
+      },
+      "minItems": 1,
+      "uniqueItems": true
+    },
+    "registry_ref": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "digest": {
+          "type": "string",
+          "pattern": "^sha256:[0-9a-f]{64}$"
+        },
+        "byte_length": {
+          "type": "string",
+          "pattern": "^(0|[1-9][0-9]*)$",
+          "maxLength": 256
+        },
+        "media_type": {
+          "type": "string",
+          "minLength": 1
+        },
+        "digest_basis": {
+          "enum": [
+            "raw_bytes",
+            "jcs_content"
+          ]
+        },
+        "schema_id": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "digest",
+        "byte_length",
+        "media_type",
+        "digest_basis"
+      ]
+    },
+    "previous_snapshot_ref": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "digest": {
+          "type": "string",
+          "pattern": "^sha256:[0-9a-f]{64}$"
+        },
+        "byte_length": {
+          "type": "string",
+          "pattern": "^(0|[1-9][0-9]*)$",
+          "maxLength": 256
+        },
+        "media_type": {
+          "type": "string",
+          "minLength": 1
+        },
+        "digest_basis": {
+          "enum": [
+            "raw_bytes",
+            "jcs_content"
+          ]
+        },
+        "schema_id": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "digest",
+        "byte_length",
+        "media_type",
+        "digest_basis"
+      ]
+    }
+  },
+  "required": [
+    "schema_id",
+    "issuer_root_key_id",
+    "sequence",
+    "issued_at",
+    "expires_at",
+    "group_certificate_refs",
+    "revocations",
+    "accepted_profile_ids",
+    "registry_ref"
+  ],
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:gotm:schema:evidence_manifest_toolkit.trust_snapshot.v1"
+}

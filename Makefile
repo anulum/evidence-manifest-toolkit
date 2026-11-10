@@ -7,18 +7,24 @@
 # EVIDENCE-MANIFEST-TOOLKIT — source and configuration provenance
 
 PYTHON := .venv/bin/python
+BASE_PYTHON ?= python
+ENVIRONMENT_DIR ?= .venv
+ENVIRONMENT_INPUTS ?= .tool-cache/environment-inputs
+ENVIRONMENT_INPUT_BYTES ?= 134217728
+UV := .tool-cache/bootstrap-uv/uv
+UV_CACHE ?= .tool-cache/uv-cache
 TEST_WORKERS ?= 0
 
 .PHONY: quality test docs preflight inventory-generate inventory source-analysis static-security dependency-security secret-scan workflow-security sbom supply-chain
 
 quality:
-	$(PYTHON) -m ruff check tools tests
-	$(PYTHON) -m ruff format --check tools tests
-	$(PYTHON) -m mypy tools tests
-	$(PYTHON) -m ruff check --select D tools tests
+	$(PYTHON) -m ruff check src tools tests
+	$(PYTHON) -m ruff format --check src tools tests
+	$(PYTHON) -m mypy src tools tests
+	$(PYTHON) -m ruff check --select D src tools tests
 
 test:
-	nice -n 10 $(PYTHON) -m pytest -n $(TEST_WORKERS) --dist=worksteal --basetemp=.tool-cache/tests --cov=tools --cov-branch --cov-fail-under=100 --cov-report=term-missing tests
+	nice -n 10 $(PYTHON) -m pytest -n $(TEST_WORKERS) --dist=worksteal --basetemp=.tool-cache/tests --cov=tools --cov=evidence_manifest_toolkit --cov-branch --cov-fail-under=100 --cov-report=term-missing tests
 
 docs:
 	$(PYTHON) tools/check_documentation.py --root . --json
@@ -33,7 +39,7 @@ preflight:
 	$(PYTHON) tools/preflight.py --root . --profile local-scaffold --json
 
 source-analysis:
-	$(PYTHON) -m bandit -r tools -f json -o .tool-cache/bandit.json
+	$(PYTHON) tools/check_static_security.py --root . --json
 
 static-security: source-analysis
 
@@ -56,18 +62,38 @@ supply-chain:
 	$(PYTHON) tools/check_dependency_alignment.py --root . --json
 
 
-.PHONY: environment prepare-native prepare-codeql prepare-test-fixtures prepare-test-wheels prepare-interpreter-fixture prepare-major-interpreter-fixture prepare-test-inputs produce-audit
+.PHONY: environment prepare-native prepare-codeql prepare-test-fixtures prepare-test-wheels prepare-interpreter-fixture prepare-major-interpreter-fixture prepare-test-inputs produce-audit prepare-uv check-environment-inputs
 
 environment:
-	test ! -L .venv
+	test ! -L "$(ENVIRONMENT_DIR)"
 	test ! -L .tool-cache
 	test ! -L .tool-cache/bootstrap-builders.lock
-	python -c 'import platform; assert platform.python_version() == "3.13.16"'
-	python -m venv --copies .venv
-	mkdir -p .tool-cache
-	python -c 'import pathlib,re; text=pathlib.Path("requirements-dev.txt").read_text(); blocks=re.findall(r"(?m)^((?:pip|poetry-core)==[^\n]+\n(?:    [^\n]*\n)*)",text); assert len(blocks)==2; pathlib.Path(".tool-cache/bootstrap-builders.lock").write_text("".join(blocks))'
-	$(PYTHON) -m pip install --require-hashes --no-deps -r .tool-cache/bootstrap-builders.lock
-	$(PYTHON) -m pip install --require-hashes --no-build-isolation -r requirements-dev.txt
+	$(BASE_PYTHON) -B -I -c 'import platform; assert platform.python_version() == "3.13.18"'
+	$(MAKE) --no-print-directory prepare-uv
+	$(BASE_PYTHON) -B -I -c 'import pathlib; pathlib.Path("$(ENVIRONMENT_DIR)").parent.mkdir(parents=True,exist_ok=True)'
+	mkdir -p "$(UV_CACHE)"
+	$(BASE_PYTHON) -B -I -c 'import os,sys; assert os.stat(sys.argv[1]).st_dev == os.stat(sys.argv[2]).st_dev, "uv cache and environment must share a filesystem"' "$(UV_CACHE)" "$(dir $(ENVIRONMENT_DIR))"
+	if test ! -e "$(ENVIRONMENT_DIR)/pyvenv.cfg"; then $(UV) --no-config venv --python "$(BASE_PYTHON)" --no-python-downloads --link-mode hardlink "$(ENVIRONMENT_DIR)"; fi
+	"$(ENVIRONMENT_DIR)/bin/python" -B -I -c 'import platform; assert platform.python_version() == "3.13.18"'
+	$(BASE_PYTHON) -B -I -c 'import pathlib,re; text=pathlib.Path("requirements-dev.txt").read_text(); blocks=re.findall(r"(?m)^((?:pip|poetry-core)==[^\n]+\n(?:    [^\n]*\n)*)",text); assert len(blocks)==2; pathlib.Path(".tool-cache/bootstrap-builders.lock").write_text("".join(blocks))'
+	$(UV) --no-config pip install --python "$(ENVIRONMENT_DIR)/bin/python" --cache-dir "$(UV_CACHE)" --link-mode hardlink --require-hashes --no-deps --no-index --find-links "$(ENVIRONMENT_INPUTS)" -r .tool-cache/bootstrap-builders.lock
+	$(UV) --no-config pip install --python "$(ENVIRONMENT_DIR)/bin/python" --cache-dir "$(UV_CACHE)" --link-mode hardlink --require-hashes --no-deps --no-build-isolation --no-index --find-links "$(ENVIRONMENT_INPUTS)" -r requirements-dev.txt
+	$(UV) --no-config pip check --python "$(ENVIRONMENT_DIR)/bin/python"
+	"$(ENVIRONMENT_DIR)/bin/python" -B -I -c 'import pathlib,sys; files=list(pathlib.Path(sys.prefix).glob("lib/python3.13/site-packages/*.dist-info/METADATA")); assert files and all(p.stat().st_nlink>1 for p in files), "Package hardlink verification failed"'
+
+check-environment-inputs:
+	$(BASE_PYTHON) -B -I -c 'import platform; assert platform.python_version() == "3.13.18"'
+	$(BASE_PYTHON) -B -I tools/check_environment_inputs.py --root . --artifacts "$(ENVIRONMENT_INPUTS)" --environment "$(ENVIRONMENT_DIR)" --max-input-bytes "$(ENVIRONMENT_INPUT_BYTES)" --json
+
+prepare-uv:
+	test ! -L .tool-cache
+	test ! -L .tool-cache/bootstrap-uv
+	test ! -L "$(UV)"
+	$(MAKE) --no-print-directory check-environment-inputs
+	mkdir -p .tool-cache/bootstrap-uv
+	if test ! -e "$(UV)"; then $(BASE_PYTHON) -B -I -c 'import pathlib,shutil,sys,zipfile; destination=pathlib.Path(sys.argv[2]); archive=zipfile.ZipFile(sys.argv[1]); names=[n for n in archive.namelist() if n.endswith("/scripts/uv")]; assert len(names)==1; source=archive.open(names[0]); target=destination.open("xb"); shutil.copyfileobj(source,target); target.close(); source.close(); archive.close(); destination.chmod(0o755)' "$(ENVIRONMENT_INPUTS)/uv-0.13.7-py3-none-manylinux_2_17_x86_64.manylinux2014_x86_64.whl" "$(UV)"; fi
+	printf '%s  %s\n' 4b5e59bc557ff2cd70934beb59d0eaa92820702853d49f0066b50aa11a8f0c52 "$(UV)" | sha256sum --check --status
+
 
 prepare-native:
 	test ! -L .tool-cache
@@ -190,8 +216,4 @@ prepare-test-inputs:
 	$(MAKE) produce-audit
 
 produce-audit:
-	test ! -L .tool-cache
-	test ! -L .tool-cache/security
-	test ! -L .tool-cache/security/pip-audit.json
-	mkdir -p .tool-cache/security
-	$(PYTHON) -m pip_audit --strict --format json --output .tool-cache/security/pip-audit.json --progress-spinner off
+	$(PYTHON) tools/check_dependency_alignment.py --root . --produce-audit --json

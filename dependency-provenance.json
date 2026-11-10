@@ -1,5 +1,5 @@
 {
-  "lock_sha256": "c286e1845d961044d33225f86c24739d5d730508bd7e64c77b477c45b543dd62",
+  "lock_sha256": "87b4805b45eeb78dd61745f7dabd39759c5e3f474c10a7acfd109051f42f05f5",
   "native_tools": [
     {
       "artifact_sha256": "8aca8db96f1b94770f1b0d72b6dddcb1ebb8123cb3712530b08cc387b349a3d8",
@@ -147,7 +147,7 @@
       "license_label": null,
       "metadata_sha256": "583e67113009211b78f03c128b010c46802909bd6ea1f40683d7e0c642ff741d",
       "name": "backrefs",
-      "official_metadata_sha256": "2d5a8a503c711891ead1d5c3c6b4e6a18612f818d2ae9f45ffc9b6c593257b35",
+      "official_metadata_sha256": "c5e0ab6785abed342b6a6fcc5b2beddad8acb9da288d224d1bea69865d005534",
       "requires_dist": [
         "regex; extra == 'extras'"
       ],
@@ -302,24 +302,24 @@
       "license_files": [
         {
           "bytes": 989,
-          "path": "certifi-2026.7.22.dist-info/licenses/LICENSE",
+          "path": "certifi-2026.10.23.dist-info/licenses/LICENSE",
           "sha256": "e93716da6b9c0d5a4a1df60fe695b370f0695603d21f6f83f053e42cfc10caf7"
         }
       ],
       "license_label": "MPL-2.0",
-      "metadata_sha256": "ef5af1638fbb23676ac3c5777dfcfc2cd9c348fe4172ed5ba3d277655b248090",
+      "metadata_sha256": "e463e38f7fe7da36a11e6d3fecc5dfa5b97be8c8022620400750d79ae7d842bc",
       "name": "certifi",
-      "official_metadata_sha256": "c6fe912677e373608eab51e324946005998faeb0fa999e6ddada24676e3556d3",
+      "official_metadata_sha256": "546ce90e02c152f5ff565baca6bc2a8f43c355855f637756f49a0143e312bdb2",
       "requires_dist": [],
       "role": "transitive",
       "source_artifact": {
-        "bytes": 136983,
-        "filename": "certifi-2026.7.22-py3-none-any.whl",
+        "bytes": 135082,
+        "filename": "certifi-2026.10.23-py3-none-any.whl",
         "kind": "bdist_wheel",
-        "sha256": "62f22742b58a1a33014a2b6b706588a8d7e2a88ae7bd1a6ebe8c992928483775",
-        "url": "https://files.pythonhosted.org/packages/0b/a7/71ac2cff56fec219ed242bb11b8efb69fcc4bec75db06fb7bfe35de520e6/certifi-2026.7.22-py3-none-any.whl"
+        "sha256": "e9b54de76e530bb6cf0ccd036787103acb58fd42ba930ea8bf948ddbaa2f61d1",
+        "url": "https://files.pythonhosted.org/packages/32/d1/a3652fe2c19134d0d15922177821d863cbd7e842d53a21bbe7e8e3a1b5ac/certifi-2026.10.23-py3-none-any.whl"
       },
-      "version": "2026.7.22"
+      "version": "2026.10.23"
     },
     {
       "license_classifiers": [],
@@ -359,7 +359,7 @@
       "license_label": null,
       "metadata_sha256": "2c8577bdf827dd08a9ab4f5279bce3b0a06dad9445bf9b567a85ba9ae429e9a9",
       "name": "chardet",
-      "official_metadata_sha256": "181f53595c44ca7ba7e6921069dfa58bfe8344e32ff20fa7745ef94ab5b04a5a",
+      "official_metadata_sha256": "c4ecd2d0f75ee7af6d5317cb16d3680612663d1bb491a73ad6cd026c7c1ad2e6",
       "requires_dist": [],
       "role": "transitive",
       "source_artifact": {
@@ -409,7 +409,7 @@
       "license_label": null,
       "metadata_sha256": "e87bce0bd194de70dfb8e708e0a6b0483009f25611804eaf87bfeb63e6c20501",
       "name": "click",
-      "official_metadata_sha256": "4e36adc9b46f837e10ce801b7a478f9146fefdfb287292b7668fc64b1474e41d",
+      "official_metadata_sha256": "6fc33d0e534d89a788a0965bb5071ca0726a483747589201789b60babd602686",
       "requires_dist": [],
       "role": "transitive",
       "source_artifact": {
@@ -466,7 +466,7 @@
       "license_label": "Apache-2.0",
       "metadata_sha256": "a5447449aa5b0b5a8b7c6a800434623a70c316750fcdde7ebd5b0b41fe756f99",
       "name": "coverage",
-      "official_metadata_sha256": "0d31972356705dff010938f4de1bc47ed0277a05e45dbc303c5c0cb6a055add6",
+      "official_metadata_sha256": "3bf7c3247fb635a039463cba600aa8724ba1a0195f11957d18952a578a61723e",
       "requires_dist": [
         "tomli; python_full_version <= \"3.11.0a6\" and extra == \"toml\""
       ],
@@ -500,7 +500,7 @@
       "license_label": "Apache-2.0",
       "metadata_sha256": "54ad9c010940e946c70392463c63449f7b608ca6ca91523d387989f5130875a5",
       "name": "cyclonedx-bom",
-      "official_metadata_sha256": "2e0f10d34ea712b5eca491f01fff0f364d843f088792833f3964f99694f9b946",
+      "official_metadata_sha256": "6061bb951838e982842e378f5b36b074f73729f4997a15fccfc1ed1cf91b329e",
       "requires_dist": [
         "chardet (>=5.1,!=6.*,<8)",
         "cyclonedx-python-lib[validation] (>=8,<12)",
@@ -602,7 +602,7 @@
       "license_label": "PSF-2.0",
       "metadata_sha256": "6c988f8c23faa0ef8734f6863b32976d65f5851333161e8a8df3d80fc57e080d",
       "name": "distlib",
-      "official_metadata_sha256": "a7005f8a304a08962b8faef28e9745f9f5b2a2e0360a6110992687eeb9bfb91c",
+      "official_metadata_sha256": "e3871f969deaee5ebb4e1468fa700abcebbafd6f2df94fa3651fd1d8b50daf7f",
       "requires_dist": [],
       "role": "transitive",
       "source_artifact": {
@@ -647,31 +647,29 @@
       "version": "2.1.2"
     },
     {
-      "license_classifiers": [
-        "License :: OSI Approved :: MIT License"
-      ],
+      "license_classifiers": [],
       "license_expression": "MIT",
       "license_files": [
         {
           "bytes": 1088,
-          "path": "filelock-4.0.9.dist-info/licenses/LICENSE",
+          "path": "filelock-4.2.9.dist-info/licenses/LICENSE",
           "sha256": "608c89d5060ae9921adccf3236695bc654a9946e12323ef6c021dfa04e294d48"
         }
       ],
       "license_label": null,
-      "metadata_sha256": "84f4d3bd3932b67c48b4e182fece56cbc837afcb68fcb3b49e26573bfa03df02",
+      "metadata_sha256": "53f9b39c11e83c1d6283f2150eb08dd66b9389921c664de90c185d20adfb5438",
       "name": "filelock",
-      "official_metadata_sha256": "f7cc5209556e33750e84ab6a7073aada326bfdfa1f857c5c029e173f94a1f2c4",
+      "official_metadata_sha256": "e4d524f8e932af1828d40584af83193392a8df07530650a607586b859bd1931b",
       "requires_dist": [],
       "role": "transitive",
       "source_artifact": {
-        "bytes": 110368,
-        "filename": "filelock-4.0.9-py3-none-any.whl",
+        "bytes": 164734,
+        "filename": "filelock-4.2.9-py3-none-any.whl",
         "kind": "bdist_wheel",
-        "sha256": "9287fd61b99a806e5202be29a83034c0808a1b9830e820537c2f5773981f7eeb",
-        "url": "https://files.pythonhosted.org/packages/01/4f/83454fafd628e1e7e1726d74e44fb2332be5969d04c6182ca1fecb6c580e/filelock-4.0.9-py3-none-any.whl"
+        "sha256": "a379c50a729e5b68c8519a4d26489f755d9769960a236ecd838190e2a78db2e9",
+        "url": "https://files.pythonhosted.org/packages/00/05/76184fe08339723d643ab47887a8e4de8f2921ca4e008617ab7490af7857/filelock-4.2.9-py3-none-any.whl"
       },
-      "version": "4.0.9"
+      "version": "4.2.9"
     },
     {
       "license_classifiers": [],
@@ -748,7 +746,7 @@
       "license_label": null,
       "metadata_sha256": "66d575ce43e8872523e16f662dbf8c626cfb213485cbe1d7cfeb53f8ccffa7f4",
       "name": "griffelib",
-      "official_metadata_sha256": "df6895dcfd5490a1ebe8d889271ae82176fcaec4825ff914089681770a19e6e0",
+      "official_metadata_sha256": "4f397441ecd2ac6b3a2988ebd5ae1cdd35e63d1a98d0cb4739e59efac2de3f7f",
       "requires_dist": [
         "pip>=24.0; extra == 'pypi'",
         "platformdirs>=4.2; extra == 'pypi'",
@@ -836,7 +834,7 @@
       "license_label": null,
       "metadata_sha256": "40d773f84e4e112f495bbf4f1be9cbd2d456c0aeb6ef5311f75d1bf322f2165b",
       "name": "iniconfig",
-      "official_metadata_sha256": "38c06d73779f13d8e4b48d48b3c524ff23e59d7be4bdb44cb6d90b3c5eb20182",
+      "official_metadata_sha256": "10a4699a386b2309a98d4c368b6696e80562cefebe20107610337447d7f13f65",
       "requires_dist": [],
       "role": "transitive",
       "source_artifact": {
@@ -927,7 +925,7 @@
       "license_label": "Modified BSD License",
       "metadata_sha256": "b461427459b7a1d595585ba05a9d0466b134b849204f4ddfbc1b1ed20775ba5d",
       "name": "jsonpointer",
-      "official_metadata_sha256": "230769c7dbfd5639db5709f1b3a40ee54dc56d67e7b0213b277b718b452581ed",
+      "official_metadata_sha256": "b6a46debe5ee7244d539071a7957d50f1561445cece0f6d0367fd0e9cbde471a",
       "requires_dist": [],
       "role": "transitive",
       "source_artifact": {
@@ -1182,7 +1180,7 @@
       "license_label": null,
       "metadata_sha256": "84a4d674fdc3fc155d45301db416b52c4268e9d6def1a06e186c25472fbbbcb8",
       "name": "markdown",
-      "official_metadata_sha256": "64440b6e62d043647e9529ab7e6e79a175524c142fcfbaa6ae1ab08b92f8ec18",
+      "official_metadata_sha256": "d7b5b7a6203a6538d23b15e5eb9b41b03828377ce420ec7c18ecf106129b32d0",
       "requires_dist": [
         "coverage; extra == \"testing\"",
         "pyyaml; extra == \"testing\"",
@@ -1279,7 +1277,7 @@
       "license_label": null,
       "metadata_sha256": "12b4cc61a7fa288cf7667ee3f213786d9619db57fb33ff6f934afbcb5c12ec81",
       "name": "markupsafe",
-      "official_metadata_sha256": "20faf559f1a150d84e7b0e7567b933fb3d383e6ba82179a1caa32a44cdc96085",
+      "official_metadata_sha256": "0de4f18187d0fc2318de8504c4178f2297bc7cfa7a55adfb6d013190aff8cff4",
       "requires_dist": [],
       "role": "transitive",
       "source_artifact": {
@@ -1416,7 +1414,7 @@
       "license_label": null,
       "metadata_sha256": "317c48e7ed51aa7278dabb17b56fdee343655b4ff010708cd5f338474cb18880",
       "name": "mkdocs-autorefs",
-      "official_metadata_sha256": "ecc553824bd8b86d9efe24c1a799e84af13564d7aeb1920eaf469a0aa92ea8fa",
+      "official_metadata_sha256": "7fbb7bd6656d188b3652d5597120eac6008201e6efbc7746c61039ef340e2552",
       "requires_dist": [
         "Markdown>=3.3",
         "markupsafe>=2.0.1",
@@ -1494,7 +1492,7 @@
       "license_label": null,
       "metadata_sha256": "fdb58fa85c44b6877b24b546d7b20021b1a4249351edf0010f935f8d15a9f9c1",
       "name": "mkdocs-material",
-      "official_metadata_sha256": "273e99b3519bdcfcd8f3736f97780a6dbd47a2a1ef6751666fd298dc169c5303",
+      "official_metadata_sha256": "4e30872498bab5c28b5fccf5047d4711a21f0ebb5c8a0803a6b8bc893bf342c4",
       "requires_dist": [
         "babel>=2.10",
         "backrefs>=5.7.post1",
@@ -1565,7 +1563,7 @@
       "license_label": null,
       "metadata_sha256": "15cd72fefb3a408352655a33505e81fa267a2c6109625b2aba27586a4a667b31",
       "name": "mkdocstrings",
-      "official_metadata_sha256": "c117a29afd5f6f0eceaa40a0ad1907d74a988d766c195a9d2cbd561cc98f8531",
+      "official_metadata_sha256": "208df8de053c1d04fc98330cb4bae05375a541b9c1eabf4f21e732abf0b5c1d7",
       "requires_dist": [
         "Jinja2>=3.1",
         "Markdown>=3.6",
@@ -1600,7 +1598,7 @@
       "license_label": null,
       "metadata_sha256": "21b0c3ace932be1afc7e337273b1356e8e7efebb942192518132c6fe465a238b",
       "name": "mkdocstrings-python",
-      "official_metadata_sha256": "f3194eecccf49752402f78ae54e7910587a76f8792fe712c68239eccfbc1fe5c",
+      "official_metadata_sha256": "f32a83774698683867eaab64b534953ae214a136c700ce30703eb22d79965af5",
       "requires_dist": [
         "mkdocstrings>=0.30",
         "mkdocs-autorefs>=1.4",
@@ -1630,7 +1628,7 @@
       "license_label": null,
       "metadata_sha256": "f47c09192e9f4f81b8b4a63979473a13f7a63c67dcdc41be2e0f97353a9dc5b4",
       "name": "msgpack",
-      "official_metadata_sha256": "f6fcd288871cb294a9dbe4484539c45771a6fd5ebe0e5c15ff05b7f233531dd2",
+      "official_metadata_sha256": "f5ee786a4e5e8af2692c26c9e95d5cfc5970141c219cec9db2b96c96f791c1ba",
       "requires_dist": [],
       "role": "transitive",
       "source_artifact": {
@@ -1665,7 +1663,7 @@
       "license_label": null,
       "metadata_sha256": "ed6c2c85bc919e083f58fdd42031ec98ce43ffe4bc7310457d969eaee7036112",
       "name": "mypy",
-      "official_metadata_sha256": "900dd3ebcaf5f4519fc3886d6eb77cf95bc749d470b8a08699db119b4c475425",
+      "official_metadata_sha256": "de78b282abab90460b62a8b28349c64e8c7c75d1d4279c7e5b2526ceba2cd879",
       "requires_dist": [
         "typing_extensions>=4.6.0; python_version < \"3.15\"",
         "typing_extensions>=4.14.0; python_version >= \"3.15\"",
@@ -1703,7 +1701,7 @@
       "license_label": null,
       "metadata_sha256": "2c4a44936d885f30433181ca40bbf62457351f1f6b0871b11f8789564f87477f",
       "name": "mypy-extensions",
-      "official_metadata_sha256": "1c470d3b03e21974b5ea09a572478f10864174511c3a46864b759409451d3ba8",
+      "official_metadata_sha256": "e9715bb5583e110c5bb663b8d2ee88ae736e8c37928218e1923714559c972fb1",
       "requires_dist": [],
       "role": "transitive",
       "source_artifact": {
@@ -1735,7 +1733,7 @@
       "license_label": "BSD",
       "metadata_sha256": "3cf9d0f2b02e832d65709376d339ee45896e512f9cdbd2b8845c0bb73b3e3b2b",
       "name": "nodeenv",
-      "official_metadata_sha256": "7f39fb510eb3383b7ab59841db6b602754b5e2cdf30c81402ced4a820ba97529",
+      "official_metadata_sha256": "9dab29ef20ed49a5f2dd3de8a77c428c83ff3f037b6b545d640ecd2023139f0a",
       "requires_dist": [
         "certifi; extra == \"certifi\""
       ],
@@ -1880,215 +1878,130 @@
       "license_expression": "MIT",
       "license_files": [
         {
-          "bytes": 12139,
-          "path": "pip-26.2.1.dist-info/licenses/AUTHORS.txt",
-          "sha256": "4eb1fb1705e2def898e81bcba19c3aac80620d27ba3569d6a6df7b4629d1b5c2"
+          "bytes": 12239,
+          "path": "pip-26.3.dist-info/licenses/AUTHORS.txt",
+          "sha256": "f8998e1ed3151771c2fbc899ccf0e18b0817d425dff4983eb0fede4e48db47e4"
         },
         {
           "bytes": 1093,
-          "path": "pip-26.2.1.dist-info/licenses/LICENSE.txt",
+          "path": "pip-26.3.dist-info/licenses/LICENSE.txt",
           "sha256": "634300a669d49aeae65b12c6c48c924c51a4cdf3d1ff086dc3456dc8bcaa2104"
         },
         {
           "bytes": 558,
-          "path": "pip-26.2.1.dist-info/licenses/src/pip/_vendor/cachecontrol/LICENSE.txt",
+          "path": "pip-26.3.dist-info/licenses/src/pip/_vendor/cachecontrol/LICENSE.txt",
           "sha256": "86eeee87be2a43f3ff1f56496f451f69243926f025fedbb033666c304c4c161b"
         },
         {
           "bytes": 989,
-          "path": "pip-26.2.1.dist-info/licenses/src/pip/_vendor/certifi/LICENSE",
+          "path": "pip-26.3.dist-info/licenses/src/pip/_vendor/certifi/LICENSE",
           "sha256": "e93716da6b9c0d5a4a1df60fe695b370f0695603d21f6f83f053e42cfc10caf7"
         },
         {
           "bytes": 14531,
-          "path": "pip-26.2.1.dist-info/licenses/src/pip/_vendor/distlib/LICENSE.txt",
+          "path": "pip-26.3.dist-info/licenses/src/pip/_vendor/distlib/LICENSE.txt",
           "sha256": "808e10c8a6ab8deb149ff9b3fb19f447a808094606d712a9ca57fead3552599d"
         },
         {
           "bytes": 11325,
-          "path": "pip-26.2.1.dist-info/licenses/src/pip/_vendor/distro/LICENSE",
+          "path": "pip-26.3.dist-info/licenses/src/pip/_vendor/distro/LICENSE",
           "sha256": "cb5e8e7e5f4a3988e1063c142c60dc2df75605f4c46515e776e3aca6df976e14"
         },
         {
           "bytes": 1541,
-          "path": "pip-26.2.1.dist-info/licenses/src/pip/_vendor/idna/LICENSE.md",
+          "path": "pip-26.3.dist-info/licenses/src/pip/_vendor/idna/LICENSE.md",
           "sha256": "1a9a4f0e3d479a27240ddd59a9137a66ab4a0f9dfdc8ca6188cc0bfd85187f04"
         },
         {
           "bytes": 614,
-          "path": "pip-26.2.1.dist-info/licenses/src/pip/_vendor/msgpack/COPYING",
+          "path": "pip-26.3.dist-info/licenses/src/pip/_vendor/msgpack/COPYING",
           "sha256": "492dedba85da5872f78e6091bcd1fea474d660d35acb4dee964b8aab3f007427"
         },
         {
           "bytes": 197,
-          "path": "pip-26.2.1.dist-info/licenses/src/pip/_vendor/packaging/LICENSE",
+          "path": "pip-26.3.dist-info/licenses/src/pip/_vendor/packaging/LICENSE",
           "sha256": "cad1ef5bd340d73e074ba614d26f7deaca5c7940c3d8c34852e65c4909686c48"
         },
         {
           "bytes": 10174,
-          "path": "pip-26.2.1.dist-info/licenses/src/pip/_vendor/packaging/LICENSE.APACHE",
+          "path": "pip-26.3.dist-info/licenses/src/pip/_vendor/packaging/LICENSE.APACHE",
           "sha256": "0d542e0c8804e39aa7f37eb00da5a762149dc682d7829451287e11b938e94594"
         },
         {
           "bytes": 1344,
-          "path": "pip-26.2.1.dist-info/licenses/src/pip/_vendor/packaging/LICENSE.BSD",
+          "path": "pip-26.3.dist-info/licenses/src/pip/_vendor/packaging/LICENSE.BSD",
           "sha256": "b70e7e9b742f1cc6f948b34c16aa39ffece94196364bc88ff0d2180f0028fac5"
         },
         {
           "bytes": 1023,
-          "path": "pip-26.2.1.dist-info/licenses/src/pip/_vendor/pkg_resources/LICENSE",
+          "path": "pip-26.3.dist-info/licenses/src/pip/_vendor/pkg_resources/LICENSE",
           "sha256": "86da0f01aeae46348a3c3d465195dc1ceccde79f79e87769a64b8da04b2a4741"
         },
         {
           "bytes": 1089,
-          "path": "pip-26.2.1.dist-info/licenses/src/pip/_vendor/platformdirs/LICENSE",
+          "path": "pip-26.3.dist-info/licenses/src/pip/_vendor/platformdirs/LICENSE",
           "sha256": "29e0fd62e929850e86eb28c3fdccf0cefdf4fa94879011cffb3d0d4bed6d4db6"
         },
         {
           "bytes": 1331,
-          "path": "pip-26.2.1.dist-info/licenses/src/pip/_vendor/pygments/LICENSE",
+          "path": "pip-26.3.dist-info/licenses/src/pip/_vendor/pygments/LICENSE",
           "sha256": "a9d66f1d526df02e29dce73436d34e56e8632f46c275bbdffc70569e882f9f17"
         },
         {
           "bytes": 1081,
-          "path": "pip-26.2.1.dist-info/licenses/src/pip/_vendor/pyproject_hooks/LICENSE",
+          "path": "pip-26.3.dist-info/licenses/src/pip/_vendor/pyproject_hooks/LICENSE",
           "sha256": "1b22b049b5267d6dfc23a67bf4a84d8ec04b9fdfb1a51d360e42b4342c8b4154"
         },
         {
           "bytes": 10142,
-          "path": "pip-26.2.1.dist-info/licenses/src/pip/_vendor/requests/LICENSE",
+          "path": "pip-26.3.dist-info/licenses/src/pip/_vendor/requests/LICENSE",
           "sha256": "09e8a9bcec8067104652c168685ab0931e7868f9c8284b66f5ae6edae5f1130b"
         },
         {
           "bytes": 751,
-          "path": "pip-26.2.1.dist-info/licenses/src/pip/_vendor/resolvelib/LICENSE",
+          "path": "pip-26.3.dist-info/licenses/src/pip/_vendor/resolvelib/LICENSE",
           "sha256": "f388fd38cad13112c1dc0f669bbe80e7f84541edbafb72f3030d2ca7642c3c9d"
         },
         {
           "bytes": 1056,
-          "path": "pip-26.2.1.dist-info/licenses/src/pip/_vendor/rich/LICENSE",
+          "path": "pip-26.3.dist-info/licenses/src/pip/_vendor/rich/LICENSE",
           "sha256": "deed7c17a4318158190a3ea239cc879a5a50271cebb98ae7025f48fbe58dca15"
         },
         {
           "bytes": 1072,
-          "path": "pip-26.2.1.dist-info/licenses/src/pip/_vendor/tomli/LICENSE",
+          "path": "pip-26.3.dist-info/licenses/src/pip/_vendor/tomli/LICENSE",
           "sha256": "b80816b0d530b8accb4c2211783790984a6e3b61922c2b5ee92f3372ab2742fe"
         },
         {
           "bytes": 1072,
-          "path": "pip-26.2.1.dist-info/licenses/src/pip/_vendor/tomli_w/LICENSE",
+          "path": "pip-26.3.dist-info/licenses/src/pip/_vendor/tomli_w/LICENSE",
           "sha256": "b80816b0d530b8accb4c2211783790984a6e3b61922c2b5ee92f3372ab2742fe"
         },
         {
           "bytes": 1086,
-          "path": "pip-26.2.1.dist-info/licenses/src/pip/_vendor/truststore/LICENSE",
+          "path": "pip-26.3.dist-info/licenses/src/pip/_vendor/truststore/LICENSE",
           "sha256": "33be7b7e8fa4fd19b1760e1a8ed8a668bdab852c91b692dd41424bcb725a9fca"
         },
         {
           "bytes": 1093,
-          "path": "pip-26.2.1.dist-info/licenses/src/pip/_vendor/urllib3/LICENSE.txt",
-          "sha256": "130e3a64d5fdd5d096a752694634a7d9df284469de86e5732100268041e3d686"
-        },
-        {
-          "bytes": 558,
-          "path": "pip/_vendor/cachecontrol/LICENSE.txt",
-          "sha256": "86eeee87be2a43f3ff1f56496f451f69243926f025fedbb033666c304c4c161b"
-        },
-        {
-          "bytes": 989,
-          "path": "pip/_vendor/certifi/LICENSE",
-          "sha256": "e93716da6b9c0d5a4a1df60fe695b370f0695603d21f6f83f053e42cfc10caf7"
-        },
-        {
-          "bytes": 14531,
-          "path": "pip/_vendor/distlib/LICENSE.txt",
-          "sha256": "808e10c8a6ab8deb149ff9b3fb19f447a808094606d712a9ca57fead3552599d"
-        },
-        {
-          "bytes": 11325,
-          "path": "pip/_vendor/distro/LICENSE",
-          "sha256": "cb5e8e7e5f4a3988e1063c142c60dc2df75605f4c46515e776e3aca6df976e14"
-        },
-        {
-          "bytes": 614,
-          "path": "pip/_vendor/msgpack/COPYING",
-          "sha256": "492dedba85da5872f78e6091bcd1fea474d660d35acb4dee964b8aab3f007427"
-        },
-        {
-          "bytes": 197,
-          "path": "pip/_vendor/packaging/LICENSE",
-          "sha256": "cad1ef5bd340d73e074ba614d26f7deaca5c7940c3d8c34852e65c4909686c48"
-        },
-        {
-          "bytes": 1023,
-          "path": "pip/_vendor/pkg_resources/LICENSE",
-          "sha256": "86da0f01aeae46348a3c3d465195dc1ceccde79f79e87769a64b8da04b2a4741"
-        },
-        {
-          "bytes": 1089,
-          "path": "pip/_vendor/platformdirs/LICENSE",
-          "sha256": "29e0fd62e929850e86eb28c3fdccf0cefdf4fa94879011cffb3d0d4bed6d4db6"
-        },
-        {
-          "bytes": 1331,
-          "path": "pip/_vendor/pygments/LICENSE",
-          "sha256": "a9d66f1d526df02e29dce73436d34e56e8632f46c275bbdffc70569e882f9f17"
-        },
-        {
-          "bytes": 1081,
-          "path": "pip/_vendor/pyproject_hooks/LICENSE",
-          "sha256": "1b22b049b5267d6dfc23a67bf4a84d8ec04b9fdfb1a51d360e42b4342c8b4154"
-        },
-        {
-          "bytes": 10142,
-          "path": "pip/_vendor/requests/LICENSE",
-          "sha256": "09e8a9bcec8067104652c168685ab0931e7868f9c8284b66f5ae6edae5f1130b"
-        },
-        {
-          "bytes": 751,
-          "path": "pip/_vendor/resolvelib/LICENSE",
-          "sha256": "f388fd38cad13112c1dc0f669bbe80e7f84541edbafb72f3030d2ca7642c3c9d"
-        },
-        {
-          "bytes": 1056,
-          "path": "pip/_vendor/rich/LICENSE",
-          "sha256": "deed7c17a4318158190a3ea239cc879a5a50271cebb98ae7025f48fbe58dca15"
-        },
-        {
-          "bytes": 1072,
-          "path": "pip/_vendor/tomli/LICENSE",
-          "sha256": "b80816b0d530b8accb4c2211783790984a6e3b61922c2b5ee92f3372ab2742fe"
-        },
-        {
-          "bytes": 1072,
-          "path": "pip/_vendor/tomli_w/LICENSE",
-          "sha256": "b80816b0d530b8accb4c2211783790984a6e3b61922c2b5ee92f3372ab2742fe"
-        },
-        {
-          "bytes": 1086,
-          "path": "pip/_vendor/truststore/LICENSE",
-          "sha256": "33be7b7e8fa4fd19b1760e1a8ed8a668bdab852c91b692dd41424bcb725a9fca"
-        },
-        {
-          "bytes": 1093,
-          "path": "pip/_vendor/urllib3/LICENSE.txt",
+          "path": "pip-26.3.dist-info/licenses/src/pip/_vendor/urllib3/LICENSE.txt",
           "sha256": "130e3a64d5fdd5d096a752694634a7d9df284469de86e5732100268041e3d686"
         }
       ],
       "license_label": null,
-      "metadata_sha256": "3a561005822841f2c45f442f6c7a7505172c8c376c9fe274d876c8ac912968cb",
+      "metadata_sha256": "ad63a8564cd158c8de9e6a912e92776b4abc56cfa2d8286ef4c35bfb9cb9e439",
       "name": "pip",
-      "official_metadata_sha256": "4f5abeb5acacd5eaaad5e6982f5721dee3592795e59fc5a4067fcca92eed70e1",
+      "official_metadata_sha256": "9cee103938ec9d9fb6201ecd0eb8a51b1893e01358f75c162d7c7cf6a9d8fa20",
       "requires_dist": [],
       "role": "transitive",
       "source_artifact": {
-        "bytes": 1816632,
-        "filename": "pip-26.2.1-py3-none-any.whl",
+        "bytes": 1950951,
+        "filename": "pip-26.3-py3-none-any.whl",
         "kind": "bdist_wheel",
-        "sha256": "71138adf1f4ca900cdb7d289c21b7494329f2332b6d85f0e1c42108c0384ed3e",
-        "url": "https://files.pythonhosted.org/packages/f3/6e/1736e5b4ae2b778ef2f81c47d797de9f891d4d8acb047a24ca37a60294dd/pip-26.2.1-py3-none-any.whl"
+        "sha256": "f3b60b20ffaadd4415ed7957212a38ac63fa4c5fa375bd0f4a797777940fad13",
+        "url": "https://files.pythonhosted.org/packages/07/25/ee8c38ae72d66b844ce8eb9711ba905dba21ca1a8a0c960057c41cd23337/pip-26.3-py3-none-any.whl"
       },
-      "version": "26.2.1"
+      "version": "26.3"
     },
     {
       "license_classifiers": [
@@ -2214,7 +2127,7 @@
       "license_label": null,
       "metadata_sha256": "d596922d09b305002a060d65bb2adb9ce752716d0f7c55ae1b47bde95ecab90e",
       "name": "platformdirs",
-      "official_metadata_sha256": "9d39a187af85b8b703786082abcab6d8041dc38add8125880880412c0f9eb346",
+      "official_metadata_sha256": "c044335077ef5a920041a0e9ce48eeea1400d5ec560bd2fc7572bc8b8553c9d2",
       "requires_dist": [],
       "role": "transitive",
       "source_artifact": {
@@ -2241,7 +2154,7 @@
       "license_label": "MIT",
       "metadata_sha256": "7438c35ee25a095eb7416f84b461c2d74425c5e734ad54c3912453c65244e01c",
       "name": "pluggy",
-      "official_metadata_sha256": "db23d1227f5870da7538b1e29371d9fc9a93b0499989f8e3ef021fdccd75bc8e",
+      "official_metadata_sha256": "597beede1e3bfb71dcf93f583c52f9b6ff64c7aca4c7cddcf365f0c6d5c0ade8",
       "requires_dist": [
         "pre-commit; extra == \"dev\"",
         "tox; extra == \"dev\"",
@@ -2317,7 +2230,7 @@
       "license_label": "MIT",
       "metadata_sha256": "9bc6183a5087af76ef837daba7a8eda0ba2d7b75dfeccfdaee0fe3687dd1905b",
       "name": "pre-commit",
-      "official_metadata_sha256": "69c5994b8ba41bc137d1ce23c495bebcabb059172c351a6f89bc00a5c2f84295",
+      "official_metadata_sha256": "7d347df0e1294dfaae59ca52c9b2e39653bbdfe3cb6823047dc816bcd2f2ccff",
       "requires_dist": [
         "cfgv>=2.0.0",
         "identify>=1.0.0",
@@ -2350,7 +2263,7 @@
       "license_label": "Apache-2.0",
       "metadata_sha256": "37f9f541366de7038094960f301642ed46dc82f3701358542dd8e200bd5bef57",
       "name": "py-serializable",
-      "official_metadata_sha256": "e1f417456edabbaeff4b7d40d4e1e05017010843f66092bc064bcc301ffe1f63",
+      "official_metadata_sha256": "ad5537b0e3138ef7158e8040e051907170b0f96ed70c75f00ed06b7b68286e0b",
       "requires_dist": [
         "defusedxml (>=0.7.1,<0.8.0)"
       ],
@@ -2363,6 +2276,39 @@
         "url": "https://files.pythonhosted.org/packages/9b/bf/7595e817906a29453ba4d99394e781b6fabe55d21f3c15d240f85dd06bb1/py_serializable-2.1.0-py3-none-any.whl"
       },
       "version": "2.1.0"
+    },
+    {
+      "license_classifiers": [
+        "License :: OSI Approved :: BSD License",
+        "License :: Public Domain"
+      ],
+      "license_expression": null,
+      "license_files": [
+        {
+          "bytes": 764,
+          "path": "pycryptodome-3.24.0.dist-info/AUTHORS.rst",
+          "sha256": "1cb670b6cc5bc3a1c38d7e12cdf944442ca790425cf2a628ffbe3012445fe1e4"
+        },
+        {
+          "bytes": 2926,
+          "path": "pycryptodome-3.24.0.dist-info/LICENSE.rst",
+          "sha256": "4e04660d77c1c64e89d79537919fb8240fa21484a7e3db29f358b2c7f84ea073"
+        }
+      ],
+      "license_label": "BSD, Public Domain",
+      "metadata_sha256": "91adf4293e18d619611e1dbcf94e9850cb7f5fca99fcdb7b2285246749f4ecf5",
+      "name": "pycryptodome",
+      "official_metadata_sha256": "76f24c96a6ac3fd76eacc3489d14e1037b3cc6052f62a89c4d73337ad041296f",
+      "requires_dist": [],
+      "role": "direct",
+      "source_artifact": {
+        "bytes": 2275758,
+        "filename": "pycryptodome-3.24.0-cp37-abi3-manylinux2014_x86_64.manylinux_2_17_x86_64.whl",
+        "kind": "bdist_wheel",
+        "sha256": "cf975cc3a0822a662ec2cdae85b38ad6f67654f9b48fbe02c5baae5999a6c18d",
+        "url": "https://files.pythonhosted.org/packages/9a/7d/1a7c58f5b839fbf65965461b554bb1297839fdb8880b5ab92c8331b7a02a/pycryptodome-3.24.0-cp37-abi3-manylinux2014_x86_64.manylinux_2_17_x86_64.whl"
+      },
+      "version": "3.24.0"
     },
     {
       "license_classifiers": [],
@@ -2411,7 +2357,7 @@
       "license_label": null,
       "metadata_sha256": "d780346efe68684d3d320e86bf3b8464b1f26f85499f2e580d1b999ba46017e1",
       "name": "pymdown-extensions",
-      "official_metadata_sha256": "4073db68aa75432d3f9212327c7ae28393c718a3ddc82689f3afe95746acef2c",
+      "official_metadata_sha256": "bbdf4a7ca2e88bb814c57de0e53c8b112fc042b941a0350c17f196c9babe5952",
       "requires_dist": [
         "markdown>=3.6",
         "pyyaml",
@@ -2468,7 +2414,7 @@
       "license_label": null,
       "metadata_sha256": "c5d032518012789cabc870d46589aca3aeda36cf9fa4399ee88bda3d10438451",
       "name": "pytest",
-      "official_metadata_sha256": "8ed48304ba7fd0ae974a041f117487b499d553b40e5ce55a9ece677e946f68dd",
+      "official_metadata_sha256": "707efea7c8046e3aaaaac619aac85bc1e73c310a9fbff8028c53ac229ca02f2c",
       "requires_dist": [
         "colorama>=0.4; sys_platform == \"win32\"",
         "exceptiongroup>=1; python_version < \"3.11\"",
@@ -2581,7 +2527,7 @@
       "license_label": "Dual License",
       "metadata_sha256": "a9d436da322be808332f98d88325998e87cb693a678a9969feb4cfad729a6e93",
       "name": "python-dateutil",
-      "official_metadata_sha256": "65747bc111eb972ae6f477f211253f21e25738cb7d894ddb80ddd65f620b58a7",
+      "official_metadata_sha256": "7938916002e8d70c9d32cbaf43c467d163af3aadd8c3b358bda5babd1f7836ee",
       "requires_dist": [
         "six >=1.5"
       ],
@@ -2633,7 +2579,7 @@
       "license_label": "Permission is hereby granted, free of charge, to any person obtaining a\ncopy of this software and associated documentation files (the\n\"Software\"), to deal in the Software without restriction, including\nwithout limitation the rights to use, copy, modify, merge, publish,\ndistribute, sublicense, and/or sell copies of the Software, and to\npermit persons to whom the Software is furnished to do so, subject to\nthe following conditions:\n\nThe above copyright notice and this permission notice shall be included\nin all copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS\nOR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF\nMERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.\nIN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY\nCLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,\nTORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE\nSOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.",
       "metadata_sha256": "fd4e94258896c927fd6e5354988c7b307a0f16b6a25abd5d0b646fcf5cc9fea8",
       "name": "python-discovery",
-      "official_metadata_sha256": "9e5bb9ab5ac72e60072ec157238ddaef24c4fcaf34b50afba0974209d63a045c",
+      "official_metadata_sha256": "858a074e6b229889ff9df799d2dd77de851af1ea9876c53219635874c31712cd",
       "requires_dist": [
         "filelock>=3.15.4"
       ],
@@ -2747,7 +2693,7 @@
         "rpds-py>=0.7.0",
         "typing-extensions>=4.4.0; python_version < '3.13'"
       ],
-      "role": "transitive",
+      "role": "direct",
       "source_artifact": {
         "bytes": 26766,
         "filename": "referencing-0.37.0-py3-none-any.whl",
@@ -2836,7 +2782,7 @@
       "license_label": "Apache-2.0 AND CC0-1.0 AND CC-BY-SA-4.0 AND GPL-3.0-or-later",
       "metadata_sha256": "318d853f6fda36222b00244ae2690c510419a79b3c28544f9bd9f53c307c2f54",
       "name": "reuse",
-      "official_metadata_sha256": "7184d4ddbab25ba44953cb274498c1a67f66613797777a4fe83a319d228dbbee",
+      "official_metadata_sha256": "67586be61eb0fdf344c6cf5c6244567b547fa8ba7a10d540b0d8d2d3523f7707",
       "requires_dist": [
         "Jinja2 (>=3.0.0)",
         "attrs (>=23.2)",
@@ -2947,6 +2893,53 @@
     },
     {
       "license_classifiers": [
+        "License :: OSI Approved :: Apache Software License"
+      ],
+      "license_expression": null,
+      "license_files": [
+        {
+          "bytes": 10174,
+          "path": "rfc8785-0.1.4+emt.1.dist-info/LICENSE",
+          "sha256": "0d542e0c8804e39aa7f37eb00da5a762149dc682d7829451287e11b938e94594"
+        },
+        {
+          "bytes": 338,
+          "path": "rfc8785-0.1.4+emt.1.dist-info/NOTICE",
+          "sha256": "cf23bebecb3f1f53ec4e28ce085fabc7a663bd67e2d3ed0312b5da233b641c76"
+        }
+      ],
+      "license_label": null,
+      "metadata_sha256": "699f2b783c4a7d815cf86f75bed4315dd575390cf604a6608dd93cc09a453e2f",
+      "name": "rfc8785",
+      "official_metadata_sha256": "9dfbf420c8c18077dd7697ec12fe2838b5901683573ae128df2d3403330f7aa9",
+      "requires_dist": [
+        "rfc8785[doc,test,lint] ; extra == \"dev\"",
+        "build ; extra == \"dev\"",
+        "pdoc ; extra == \"doc\"",
+        "ruff ~= 0.3 ; extra == \"lint\"",
+        "mypy >= 1.0 ; extra == \"lint\"",
+        "interrogate ; extra == \"lint\"",
+        "pytest ; extra == \"test\"",
+        "pytest-cov ; extra == \"test\"",
+        "coverage ; extra == \"test\""
+      ],
+      "role": "direct",
+      "source_artifact": {
+        "bytes": 23461,
+        "filename": "rfc8785-0.1.4+emt.1-py3-none-any.whl",
+        "kind": "maintained_wheel",
+        "path": "vendor/rfc8785/rfc8785-0.1.4+emt.1-py3-none-any.whl",
+        "provenance": {
+          "path": "vendor/rfc8785/source-provenance.json",
+          "sha256": "548226480527c0a1d254f769c670277d5cf204fa74390323aee6eee3aad90ffe"
+        },
+        "sha256": "e04761706fcbbb5f0afd5fa74a7e6ea7484ce97f073adb5372ab8ee93230c48e",
+        "url": null
+      },
+      "version": "0.1.4+emt.1"
+    },
+    {
+      "license_classifiers": [
         "License :: OSI Approved :: MIT License"
       ],
       "license_expression": null,
@@ -2989,7 +2982,7 @@
       "license_label": null,
       "metadata_sha256": "f8be7b17da3980b2c48596941411a43c70ac41b1e2d530aa531f2c15eab2eb1c",
       "name": "rpds-py",
-      "official_metadata_sha256": "fff1fa33d84392d5684f0c1a40fc23f0a2027113c966498a1f64614bc83b02c2",
+      "official_metadata_sha256": "c791bb0eaf9f18668ca978bd500d8dd8e25cdf692cf5bc92229d1c2854e8d852",
       "requires_dist": [],
       "role": "transitive",
       "source_artifact": {
@@ -3014,7 +3007,7 @@
       "license_label": null,
       "metadata_sha256": "2f914c8907d59fc48255be1689e1edca6679a52962fa321fb6ddea08b4a25046",
       "name": "ruff",
-      "official_metadata_sha256": "e213637986ba1840e0db26cf41367fd5e4bdf0888e0d148ffd8a3b9a2a75a2f0",
+      "official_metadata_sha256": "7328b62d6348a796fb66d49564b2f673627b210df01a24b9bcb5817e989f4303",
       "requires_dist": [],
       "role": "direct",
       "source_artifact": {
@@ -3123,7 +3116,7 @@
       "license_label": null,
       "metadata_sha256": "1428a97e0c90b9ed2958e9e487db976c4c450932f7334630aebb5bc04e01aa59",
       "name": "tomli",
-      "official_metadata_sha256": "6cb47d67050f8aaebc5b8ee648fdc4d92ca376fcaefde0536557781e689767d8",
+      "official_metadata_sha256": "bd88ef161fbda665bed19e902975ebde201a20c723964d9c8b17f5515f1854c0",
       "requires_dist": [],
       "role": "transitive",
       "source_artifact": {
@@ -3177,7 +3170,7 @@
       "license_label": "MIT",
       "metadata_sha256": "752d0210341ae500e12ae384ebb8c287a76a00cbac2d41eb86aba2622dabaaad",
       "name": "tomlkit",
-      "official_metadata_sha256": "1fbf5e091a2fa4aec078b995db1ba7dc341fd28746895eb9b910442b1558c0cb",
+      "official_metadata_sha256": "d31095abcc6fe408231567cb59cee2715b17ac6ee54c79d23c049f53d2c050c0",
       "requires_dist": [],
       "role": "transitive",
       "source_artifact": {
@@ -3202,7 +3195,7 @@
       "license_label": null,
       "metadata_sha256": "7af18c9d3615313f0ac672f074ca2e53c3db69613a802ff7935d90dbeba56063",
       "name": "types-jsonschema",
-      "official_metadata_sha256": "a7e3d4e8754ff32224627d3b22b8a8f792beeea7d7d278540a22f044a6cdbed3",
+      "official_metadata_sha256": "ff0d59ed8ce41f19601a81e770be21814ac384586400be5f721c92ab2d9c62f5",
       "requires_dist": [
         "referencing"
       ],
@@ -3229,7 +3222,7 @@
       "license_label": null,
       "metadata_sha256": "fee42e3e71c4a1e1637f0d7a2b30231a5ac535eb5668d684f7c79f657051a0d3",
       "name": "types-markdown",
-      "official_metadata_sha256": "05a624369983613f07ce7c10fa79d82fd6fe716235c7a9c6781c511a47d52655",
+      "official_metadata_sha256": "f09672f69759ae9ba02c5acaf91f245260d3adb9fe938eb8e010a77318f6307d",
       "requires_dist": [],
       "role": "direct",
       "source_artifact": {
@@ -3254,7 +3247,7 @@
       "license_label": null,
       "metadata_sha256": "88dbaba05733416a205eda9779181559f23ead8be650dfdbb887dd3bd0fbd428",
       "name": "types-pyyaml",
-      "official_metadata_sha256": "da608cd3a1450d972d4f89e3a2734cfe86038bf4089b806884772508e79dce63",
+      "official_metadata_sha256": "0c1569852dece6294471cd2d6b478d39c674d1ff32413472b400b2d07b2c6e77",
       "requires_dist": [],
       "role": "direct",
       "source_artifact": {
@@ -3309,7 +3302,7 @@
       "license_label": "Apache-2.0",
       "metadata_sha256": "b022fde14c390c66d53c9cbccf614ebfa7224c453b1b5bec11f2923beaa7c96a",
       "name": "tzdata",
-      "official_metadata_sha256": "47765f2d72ad6d2568e3717c8ac15292dfa6e06cd89b3cd2cb15643cf42b3218",
+      "official_metadata_sha256": "09e4769272b45f018103a9ad940932650089144456b4e1481299efc03e5c7f46",
       "requires_dist": [],
       "role": "transitive",
       "source_artifact": {
@@ -3406,69 +3399,67 @@
       "license_files": [
         {
           "bytes": 11357,
-          "path": "uv-0.12.22.dist-info/licenses/LICENSE-APACHE",
+          "path": "uv-0.13.7.dist-info/licenses/LICENSE-APACHE",
           "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4"
         },
         {
           "bytes": 1077,
-          "path": "uv-0.12.22.dist-info/licenses/LICENSE-MIT",
+          "path": "uv-0.13.7.dist-info/licenses/LICENSE-MIT",
           "sha256": "860e3d7a86b84e6a7012c7a635fc64df475cebc6cce34dfeb73a5982ec58176c"
         }
       ],
       "license_label": null,
-      "metadata_sha256": "bd87452b7786f5588584b827dca166e57e269c655f5ea0228b47e83fb703fd27",
+      "metadata_sha256": "507c23b3a9f1163f536cf22e673779defab68318c82cff8d93551d773c056d62",
       "name": "uv",
-      "official_metadata_sha256": "afab0e70d0ba504e60ae335f451a2889d47d8096343b7ad2450f259a18dd7fd8",
+      "official_metadata_sha256": "ad3bf73bc52e87c59dee6b926f10144df71a7825408dae182d1f58e729829d35",
       "requires_dist": [],
       "role": "direct",
       "source_artifact": {
-        "bytes": 20587257,
-        "filename": "uv-0.12.22-py3-none-manylinux_2_17_x86_64.manylinux2014_x86_64.whl",
+        "bytes": 17202345,
+        "filename": "uv-0.13.7-py3-none-manylinux_2_17_x86_64.manylinux2014_x86_64.whl",
         "kind": "bdist_wheel",
-        "sha256": "680769ef701922dd93426b73476073411941f51ac46991a6e5c5a6efbf68a713",
-        "url": "https://files.pythonhosted.org/packages/7a/b0/4cceeef80da0e8627bf3afb628930d5ea8e857f9c2aacbcda8598a5b82aa/uv-0.12.22-py3-none-manylinux_2_17_x86_64.manylinux2014_x86_64.whl"
+        "sha256": "2c9bdc4a872b60a93c5f26c0791089ea11585a4f9d3b3c017d78eb8487505e25",
+        "url": "https://files.pythonhosted.org/packages/b9/93/0e053a2ca4523ee9825ccbedeb7121470d0a188933f11688b6d90d7f5c08/uv-0.13.7-py3-none-manylinux_2_17_x86_64.manylinux2014_x86_64.whl"
       },
-      "version": "0.12.22"
+      "version": "0.13.7"
     },
     {
-      "license_classifiers": [
-        "License :: OSI Approved :: MIT License"
-      ],
+      "license_classifiers": [],
       "license_expression": "MIT",
       "license_files": [
         {
           "bytes": 1077,
-          "path": "virtualenv-21.14.4.dist-info/licenses/LICENSE",
+          "path": "virtualenv-21.15.6.dist-info/licenses/LICENSE",
           "sha256": "38ef740a641ff08df082680e98ab30d09badccee9e5fb686bce21212f3a663f0"
         },
         {
-          "bytes": 2846,
-          "path": "virtualenv-21.14.4.dist-info/licenses/THIRD-PARTY-NOTICES.md",
-          "sha256": "0e51b915e26da42c998b274c1a81804c5f9eea5ca49d69da2f96418872590825"
+          "bytes": 2844,
+          "path": "virtualenv-21.15.6.dist-info/licenses/THIRD-PARTY-NOTICES.md",
+          "sha256": "e11a60cef9e23787ac743976b3b0d5718304fafdcac4f285683498955f0704f4"
         }
       ],
       "license_label": null,
-      "metadata_sha256": "e61ddea70c7be384fc3cbfb0dfcc4d691a58d3012b1cd137842a8f22a8279491",
+      "metadata_sha256": "af6d7828da8e23557806b3d80e99cfa48d9ad43194fd7c5b4529318dcc0dd316",
       "name": "virtualenv",
-      "official_metadata_sha256": "7e1f8bbbe98d9c1d83986d7c740d21207f0c4b6e4cb7a5c41320b12c7b0e03bc",
+      "official_metadata_sha256": "01c1a932fbd2630c71fb49008d1f598a5339b34f4fb277fa0363e8306df0d2de",
       "requires_dist": [
-        "distlib<1,>=0.3.7",
+        "distlib<1,>=0.4.3",
         "filelock<5,>=3.24.2; python_version >= '3.10'",
-        "filelock<=3.19.1,>=3.16.1; python_version < '3.10'",
-        "packaging>=23.1",
-        "platformdirs<5,>=3.9.1",
-        "python-discovery>=1.6",
-        "typing-extensions>=4.13.2; python_version < '3.11'"
+        "filelock<=3.19.1,>=3.19.1; python_version < '3.10'",
+        "packaging>=26.3",
+        "platformdirs<5,>=4.4",
+        "python-discovery>=1.6.1",
+        "typing-extensions>=4.16; python_version < '3.11'"
       ],
       "role": "transitive",
       "source_artifact": {
-        "bytes": 5487214,
-        "filename": "virtualenv-21.14.4-py3-none-any.whl",
+        "bytes": 5680963,
+        "filename": "virtualenv-21.15.6-py3-none-any.whl",
         "kind": "bdist_wheel",
-        "sha256": "2d1a394ef089220b4606408b184433e49417a6e5590a09c7b8a67fb1e013af56",
-        "url": "https://files.pythonhosted.org/packages/89/69/49381b5dd39d930c4b42819a23b8f9f242dd256bf46fb9dcd7ce713fe5d5/virtualenv-21.14.4-py3-none-any.whl"
+        "sha256": "4b99ab9b95ff11043939bb4cad2fa0449175fa5a478372864f62160cb6c1a7ed",
+        "url": "https://files.pythonhosted.org/packages/0a/63/fd514dee3159f74a96ac01beb8f460b65e4ef0b972f63f4fe9f0cd2aa0e3/virtualenv-21.15.6-py3-none-any.whl"
       },
-      "version": "21.14.4"
+      "version": "21.15.6"
     },
     {
       "license_classifiers": [
@@ -3490,7 +3481,7 @@
       "license_label": "Apache-2.0",
       "metadata_sha256": "ecfde023047e7761dce06d4488abcede89e398399961a052f2fccb39b001e279",
       "name": "watchdog",
-      "official_metadata_sha256": "098f7743bb57d276f218724edf624a627b484485408238c60ec7acae104b90f9",
+      "official_metadata_sha256": "772c955b6938724fb05b4ed61ea87e0b7d0939fccea0ddf13ce5ae33f859bcf6",
       "requires_dist": [
         "PyYAML>=3.10; extra == \"watchmedo\""
       ],
@@ -3544,7 +3535,7 @@
       "license_label": "MIT",
       "metadata_sha256": "0bbcc2eb51ce690a1f2df9a697409713d72276d43870ea2563a595c31de8ca0e",
       "name": "zizmor",
-      "official_metadata_sha256": "ac8eb39ab1f9dae51b7da2d0e86cfa471173a866bb7501a16bda7e20da34da97",
+      "official_metadata_sha256": "562163b8f4e0a3bae6195baaef698e68c6d52b684518e5a44f54290d6ff90640",
       "requires_dist": [],
       "role": "direct",
       "source_artifact": {
@@ -3557,7 +3548,7 @@
       "version": "1.30.1"
     }
   ],
-  "python": "3.13.16",
+  "python": "3.13.18",
   "schema_revision": "emt.local-development-provenance.v1",
   "security_audit": {
     "produced_at": "2026-10-07T15:08:20.922765+00:00",
@@ -3565,5 +3556,5 @@
     "sha256": "3bf24d1cc9e4d4448e1f48d85cc49636fa0fe980a022ad2c5ff93d850d695418",
     "version": "2.10.1"
   },
-  "supported_range": ">=3.13.16,<3.14"
+  "supported_range": ">=3.13.18,<3.14"
 }

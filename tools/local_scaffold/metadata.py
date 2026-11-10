@@ -126,7 +126,16 @@ def check(root: Path, report: Report) -> dict[str, Json] | None:
         ("qualified-id", metadata.get("qualified_owned_schema_ids"), []),
         ("wrong-planned-set", metadata.get("planned_owned_schema_ids"), PLANNED),
         ("wrong-profile", metadata.get("validation_profile"), PROFILE),
-        ("wrong-profile", metadata.get("domain_runtime_dependencies"), []),
+        (
+            "wrong-profile",
+            metadata.get("domain_runtime_dependencies"),
+            [
+                "jsonschema==4.26.0",
+                "referencing==0.37.0",
+                "pycryptodome==3.24.0",
+                "rfc8785==0.1.4+emt.1",
+            ],
+        ),
     ]
     for condition, actual, expected in checks:
         if actual != expected:

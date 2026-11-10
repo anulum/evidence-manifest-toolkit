@@ -58,18 +58,18 @@ WORKFLOW_POLICY: Final[WorkflowPolicy] = {
     "workflow_inputs_sha256": {
         "ci.yml": {"sha256": "64445a0ef5fe296928ae6f30370aaf2626703dfe06bc2d8c8f8f17500b45baaa"},
         "codeql.yml": {
-            "sha256": "34838cef9e09e55609e28660ceeaa90ba303fc128d90eefab0d9d745c9211187"
+            "sha256": "4d9e59d5c1967853b3087cfdb3ce85843fa77c95c17f4ea6a8b75bf7bd81b5c6"
         },
-        "docs.yml": {"sha256": "d10a00c9044e621b7e0afc611dcd3278aeed88d3eeb4622c37fe66a5abf6d8eb"},
+        "docs.yml": {"sha256": "c3a89f2a9d0666574fb9aaad6add60365f4519959fdfa4706b26fd3f2feaac18"},
         "pre-commit.yml": {
-            "sha256": "d715a2f516df1392d197a1dc189d3373893e13b448e1774ec950c276c98eb8d7"
+            "sha256": "09909ed703a39f5ff942e2e351408c7e5c4a543b988829d4e4bd009c3f033d28"
         },
-        "sbom.yml": {"sha256": "4467b50b83b585ea4b05f5e4fb08a027adc08b5b6f4a4f4f8eb420274d848052"},
+        "sbom.yml": {"sha256": "8e040cdaf78e3cc5718d14ff8a257b50af267a73ebfc72c0f7b9cee77dfb9fc2"},
         "scorecard.yml": {
-            "sha256": "75710dff695080cacaaa583b00302799ac365e3e7db094b4466a4ad4e998d86e"
+            "sha256": "0fe4059e00a9a0fdcdd06da1997f549adc9b1d0cecd943c47bad5373dafc6b1e"
         },
         "security-audit.yml": {
-            "sha256": "dbaa82ead24e056a455734a75552d7f1ba4b82efad45f308ed53d367a83e9e72"
+            "sha256": "1dc809a18c23821c2769d196133b05b9ae2843a72495baf16575519c660b319b"
         },
     },
     "platform": "github.com",
@@ -78,34 +78,34 @@ WORKFLOW_POLICY: Final[WorkflowPolicy] = {
             "sha256": "27a8d67d28e7c37496270963292e378b2f9afa3bafdf3f98948e101a0851c1aa"
         },
         "codeql.yml/analysis": {
-            "sha256": "93f42aeb65fe5168dcd68dfa34bd82fcf7f672bf50f9405bdbf3287429bc8ef4"
+            "sha256": "884bed723e086a6923a218362f9cee1dd3f049dd5e45bec24e955d8d8bb90fb8"
         },
         "docs.yml/render": {
-            "sha256": "60ca514b4891b3c4df79375b79c3669f9ac86ca90870fdda1b6e439a98afc05c"
+            "sha256": "e1011e03c2511611ceb72c5e16b2b80b99bf9b561d041619b5706ead2c587483"
         },
         "pre-commit.yml/quality": {
-            "sha256": "acca9bee5a2516cbfb969fbe99f2f44247bf4a3fd880b676d4b9197cce848756"
+            "sha256": "c44679639c17c44916babe8db80ae5544e309ed4514d5163d1ba1dae01bac946"
         },
         "pre-commit.yml/tests": {
-            "sha256": "5887f449e2bca6242ffc495daf0f9181be6035d4429a0b7e2f882cb9757c31be"
+            "sha256": "bbaeb2bfd36ddddd984d7473abd9b70d6ea6f0454ddc8fc75090d478cc74cfb5"
         },
         "sbom.yml/inventory": {
-            "sha256": "038b225e451ccdbbc8f84086cd53ffba43a94d52a2dfa2faf289d2d73af99ed0"
+            "sha256": "7d640589341cdfee1a73356baff4771cc43723d88b7ef84d48282aaf55351153"
         },
         "scorecard.yml/configuration": {
-            "sha256": "dc59deb2ce3169dcacab11219f4028721b83c11106a8138a738120f3ce88a147"
+            "sha256": "f076b392005ec797b3478957e5ae62696362c668e9d7b6c199d35ef031f3078b"
         },
         "security-audit.yml/dependency": {
-            "sha256": "9a6a3e53ffbed3833a9a00a85a469779a29d569d1450630ff687ae1c8a71b31d"
+            "sha256": "cf5082b1aada6554f2e25a9f49c5867d482e78e7e6c5218d960f9097ed38e37f"
         },
         "security-audit.yml/secrets": {
-            "sha256": "235d84069958c8a2cdb1f8f1bbff5bf73cff2a59aaf514923abc00fbaea3bb14"
+            "sha256": "3d9d52a314345882b6afa9b36fda3f12305c4762b8626739ea08332212c4238b"
         },
         "security-audit.yml/static": {
-            "sha256": "7a52ac3d6d07529d193a7ef638e70169b2976dde4c801664e0d58d15de020bb4"
+            "sha256": "c0b9486a5aa883cad45b3404b989f0a75f62668fc067ab2a84fea51d9cc08044"
         },
         "security-audit.yml/workflow": {
-            "sha256": "9a714c90a46f731b4f7852c241852a3749c6e40f66e660edb987b79cb908c6f7"
+            "sha256": "6b3fbfa2952cfd7670a2b4f242d269e810082ec77fd2807f0b0d9068a7425ae5"
         },
     },
     "schema_revision": "emt.local-workflow-policy.v1",
@@ -248,7 +248,7 @@ WORKFLOW_POLICY: Final[WorkflowPolicy] = {
         "github/codeql-action/init": "2892aa5e19bbd11bc0cff5427e3b750a04d9e3c2",
         "github/codeql-action/analyze": "2892aa5e19bbd11bc0cff5427e3b750a04d9e3c2",
     },
-    "python_version": "3.13.16",
+    "python_version": "3.13.18",
     "job_timeout_minutes": 20,
     "workflow_max_bytes": 102400,
     "workflow_max_lines": 1000,

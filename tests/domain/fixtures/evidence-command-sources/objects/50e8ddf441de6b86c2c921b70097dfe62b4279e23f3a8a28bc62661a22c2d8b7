@@ -1,0 +1,162 @@
+{
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "schema_id": {
+      "const": "evidence_manifest_toolkit.signed_statement.v1"
+    },
+    "profile_id": {
+      "const": "evidence_manifest_toolkit.jcs_sha256_ed25519.v1"
+    },
+    "canonical_profile": {
+      "const": "rfc8785-jcs-v1"
+    },
+    "digest_algorithm": {
+      "const": "sha256"
+    },
+    "content_schema_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "content_digest": {
+      "type": "string",
+      "pattern": "^sha256:[0-9a-f]{64}$"
+    },
+    "content_byte_length": {
+      "type": "string",
+      "pattern": "^(0|[1-9][0-9]*)$",
+      "maxLength": 256
+    },
+    "signer_key_id": {
+      "type": "string",
+      "pattern": "^ed25519:[0-9a-f]{64}$"
+    },
+    "purpose": {
+      "enum": [
+        "evidence",
+        "deployment",
+        "human_review",
+        "group_certificate",
+        "trust_snapshot",
+        "root_transition"
+      ]
+    },
+    "signature_context": {
+      "enum": [
+        "group_statement",
+        "root_control"
+      ]
+    },
+    "scope_digest": {
+      "type": "string",
+      "pattern": "^sha256:[0-9a-f]{64}$"
+    },
+    "claim_ids": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "minItems": 1,
+      "uniqueItems": true
+    },
+    "group_certificate_digest": {
+      "type": "string",
+      "pattern": "^sha256:[0-9a-f]{64}$"
+    },
+    "trust_snapshot_digest": {
+      "type": "string",
+      "pattern": "^sha256:[0-9a-f]{64}$"
+    },
+    "bootstrap_policy_digest": {
+      "type": "string",
+      "pattern": "^sha256:[0-9a-f]{64}$"
+    },
+    "claimed_signed_at": {
+      "type": "string",
+      "format": "date-time",
+      "pattern": "Z$"
+    }
+  },
+  "required": [
+    "schema_id",
+    "profile_id",
+    "canonical_profile",
+    "digest_algorithm",
+    "content_schema_id",
+    "content_digest",
+    "content_byte_length",
+    "signer_key_id",
+    "purpose",
+    "signature_context",
+    "scope_digest",
+    "claimed_signed_at"
+  ],
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:gotm:design:evidence_manifest_toolkit.signed_statement.v1",
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "signature_context": {
+            "const": "group_statement"
+          }
+        }
+      },
+      "then": {
+        "required": [
+          "claim_ids",
+          "group_certificate_digest",
+          "trust_snapshot_digest"
+        ],
+        "properties": {
+          "purpose": {
+            "enum": [
+              "evidence",
+              "deployment",
+              "human_review"
+            ]
+          }
+        },
+        "not": {
+          "required": [
+            "bootstrap_policy_digest"
+          ]
+        }
+      },
+      "else": {
+        "required": [
+          "bootstrap_policy_digest"
+        ],
+        "properties": {
+          "purpose": {
+            "enum": [
+              "group_certificate",
+              "trust_snapshot",
+              "root_transition"
+            ]
+          }
+        },
+        "not": {
+          "anyOf": [
+            {
+              "required": [
+                "group_certificate_digest"
+              ]
+            },
+            {
+              "required": [
+                "trust_snapshot_digest"
+              ]
+            },
+            {
+              "required": [
+                "claim_ids"
+              ]
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

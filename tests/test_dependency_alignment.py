@@ -75,7 +75,7 @@ def test_actual_dependency_refusals(root: Path, case: str) -> None:
         path = root / "pyproject.toml"
         text = path.read_text()
         path.write_text(
-            text + "\n[project]\nname='dormant'\n"
+            text.replace('name = "evidence-manifest-toolkit"', 'name = "unrecognized-package"')
             if case == "domain-package"
             else text.replace("strict = true", "strict = false")
         )
@@ -127,10 +127,10 @@ def test_received_audit_stamp_cannot_create_freshness(root: Path, stamp: str) ->
     value = json.loads((root / "dependency-provenance.json").read_text())
     value["security_audit"]["produced_at"] = stamp
     (root / "dependency-provenance.json").write_text(json.dumps(value))
-    record = payload(run_guard("dependency_alignment", root), 3)
+    record = payload(run_guard("dependency_alignment", root), 2)
     reasons = record["reasons"]
     assert isinstance(reasons, list)
-    assert any(isinstance(r, dict) and r.get("code") == "tool_unavailable" for r in reasons)
+    assert any(isinstance(r, dict) and r.get("code") == "source_identity_mismatch" for r in reasons)
 
 
 @pytest.mark.parametrize("stamp", ["invalid", "2026-10-02T12:00:00", 7])

@@ -6,10 +6,46 @@
 # Contact: www.anulum.li | protoscience@anulum.li
 # EVIDENCE-MANIFEST-TOOLKIT — source and configuration provenance
 
+[build-system]
+requires = ["poetry-core==2.5.0"]
+build-backend = "poetry.core.masonry.api"
+
+[project]
+name = "evidence-manifest-toolkit"
+version = "0.0.0.dev0"
+description = "Explicit offline evidence references, detached statements and common verification"
+readme = "README.md"
+requires-python = ">=3.13.18,<3.14"
+license = "AGPL-3.0-or-later"
+license-files = ["LICENSE", "LICENSES/*.txt"]
+authors = [{name = "Miroslav Šotek", email = "protoscience@anulum.li"}]
+dependencies = [
+    "jsonschema==4.26.0",
+    "referencing==0.37.0",
+    "pycryptodome==3.24.0",
+    "rfc8785==0.1.4+emt.1",
+]
+
+[project.scripts]
+emt = "evidence_manifest_toolkit._cli:main"
+
+[tool.poetry]
+packages = [{include = "evidence_manifest_toolkit", from = "src"}]
+include = [
+    {path = "src/evidence_manifest_toolkit/_native_entry_method.json", format = ["sdist", "wheel"]},
+    {path = "src/evidence_manifest_toolkit/_native_entry_method.json.license", format = ["sdist", "wheel"]},
+    {path = "src/evidence_manifest_toolkit/_qpu_registry_bindings.json", format = ["sdist", "wheel"]},
+    {path = "src/evidence_manifest_toolkit/_qpu_registry_bindings.json.license", format = ["sdist", "wheel"]},
+    {path = "src/evidence_manifest_toolkit/_schemas/*.json", format = ["sdist", "wheel"]},
+    {path = "src/evidence_manifest_toolkit/_schemas/*.json.license", format = ["sdist", "wheel"]},
+    {path = "src/evidence_manifest_toolkit/py.typed", format = ["sdist", "wheel"]},
+    {path = "src/evidence_manifest_toolkit/py.typed.license", format = ["sdist", "wheel"]},
+]
+
 [tool.ruff]
 target-version = "py313"
 line-length = 100
-src = ["tools", "tests"]
+src = ["src", "tools", "tests"]
 
 [tool.ruff.lint]
 select = ["E4", "E7", "E9", "F", "I", "UP", "B", "D"]
@@ -18,25 +54,25 @@ select = ["E4", "E7", "E9", "F", "I", "UP", "B", "D"]
 convention = "numpy"
 
 [tool.ruff.lint.isort]
-known-first-party = ["local_scaffold"]
+known-first-party = ["evidence_manifest_toolkit", "local_scaffold"]
 
 [tool.mypy]
 python_version = "3.13"
 strict = true
 warn_unreachable = true
-mypy_path = "tools"
+mypy_path = ["src", "tools"]
 explicit_package_bases = true
-files = ["tools", "tests"]
+files = ["src", "tools", "tests"]
 cache_dir = ".tool-cache/mypy"
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
-pythonpath = ["tools"]
+pythonpath = ["src", "tools"]
 addopts = "--strict-config --strict-markers"
 
 [tool.coverage.run]
 branch = true
-source = ["tools"]
+source = ["src/evidence_manifest_toolkit", "tools"]
 parallel = true
 sigterm = true
 data_file = ".tool-cache/coverage/data"
@@ -48,3 +84,4 @@ precision = 2
 
 [tool.coverage.paths]
 source = ["tools"]
+domain = ["src/evidence_manifest_toolkit", "*/successor-package-*/evidence_manifest_toolkit"]

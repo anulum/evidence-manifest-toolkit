@@ -107,7 +107,9 @@ def test_real_tree_faults(root: Path, case: str) -> None:
         assert indexed.stdout == b"docs/internal/private.txt\0"
     elif case == "packaged":
         path = root / "pyproject.toml"
-        path.write_text(path.read_text() + "\n[build-system]\nrequires=[]\n")
+        original = path.read_text()
+        assert 'requires = ["poetry-core==2.5.0"]' in original
+        path.write_text(original.replace('requires = ["poetry-core==2.5.0"]', "requires = []"))
     elif case == "binary":
         (root / "unprovenanced.png").write_bytes(b"actual unprovenanced binary")
     elif case == "source-hash":

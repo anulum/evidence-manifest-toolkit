@@ -22,7 +22,7 @@ GOLDEN = (
     b'"lifecycle": "local_scaffold", "qualified_owned_schema_ids": [], '
     b'"repository_name": "EVIDENCE-MANIFEST-TOOLKIT", "source_metadata": '
     b'{"path": "repository-domain.json", "sha256": '
-    b'"4aeb7350ffea48e08196ab71cc1481edc0d69a6b3ac6b84dc00f38ad1ad60d82"}}\n'
+    b'"1024909acee21475a074b25629267fe238a868ee407155c742874738df0fef93"}}\n'
 )
 
 
@@ -91,7 +91,7 @@ def test_actual_atomic_syscall_faults(
 ) -> None:
     """Actual fsync/link/unlink/signals preserve complete publication and recovery."""
     assert hashlib.sha256((root / "repository-domain.json").read_bytes()).hexdigest() == (
-        "4aeb7350ffea48e08196ab71cc1481edc0d69a6b3ac6b84dc00f38ad1ad60d82"
+        "1024909acee21475a074b25629267fe238a868ee407155c742874738df0fef93"
     )
     unrelated = root / "unrelated-existing-file.txt"
     unrelated.write_bytes(b"Independent original sentinel; never replace or clean up.\n")

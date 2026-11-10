@@ -15,10 +15,12 @@ import json
 import os
 import stat
 import tempfile
+import tomllib
 from pathlib import Path, PurePosixPath
 
 from .inputs import Json, json_object, read_bytes, relative_path
 from .metadata import check
+from .package_metadata import check_package_metadata
 from .policy import (
     ASSETS,
     EXCLUDED,
@@ -34,6 +36,7 @@ from .policy import (
 from .processes import run_process
 from .production_names import check_file, check_text
 from .reports import Fault, Report, safe_location
+from .source_materials import check_source_material
 
 
 def owned_tree(root: Path, report: Report) -> list[str]:
@@ -49,7 +52,8 @@ def owned_tree(root: Path, report: Report) -> list[str]:
     Returns
     -------
     list[str]
-        Sorted regular-file names in the complete owned population, excluding only declared caches; no symlink is traversed.
+        Sorted public regular-file names, excluding declared caches and the exact
+        private document directory after kind checks; no symlink is traversed.
 
     Raises
     ------
@@ -78,7 +82,7 @@ def owned_tree(root: Path, report: Report) -> list[str]:
             if stat.S_ISLNK(info.st_mode):
                 report.add("repository_inventory.symlink-entry", name)
                 continue
-            if path.name in EXCLUDED:
+            if path.name in EXCLUDED or name == "docs/internal":
                 if not stat.S_ISDIR(info.st_mode) or info.st_dev != device:
                     report.add("repository_inventory.wrong-kind", name)
                 continue
@@ -287,11 +291,15 @@ def verify(root: Path, report: Report) -> None:
         if name.endswith((".jpg", ".png")) and name not in ASSETS:
             report.add("repository_inventory.unexpected-binary", name)
         elif name not in ASSETS and name != "LICENSE" and not name.startswith("LICENSES/"):
-            check_file(root, name, report)
+            if not check_source_material(root, name, report):
+                check_file(root, name, report)
     verify_tracking(root, report)
     config = read_bytes(root, "pyproject.toml")
-    if b"build-system" in config or b"[project]" in config:
-        report.add("repository_inventory.private-packaged", "pyproject.toml")
+    try:
+        package = tomllib.loads(config.decode("utf-8"))
+    except (tomllib.TOMLDecodeError, UnicodeError) as error:
+        raise Fault("configuration_invalid", "pyproject.toml", 4) from error
+    check_package_metadata(package, report, refusal_code="repository_inventory.private-packaged")
     check(root, report)
     actual: dict[str, Json] = json_object(root, "capability-inventory.json")
     expected = json.loads(inventory_bytes(root))

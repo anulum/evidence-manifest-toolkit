@@ -18,10 +18,11 @@ import signal
 import time
 from collections.abc import Mapping
 from dataclasses import dataclass, field
+from datetime import UTC, datetime
 from pathlib import Path
 from typing import cast
 
-from .policy import LEAF_SECONDS, MAX_CAPTURE
+from .policy import LEAF_SECONDS, MAX_CAPTURE, MAX_TREE
 from .reports import Fault
 
 
@@ -59,14 +60,40 @@ class ProcessObservation:
         Actual bounded stderr prefix collected into this fresh caller-owned buffer.
     native_exit : int | None
         Observed native child exit, or None before child termination is observed.
+    native_completed_at : datetime | None
+        Aware UTC observation of actual owned child completion.
     """
 
     stdout: bytearray = field(default_factory=bytearray)
     stderr: bytearray = field(default_factory=bytearray)
     native_exit: int | None = None
+    native_completed_at: datetime | None = None
 
 
-async def capture(stream: asyncio.StreamReader, output: bytearray) -> bytes:
+async def observe_exit(child: asyncio.subprocess.Process, observation: ProcessObservation) -> int:
+    """Retain actual native completion time as soon as the owned child wait resolves.
+
+    Parameters
+    ----------
+    child : asyncio.subprocess.Process
+        Exact owned child, never a received PID.
+    observation : ProcessObservation
+        Fresh owning operation's private observation container.
+
+    Returns
+    -------
+    int
+        Actual native child exit, independent of later capture or validation.
+    """
+    result = await child.wait()
+    observation.native_completed_at = datetime.now(UTC)
+    observation.native_exit = result
+    return result
+
+
+async def capture(
+    stream: asyncio.StreamReader, output: bytearray, max_bytes: int = MAX_CAPTURE
+) -> bytes:
     """Drain one real pipe while enforcing its inclusive capture byte bound.
 
     Parameters
@@ -75,11 +102,13 @@ async def capture(stream: asyncio.StreamReader, output: bytearray) -> bytes:
         Owned native stdout/stderr reader drained in 8192-byte blocks.
     output : bytearray
         Caller-owned bytearray retaining the actual bounded prefix as bytes arrive.
+    max_bytes : int
+        Independently admitted inclusive ceiling for this pipe, shared across all its reads.
 
     Returns
     -------
     bytes
-        Complete pipe bytes when native EOF arrives within MAX_CAPTURE.
+        Complete pipe bytes when native EOF arrives within the selected ceiling.
 
     Raises
     ------
@@ -87,7 +116,7 @@ async def capture(stream: asyncio.StreamReader, output: bytearray) -> bytes:
         Raised as tool_output_limit before appending a block that exceeds the inclusive cap.
     """
     while block := await stream.read(8192):
-        if len(output) + len(block) > MAX_CAPTURE:
+        if len(output) + len(block) > max_bytes:
             raise Fault("tool_output_limit")
         output.extend(block)
     return bytes(output)
@@ -148,6 +177,7 @@ async def execute(
     cleanup: float,
     observation: ProcessObservation,
     environment: Mapping[str, str] | None = None,
+    max_capture_bytes: int = MAX_CAPTURE,
 ) -> ProcessResult:
     """Own an exec-only child, both readers and inclusive deadline-bounded cleanup.
 
@@ -165,6 +195,8 @@ async def execute(
         Fresh caller-owned raw pipe prefixes and native child exit container.
     environment : Mapping[str, str] | None
         Explicit trusted child environment, or inherited environment when None; original five-argument calls remain supported.
+    max_capture_bytes : int
+        Independently selected per-pipe ceiling, checked before every buffered append.
 
     Returns
     -------
@@ -189,12 +221,12 @@ async def execute(
     except OSError as error:
         raise Fault("tool_unavailable", exit_code=3) from error
     stdout = asyncio.create_task(
-        capture(cast(asyncio.StreamReader, child.stdout), observation.stdout)
+        capture(cast(asyncio.StreamReader, child.stdout), observation.stdout, max_capture_bytes)
     )
     stderr = asyncio.create_task(
-        capture(cast(asyncio.StreamReader, child.stderr), observation.stderr)
+        capture(cast(asyncio.StreamReader, child.stderr), observation.stderr, max_capture_bytes)
     )
-    wait = asyncio.create_task(child.wait())
+    wait = asyncio.create_task(observe_exit(child, observation))
     tasks = (stdout, stderr, wait)
     try:
         observed = await asyncio.wait_for(
@@ -212,6 +244,8 @@ async def execute(
             await terminate_group(child, total_deadline)
         finally:
             observation.native_exit = child.returncode
+            if child.returncode is not None and observation.native_completed_at is None:
+                observation.native_completed_at = datetime.now(UTC)
 
 
 def run_process(
@@ -221,6 +255,7 @@ def run_process(
     *,
     observation: ProcessObservation | None = None,
     environment: Mapping[str, str] | None = None,
+    max_capture_bytes: int = MAX_CAPTURE,
 ) -> ProcessResult:
     """Execute caller-authorised arguments with no shell or repository callback.
 
@@ -243,6 +278,9 @@ def run_process(
         Optional fresh empty evidence container for actual stdout/stderr prefixes and native exit.
     environment : Mapping[str, str] | None
         Explicit trusted environment or inherited caller environment; caller signal masks are restored before exec.
+    max_capture_bytes : int
+        Exact positive per-pipe byte ceiling, at most half the whole-operation tree budget.
+        The default preserves MAX_CAPTURE; two complete captures fit within MAX_TREE.
 
     Returns
     -------
@@ -260,10 +298,17 @@ def run_process(
         or not math.isfinite(timeout)
         or timeout <= 0
         or timeout > LEAF_SECONDS
+        or type(max_capture_bytes) is not int
+        or not 0 < max_capture_bytes <= MAX_TREE // 2
     ):
         raise Fault("configuration_invalid", exit_code=4)
     observed = observation if observation is not None else ProcessObservation()
-    if observed.stdout or observed.stderr or observed.native_exit is not None:
+    if (
+        observed.stdout
+        or observed.stderr
+        or observed.native_exit is not None
+        or observed.native_completed_at is not None
+    ):
         raise Fault("configuration_invalid", exit_code=4)
     total_deadline = time.monotonic() + timeout
     cleanup = min(4.0, timeout / 2)
@@ -277,7 +322,9 @@ def run_process(
         with asyncio.Runner() as runner:
             signal.pthread_sigmask(signal.SIG_SETMASK, previous_mask)
             return runner.run(
-                execute(command, root, total_deadline, cleanup, observed, environment)
+                execute(
+                    command, root, total_deadline, cleanup, observed, environment, max_capture_bytes
+                )
             )
     finally:
         signal.pthread_sigmask(signal.SIG_SETMASK, previous_mask)

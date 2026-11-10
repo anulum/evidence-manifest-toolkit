@@ -19,11 +19,13 @@ import time
 from pathlib import Path
 
 from .identity import SPDX_PREFIX
-from .inputs import json_object, read_bytes, read_text
+from .inputs import parse_json, read_bytes, read_text
 from .inventory import owned_tree
-from .policy import ASSETS, HEADER, LEAF_SECONDS, LICENCE_SHA256, MAX_FILE, PROVENANCE_SHA256
+from .ownership_header import has_native_header
+from .policy import ASSETS, LEAF_SECONDS, LICENCE_SHA256, MAX_FILE, MAX_TREE, PROVENANCE_SHA256
 from .processes import ProcessResult, run_process
 from .reports import Fault, Report
+from .source_materials import check_source_material
 
 COPYRIGHTS = (
     "SPDX-FileCopyrightText: 1996-2026 Miroslav Šotek <protoscience@anulum.li> (concepts)",
@@ -44,15 +46,13 @@ def header_check(name: str, text: str, report: Report) -> None:
         Receives exact ownership/header/SPDX conflicts without rewriting source.
     """
     if name.endswith((".md", ".html")):
-        expected = "<!--\n" + "\n".join(HEADER) + "\n-->"
-        if not text.startswith(expected):
+        if not has_native_header(text, style="invisible"):
             report.add("source_provenance.visible-header", name)
     elif name.endswith(".license"):
-        if not text.startswith("\n".join(HEADER) + "\n"):
+        if not has_native_header(text, style="bare"):
             report.add("source_provenance.wrong-notice", name)
     else:
-        expected = "\n".join("# " + line for line in HEADER)
-        if not text.startswith(expected):
+        if not has_native_header(text, style="comment"):
             code = (
                 "source_provenance.missing-spdx"
                 if SPDX_PREFIX not in text[:1000]
@@ -104,6 +104,8 @@ def analyse_reuse(root: Path, timeout: float = LEAF_SECONDS) -> ProcessResult:
     files. The absolute producer runs in isolated mode without executable
     discovery and never imports received code.
     Original and delivered bytes must still agree after the real producer exits.
+    Original source bytes plus both complete native capture ceilings share MAX_TREE;
+    the generic per-pipe default remains unchanged for every other producer.
 
     Parameters
     ----------
@@ -134,6 +136,9 @@ def analyse_reuse(root: Path, timeout: float = LEAF_SECONDS) -> ProcessResult:
     original = public_bytes(root, report)
     if report.exit_code:
         raise Fault("policy_refusal", exit_code=report.exit_code)
+    capture_budget = (MAX_TREE - sum(len(data) for data in original.values())) // 2
+    if capture_budget <= 0:
+        raise Fault("resource_limit")
     with tempfile.TemporaryDirectory(prefix="emt-reuse-") as temporary:
         directory = Path(temporary)
         for name, data in original.items():
@@ -147,6 +152,7 @@ def analyse_reuse(root: Path, timeout: float = LEAF_SECONDS) -> ProcessResult:
             [sys.executable, "-I", "-m", "reuse", "--root", str(directory), "lint", "--json"],
             directory,
             remaining,
+            max_capture_bytes=capture_budget,
             environment={
                 **os.environ,
                 "PATH": os.devnull,
@@ -182,6 +188,8 @@ def verify(root: Path, report: Report) -> None:
         if name.startswith("docs/internal/"):
             continue
         try:
+            if check_source_material(root, name, report):
+                continue
             if name in ASSETS:
                 if hashlib.sha256(read_bytes(root, name, MAX_FILE)).hexdigest() != ASSETS[name]:
                     report.add("source_provenance.third-party", name)
@@ -192,18 +200,26 @@ def verify(root: Path, report: Report) -> None:
                         report.add("source_provenance.third-party", name)
                 continue
             if name.lower().endswith(".json"):
-                value = json_object(root, name)
+                value = parse_json(read_bytes(root, name), name)
                 sidecar_name = name + ".license"
                 if sidecar_name not in files:
                     report.add("source_provenance.json-sidecar", name)
                     continue
                 sidecar = read_text(root, sidecar_name)
-                if any(line not in sidecar.splitlines() for line in COPYRIGHTS):
+                if not check_source_material(root, sidecar_name, report) and any(
+                    line not in sidecar.splitlines() for line in COPYRIGHTS
+                ):
                     report.add("source_provenance.copyright-record", sidecar_name)
                 for key in ("SPDX-License-Identifier", "spdx_license_identifier"):
-                    if key in value and value[key] != "AGPL-3.0-or-later":
+                    if (
+                        isinstance(value, dict)
+                        and key in value
+                        and value[key] != "AGPL-3.0-or-later"
+                    ):
                         report.add("source_provenance.conflicting-spdx", name)
                 if name == "capability-inventory.json":
+                    if not isinstance(value, dict):
+                        raise Fault("configuration_invalid", name, 4)
                     source = value.get("source_metadata")
                     digest = hashlib.sha256(read_bytes(root, "repository-domain.json")).hexdigest()
                     if source != {"path": "repository-domain.json", "sha256": digest}:

@@ -135,6 +135,8 @@ def main(gate: str, arguments: list[str] | None = None) -> int:
             metavar="ROOT_RELATIVE_JSON_FILE",
             help="also require all six caller-supplied workflow outcomes to be success",
         )
+    if gate == "dependency_alignment":
+        parser.add_argument("--produce-audit", action="store_true")
     if gate == "repository_inventory":
         parser.add_argument("--mode", choices=["verify", "generate"], default="verify")
         parser.add_argument("--output")
@@ -143,6 +145,8 @@ def main(gate: str, arguments: list[str] | None = None) -> int:
     previous = signal.signal(signal.SIGTERM, interrupted)
     try:
         options = parser.parse_args(arguments)
+        if gate == "dependency_alignment" and arguments.count("--produce-audit") > 1:
+            raise Fault("invocation_invalid", exit_code=4)
         if gate == "repository_inventory":
             if (options.mode == "generate") != bool(options.output):
                 raise Fault("invocation_invalid", exit_code=4)
@@ -156,7 +160,15 @@ def main(gate: str, arguments: list[str] | None = None) -> int:
         elif gate == "workflow_policy":
             from .workflows import verify
         elif gate == "dependency_alignment":
+            if options.produce_audit:
+                from .audit_producer import produce
+
+                report.scope = "audit_produce"
+                produce(root, report)
+                return report.emit(json_mode)
             from .dependencies import verify
+        elif gate == "static_security":
+            from .static_security import verify
         elif gate == "documentation":
             from .documentation import verify
         elif gate == "repository_inventory":

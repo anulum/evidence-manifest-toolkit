@@ -1,0 +1,1499 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Complete native authority successor source, proposal r6",
+  "description": "CONTRACT_CHANGE_PROPOSAL_NOT_ADOPTED revision3. Default selected-common-policy success, separate class carrier; protected machinery deferred. No live registration. Exact consumer bindings and class-bearing private Clock formats accompany this revision; no live registration. R5 explicitly restricts each control purpose to its whole native target; the complete independent control method remains mandatory.",
+  "oneOf": [
+    {
+      "$ref": "#/$defs/policy"
+    },
+    {
+      "$ref": "#/$defs/authority_grant"
+    },
+    {
+      "$ref": "#/$defs/delegated_certificate"
+    },
+    {
+      "$ref": "#/$defs/authority_rotation"
+    },
+    {
+      "$ref": "#/$defs/authority_snapshot"
+    },
+    {
+      "$ref": "#/$defs/signed_statement"
+    },
+    {
+      "$ref": "#/$defs/identity_binding"
+    },
+    {
+      "$ref": "#/$defs/validation_body"
+    },
+    {
+      "$ref": "#/$defs/validation_record"
+    },
+    {
+      "$ref": "#/$defs/foreign_run_identity"
+    }
+  ],
+  "$defs": {
+    "blob": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "digest": {
+          "type": "string",
+          "pattern": "^sha256:[0-9a-f]{64}$"
+        },
+        "byte_length": {
+          "type": "string",
+          "pattern": "^(0|[1-9][0-9]*)$",
+          "maxLength": 256
+        },
+        "media_type": {
+          "type": "string",
+          "minLength": 1
+        },
+        "digest_basis": {
+          "enum": [
+            "raw_bytes",
+            "jcs_content"
+          ]
+        },
+        "schema_id": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "digest",
+        "byte_length",
+        "media_type",
+        "digest_basis"
+      ]
+    },
+    "scope": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "group_ids": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "principal_ids": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "roles": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "tool_segments": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "permitted_operations": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "enum": [
+              "evidence",
+              "deployment",
+              "human_review",
+              "issue_certificate",
+              "issue_snapshot",
+              "revoke_descendants",
+              "rotate_authority"
+            ]
+          }
+        }
+      },
+      "required": [
+        "group_ids",
+        "principal_ids",
+        "roles",
+        "tool_segments",
+        "permitted_operations"
+      ]
+    },
+    "lifetime": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "enum": [
+            "finite",
+            "until_withdrawal"
+          ]
+        },
+        "not_before": {
+          "type": "string",
+          "format": "date-time",
+          "pattern": "Z$"
+        },
+        "not_after": {
+          "anyOf": [
+            {
+              "type": "string",
+              "format": "date-time",
+              "pattern": "Z$"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "kind",
+        "not_before",
+        "not_after"
+      ],
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "kind": {
+                "const": "finite"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "not_after": {
+                "type": "string",
+                "format": "date-time",
+                "pattern": "Z$"
+              }
+            }
+          },
+          "else": {
+            "properties": {
+              "not_after": {
+                "type": "null"
+              }
+            }
+          }
+        }
+      ]
+    },
+    "policy": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "schema_id": {
+          "const": "evidence_manifest_toolkit.authority_policy.v2"
+        },
+        "namespace": {
+          "const": "EMT_AUTHORITY_SUCCESSOR_POLICY_V2"
+        },
+        "profile_class": {
+          "enum": [
+            "unsigned_declared",
+            "software_local_unprotected",
+            "protected_delegated"
+          ]
+        },
+        "whole_legacy_artifact_policy_ref": {
+          "$ref": "#/$defs/blob",
+          "description": "Invocation final whole ordinary P, reconstructed from the complete earlier B by changing only clock_qualification_ref to actual W; durable r6 rule separately binds whole_legacy_base_policy_ref=B. Full equality law is mandatory."
+        },
+        "authority_rule_ref": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/blob"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "root_grant_ref": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/blob"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "identity_rule_ref": {
+          "$ref": "#/$defs/blob"
+        },
+        "validation_rule_ref": {
+          "$ref": "#/$defs/blob"
+        },
+        "foreign_rule_ref": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/blob"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "independent_foreign_trust_ref": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/blob"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "minimum_identity_class": {
+          "enum": [
+            "declared_by_launcher_under_the_seat_account",
+            "vendor_by_client_program_only",
+            "endpoint_observed"
+          ]
+        },
+        "allowed_nonuse_classes": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "enum": [
+              "procedural_nonuse",
+              "enforced_isolation"
+            ]
+          }
+        },
+        "whole_conditions_and_limitations_ref": {
+          "$ref": "#/$defs/blob"
+        },
+        "signature_obligation_rule_ref": {
+          "$ref": "#/$defs/blob"
+        }
+      },
+      "required": [
+        "schema_id",
+        "namespace",
+        "profile_class",
+        "whole_legacy_artifact_policy_ref",
+        "authority_rule_ref",
+        "root_grant_ref",
+        "identity_rule_ref",
+        "validation_rule_ref",
+        "foreign_rule_ref",
+        "independent_foreign_trust_ref",
+        "minimum_identity_class",
+        "allowed_nonuse_classes",
+        "whole_conditions_and_limitations_ref",
+        "signature_obligation_rule_ref"
+      ],
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "profile_class": {
+                "const": "protected_delegated"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "authority_rule_ref": {
+                "$ref": "#/$defs/blob"
+              },
+              "root_grant_ref": {
+                "$ref": "#/$defs/blob"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "profile_class": {
+                "const": "unsigned_declared"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "root_grant_ref": {
+                "type": "null"
+              },
+              "authority_rule_ref": {
+                "type": "null"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "profile_class": {
+                "const": "software_local_unprotected"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "root_grant_ref": {
+                "type": "null"
+              },
+              "authority_rule_ref": {
+                "$ref": "#/$defs/blob"
+              }
+            }
+          }
+        }
+      ]
+    },
+    "authority_grant": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "schema_id": {
+          "const": "evidence_manifest_toolkit.authority_grant.v2"
+        },
+        "authority_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "root_key_id": {
+          "type": "string",
+          "pattern": "^ed25519:[0-9a-f]{64}$"
+        },
+        "initial_issuer_key_id": {
+          "type": "string",
+          "pattern": "^ed25519:[0-9a-f]{64}$"
+        },
+        "initial_issuer_public_key_ref": {
+          "$ref": "#/$defs/blob"
+        },
+        "automation_policy_ref": {
+          "$ref": "#/$defs/blob"
+        },
+        "protected_controller_custody_ref": {
+          "$ref": "#/$defs/blob"
+        },
+        "scope": {
+          "$ref": "#/$defs/scope"
+        },
+        "remaining_path_length": {
+          "type": "string",
+          "pattern": "^(0|[1-9][0-9]*)$",
+          "maxLength": 256
+        },
+        "lifetime": {
+          "$ref": "#/$defs/lifetime"
+        },
+        "rotation_rule_ref": {
+          "$ref": "#/$defs/blob"
+        },
+        "root_selection_source_ref": {
+          "$ref": "#/$defs/blob"
+        },
+        "serial": {
+          "type": "string",
+          "pattern": "^(0|[1-9][0-9]*)$",
+          "maxLength": 256
+        },
+        "owner_revocation_only_path_ref": {
+          "$ref": "#/$defs/blob"
+        }
+      },
+      "required": [
+        "schema_id",
+        "authority_id",
+        "root_key_id",
+        "initial_issuer_key_id",
+        "initial_issuer_public_key_ref",
+        "automation_policy_ref",
+        "protected_controller_custody_ref",
+        "scope",
+        "remaining_path_length",
+        "lifetime",
+        "rotation_rule_ref",
+        "root_selection_source_ref",
+        "serial",
+        "owner_revocation_only_path_ref"
+      ]
+    },
+    "delegated_certificate": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "schema_id": {
+          "const": "evidence_manifest_toolkit.delegated_certificate.v2"
+        },
+        "authority_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "parent_authorization_ref": {
+          "$ref": "#/$defs/blob"
+        },
+        "issuer_key_id": {
+          "type": "string",
+          "pattern": "^ed25519:[0-9a-f]{64}$"
+        },
+        "subject_key_id": {
+          "type": "string",
+          "pattern": "^ed25519:[0-9a-f]{64}$"
+        },
+        "subject_public_key_ref": {
+          "$ref": "#/$defs/blob"
+        },
+        "identity_custody_source_ref": {
+          "$ref": "#/$defs/blob"
+        },
+        "scope": {
+          "$ref": "#/$defs/scope"
+        },
+        "remaining_path_length": {
+          "type": "string",
+          "pattern": "^(0|[1-9][0-9]*)$",
+          "maxLength": 256
+        },
+        "not_before": {
+          "type": "string",
+          "format": "date-time",
+          "pattern": "Z$"
+        },
+        "not_after": {
+          "type": "string",
+          "format": "date-time",
+          "pattern": "Z$"
+        },
+        "serial": {
+          "type": "string",
+          "pattern": "^(0|[1-9][0-9]*)$",
+          "maxLength": 256
+        }
+      },
+      "required": [
+        "schema_id",
+        "authority_id",
+        "parent_authorization_ref",
+        "issuer_key_id",
+        "subject_key_id",
+        "subject_public_key_ref",
+        "identity_custody_source_ref",
+        "scope",
+        "remaining_path_length",
+        "not_before",
+        "not_after",
+        "serial"
+      ]
+    },
+    "authority_rotation": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "schema_id": {
+          "const": "evidence_manifest_toolkit.authority_rotation.v2"
+        },
+        "authority_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "root_grant_ref": {
+          "$ref": "#/$defs/blob"
+        },
+        "previous_rotation_ref": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/blob"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "old_key_id": {
+          "type": "string",
+          "pattern": "^ed25519:[0-9a-f]{64}$"
+        },
+        "new_key_id": {
+          "type": "string",
+          "pattern": "^ed25519:[0-9a-f]{64}$"
+        },
+        "new_public_key_ref": {
+          "$ref": "#/$defs/blob"
+        },
+        "actual_generation_custody_ref": {
+          "$ref": "#/$defs/blob"
+        },
+        "controller_ref": {
+          "$ref": "#/$defs/blob"
+        },
+        "effective_at": {
+          "type": "string",
+          "format": "date-time",
+          "pattern": "Z$"
+        },
+        "rotation_sequence": {
+          "type": "string",
+          "pattern": "^[1-9][0-9]*$",
+          "maxLength": 256
+        },
+        "unchanged_scope_ref": {
+          "$ref": "#/$defs/blob"
+        }
+      },
+      "required": [
+        "schema_id",
+        "authority_id",
+        "root_grant_ref",
+        "previous_rotation_ref",
+        "old_key_id",
+        "new_key_id",
+        "new_public_key_ref",
+        "actual_generation_custody_ref",
+        "controller_ref",
+        "effective_at",
+        "rotation_sequence",
+        "unchanged_scope_ref"
+      ]
+    },
+    "authority_snapshot": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "schema_id": {
+          "const": "evidence_manifest_toolkit.authority_snapshot.v2"
+        },
+        "authority_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "root_grant_ref": {
+          "$ref": "#/$defs/blob"
+        },
+        "current_issuer_key_id": {
+          "type": "string",
+          "pattern": "^ed25519:[0-9a-f]{64}$"
+        },
+        "current_rotation_ref": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/blob"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "sequence": {
+          "type": "string",
+          "pattern": "^(0|[1-9][0-9]*)$",
+          "maxLength": 256
+        },
+        "issued_at": {
+          "type": "string",
+          "format": "date-time",
+          "pattern": "Z$"
+        },
+        "expires_at": {
+          "type": "string",
+          "format": "date-time",
+          "pattern": "Z$"
+        },
+        "certificate_refs": {
+          "type": "array",
+          "minItems": 0,
+          "items": {
+            "$ref": "#/$defs/blob"
+          }
+        },
+        "identity_rule_refs": {
+          "type": "array",
+          "minItems": 0,
+          "items": {
+            "$ref": "#/$defs/blob"
+          }
+        },
+        "registry_ref": {
+          "$ref": "#/$defs/blob"
+        },
+        "revocations": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "target_kind": {
+                "enum": [
+                  "key",
+                  "certificate",
+                  "authority_scope"
+                ]
+              },
+              "target_ref": {
+                "$ref": "#/$defs/blob"
+              },
+              "reason": {
+                "enum": [
+                  "compromise",
+                  "retirement",
+                  "policy_change"
+                ]
+              },
+              "reported_at": {
+                "type": "string",
+                "format": "date-time",
+                "pattern": "Z$"
+              },
+              "compromise_window": {
+                "enum": [
+                  "known",
+                  "unknown"
+                ]
+              },
+              "compromise_time_bounds_ref": {
+                "anyOf": [
+                  {
+                    "$ref": "#/$defs/blob"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              }
+            },
+            "required": [
+              "target_kind",
+              "target_ref",
+              "reason",
+              "reported_at",
+              "compromise_window",
+              "compromise_time_bounds_ref"
+            ],
+            "allOf": [
+              {
+                "if": {
+                  "properties": {
+                    "compromise_window": {
+                      "const": "known"
+                    }
+                  }
+                },
+                "then": {
+                  "properties": {
+                    "compromise_time_bounds_ref": {
+                      "$ref": "#/$defs/blob"
+                    }
+                  }
+                },
+                "else": {
+                  "properties": {
+                    "compromise_time_bounds_ref": {
+                      "type": "null"
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        },
+        "previous_snapshot_ref": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/blob"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "schema_id",
+        "authority_id",
+        "root_grant_ref",
+        "current_issuer_key_id",
+        "current_rotation_ref",
+        "sequence",
+        "issued_at",
+        "expires_at",
+        "certificate_refs",
+        "identity_rule_refs",
+        "registry_ref",
+        "revocations",
+        "previous_snapshot_ref"
+      ]
+    },
+    "signed_statement": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "schema_id": {
+          "const": "evidence_manifest_toolkit.signed_statement.v2"
+        },
+        "profile_id": {
+          "const": "evidence_manifest_toolkit.jcs_sha256_ed25519.authority_v2"
+        },
+        "canonical_profile": {
+          "const": "rfc8785-jcs-v1"
+        },
+        "digest_algorithm": {
+          "const": "sha256"
+        },
+        "content_schema_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "content_digest": {
+          "type": "string",
+          "pattern": "^sha256:[0-9a-f]{64}$"
+        },
+        "content_byte_length": {
+          "type": "string",
+          "pattern": "^(0|[1-9][0-9]*)$",
+          "maxLength": 256
+        },
+        "signer_key_id": {
+          "type": "string",
+          "pattern": "^ed25519:[0-9a-f]{64}$"
+        },
+        "purpose": {
+          "enum": [
+            "evidence",
+            "deployment",
+            "human_review",
+            "issue_certificate",
+            "issue_snapshot",
+            "revoke_descendants",
+            "rotate_authority",
+            "authority_grant"
+          ]
+        },
+        "signature_context": {
+          "enum": [
+            "ordinary_statement",
+            "authority_control"
+          ]
+        },
+        "authorizing_state_ref": {
+          "$ref": "#/$defs/blob"
+        },
+        "authorization_ref": {
+          "$ref": "#/$defs/blob"
+        },
+        "scope_ref": {
+          "$ref": "#/$defs/blob"
+        },
+        "snapshot_ref": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/blob"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "claim_ids": {
+          "type": "array",
+          "minItems": 0,
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "claimed_signed_at": {
+          "type": "string",
+          "format": "date-time",
+          "pattern": "Z$"
+        }
+      },
+      "required": [
+        "schema_id",
+        "profile_id",
+        "canonical_profile",
+        "digest_algorithm",
+        "content_schema_id",
+        "content_digest",
+        "content_byte_length",
+        "signer_key_id",
+        "purpose",
+        "signature_context",
+        "authorizing_state_ref",
+        "authorization_ref",
+        "scope_ref",
+        "snapshot_ref",
+        "claim_ids",
+        "claimed_signed_at"
+      ],
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "signature_context": {
+                "const": "ordinary_statement"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "purpose": {
+                "enum": [
+                  "evidence",
+                  "deployment",
+                  "human_review"
+                ]
+              },
+              "snapshot_ref": {
+                "$ref": "#/$defs/blob"
+              },
+              "claim_ids": {
+                "type": "array",
+                "minItems": 1,
+                "uniqueItems": true,
+                "items": {
+                  "type": "string",
+                  "minLength": 1
+                }
+              }
+            }
+          },
+          "else": {
+            "properties": {
+              "purpose": {
+                "enum": [
+                  "issue_certificate",
+                  "issue_snapshot",
+                  "revoke_descendants",
+                  "rotate_authority",
+                  "authority_grant"
+                ]
+              },
+              "snapshot_ref": {
+                "type": "null"
+              },
+              "claim_ids": {
+                "type": "array",
+                "maxItems": 0
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "signature_context": {
+                "const": "authority_control"
+              },
+              "purpose": {
+                "const": "authority_grant"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "content_schema_id": {
+                "const": "evidence_manifest_toolkit.authority_grant.v2"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "signature_context": {
+                "const": "authority_control"
+              },
+              "purpose": {
+                "const": "issue_certificate"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "content_schema_id": {
+                "const": "evidence_manifest_toolkit.delegated_certificate.v2"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "signature_context": {
+                "const": "authority_control"
+              },
+              "purpose": {
+                "const": "rotate_authority"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "content_schema_id": {
+                "const": "evidence_manifest_toolkit.authority_rotation.v2"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "signature_context": {
+                "const": "authority_control"
+              },
+              "purpose": {
+                "const": "issue_snapshot"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "content_schema_id": {
+                "const": "evidence_manifest_toolkit.authority_snapshot.v2"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "signature_context": {
+                "const": "authority_control"
+              },
+              "purpose": {
+                "const": "revoke_descendants"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "content_schema_id": {
+                "const": "evidence_manifest_toolkit.authority_snapshot.v2"
+              }
+            }
+          }
+        }
+      ]
+    },
+    "identity_binding": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "schema_id": {
+          "const": "evidence_manifest_toolkit.identity_binding.v2"
+        },
+        "custody_class": {
+          "enum": [
+            "unsigned_declared",
+            "software_local_unprotected",
+            "protected_delegated"
+          ]
+        },
+        "identity_class": {
+          "enum": [
+            "declared_by_launcher_under_the_seat_account",
+            "vendor_by_client_program_only",
+            "endpoint_observed"
+          ]
+        },
+        "vendor_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "principal_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "declared_public_key_ref": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/blob"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "observer_or_launcher_ref": {
+          "$ref": "#/$defs/blob"
+        },
+        "whole_policy_ref": {
+          "$ref": "#/$defs/blob"
+        },
+        "actual_launch_or_declared_source_ref": {
+          "$ref": "#/$defs/blob"
+        },
+        "process_identity_ref": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/blob"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "key_possession_ref": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/blob"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "endpoint_observation_ref": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/blob"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "client_reported_native_identity_ref": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/blob"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "limitations": {
+          "type": "array",
+          "minItems": 0,
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      },
+      "required": [
+        "schema_id",
+        "custody_class",
+        "identity_class",
+        "vendor_id",
+        "principal_id",
+        "declared_public_key_ref",
+        "observer_or_launcher_ref",
+        "whole_policy_ref",
+        "actual_launch_or_declared_source_ref",
+        "process_identity_ref",
+        "key_possession_ref",
+        "endpoint_observation_ref",
+        "client_reported_native_identity_ref",
+        "limitations"
+      ],
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "identity_class": {
+                "const": "endpoint_observed"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "process_identity_ref": {
+                "$ref": "#/$defs/blob"
+              },
+              "key_possession_ref": {
+                "$ref": "#/$defs/blob"
+              },
+              "endpoint_observation_ref": {
+                "$ref": "#/$defs/blob"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "identity_class": {
+                "const": "vendor_by_client_program_only"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "process_identity_ref": {
+                "$ref": "#/$defs/blob"
+              },
+              "key_possession_ref": {
+                "$ref": "#/$defs/blob"
+              },
+              "endpoint_observation_ref": {
+                "type": "null"
+              }
+            }
+          }
+        }
+      ]
+    },
+    "validation_body": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "schema_id": {
+          "const": "evidence_manifest_toolkit.independent_validation_body.v2"
+        },
+        "subject_ref": {
+          "$ref": "#/$defs/blob"
+        },
+        "claim_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "whole_policy_ref": {
+          "$ref": "#/$defs/blob"
+        },
+        "custody_class": {
+          "enum": [
+            "unsigned_declared",
+            "software_local_unprotected",
+            "protected_delegated"
+          ]
+        },
+        "producer_binding_ref": {
+          "$ref": "#/$defs/blob"
+        },
+        "runner_binding_ref": {
+          "$ref": "#/$defs/blob"
+        },
+        "runner_actual_key_ref": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/blob"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "nonuse_class": {
+          "enum": [
+            "procedural_nonuse",
+            "enforced_isolation"
+          ]
+        },
+        "committed_code_recipe_environment_ref": {
+          "$ref": "#/$defs/blob"
+        },
+        "ordered_original_input_refs": {
+          "type": "array",
+          "minItems": 0,
+          "items": {
+            "$ref": "#/$defs/blob"
+          }
+        },
+        "actual_run_provenance_ref": {
+          "$ref": "#/$defs/blob"
+        },
+        "raw_output_and_diagnostics_refs": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/blob"
+          }
+        },
+        "dispatch_clock_witness_ref": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/blob"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "retrieval_clock_witness_ref": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/blob"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "raw_runner_times_ref": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/blob"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "sealed_independent_output_ref": {
+          "$ref": "#/$defs/blob"
+        },
+        "comparison_release_order_ref": {
+          "$ref": "#/$defs/blob"
+        },
+        "comparison_rule_ref": {
+          "$ref": "#/$defs/blob"
+        },
+        "producer_output_refs": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/blob"
+          }
+        },
+        "whole_comparison_evidence_ref": {
+          "$ref": "#/$defs/blob"
+        },
+        "outcome": {
+          "enum": [
+            "agree",
+            "diverge",
+            "inconclusive",
+            "unsupported",
+            "unclassifiable"
+          ]
+        },
+        "limitations": {
+          "type": "array",
+          "minItems": 0,
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      },
+      "required": [
+        "schema_id",
+        "subject_ref",
+        "claim_id",
+        "whole_policy_ref",
+        "custody_class",
+        "producer_binding_ref",
+        "runner_binding_ref",
+        "runner_actual_key_ref",
+        "nonuse_class",
+        "committed_code_recipe_environment_ref",
+        "ordered_original_input_refs",
+        "actual_run_provenance_ref",
+        "raw_output_and_diagnostics_refs",
+        "dispatch_clock_witness_ref",
+        "retrieval_clock_witness_ref",
+        "raw_runner_times_ref",
+        "sealed_independent_output_ref",
+        "comparison_release_order_ref",
+        "comparison_rule_ref",
+        "producer_output_refs",
+        "whole_comparison_evidence_ref",
+        "outcome",
+        "limitations"
+      ]
+    },
+    "validation_record": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "schema_id": {
+          "const": "evidence_manifest_toolkit.independent_validation_record.v2"
+        },
+        "body_ref": {
+          "$ref": "#/$defs/blob"
+        },
+        "subject_ref": {
+          "$ref": "#/$defs/blob"
+        },
+        "claim_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "whole_policy_ref": {
+          "$ref": "#/$defs/blob"
+        },
+        "evidence_class": {
+          "enum": [
+            "unsigned_declared_reproduction",
+            "software_local_reproduction",
+            "protected_native_seat_reproduction",
+            "github_hosted_verified_run_identity"
+          ]
+        },
+        "validation_C0_statement_ref": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/blob"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "ordered_native_receipt_refs": {
+          "type": "array",
+          "minItems": 0,
+          "items": {
+            "$ref": "#/$defs/blob"
+          }
+        },
+        "foreign_run_identity_ref": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/blob"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "whole_conditions_and_limitations_ref": {
+          "$ref": "#/$defs/blob"
+        }
+      },
+      "required": [
+        "schema_id",
+        "body_ref",
+        "subject_ref",
+        "claim_id",
+        "whole_policy_ref",
+        "evidence_class",
+        "validation_C0_statement_ref",
+        "ordered_native_receipt_refs",
+        "foreign_run_identity_ref",
+        "whole_conditions_and_limitations_ref"
+      ],
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "evidence_class": {
+                "const": "protected_native_seat_reproduction"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "validation_C0_statement_ref": {
+                "$ref": "#/$defs/blob"
+              },
+              "ordered_native_receipt_refs": {
+                "type": "array",
+                "minItems": 1,
+                "items": {
+                  "$ref": "#/$defs/blob"
+                }
+              },
+              "foreign_run_identity_ref": {
+                "type": "null"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "evidence_class": {
+                "const": "github_hosted_verified_run_identity"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "foreign_run_identity_ref": {
+                "$ref": "#/$defs/blob"
+              }
+            }
+          }
+        }
+      ]
+    },
+    "foreign_run_identity": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "schema_id": {
+          "const": "evidence_manifest_toolkit.foreign_run_identity.v1"
+        },
+        "evidence_class": {
+          "const": "github_hosted_verified_run_identity"
+        },
+        "attested_raw_artifact_ref": {
+          "$ref": "#/$defs/blob"
+        },
+        "full_bundle_ref": {
+          "$ref": "#/$defs/blob"
+        },
+        "independent_trusted_root_ref": {
+          "$ref": "#/$defs/blob"
+        },
+        "whole_foreign_rule_ref": {
+          "$ref": "#/$defs/blob"
+        },
+        "maintained_verifier_inventory_ref": {
+          "$ref": "#/$defs/blob"
+        },
+        "whole_actual_verification_inputs_outputs_ref": {
+          "$ref": "#/$defs/blob"
+        },
+        "authenticated_repository_identity_ref": {
+          "$ref": "#/$defs/blob"
+        },
+        "authenticated_workflow_commit_identity_ref": {
+          "$ref": "#/$defs/blob"
+        },
+        "authenticated_hosted_run_attempt_identity_ref": {
+          "$ref": "#/$defs/blob"
+        },
+        "verified_timestamps_source_ref": {
+          "$ref": "#/$defs/blob"
+        },
+        "limitations": {
+          "type": "array",
+          "minItems": 0,
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      },
+      "required": [
+        "schema_id",
+        "evidence_class",
+        "attested_raw_artifact_ref",
+        "full_bundle_ref",
+        "independent_trusted_root_ref",
+        "whole_foreign_rule_ref",
+        "maintained_verifier_inventory_ref",
+        "whole_actual_verification_inputs_outputs_ref",
+        "authenticated_repository_identity_ref",
+        "authenticated_workflow_commit_identity_ref",
+        "authenticated_hosted_run_attempt_identity_ref",
+        "verified_timestamps_source_ref",
+        "limitations"
+      ]
+    }
+  }
+}

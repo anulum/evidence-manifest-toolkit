@@ -1,0 +1,11 @@
+--- rfc8785/_impl.py
++++ rfc8785/_impl.py
+@@ -81,7 +81,7 @@
+     Serialize a string as a JSON string, per RFC 8785 3.2.2.2.
+     """
+ 
+-    def _replace(match: re.Match) -> str:
++    def _replace(match: re.Match[str]) -> str:
+         return _ESCAPE_DCT[match.group(0)]
+ 
+     sink.write(b'"')

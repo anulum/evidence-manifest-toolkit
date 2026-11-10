@@ -200,3 +200,77 @@ def closed_stdout(gate: str, root: Path) -> int:
         os.close(writer)
     assert b"private-sentinel" not in result.stderr
     return result.returncode
+
+
+@pytest.fixture
+def audited_clone(root: Path) -> Path:
+    """Copy genuine original local admission objects into a distinct owned installation."""
+    source = SOURCE / ".tool-cache/security-admissions"
+    target = root / ".tool-cache/security-admissions"
+    target.mkdir()
+    shutil.copytree(source / "objects", target / "objects")
+    shutil.copyfile(source / "HEAD.json", target / "HEAD.json")
+    shutil.copyfile(source / "admission.lock", target / "admission.lock")
+    return root
+
+
+def clone_dependency(root: Path, *arguments: str) -> subprocess.CompletedProcess[bytes]:
+    """Exercise the cloned real implementation so its actual installation owns its store."""
+    return subprocess.run(
+        source_python(
+            str(root / "tools/check_dependency_alignment.py"),
+            "--root",
+            str(root),
+            "--json",
+            *arguments,
+        ),
+        cwd=root,
+        capture_output=True,
+        timeout=120,
+    )
+
+
+def adverse_audit_receipt(root: Path, changes: dict[str, Json]) -> None:
+    """Publish only an explicitly adverse owned fixture, never a synthetic passing receipt."""
+    store = root / ".tool-cache/security-admissions"
+    head = cast(dict[str, Json], json.loads((store / "HEAD.json").read_bytes()))
+    selector = head["receipt_sha256"]
+    assert isinstance(selector, str)
+    receipt = cast(
+        dict[str, Json], json.loads((store / "objects" / (selector + ".json")).read_bytes())
+    )
+    assert changes and any(
+        type(receipt.get(key)) is not type(value) or receipt.get(key) != value
+        for key, value in changes.items()
+    )
+    receipt["installation_sha256"] = hashlib.sha256(
+        b"emt.trusted-installation.v1\0" + str(root.resolve()).encode()
+    ).hexdigest()
+    receipt.update(changes)
+    data = (json.dumps(receipt, sort_keys=True) + "\n").encode()
+    new_selector = hashlib.sha256(data).hexdigest()
+    (store / "objects" / (new_selector + ".json")).write_bytes(data)
+    head["receipt_sha256"] = new_selector
+    (store / "HEAD.json").write_text(json.dumps(head) + "\n")
+
+
+@pytest.fixture(scope="module")
+def actual_strace() -> Path:
+    """Require the genuine pinned Ubuntu fixture; absence never simulates success."""
+    base = SOURCE / ".tool-cache/native-fixtures/strace-6.8-0ubuntu2"
+    executable = base / "extracted/usr/bin/strace"
+    if not executable.is_file():
+        pytest.exit("Required native strace fixture is unavailable.", returncode=3)
+    assert not any(path.is_symlink() for path in (executable, *executable.parents[:-1]))
+    assert hashlib.sha256(executable.read_bytes()).hexdigest() == (
+        "28f957c227012de0b18d1bd7fff2d396cb693ea60ed8013be68de071e84b5001"
+    )
+    copyright_file = base / "extracted/usr/share/doc/strace/copyright"
+    assert hashlib.sha256(copyright_file.read_bytes()).hexdigest() == (
+        "40e4ca01654c733c06fabee65168da4c177117b1bd084f3a752bc8a989736e04"
+    )
+    version = subprocess.run(
+        [str(executable), "--version"], capture_output=True, timeout=10, check=True
+    )
+    assert b"strace -- version 6.8" in version.stdout
+    return executable

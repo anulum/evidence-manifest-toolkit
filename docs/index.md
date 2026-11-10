@@ -10,9 +10,9 @@ EVIDENCE-MANIFEST-TOOLKIT — source and configuration provenance
 
 # Evidence Manifest Toolkit
 
-This repository provides local validation infrastructure for a planned evidence-manifest boundary. Its maturity is `architecture_only`; it has no qualified evidence runtime or released signing service.
+This repository provides local validation infrastructure and an evidence runtime under development. Read the [Python API](api.md) for the six source operations and immutable values, and the [Offline CLI](offline-cli.md) for four command grammars and complete output transport. Its maturity remains `architecture_only`, with no qualified runtime inventory or released signing service.
 
-Read [Architecture](ARCHITECTURE.md), [Validation tooling](validation-tooling.md), [Threat model](THREAT_MODEL.md) and the [Repository boundary decision](adr/0001-repository-boundary.md). All current reports cover finite local repository checks. Scientific acceptance remains with the corresponding evidence owner.
+Read [Architecture](ARCHITECTURE.md), [Validation tooling](validation-tooling.md), [Threat model](THREAT_MODEL.md) and the [Repository boundary decision](adr/0001-repository-boundary.md). Repository guard reports cover finite local repository checks. Evidence reports preserve separate common, domain and current results; scientific acceptance remains with the corresponding evidence owner.
 
 ![ANULUM](assets/anulum_logo_company.jpg)
 ![Fortis Studio](assets/fortis_studio_logo.jpg)

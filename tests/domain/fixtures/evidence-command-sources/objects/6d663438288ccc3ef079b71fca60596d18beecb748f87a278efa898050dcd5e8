@@ -1,0 +1,22 @@
+{
+  "namespace": "PROSPECTIVE_PUBLISHED_RFC_FIXTURE_ONLY_NOT_OPERATIONAL",
+  "required_claim_ids": [
+    "common8-author-input",
+    "common8-author-input-second"
+  ],
+  "required_purposes": [
+    "evidence"
+  ],
+  "required_principal": "published-public-test-vector-only",
+  "required_role": "author_input_fixture",
+  "required_segment": "evidence_manifest_toolkit",
+  "required_closure": "All original independently selected when_present/common/control references; preserve all optional absence diagnostics.",
+  "time_rule": "Explicit fixture point2026-10-03T12:00:00Z under original half-open snapshot/certificate windows, never actual trusted current clock.",
+  "root_and_key_rule": "Prior independent acceptance of the exact published fixture root/control namespace is a required future premise; these inputs do not authenticate operational keys or enroll hardware.",
+  "actual_accepted_configuration": false,
+  "source_chain_ref": {
+    "path": "custody/owner-acceptance/owner_acceptance_profiles_2026-10-02T234358Z/common8_fixture_local_signed_chain_design_2026-10-07/candidate10/baseline/complete_fixture_chain_input.author.json",
+    "byte_length": 20249,
+    "sha256": "95669327edd16c45b63efbf270a44cfacfd6f2a66cd399909e623a3f266f1f52"
+  }
+}

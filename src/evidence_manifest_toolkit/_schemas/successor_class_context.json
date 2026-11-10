@@ -1,0 +1,182 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Separate successor class-context presentation, private r4",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "format_version": {
+      "const": "emt-successor-class-context-presentation-r4"
+    },
+    "report_raw_sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "report_raw_byte_length": {
+      "type": "string",
+      "pattern": "^(0|[1-9][0-9]*)$",
+      "maxLength": 256
+    },
+    "content_ref": {
+      "$ref": "#/$defs/blob"
+    },
+    "policy_ref": {
+      "$ref": "#/$defs/blob"
+    },
+    "evaluated_claim_ids": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "claim_classes": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "claim_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "class_state": {
+            "enum": [
+              "resolved",
+              "unavailable",
+              "legacy_unspecified"
+            ]
+          },
+          "tuple": {
+            "anyOf": [
+              {
+                "$ref": "#/$defs/class_tuple"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "whole_source_refs": {
+            "type": "array",
+            "items": {
+              "$ref": "#/$defs/blob"
+            }
+          }
+        },
+        "required": [
+          "claim_id",
+          "class_state",
+          "tuple",
+          "whole_source_refs"
+        ],
+        "allOf": [
+          {
+            "if": {
+              "properties": {
+                "class_state": {
+                  "const": "resolved"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "tuple": {
+                  "$ref": "#/$defs/class_tuple"
+                }
+              }
+            },
+            "else": {
+              "properties": {
+                "tuple": {
+                  "type": "null"
+                }
+              }
+            }
+          }
+        ]
+      }
+    }
+  },
+  "required": [
+    "format_version",
+    "report_raw_sha256",
+    "report_raw_byte_length",
+    "content_ref",
+    "policy_ref",
+    "evaluated_claim_ids",
+    "claim_classes"
+  ],
+  "$defs": {
+    "blob": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "digest": {
+          "type": "string",
+          "pattern": "^sha256:[0-9a-f]{64}$"
+        },
+        "byte_length": {
+          "type": "string",
+          "pattern": "^(0|[1-9][0-9]*)$",
+          "maxLength": 256
+        },
+        "media_type": {
+          "type": "string",
+          "minLength": 1
+        },
+        "digest_basis": {
+          "enum": [
+            "raw_bytes",
+            "jcs_content"
+          ]
+        },
+        "schema_id": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "digest",
+        "byte_length",
+        "media_type",
+        "digest_basis"
+      ]
+    },
+    "class_tuple": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "custody_class": {
+          "enum": [
+            "unsigned_declared",
+            "software_local_unprotected",
+            "protected_delegated"
+          ]
+        },
+        "identity_class": {
+          "enum": [
+            "declared_by_launcher_under_the_seat_account",
+            "vendor_by_client_program_only",
+            "endpoint_observed"
+          ]
+        },
+        "nonuse_class": {
+          "enum": [
+            "procedural_nonuse",
+            "enforced_isolation"
+          ]
+        },
+        "limitations_ref": {
+          "$ref": "#/$defs/blob"
+        }
+      },
+      "required": [
+        "custody_class",
+        "identity_class",
+        "nonuse_class",
+        "limitations_ref"
+      ]
+    }
+  }
+}

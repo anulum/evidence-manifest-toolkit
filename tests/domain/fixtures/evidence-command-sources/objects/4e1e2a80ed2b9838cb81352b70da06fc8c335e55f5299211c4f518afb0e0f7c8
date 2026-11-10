@@ -1,0 +1,473 @@
+{
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "schema_id": {
+      "const": "evidence_manifest_toolkit.registry_snapshot.v1"
+    },
+    "registry_revision": {
+      "type": "string",
+      "pattern": "^(0|[1-9][0-9]*)$",
+      "maxLength": 256
+    },
+    "entries": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "schema_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "owner": {
+            "type": "string",
+            "minLength": 1
+          },
+          "schema_ref": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "digest": {
+                "type": "string",
+                "pattern": "^sha256:[0-9a-f]{64}$"
+              },
+              "byte_length": {
+                "type": "string",
+                "pattern": "^(0|[1-9][0-9]*)$",
+                "maxLength": 256
+              },
+              "media_type": {
+                "type": "string",
+                "minLength": 1
+              },
+              "digest_basis": {
+                "enum": [
+                  "raw_bytes",
+                  "jcs_content"
+                ]
+              },
+              "schema_id": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "required": [
+              "digest",
+              "byte_length",
+              "media_type",
+              "digest_basis"
+            ]
+          },
+          "schema_bytes": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "^[A-Za-z0-9_-]+$"
+          },
+          "media_type": {
+            "type": "string",
+            "minLength": 1
+          },
+          "digest_basis": {
+            "enum": [
+              "raw_bytes",
+              "jcs_content"
+            ]
+          },
+          "reference_paths": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "path_id": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "steps": {
+                  "type": "array",
+                  "items": {
+                    "oneOf": [
+                      {
+                        "type": "object",
+                        "additionalProperties": false,
+                        "properties": {
+                          "kind": {
+                            "const": "member"
+                          },
+                          "name": {
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "kind",
+                          "name"
+                        ]
+                      },
+                      {
+                        "type": "object",
+                        "additionalProperties": false,
+                        "properties": {
+                          "kind": {
+                            "const": "index"
+                          },
+                          "index": {
+                            "type": "string",
+                            "pattern": "^(0|[1-9][0-9]*)$",
+                            "maxLength": 256
+                          }
+                        },
+                        "required": [
+                          "kind",
+                          "index"
+                        ]
+                      },
+                      {
+                        "type": "object",
+                        "additionalProperties": false,
+                        "properties": {
+                          "kind": {
+                            "const": "each"
+                          }
+                        },
+                        "required": [
+                          "kind"
+                        ]
+                      }
+                    ]
+                  }
+                },
+                "absent": {
+                  "enum": [
+                    "schema_optional",
+                    "refuse"
+                  ]
+                },
+                "null": {
+                  "enum": [
+                    "schema_optional",
+                    "refuse"
+                  ]
+                },
+                "requirement": {
+                  "enum": [
+                    "when_present",
+                    "policy_optional"
+                  ]
+                }
+              },
+              "required": [
+                "path_id",
+                "steps",
+                "absent",
+                "null",
+                "requirement"
+              ]
+            }
+          },
+          "common_semantics_id": {
+            "enum": [
+              "evidence_manifest_toolkit.common_json.v1",
+              "evidence_manifest_toolkit.manifest_common.v1",
+              "evidence_manifest_toolkit.claim_inventory_common.v1",
+              "evidence_manifest_toolkit.signed_statement_common.v1",
+              "evidence_manifest_toolkit.group_certificate_common.v1",
+              "evidence_manifest_toolkit.trust_snapshot_common.v1",
+              "evidence_manifest_toolkit.target_descriptor_common.v1",
+              "evidence_manifest_toolkit.adapter_conformance_common.v1",
+              "evidence_manifest_toolkit.studio_mapping_common.v1"
+            ]
+          },
+          "schema_role": {
+            "enum": [
+              "common_control",
+              "common_evidence",
+              "domain_evidence",
+              "domain_verification",
+              "domain_support"
+            ]
+          },
+          "closure_profile_id": {
+            "const": "evidence_manifest_toolkit.declared_refs.v1"
+          },
+          "schema_dependencies": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "uri": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "schema_ref": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "properties": {
+                    "digest": {
+                      "type": "string",
+                      "pattern": "^sha256:[0-9a-f]{64}$"
+                    },
+                    "byte_length": {
+                      "type": "string",
+                      "pattern": "^(0|[1-9][0-9]*)$",
+                      "maxLength": 256
+                    },
+                    "media_type": {
+                      "type": "string",
+                      "minLength": 1
+                    },
+                    "digest_basis": {
+                      "enum": [
+                        "raw_bytes",
+                        "jcs_content"
+                      ]
+                    },
+                    "schema_id": {
+                      "type": "string",
+                      "minLength": 1
+                    }
+                  },
+                  "required": [
+                    "digest",
+                    "byte_length",
+                    "media_type",
+                    "digest_basis"
+                  ]
+                }
+              },
+              "required": [
+                "uri",
+                "schema_ref"
+              ]
+            }
+          },
+          "domain_support": {
+            "enum": [
+              "not_required",
+              "required_unqualified",
+              "required_qualified"
+            ]
+          },
+          "domain_verifier_ref": {
+            "oneOf": [
+              {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                  "digest": {
+                    "type": "string",
+                    "pattern": "^sha256:[0-9a-f]{64}$"
+                  },
+                  "byte_length": {
+                    "type": "string",
+                    "pattern": "^(0|[1-9][0-9]*)$",
+                    "maxLength": 256
+                  },
+                  "media_type": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "digest_basis": {
+                    "enum": [
+                      "raw_bytes",
+                      "jcs_content"
+                    ]
+                  },
+                  "schema_id": {
+                    "type": "string",
+                    "minLength": 1
+                  }
+                },
+                "required": [
+                  "digest",
+                  "byte_length",
+                  "media_type",
+                  "digest_basis"
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "domain_qualification_ref": {
+            "oneOf": [
+              {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                  "digest": {
+                    "type": "string",
+                    "pattern": "^sha256:[0-9a-f]{64}$"
+                  },
+                  "byte_length": {
+                    "type": "string",
+                    "pattern": "^(0|[1-9][0-9]*)$",
+                    "maxLength": 256
+                  },
+                  "media_type": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "digest_basis": {
+                    "enum": [
+                      "raw_bytes",
+                      "jcs_content"
+                    ]
+                  },
+                  "schema_id": {
+                    "type": "string",
+                    "minLength": 1
+                  }
+                },
+                "required": [
+                  "digest",
+                  "byte_length",
+                  "media_type",
+                  "digest_basis"
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "required": [
+          "schema_id",
+          "owner",
+          "schema_ref",
+          "schema_bytes",
+          "media_type",
+          "digest_basis",
+          "reference_paths",
+          "common_semantics_id",
+          "schema_role",
+          "closure_profile_id",
+          "schema_dependencies",
+          "domain_support",
+          "domain_verifier_ref",
+          "domain_qualification_ref"
+        ],
+        "allOf": [
+          {
+            "if": {
+              "properties": {
+                "schema_role": {
+                  "enum": [
+                    "domain_evidence",
+                    "domain_verification",
+                    "domain_support"
+                  ]
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "domain_support": {
+                  "enum": [
+                    "required_unqualified",
+                    "required_qualified"
+                  ]
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "domain_support": {
+                  "const": "required_qualified"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "domain_verifier_ref": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "properties": {
+                    "digest": {
+                      "type": "string",
+                      "pattern": "^sha256:[0-9a-f]{64}$"
+                    },
+                    "byte_length": {
+                      "type": "string",
+                      "pattern": "^(0|[1-9][0-9]*)$",
+                      "maxLength": 256
+                    },
+                    "media_type": {
+                      "type": "string",
+                      "minLength": 1
+                    },
+                    "digest_basis": {
+                      "enum": [
+                        "raw_bytes",
+                        "jcs_content"
+                      ]
+                    },
+                    "schema_id": {
+                      "type": "string",
+                      "minLength": 1
+                    }
+                  },
+                  "required": [
+                    "digest",
+                    "byte_length",
+                    "media_type",
+                    "digest_basis"
+                  ]
+                },
+                "domain_qualification_ref": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "properties": {
+                    "digest": {
+                      "type": "string",
+                      "pattern": "^sha256:[0-9a-f]{64}$"
+                    },
+                    "byte_length": {
+                      "type": "string",
+                      "pattern": "^(0|[1-9][0-9]*)$",
+                      "maxLength": 256
+                    },
+                    "media_type": {
+                      "type": "string",
+                      "minLength": 1
+                    },
+                    "digest_basis": {
+                      "enum": [
+                        "raw_bytes",
+                        "jcs_content"
+                      ]
+                    },
+                    "schema_id": {
+                      "type": "string",
+                      "minLength": 1
+                    }
+                  },
+                  "required": [
+                    "digest",
+                    "byte_length",
+                    "media_type",
+                    "digest_basis"
+                  ]
+                }
+              }
+            }
+          }
+        ]
+      },
+      "minItems": 1
+    }
+  },
+  "required": [
+    "schema_id",
+    "registry_revision",
+    "entries"
+  ],
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:gotm:design:evidence_manifest_toolkit.registry_snapshot.v1",
+  "$comment": "UNREGISTERED DESIGN. Encoding/hash/schema dependency and selector compatibility, namespace uniqueness, protected profiles, actual qualification, UTC and trusted bootstrap are semantic/runtime gates, not metaschema proof."
+}

@@ -1,0 +1,814 @@
+{
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "schema_id": {
+      "const": "evidence_manifest_toolkit.target_descriptor.v1"
+    },
+    "target_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "target_kind": {
+      "enum": [
+        "simulation",
+        "board",
+        "host",
+        "remote"
+      ]
+    },
+    "hardware_ref": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "digest": {
+          "type": "string",
+          "pattern": "^sha256:[0-9a-f]{64}$"
+        },
+        "byte_length": {
+          "type": "string",
+          "pattern": "^(0|[1-9][0-9]*)$",
+          "maxLength": 256
+        },
+        "media_type": {
+          "type": "string",
+          "minLength": 1
+        },
+        "digest_basis": {
+          "enum": [
+            "raw_bytes",
+            "jcs_content"
+          ]
+        },
+        "schema_id": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "digest",
+        "byte_length",
+        "media_type",
+        "digest_basis"
+      ]
+    },
+    "environment_ref": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "digest": {
+          "type": "string",
+          "pattern": "^sha256:[0-9a-f]{64}$"
+        },
+        "byte_length": {
+          "type": "string",
+          "pattern": "^(0|[1-9][0-9]*)$",
+          "maxLength": 256
+        },
+        "media_type": {
+          "type": "string",
+          "minLength": 1
+        },
+        "digest_basis": {
+          "enum": [
+            "raw_bytes",
+            "jcs_content"
+          ]
+        },
+        "schema_id": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "digest",
+        "byte_length",
+        "media_type",
+        "digest_basis"
+      ]
+    },
+    "toolchain_ref": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "digest": {
+          "type": "string",
+          "pattern": "^sha256:[0-9a-f]{64}$"
+        },
+        "byte_length": {
+          "type": "string",
+          "pattern": "^(0|[1-9][0-9]*)$",
+          "maxLength": 256
+        },
+        "media_type": {
+          "type": "string",
+          "minLength": 1
+        },
+        "digest_basis": {
+          "enum": [
+            "raw_bytes",
+            "jcs_content"
+          ]
+        },
+        "schema_id": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "digest",
+        "byte_length",
+        "media_type",
+        "digest_basis"
+      ]
+    },
+    "capabilities": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "timebase": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "availability": {
+              "enum": [
+                "available",
+                "absent",
+                "unknown"
+              ]
+            },
+            "contract_version": {
+              "type": "string",
+              "minLength": 1
+            },
+            "parameters_ref": {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "digest": {
+                  "type": "string",
+                  "pattern": "^sha256:[0-9a-f]{64}$"
+                },
+                "byte_length": {
+                  "type": "string",
+                  "pattern": "^(0|[1-9][0-9]*)$",
+                  "maxLength": 256
+                },
+                "media_type": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "digest_basis": {
+                  "enum": [
+                    "raw_bytes",
+                    "jcs_content"
+                  ]
+                },
+                "schema_id": {
+                  "type": "string",
+                  "minLength": 1
+                }
+              },
+              "required": [
+                "digest",
+                "byte_length",
+                "media_type",
+                "digest_basis"
+              ]
+            },
+            "limits_ref": {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "digest": {
+                  "type": "string",
+                  "pattern": "^sha256:[0-9a-f]{64}$"
+                },
+                "byte_length": {
+                  "type": "string",
+                  "pattern": "^(0|[1-9][0-9]*)$",
+                  "maxLength": 256
+                },
+                "media_type": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "digest_basis": {
+                  "enum": [
+                    "raw_bytes",
+                    "jcs_content"
+                  ]
+                },
+                "schema_id": {
+                  "type": "string",
+                  "minLength": 1
+                }
+              },
+              "required": [
+                "digest",
+                "byte_length",
+                "media_type",
+                "digest_basis"
+              ]
+            }
+          },
+          "required": [
+            "availability",
+            "contract_version"
+          ],
+          "allOf": [
+            {
+              "if": {
+                "properties": {
+                  "availability": {
+                    "const": "available"
+                  }
+                }
+              },
+              "then": {
+                "required": [
+                  "parameters_ref",
+                  "limits_ref"
+                ]
+              }
+            }
+          ]
+        },
+        "event_transport": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "availability": {
+              "enum": [
+                "available",
+                "absent",
+                "unknown"
+              ]
+            },
+            "contract_version": {
+              "type": "string",
+              "minLength": 1
+            },
+            "parameters_ref": {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "digest": {
+                  "type": "string",
+                  "pattern": "^sha256:[0-9a-f]{64}$"
+                },
+                "byte_length": {
+                  "type": "string",
+                  "pattern": "^(0|[1-9][0-9]*)$",
+                  "maxLength": 256
+                },
+                "media_type": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "digest_basis": {
+                  "enum": [
+                    "raw_bytes",
+                    "jcs_content"
+                  ]
+                },
+                "schema_id": {
+                  "type": "string",
+                  "minLength": 1
+                }
+              },
+              "required": [
+                "digest",
+                "byte_length",
+                "media_type",
+                "digest_basis"
+              ]
+            },
+            "limits_ref": {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "digest": {
+                  "type": "string",
+                  "pattern": "^sha256:[0-9a-f]{64}$"
+                },
+                "byte_length": {
+                  "type": "string",
+                  "pattern": "^(0|[1-9][0-9]*)$",
+                  "maxLength": 256
+                },
+                "media_type": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "digest_basis": {
+                  "enum": [
+                    "raw_bytes",
+                    "jcs_content"
+                  ]
+                },
+                "schema_id": {
+                  "type": "string",
+                  "minLength": 1
+                }
+              },
+              "required": [
+                "digest",
+                "byte_length",
+                "media_type",
+                "digest_basis"
+              ]
+            }
+          },
+          "required": [
+            "availability",
+            "contract_version"
+          ],
+          "allOf": [
+            {
+              "if": {
+                "properties": {
+                  "availability": {
+                    "const": "available"
+                  }
+                }
+              },
+              "then": {
+                "required": [
+                  "parameters_ref",
+                  "limits_ref"
+                ]
+              }
+            }
+          ]
+        },
+        "power_monitor": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "availability": {
+              "enum": [
+                "available",
+                "absent",
+                "unknown"
+              ]
+            },
+            "contract_version": {
+              "type": "string",
+              "minLength": 1
+            },
+            "parameters_ref": {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "digest": {
+                  "type": "string",
+                  "pattern": "^sha256:[0-9a-f]{64}$"
+                },
+                "byte_length": {
+                  "type": "string",
+                  "pattern": "^(0|[1-9][0-9]*)$",
+                  "maxLength": 256
+                },
+                "media_type": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "digest_basis": {
+                  "enum": [
+                    "raw_bytes",
+                    "jcs_content"
+                  ]
+                },
+                "schema_id": {
+                  "type": "string",
+                  "minLength": 1
+                }
+              },
+              "required": [
+                "digest",
+                "byte_length",
+                "media_type",
+                "digest_basis"
+              ]
+            },
+            "limits_ref": {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "digest": {
+                  "type": "string",
+                  "pattern": "^sha256:[0-9a-f]{64}$"
+                },
+                "byte_length": {
+                  "type": "string",
+                  "pattern": "^(0|[1-9][0-9]*)$",
+                  "maxLength": 256
+                },
+                "media_type": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "digest_basis": {
+                  "enum": [
+                    "raw_bytes",
+                    "jcs_content"
+                  ]
+                },
+                "schema_id": {
+                  "type": "string",
+                  "minLength": 1
+                }
+              },
+              "required": [
+                "digest",
+                "byte_length",
+                "media_type",
+                "digest_basis"
+              ]
+            }
+          },
+          "required": [
+            "availability",
+            "contract_version"
+          ],
+          "allOf": [
+            {
+              "if": {
+                "properties": {
+                  "availability": {
+                    "const": "available"
+                  }
+                }
+              },
+              "then": {
+                "required": [
+                  "parameters_ref",
+                  "limits_ref"
+                ]
+              }
+            }
+          ]
+        },
+        "fault_control": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "availability": {
+              "enum": [
+                "available",
+                "absent",
+                "unknown"
+              ]
+            },
+            "contract_version": {
+              "type": "string",
+              "minLength": 1
+            },
+            "parameters_ref": {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "digest": {
+                  "type": "string",
+                  "pattern": "^sha256:[0-9a-f]{64}$"
+                },
+                "byte_length": {
+                  "type": "string",
+                  "pattern": "^(0|[1-9][0-9]*)$",
+                  "maxLength": 256
+                },
+                "media_type": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "digest_basis": {
+                  "enum": [
+                    "raw_bytes",
+                    "jcs_content"
+                  ]
+                },
+                "schema_id": {
+                  "type": "string",
+                  "minLength": 1
+                }
+              },
+              "required": [
+                "digest",
+                "byte_length",
+                "media_type",
+                "digest_basis"
+              ]
+            },
+            "limits_ref": {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "digest": {
+                  "type": "string",
+                  "pattern": "^sha256:[0-9a-f]{64}$"
+                },
+                "byte_length": {
+                  "type": "string",
+                  "pattern": "^(0|[1-9][0-9]*)$",
+                  "maxLength": 256
+                },
+                "media_type": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "digest_basis": {
+                  "enum": [
+                    "raw_bytes",
+                    "jcs_content"
+                  ]
+                },
+                "schema_id": {
+                  "type": "string",
+                  "minLength": 1
+                }
+              },
+              "required": [
+                "digest",
+                "byte_length",
+                "media_type",
+                "digest_basis"
+              ]
+            }
+          },
+          "required": [
+            "availability",
+            "contract_version"
+          ],
+          "allOf": [
+            {
+              "if": {
+                "properties": {
+                  "availability": {
+                    "const": "available"
+                  }
+                }
+              },
+              "then": {
+                "required": [
+                  "parameters_ref",
+                  "limits_ref"
+                ]
+              }
+            }
+          ]
+        },
+        "run_control": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "availability": {
+              "enum": [
+                "available",
+                "absent",
+                "unknown"
+              ]
+            },
+            "contract_version": {
+              "type": "string",
+              "minLength": 1
+            },
+            "parameters_ref": {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "digest": {
+                  "type": "string",
+                  "pattern": "^sha256:[0-9a-f]{64}$"
+                },
+                "byte_length": {
+                  "type": "string",
+                  "pattern": "^(0|[1-9][0-9]*)$",
+                  "maxLength": 256
+                },
+                "media_type": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "digest_basis": {
+                  "enum": [
+                    "raw_bytes",
+                    "jcs_content"
+                  ]
+                },
+                "schema_id": {
+                  "type": "string",
+                  "minLength": 1
+                }
+              },
+              "required": [
+                "digest",
+                "byte_length",
+                "media_type",
+                "digest_basis"
+              ]
+            },
+            "limits_ref": {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "digest": {
+                  "type": "string",
+                  "pattern": "^sha256:[0-9a-f]{64}$"
+                },
+                "byte_length": {
+                  "type": "string",
+                  "pattern": "^(0|[1-9][0-9]*)$",
+                  "maxLength": 256
+                },
+                "media_type": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "digest_basis": {
+                  "enum": [
+                    "raw_bytes",
+                    "jcs_content"
+                  ]
+                },
+                "schema_id": {
+                  "type": "string",
+                  "minLength": 1
+                }
+              },
+              "required": [
+                "digest",
+                "byte_length",
+                "media_type",
+                "digest_basis"
+              ]
+            }
+          },
+          "required": [
+            "availability",
+            "contract_version"
+          ],
+          "allOf": [
+            {
+              "if": {
+                "properties": {
+                  "availability": {
+                    "const": "available"
+                  }
+                }
+              },
+              "then": {
+                "required": [
+                  "parameters_ref",
+                  "limits_ref"
+                ]
+              }
+            }
+          ]
+        },
+        "boot_reset": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "availability": {
+              "enum": [
+                "available",
+                "absent",
+                "unknown"
+              ]
+            },
+            "contract_version": {
+              "type": "string",
+              "minLength": 1
+            },
+            "parameters_ref": {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "digest": {
+                  "type": "string",
+                  "pattern": "^sha256:[0-9a-f]{64}$"
+                },
+                "byte_length": {
+                  "type": "string",
+                  "pattern": "^(0|[1-9][0-9]*)$",
+                  "maxLength": 256
+                },
+                "media_type": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "digest_basis": {
+                  "enum": [
+                    "raw_bytes",
+                    "jcs_content"
+                  ]
+                },
+                "schema_id": {
+                  "type": "string",
+                  "minLength": 1
+                }
+              },
+              "required": [
+                "digest",
+                "byte_length",
+                "media_type",
+                "digest_basis"
+              ]
+            },
+            "limits_ref": {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "digest": {
+                  "type": "string",
+                  "pattern": "^sha256:[0-9a-f]{64}$"
+                },
+                "byte_length": {
+                  "type": "string",
+                  "pattern": "^(0|[1-9][0-9]*)$",
+                  "maxLength": 256
+                },
+                "media_type": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "digest_basis": {
+                  "enum": [
+                    "raw_bytes",
+                    "jcs_content"
+                  ]
+                },
+                "schema_id": {
+                  "type": "string",
+                  "minLength": 1
+                }
+              },
+              "required": [
+                "digest",
+                "byte_length",
+                "media_type",
+                "digest_basis"
+              ]
+            }
+          },
+          "required": [
+            "availability",
+            "contract_version"
+          ],
+          "allOf": [
+            {
+              "if": {
+                "properties": {
+                  "availability": {
+                    "const": "available"
+                  }
+                }
+              },
+              "then": {
+                "required": [
+                  "parameters_ref",
+                  "limits_ref"
+                ]
+              }
+            }
+          ]
+        }
+      },
+      "required": [
+        "timebase",
+        "event_transport",
+        "power_monitor",
+        "fault_control",
+        "run_control",
+        "boot_reset"
+      ]
+    }
+  },
+  "required": [
+    "schema_id",
+    "target_id",
+    "target_kind",
+    "environment_ref",
+    "toolchain_ref",
+    "capabilities"
+  ],
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:gotm:schema:evidence_manifest_toolkit.target_descriptor.v1",
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "target_kind": {
+            "const": "board"
+          }
+        }
+      },
+      "then": {
+        "required": [
+          "hardware_ref"
+        ]
+      }
+    }
+  ]
+}

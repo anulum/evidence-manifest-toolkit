@@ -10,7 +10,9 @@ EVIDENCE-MANIFEST-TOOLKIT — source and configuration provenance
 
 # Evidence Manifest Toolkit
 
-Local repository validation infrastructure for a planned portable evidence-manifest toolkit. The repository records `architecture_only` maturity. Its capability, claim and qualified-schema inventories are empty. There is no released signing, verification or domain runtime package.
+Local repository validation infrastructure and a Python evidence runtime under development. The source module exports canonicalization, byte references, inspection, difference, seal and verification operations, with four offline command grammars. Read the [Python API](docs/api.md) and [Offline CLI](docs/offline-cli.md) for their inputs and result semantics.
+
+The repository records `architecture_only` maturity. Its qualified capability, claim and schema inventories remain empty. Installed packaging and operational root, signer, clock and domain qualification are not supplied by this checkout. Common report eligibility and command completion do not establish scientific acceptance.
 
 The implemented infrastructure checks local metadata, attribution, workflows, dependency alignment, documentation and inventory. The preflight command combines those gates with the complete development-tool checks. A successful report covers only the requested local repository operation.
 

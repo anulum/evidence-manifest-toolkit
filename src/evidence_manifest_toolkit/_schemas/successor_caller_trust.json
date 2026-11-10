@@ -1,0 +1,441 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Complete explicit caller trust source formats, normative source r6",
+  "description": "Private caller configurations; unchanged carrier grammar, exact independently selected r6 policy/base/control source law. No public native IDs, old parser relaxation or runtime qualification.",
+  "oneOf": [
+    {
+      "$ref": "#/$defs/unsigned_context"
+    },
+    {
+      "$ref": "#/$defs/software_context"
+    },
+    {
+      "$ref": "#/$defs/delegated_context"
+    },
+    {
+      "$ref": "#/$defs/software_authorization"
+    }
+  ],
+  "$defs": {
+    "blob": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "digest": {
+          "type": "string",
+          "pattern": "^sha256:[0-9a-f]{64}$"
+        },
+        "byte_length": {
+          "type": "string",
+          "pattern": "^(0|[1-9][0-9]*)$",
+          "maxLength": 256
+        },
+        "media_type": {
+          "type": "string",
+          "minLength": 1
+        },
+        "digest_basis": {
+          "enum": [
+            "raw_bytes",
+            "jcs_content"
+          ]
+        },
+        "schema_id": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "digest",
+        "byte_length",
+        "media_type",
+        "digest_basis"
+      ]
+    },
+    "entry_binding": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "format_version": {
+          "const": "emt-clock-entry-binding-source-r4"
+        },
+        "request_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "first_sample_source_ref": {
+          "$ref": "#/$defs/blob"
+        },
+        "source_profile_ref": {
+          "$ref": "#/$defs/blob"
+        },
+        "boot_domain_ref": {
+          "$ref": "#/$defs/blob"
+        },
+        "verification_controller_identity_ref": {
+          "$ref": "#/$defs/blob"
+        },
+        "process_start_identity_ref": {
+          "$ref": "#/$defs/blob"
+        },
+        "entry_observation_method_ref": {
+          "$ref": "#/$defs/blob"
+        },
+        "implementation_environment_ref": {
+          "$ref": "#/$defs/blob"
+        }
+      },
+      "required": [
+        "format_version",
+        "request_id",
+        "first_sample_source_ref",
+        "source_profile_ref",
+        "boot_domain_ref",
+        "verification_controller_identity_ref",
+        "process_start_identity_ref",
+        "entry_observation_method_ref",
+        "implementation_environment_ref"
+      ]
+    },
+    "unsigned_context": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "namespace": {
+          "const": "EMT_CALLER_TRUST_UNSIGNED_V2"
+        },
+        "profile_class": {
+          "const": "unsigned_declared"
+        },
+        "evaluation_mode": {
+          "enum": [
+            "current",
+            "historical"
+          ]
+        },
+        "evaluation_time": {
+          "type": "string",
+          "format": "date-time",
+          "pattern": "Z$"
+        },
+        "clock_entry_binding": {
+          "$ref": "#/$defs/entry_binding"
+        }
+      },
+      "required": [
+        "namespace",
+        "profile_class",
+        "evaluation_mode",
+        "evaluation_time",
+        "clock_entry_binding"
+      ]
+    },
+    "software_context": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "namespace": {
+          "const": "EMT_CALLER_TRUST_SOFTWARE_V2"
+        },
+        "profile_class": {
+          "const": "software_local_unprotected"
+        },
+        "evaluation_mode": {
+          "enum": [
+            "current",
+            "historical"
+          ]
+        },
+        "evaluation_time": {
+          "type": "string",
+          "format": "date-time",
+          "pattern": "Z$"
+        },
+        "clock_entry_binding": {
+          "$ref": "#/$defs/entry_binding"
+        },
+        "software_authorization_ref": {
+          "$ref": "#/$defs/blob"
+        },
+        "accepted_authorization_sequence_floor": {
+          "type": "string",
+          "pattern": "^(0|[1-9][0-9]*)$",
+          "maxLength": 256
+        },
+        "archived_software_authorization_ref": {
+          "$ref": "#/$defs/blob"
+        }
+      },
+      "required": [
+        "namespace",
+        "profile_class",
+        "evaluation_mode",
+        "evaluation_time",
+        "clock_entry_binding",
+        "software_authorization_ref",
+        "accepted_authorization_sequence_floor"
+      ],
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "evaluation_mode": {
+                "const": "historical"
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "archived_software_authorization_ref"
+            ]
+          },
+          "else": {
+            "not": {
+              "required": [
+                "archived_software_authorization_ref"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    "delegated_context": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "namespace": {
+          "const": "EMT_CALLER_TRUST_DELEGATED_V2"
+        },
+        "profile_class": {
+          "const": "protected_delegated"
+        },
+        "evaluation_mode": {
+          "enum": [
+            "current",
+            "historical"
+          ]
+        },
+        "evaluation_time": {
+          "type": "string",
+          "format": "date-time",
+          "pattern": "Z$"
+        },
+        "clock_entry_binding": {
+          "$ref": "#/$defs/entry_binding"
+        },
+        "independent_root_selection_ref": {
+          "$ref": "#/$defs/blob"
+        },
+        "root_grant_ref": {
+          "$ref": "#/$defs/blob"
+        },
+        "current_authority_snapshot_ref": {
+          "$ref": "#/$defs/blob"
+        },
+        "accepted_authority_sequence_floor": {
+          "type": "string",
+          "pattern": "^(0|[1-9][0-9]*)$",
+          "maxLength": 256
+        },
+        "control_envelopes": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_-]+$"
+          }
+        },
+        "archived_authority_snapshot_ref": {
+          "$ref": "#/$defs/blob"
+        },
+        "authority_control_selection_ref": {
+          "$ref": "#/$defs/blob"
+        }
+      },
+      "required": [
+        "namespace",
+        "profile_class",
+        "evaluation_mode",
+        "evaluation_time",
+        "clock_entry_binding",
+        "independent_root_selection_ref",
+        "root_grant_ref",
+        "current_authority_snapshot_ref",
+        "accepted_authority_sequence_floor",
+        "control_envelopes",
+        "authority_control_selection_ref"
+      ],
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "evaluation_mode": {
+                "const": "historical"
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "archived_authority_snapshot_ref"
+            ]
+          },
+          "else": {
+            "not": {
+              "required": [
+                "archived_authority_snapshot_ref"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    "software_authorization": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "format_version": {
+          "const": "emt-software-authorization-source-r4"
+        },
+        "installation_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "sequence": {
+          "type": "string",
+          "pattern": "^(0|[1-9][0-9]*)$",
+          "maxLength": 256
+        },
+        "whole_scope_and_signature_rule_ref": {
+          "$ref": "#/$defs/blob"
+        },
+        "local_controller_identity_ref": {
+          "$ref": "#/$defs/blob"
+        },
+        "authorized_keys": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "key_id": {
+                "type": "string",
+                "pattern": "^ed25519:[0-9a-f]{64}$"
+              },
+              "raw_public_key_base64url": {
+                "type": "string",
+                "pattern": "^[A-Za-z0-9_-]{43}$"
+              },
+              "group": {
+                "type": "string",
+                "minLength": 1
+              },
+              "principal": {
+                "type": "string",
+                "minLength": 1
+              },
+              "role": {
+                "type": "string",
+                "minLength": 1
+              },
+              "segment": {
+                "type": "string",
+                "minLength": 1
+              },
+              "purposes": {
+                "type": "array",
+                "minItems": 1,
+                "uniqueItems": true,
+                "items": {
+                  "enum": [
+                    "evidence",
+                    "deployment",
+                    "human_review"
+                  ]
+                }
+              },
+              "valid_from": {
+                "type": "string",
+                "format": "date-time",
+                "pattern": "Z$"
+              },
+              "valid_until": {
+                "type": "string",
+                "format": "date-time",
+                "pattern": "Z$"
+              },
+              "identity_binding_ref": {
+                "$ref": "#/$defs/blob"
+              },
+              "possession_and_software_custody_ref": {
+                "$ref": "#/$defs/blob"
+              }
+            },
+            "required": [
+              "key_id",
+              "raw_public_key_base64url",
+              "group",
+              "principal",
+              "role",
+              "segment",
+              "purposes",
+              "valid_from",
+              "valid_until",
+              "identity_binding_ref",
+              "possession_and_software_custody_ref"
+            ]
+          }
+        },
+        "revocations": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "key_id": {
+                "type": "string",
+                "pattern": "^ed25519:[0-9a-f]{64}$"
+              },
+              "revocation_source_ref": {
+                "$ref": "#/$defs/blob"
+              }
+            },
+            "required": [
+              "key_id",
+              "revocation_source_ref"
+            ]
+          }
+        },
+        "previous_authorization_ref": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/blob"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "issued_at": {
+          "type": "string",
+          "format": "date-time",
+          "pattern": "Z$"
+        },
+        "limitations_ref": {
+          "$ref": "#/$defs/blob"
+        }
+      },
+      "required": [
+        "format_version",
+        "installation_id",
+        "sequence",
+        "whole_scope_and_signature_rule_ref",
+        "local_controller_identity_ref",
+        "authorized_keys",
+        "revocations",
+        "previous_authorization_ref",
+        "issued_at",
+        "limitations_ref"
+      ]
+    }
+  }
+}

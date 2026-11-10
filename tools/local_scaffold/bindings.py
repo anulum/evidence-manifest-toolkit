@@ -11,7 +11,7 @@
 
 from typing import Final
 
-PYTHON_SUPPORTED_RANGE: Final = ">=3.13.16,<3.14"
+PYTHON_SUPPORTED_RANGE: Final = ">=3.13.18,<3.14"
 
 ASSETS: Final = {
     "docs/assets/fortis_studio_logo.jpg": "844c5d764c8ad0a030e8f7b83c7e878bb4ebec42ea6e40223f65f344769568c0",
@@ -29,16 +29,16 @@ ACTIONS: Final = {
 }
 
 
-SCHEMA_SHA256: Final = "b6b074ebff93cbcd027a249192209dd393695e3ed72378ae72c08da16366b80f"
+SCHEMA_SHA256: Final = "21428a9bec1601077274fe9ba74003e80442a3fcbe9e107206de482b3032d670"
 
 
 LICENCE_SHA256: Final = "d8a6cc31abc16b6748c7a21f21611f5a1ec33f67d22ca23d7da1c19b95496bee"
 
 
-PROVENANCE_SHA256: Final = "e767f7b06b9073d9b064b824d3707459390865545bd2551c2f7910ef1912ef53"
+PROVENANCE_SHA256: Final = "9ab2cc6dab04fa6f3627bbdc1f6711eeb507e973da5445dab424e7e53fb8ab45"
 
 
-LOCK_SHA256: Final = "c286e1845d961044d33225f86c24739d5d730508bd7e64c77b477c45b543dd62"
+LOCK_SHA256: Final = "87b4805b45eeb78dd61745f7dabd39759c5e3f474c10a7acfd109051f42f05f5"
 
 
 EXPECTED_GRAPH: Final = {
@@ -49,7 +49,7 @@ EXPECTED_GRAPH: Final = {
     "bandit": "1.9.4",
     "boolean-py": "5.0",
     "cachecontrol": "0.14.4",
-    "certifi": "2026.7.22",
+    "certifi": "2026.10.23",
     "cfgv": "3.5.0",
     "chardet": "7.6.0",
     "charset-normalizer": "3.5.2",
@@ -61,7 +61,7 @@ EXPECTED_GRAPH: Final = {
     "defusedxml": "0.7.1",
     "distlib": "0.4.3",
     "execnet": "2.1.2",
-    "filelock": "4.0.9",
+    "filelock": "4.2.9",
     "fqdn": "1.6.0",
     "ghp-import": "2.1.0",
     "griffelib": "2.3.0",
@@ -97,7 +97,7 @@ EXPECTED_GRAPH: Final = {
     "packaging": "26.3",
     "paginate": "0.5.7",
     "pathspec": "1.1.1",
-    "pip": "26.2.1",
+    "pip": "26.3",
     "pip-api": "0.0.35",
     "pip-audit": "2.10.1",
     "pip-requirements-parser": "32.0.1",
@@ -106,6 +106,7 @@ EXPECTED_GRAPH: Final = {
     "poetry-core": "2.5.0",
     "pre-commit": "4.6.2",
     "py-serializable": "2.1.0",
+    "pycryptodome": "3.24.0",
     "pygments": "2.21.0",
     "pymdown-extensions": "12.1",
     "pyparsing": "3.3.3",
@@ -124,6 +125,7 @@ EXPECTED_GRAPH: Final = {
     "rfc3339-validator": "0.1.4",
     "rfc3986-validator": "0.1.1",
     "rfc3987-syntax": "1.1.0",
+    "rfc8785": "0.1.4+emt.1",
     "rich": "15.0.0",
     "rpds-py": "2026.6.3",
     "ruff": "0.16.10",
@@ -140,8 +142,8 @@ EXPECTED_GRAPH: Final = {
     "tzdata": "2026.4",
     "uri-template": "1.3.0",
     "urllib3": "2.8.0",
-    "uv": "0.12.22",
-    "virtualenv": "21.14.4",
+    "uv": "0.13.7",
+    "virtualenv": "21.15.6",
     "watchdog": "6.0.0",
     "webcolors": "25.10.0",
     "zizmor": "1.30.1",
@@ -182,7 +184,7 @@ AUDIT_SHA256: Final = "3bf24d1cc9e4d4448e1f48d85cc49636fa0fe980a022ad2c5ff93d850
 AUDIT_PRODUCED_AT: Final = "2026-10-07T15:08:20.922765+00:00"
 
 
-MKDOCS_SHA256: Final = "42ecf320172f8ecfeccd24495664d3cfc8ad526f3d9aa79374b20956a09e4707"
+MKDOCS_SHA256: Final = "3b04ed306e57494349bc5fe839b44c18982ea2e27a45de06a0a08201efa7af30"
 
 DOCUMENTATION_TEMPLATE_SHA256: Final = (
     "acf439bf3e56283af35799168be65b33574b65fa95733edbd349857b12dfaf0d"

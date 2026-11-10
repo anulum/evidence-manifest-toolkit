@@ -11,32 +11,31 @@
 from __future__ import annotations
 
 import hashlib
-from datetime import UTC, datetime, timedelta
 from pathlib import Path
 
-from packaging.utils import canonicalize_name
-
+from .audit_context import trusted_root
+from .audit_records import audit, object_digest, receipt, timestamp
+from .audit_store import open_store
 from .inputs import json_object, read_bytes
 from .policy import AUDIT_PRODUCED_AT, AUDIT_SHA256, EXPECTED_GRAPH
 from .reports import Report
 
 
-def verify(root: Path, report: Report) -> None:
-    """Verify producer-admitted snapshot bytes, freshness and the complete real graph.
+def historical_source(root: Path, report: Report) -> None:
+    """Verify immutable historical source admission without granting current freshness.
 
     Parameters
     ----------
     root : Path
-        Repository supplying original dependency provenance and the separately sealed private pip-audit snapshot.
+        Inspected repository supplying the original immutable source declaration.
     report : Report
-        Receives producer/digest/time-window/complete103-graph/vulnerability mismatches; no live network audit or seal refresh occurs.
+        Receives exact source identity and aware-time syntax refusals; received time cannot renew trust.
 
     Raises
     ------
     Fault
         Raised for unsafe/unavailable/unbounded or malformed retained snapshot input.
     """
-    name = ".tool-cache/security/pip-audit.json"
     source = "dependency-provenance.json"
     snapshot = json_object(root, source).get("security_audit")
     expected = {
@@ -50,38 +49,33 @@ def verify(root: Path, report: Report) -> None:
         return
     if snapshot != expected:
         report.add("source_identity_mismatch", source)
-    stamp = snapshot["produced_at"]
-    try:
-        produced = datetime.fromisoformat(stamp) if isinstance(stamp, str) else None
-    except ValueError:
-        produced = None
-    if produced is None or produced.tzinfo is None:
-        report.add("configuration_invalid", source, 4)
+    timestamp(snapshot["produced_at"])
+
+
+def verify(root: Path, report: Report) -> None:
+    """Verify original audit semantics against independent current installation admission.
+
+    Parameters
+    ----------
+    root : Path
+        Inspected repository supplying audit bytes, never a local admission store or producer command.
+    report : Report
+        Receives source identity, complete graph/findings, current admission and freshness outcomes.
+
+    Raises
+    ------
+    Fault
+        Raised for missing/unsafe/malformed/adverse/expired trusted admission or received input.
+    """
+    historical_source(root, report)
+    if report.exit_code == 4:
         return
-    age = datetime.now(UTC) - produced
-    if age > timedelta(days=1) or age < -timedelta(minutes=5):
-        report.add("tool_unavailable", name, 3)
-        return
+    name = ".tool-cache/security/pip-audit.json"
     data = read_bytes(root, name)
-    if hashlib.sha256(data).hexdigest() != AUDIT_SHA256:
-        report.add("source_identity_mismatch", name)
-    value = json_object(root, name)
-    dependencies = value.get("dependencies")
-    if not isinstance(dependencies, list) or set(value) != {"dependencies", "fixes"}:
-        report.add("configuration_invalid", name, 4)
-        return
-    actual: dict[str, str] = {}
-    for dependency in dependencies:
-        if not isinstance(dependency, dict) or set(dependency) != {"name", "version", "vulns"}:
-            report.add("policy_refusal", name)
-            continue
-        dependency_name, version = dependency["name"], dependency["version"]
-        if not isinstance(dependency_name, str) or not isinstance(version, str):
-            report.add("policy_refusal", name)
-            continue
-        key = canonicalize_name(dependency_name)
-        if key in actual or dependency["vulns"] != []:
-            report.add("policy_refusal", name)
-        actual[key] = version
-    if actual != EXPECTED_GRAPH or value["fixes"] != []:
-        report.add("dependency_alignment.wrong-producer", name)
+    with open_store(trusted_root()) as store:
+        current = receipt(store)
+        selector = object_digest(current["audit_sha256"])
+        retained = store.read(selector, object_file=True)
+        if hashlib.sha256(data).hexdigest() != selector or data != retained:
+            report.add("source_identity_mismatch", name)
+        audit(data, report)

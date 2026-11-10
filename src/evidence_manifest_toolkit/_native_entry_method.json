@@ -1,0 +1,54 @@
+{
+  "method_id": "linux_glibc_x86_64_monotonic_raw_timex_v1",
+  "coordinate_origin": "1970-01-01T00:00:00Z",
+  "clock_name": "CLOCK_MONOTONIC_RAW",
+  "ticks_per_second": {
+    "numerator": "1000000000",
+    "denominator": "1"
+  },
+  "abi": {
+    "long_bits": "64",
+    "pointer_bits": "64",
+    "byte_order": "little",
+    "timex_size": "208"
+  },
+  "environment_fields": [
+    "python_implementation",
+    "python_version",
+    "python_cache_tag",
+    "python_executable",
+    "python_soabi",
+    "libc_reported_version",
+    "uname",
+    "byte_order",
+    "long_bits",
+    "pointer_bits"
+  ],
+  "implementation_files": [
+    {
+      "filename": "_entry_observation.py",
+      "byte_length": "10755",
+      "sha256": "dd6e8c2f934b53686a26b535bb3a0781222f6b394cba92ed740fa2a6e041df33"
+    },
+    {
+      "filename": "_entry_binding.py",
+      "byte_length": "13495",
+      "sha256": "974e7b218e001d88d7edce3f061d017a7b2bb368840ca3dd3a222f697bc97ab2"
+    },
+    {
+      "filename": "_verification.py",
+      "byte_length": "8340",
+      "sha256": "0660d7e65dff428874b8fb45ad92337e8de24489593bda6a4ccf81c5748c3a16"
+    },
+    {
+      "filename": "_verification_inputs.py",
+      "byte_length": "17961",
+      "sha256": "27f99dcbdc0ff5e574044f1add4138c0a3dfd8d7adbc5f717595470e1a30d2fe"
+    },
+    {
+      "filename": "_clock_subject.py",
+      "byte_length": "13380",
+      "sha256": "a3ac3c69fc1abe6fd749522de2961db6da831b3fdfdd1ad4e01b697cdd2f0529"
+    }
+  ]
+}

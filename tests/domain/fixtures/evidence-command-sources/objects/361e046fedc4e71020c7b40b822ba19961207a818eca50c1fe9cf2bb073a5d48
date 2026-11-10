@@ -1,0 +1,542 @@
+{
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "schema_id": {
+      "const": "evidence_manifest_toolkit.studio_mapping.v1"
+    },
+    "source_bundle_ref": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "digest": {
+          "type": "string",
+          "pattern": "^sha256:[0-9a-f]{64}$"
+        },
+        "byte_length": {
+          "type": "string",
+          "pattern": "^(0|[1-9][0-9]*)$",
+          "maxLength": 256
+        },
+        "media_type": {
+          "type": "string",
+          "minLength": 1
+        },
+        "digest_basis": {
+          "enum": [
+            "raw_bytes",
+            "jcs_content"
+          ]
+        },
+        "schema_id": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "digest",
+        "byte_length",
+        "media_type",
+        "digest_basis"
+      ]
+    },
+    "destination_content_ref": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "digest": {
+          "type": "string",
+          "pattern": "^sha256:[0-9a-f]{64}$"
+        },
+        "byte_length": {
+          "type": "string",
+          "pattern": "^(0|[1-9][0-9]*)$",
+          "maxLength": 256
+        },
+        "media_type": {
+          "type": "string",
+          "minLength": 1
+        },
+        "digest_basis": {
+          "enum": [
+            "raw_bytes",
+            "jcs_content"
+          ]
+        },
+        "schema_id": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "digest",
+        "byte_length",
+        "media_type",
+        "digest_basis"
+      ]
+    },
+    "mapping_profile": {
+      "const": "studio_mapping_v1"
+    },
+    "platform_source_ref": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "digest": {
+          "type": "string",
+          "pattern": "^sha256:[0-9a-f]{64}$"
+        },
+        "byte_length": {
+          "type": "string",
+          "pattern": "^(0|[1-9][0-9]*)$",
+          "maxLength": 256
+        },
+        "media_type": {
+          "type": "string",
+          "minLength": 1
+        },
+        "digest_basis": {
+          "enum": [
+            "raw_bytes",
+            "jcs_content"
+          ]
+        },
+        "schema_id": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "digest",
+        "byte_length",
+        "media_type",
+        "digest_basis"
+      ]
+    },
+    "platform_vectors_ref": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "digest": {
+          "type": "string",
+          "pattern": "^sha256:[0-9a-f]{64}$"
+        },
+        "byte_length": {
+          "type": "string",
+          "pattern": "^(0|[1-9][0-9]*)$",
+          "maxLength": 256
+        },
+        "media_type": {
+          "type": "string",
+          "minLength": 1
+        },
+        "digest_basis": {
+          "enum": [
+            "raw_bytes",
+            "jcs_content"
+          ]
+        },
+        "schema_id": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "digest",
+        "byte_length",
+        "media_type",
+        "digest_basis"
+      ]
+    },
+    "policy_ref": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "digest": {
+          "type": "string",
+          "pattern": "^sha256:[0-9a-f]{64}$"
+        },
+        "byte_length": {
+          "type": "string",
+          "pattern": "^(0|[1-9][0-9]*)$",
+          "maxLength": 256
+        },
+        "media_type": {
+          "type": "string",
+          "minLength": 1
+        },
+        "digest_basis": {
+          "enum": [
+            "raw_bytes",
+            "jcs_content"
+          ]
+        },
+        "schema_id": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "digest",
+        "byte_length",
+        "media_type",
+        "digest_basis"
+      ]
+    },
+    "mapped_claim_ids": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "minItems": 0,
+      "uniqueItems": true
+    },
+    "unknown_members": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "minItems": 0
+    },
+    "refusal_reasons": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "minItems": 0
+    },
+    "current_eligibility": {
+      "enum": [
+        "eligible",
+        "refused"
+      ]
+    },
+    "evaluation_time": {
+      "type": "string",
+      "format": "date-time",
+      "pattern": "Z$"
+    },
+    "contract_era": {
+      "const": "v2"
+    },
+    "source_schema_id": {
+      "enum": [
+        "studio.bitstream-encoding.v1",
+        "studio.sc-inference.v1",
+        "studio.spike-analysis.v1",
+        "studio.backend-benchmark.v1",
+        "studio.cosim-parity.v1",
+        "studio.rtl-compilation.v1",
+        "studio.fpga-deployment.v1"
+      ]
+    },
+    "mapping_outcome": {
+      "enum": [
+        "mapped",
+        "unmapped"
+      ]
+    },
+    "freshness_evaluation": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "subject_digest": {
+          "type": "string",
+          "pattern": "^sha256:[0-9a-f]{64}$"
+        },
+        "expected_source_identity_ref": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "digest": {
+              "type": "string",
+              "pattern": "^sha256:[0-9a-f]{64}$"
+            },
+            "byte_length": {
+              "type": "string",
+              "pattern": "^(0|[1-9][0-9]*)$",
+              "maxLength": 256
+            },
+            "media_type": {
+              "type": "string",
+              "minLength": 1
+            },
+            "digest_basis": {
+              "enum": [
+                "raw_bytes",
+                "jcs_content"
+              ]
+            },
+            "schema_id": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "required": [
+            "digest",
+            "byte_length",
+            "media_type",
+            "digest_basis"
+          ]
+        },
+        "observed_source_identity_ref": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "digest": {
+              "type": "string",
+              "pattern": "^sha256:[0-9a-f]{64}$"
+            },
+            "byte_length": {
+              "type": "string",
+              "pattern": "^(0|[1-9][0-9]*)$",
+              "maxLength": 256
+            },
+            "media_type": {
+              "type": "string",
+              "minLength": 1
+            },
+            "digest_basis": {
+              "enum": [
+                "raw_bytes",
+                "jcs_content"
+              ]
+            },
+            "schema_id": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "required": [
+            "digest",
+            "byte_length",
+            "media_type",
+            "digest_basis"
+          ]
+        },
+        "evaluation_record_ref": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "digest": {
+              "type": "string",
+              "pattern": "^sha256:[0-9a-f]{64}$"
+            },
+            "byte_length": {
+              "type": "string",
+              "pattern": "^(0|[1-9][0-9]*)$",
+              "maxLength": 256
+            },
+            "media_type": {
+              "type": "string",
+              "minLength": 1
+            },
+            "digest_basis": {
+              "enum": [
+                "raw_bytes",
+                "jcs_content"
+              ]
+            },
+            "schema_id": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "required": [
+            "digest",
+            "byte_length",
+            "media_type",
+            "digest_basis"
+          ]
+        },
+        "evaluator": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "principal": {
+              "type": "string",
+              "minLength": 1
+            },
+            "tool": {
+              "type": "string",
+              "minLength": 1
+            },
+            "version": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "required": [
+            "principal",
+            "tool",
+            "version"
+          ]
+        },
+        "evaluated_at": {
+          "type": "string",
+          "format": "date-time",
+          "pattern": "Z$"
+        },
+        "result": {
+          "enum": [
+            "source_matches",
+            "source_drift",
+            "stale",
+            "unavailable",
+            "not_checked"
+          ]
+        },
+        "reasons": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true
+        }
+      },
+      "required": [
+        "subject_digest",
+        "evaluation_record_ref",
+        "evaluator",
+        "evaluated_at",
+        "result",
+        "reasons"
+      ],
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "result": {
+                "enum": [
+                  "source_matches",
+                  "source_drift"
+                ]
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "expected_source_identity_ref",
+              "observed_source_identity_ref"
+            ]
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "result": {
+                "const": "source_matches"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "reasons": {
+                "maxItems": 0
+              }
+            }
+          },
+          "else": {
+            "properties": {
+              "reasons": {
+                "minItems": 1
+              }
+            }
+          }
+        }
+      ]
+    }
+  },
+  "required": [
+    "schema_id",
+    "source_bundle_ref",
+    "mapping_profile",
+    "platform_source_ref",
+    "platform_vectors_ref",
+    "policy_ref",
+    "mapped_claim_ids",
+    "unknown_members",
+    "refusal_reasons",
+    "current_eligibility",
+    "evaluation_time",
+    "contract_era",
+    "source_schema_id",
+    "mapping_outcome",
+    "freshness_evaluation"
+  ],
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:gotm:design:evidence_manifest_toolkit.studio_mapping.v1",
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "mapping_outcome": {
+            "const": "mapped"
+          }
+        }
+      },
+      "then": {
+        "required": [
+          "destination_content_ref"
+        ],
+        "properties": {
+          "mapped_claim_ids": {
+            "minItems": 1
+          }
+        }
+      },
+      "else": {
+        "not": {
+          "required": [
+            "destination_content_ref"
+          ]
+        },
+        "properties": {
+          "mapped_claim_ids": {
+            "maxItems": 0
+          },
+          "current_eligibility": {
+            "const": "refused"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "current_eligibility": {
+            "const": "eligible"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "mapping_outcome": {
+            "const": "mapped"
+          },
+          "refusal_reasons": {
+            "maxItems": 0
+          },
+          "freshness_evaluation": {
+            "properties": {
+              "result": {
+                "const": "source_matches"
+              }
+            }
+          }
+        }
+      },
+      "else": {
+        "properties": {
+          "refusal_reasons": {
+            "minItems": 1
+          }
+        }
+      }
+    }
+  ]
+}

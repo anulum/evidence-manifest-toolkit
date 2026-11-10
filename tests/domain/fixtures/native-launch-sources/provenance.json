@@ -1,0 +1,34 @@
+{
+  "publisher": "SYNAPSE-CHANNEL",
+  "publisher_tag": "v0.99.38",
+  "publisher_module": "synapse_channel/launch_record.py",
+  "publisher_source_sha256": "3b47aa2a1698060a43aabb702edf89ca89f4a1b810a6995459e2d6663d001c4e",
+  "command": [
+    "/usr/bin/cat"
+  ],
+  "records": [
+    {
+      "file": "producer.json",
+      "byte_length": 890,
+      "sha256": "c8756fbc24904943f04c2a40840778250025f72db84cca06e3efc41e8efd4a00",
+      "public_function": "make_record and write_record",
+      "declared_seat": "Arcane Sapience",
+      "original_recorded_at": "2026-11-01T03:56:04.344367Z",
+      "child_reaped_exit": 0
+    },
+    {
+      "file": "runner.json",
+      "byte_length": 911,
+      "sha256": "a429cde302cda62dbfc7a67cbb522ff635c1ca125cddb682b5239d3d43a79683",
+      "public_function": "make_record and write_record",
+      "declared_seat": "deliberately-unverified-other-runner",
+      "original_recorded_at": "2026-11-01T03:51:56.466113Z",
+      "child_reaped_exit": 0
+    }
+  ],
+  "limitations": [
+    "Original whole historic publisher outputs; no current process/path reopen.",
+    "Seat/vendor/key remain unprotected declarations, no observer, actual account, key possession, event time, independent run or class acceptance.",
+    "Ordinary test declarations may change the declared seat explicitly before whole Ref construction; those derived inputs are not unmodified publisher output."
+  ]
+}

@@ -106,8 +106,12 @@
       }
     },
     "domain_runtime_dependencies": {
-      "type": "array",
-      "maxItems": 0
+      "const": [
+        "jsonschema==4.26.0",
+        "referencing==0.37.0",
+        "pycryptodome==3.24.0",
+        "rfc8785==0.1.4+emt.1"
+      ]
     }
   }
 }

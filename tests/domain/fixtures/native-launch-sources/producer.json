@@ -1,0 +1,32 @@
+{
+ "command_name": "cat",
+ "command_sha256": "bf139a062df6b73a65b9efe60e4bf4941b7df539fe69ec7ba62923647c7421e1",
+ "command_words": 1,
+ "declared_vendor": "",
+ "evidence_class": "declared_by_launcher_under_the_seat_account",
+ "executable": {
+  "path": "/usr/bin/cat",
+  "sha256": "0d5c6788b9e87eb2f6672ae7dd1fb1fc9e4d13b930d988f28e4c040ff5b79c19",
+  "size": 39384,
+  "unavailable": ""
+ },
+ "host": "aaarthuus",
+ "launcher_pid": 523236,
+ "process": {
+  "boot": "9b9dd47f-63c0-4463-9d18-b088ea77e98b",
+  "image": {
+   "path": "/usr/bin/cat",
+   "sha256": "0d5c6788b9e87eb2f6672ae7dd1fb1fc9e4d13b930d988f28e4c040ff5b79c19",
+   "size": 39384,
+   "unavailable": ""
+  },
+  "pid": 523244,
+  "started": "273269328",
+  "unavailable": ""
+ },
+ "recorded_at": "2026-11-01T03:56:04.344367Z",
+ "schema": "session-launch-record-v1",
+ "seat": "Arcane Sapience",
+ "seat_public_key": "",
+ "system": "linux"
+}

@@ -1,0 +1,1587 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Prospective subordinate native identity and execution method data",
+  "description": "Uninstalled implementation-source design behind existing rule/blob slots. Fixed independent method selects one literal definition. No new public/native evidence schema ID, carrier, artifact-selected code, source adoption or qualified outcome. Shape checks do not discharge original source/model/class/time/authority/run/comparison predicates.",
+  "$defs": {
+    "ref": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "digest": {
+          "type": "string",
+          "pattern": "^sha256:[0-9a-f]{64}$"
+        },
+        "byte_length": {
+          "type": "string",
+          "pattern": "^(0|[1-9][0-9]*)$",
+          "maxLength": 256
+        },
+        "media_type": {
+          "type": "string",
+          "minLength": 1
+        },
+        "digest_basis": {
+          "enum": [
+            "raw_bytes",
+            "jcs_content"
+          ]
+        },
+        "schema_id": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "digest",
+        "byte_length",
+        "media_type",
+        "digest_basis"
+      ]
+    },
+    "declared_launch_binding": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "method_version": {
+          "const": "1"
+        },
+        "implementation_ref": {
+          "$ref": "#/$defs/ref"
+        },
+        "implementation_environment_ref": {
+          "$ref": "#/$defs/ref"
+        },
+        "implementation_qualification_ref": {
+          "$ref": "#/$defs/ref"
+        },
+        "semantic_law_ref": {
+          "$ref": "#/$defs/ref"
+        },
+        "record_contract_ref": {
+          "$ref": "#/$defs/ref"
+        },
+        "vendor_source": {
+          "const": "binding_declaration_with_optional_launcher_or_client_consistency"
+        },
+        "key_source": {
+          "const": "separate_raw_key_and_possession_method_only"
+        }
+      },
+      "required": [
+        "method_version",
+        "implementation_ref",
+        "implementation_environment_ref",
+        "implementation_qualification_ref",
+        "semantic_law_ref",
+        "record_contract_ref",
+        "vendor_source",
+        "key_source"
+      ]
+    },
+    "observer_binding": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "method_version": {
+          "const": "1"
+        },
+        "implementation_ref": {
+          "$ref": "#/$defs/ref"
+        },
+        "implementation_environment_ref": {
+          "$ref": "#/$defs/ref"
+        },
+        "implementation_qualification_ref": {
+          "$ref": "#/$defs/ref"
+        },
+        "semantic_law_ref": {
+          "$ref": "#/$defs/ref"
+        },
+        "capture_contract_ref": {
+          "$ref": "#/$defs/ref"
+        },
+        "observer_authority_policy_ref": {
+          "$ref": "#/$defs/ref"
+        },
+        "endpoint_rule_ref": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/ref"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "method_version",
+        "implementation_ref",
+        "implementation_environment_ref",
+        "implementation_qualification_ref",
+        "semantic_law_ref",
+        "capture_contract_ref",
+        "observer_authority_policy_ref",
+        "endpoint_rule_ref"
+      ]
+    },
+    "possession_binding": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "method_version": {
+          "const": "1"
+        },
+        "implementation_ref": {
+          "$ref": "#/$defs/ref"
+        },
+        "implementation_environment_ref": {
+          "$ref": "#/$defs/ref"
+        },
+        "implementation_qualification_ref": {
+          "$ref": "#/$defs/ref"
+        },
+        "semantic_law_ref": {
+          "$ref": "#/$defs/ref"
+        },
+        "challenge_issuer_rule_ref": {
+          "$ref": "#/$defs/ref"
+        },
+        "receiver_method_ref": {
+          "$ref": "#/$defs/ref"
+        },
+        "possession_scope": {
+          "enum": [
+            "seat_account",
+            "observed_process_signing_capability"
+          ]
+        }
+      },
+      "required": [
+        "method_version",
+        "implementation_ref",
+        "implementation_environment_ref",
+        "implementation_qualification_ref",
+        "semantic_law_ref",
+        "challenge_issuer_rule_ref",
+        "receiver_method_ref",
+        "possession_scope"
+      ]
+    },
+    "challenge": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "semantic_law_ref": {
+          "$ref": "#/$defs/ref"
+        },
+        "identity_policy_ref": {
+          "$ref": "#/$defs/ref"
+        },
+        "execution_request_ref": {
+          "$ref": "#/$defs/ref"
+        },
+        "issuer_source_ref": {
+          "$ref": "#/$defs/ref"
+        },
+        "principal_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "vendor_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "public_key_ref": {
+          "$ref": "#/$defs/ref"
+        },
+        "launch_record_ref": {
+          "$ref": "#/$defs/ref"
+        },
+        "process_identity_ref": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/ref"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "nonce_base64url": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9_-]{43}$"
+        },
+        "issued_at": {
+          "type": "string",
+          "minLength": 1
+        },
+        "expires_at": {
+          "type": "string",
+          "minLength": 1
+        },
+        "issuance_time_sources_ref": {
+          "$ref": "#/$defs/ref"
+        }
+      },
+      "required": [
+        "semantic_law_ref",
+        "identity_policy_ref",
+        "execution_request_ref",
+        "issuer_source_ref",
+        "principal_id",
+        "vendor_id",
+        "public_key_ref",
+        "launch_record_ref",
+        "process_identity_ref",
+        "nonce_base64url",
+        "issued_at",
+        "expires_at",
+        "issuance_time_sources_ref"
+      ]
+    },
+    "possession_message": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "possession_method_ref": {
+          "$ref": "#/$defs/ref"
+        },
+        "identity_policy_ref": {
+          "$ref": "#/$defs/ref"
+        },
+        "challenge_ref": {
+          "$ref": "#/$defs/ref"
+        },
+        "principal_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "vendor_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "public_key_ref": {
+          "$ref": "#/$defs/ref"
+        },
+        "launch_record_ref": {
+          "$ref": "#/$defs/ref"
+        },
+        "process_identity_ref": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/ref"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "possession_method_ref",
+        "identity_policy_ref",
+        "challenge_ref",
+        "principal_id",
+        "vendor_id",
+        "public_key_ref",
+        "launch_record_ref",
+        "process_identity_ref"
+      ]
+    },
+    "possession_result": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "possession_method_ref": {
+          "$ref": "#/$defs/ref"
+        },
+        "identity_policy_ref": {
+          "$ref": "#/$defs/ref"
+        },
+        "challenge_ref": {
+          "$ref": "#/$defs/ref"
+        },
+        "challenge_manifest_ref": {
+          "$ref": "#/$defs/ref"
+        },
+        "ordered_challenge_receipt_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/ref"
+          }
+        },
+        "proof_bytes_ref": {
+          "$ref": "#/$defs/ref"
+        },
+        "receiver_completion_manifest_ref": {
+          "$ref": "#/$defs/ref"
+        },
+        "ordered_receiver_receipt_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/ref"
+          }
+        },
+        "limitations_ref": {
+          "$ref": "#/$defs/ref"
+        }
+      },
+      "required": [
+        "possession_method_ref",
+        "identity_policy_ref",
+        "challenge_ref",
+        "challenge_manifest_ref",
+        "ordered_challenge_receipt_refs",
+        "proof_bytes_ref",
+        "receiver_completion_manifest_ref",
+        "ordered_receiver_receipt_refs",
+        "limitations_ref"
+      ]
+    },
+    "receiver_completion_payload": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "challenge_ref": {
+          "$ref": "#/$defs/ref"
+        },
+        "proof_bytes_ref": {
+          "$ref": "#/$defs/ref"
+        },
+        "execution_request_ref": {
+          "$ref": "#/$defs/ref"
+        },
+        "public_key_ref": {
+          "$ref": "#/$defs/ref"
+        },
+        "launch_record_ref": {
+          "$ref": "#/$defs/ref"
+        },
+        "process_identity_ref": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/ref"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "receiver_identity_ref": {
+          "$ref": "#/$defs/ref"
+        },
+        "received_at": {
+          "type": "string",
+          "minLength": 1
+        },
+        "raw_receiver_times_ref": {
+          "$ref": "#/$defs/ref"
+        },
+        "previous_challenge_state_ref": {
+          "$ref": "#/$defs/ref"
+        },
+        "next_challenge_state_ref": {
+          "$ref": "#/$defs/ref"
+        },
+        "receiver_method_ref": {
+          "$ref": "#/$defs/ref"
+        },
+        "receiver_qualification_ref": {
+          "$ref": "#/$defs/ref"
+        }
+      },
+      "required": [
+        "challenge_ref",
+        "proof_bytes_ref",
+        "execution_request_ref",
+        "public_key_ref",
+        "launch_record_ref",
+        "process_identity_ref",
+        "receiver_identity_ref",
+        "received_at",
+        "raw_receiver_times_ref",
+        "previous_challenge_state_ref",
+        "next_challenge_state_ref",
+        "receiver_method_ref",
+        "receiver_qualification_ref"
+      ]
+    },
+    "challenge_state": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "controller_identity_ref": {
+          "$ref": "#/$defs/ref"
+        },
+        "method_ref": {
+          "$ref": "#/$defs/ref"
+        },
+        "sequence": {
+          "type": "string",
+          "pattern": "^(0|[1-9][0-9]*)$",
+          "maxLength": 256
+        },
+        "previous_state_ref": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/ref"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "issued_challenge_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/ref"
+          }
+        },
+        "completed_response_records": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "challenge_ref": {
+                "$ref": "#/$defs/ref"
+              },
+              "proof_bytes_ref": {
+                "$ref": "#/$defs/ref"
+              },
+              "execution_request_ref": {
+                "$ref": "#/$defs/ref"
+              },
+              "received_at": {
+                "type": "string",
+                "minLength": 1
+              },
+              "raw_receiver_times_ref": {
+                "$ref": "#/$defs/ref"
+              }
+            },
+            "required": [
+              "challenge_ref",
+              "proof_bytes_ref",
+              "execution_request_ref",
+              "received_at",
+              "raw_receiver_times_ref"
+            ]
+          }
+        }
+      },
+      "required": [
+        "controller_identity_ref",
+        "method_ref",
+        "sequence",
+        "previous_state_ref",
+        "issued_challenge_refs",
+        "completed_response_records"
+      ]
+    },
+    "receiver_transaction": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "transaction_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "previous_state_ref": {
+          "$ref": "#/$defs/ref"
+        },
+        "next_state_ref": {
+          "$ref": "#/$defs/ref"
+        },
+        "candidate_completion_manifest_ref": {
+          "$ref": "#/$defs/ref"
+        },
+        "receiver_method_ref": {
+          "$ref": "#/$defs/ref"
+        },
+        "controller_identity_ref": {
+          "$ref": "#/$defs/ref"
+        }
+      },
+      "required": [
+        "transaction_id",
+        "previous_state_ref",
+        "next_state_ref",
+        "candidate_completion_manifest_ref",
+        "receiver_method_ref",
+        "controller_identity_ref"
+      ]
+    },
+    "receiver_commit_payload": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "transaction_ref": {
+          "$ref": "#/$defs/ref"
+        },
+        "previous_state_ref": {
+          "$ref": "#/$defs/ref"
+        },
+        "next_state_ref": {
+          "$ref": "#/$defs/ref"
+        },
+        "candidate_completion_manifest_ref": {
+          "$ref": "#/$defs/ref"
+        },
+        "actual_head_observation_ref": {
+          "$ref": "#/$defs/ref"
+        },
+        "commit_observation_time_source_ref": {
+          "$ref": "#/$defs/ref"
+        },
+        "receiver_method_ref": {
+          "$ref": "#/$defs/ref"
+        },
+        "controller_identity_ref": {
+          "$ref": "#/$defs/ref"
+        }
+      },
+      "required": [
+        "transaction_ref",
+        "previous_state_ref",
+        "next_state_ref",
+        "candidate_completion_manifest_ref",
+        "actual_head_observation_ref",
+        "commit_observation_time_source_ref",
+        "receiver_method_ref",
+        "controller_identity_ref"
+      ]
+    },
+    "execution_binding": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "method_version": {
+          "const": "1"
+        },
+        "implementation_ref": {
+          "$ref": "#/$defs/ref"
+        },
+        "implementation_environment_ref": {
+          "$ref": "#/$defs/ref"
+        },
+        "implementation_qualification_ref": {
+          "$ref": "#/$defs/ref"
+        },
+        "semantic_law_ref": {
+          "$ref": "#/$defs/ref"
+        },
+        "whole_request_selection_ref": {
+          "$ref": "#/$defs/ref"
+        },
+        "executor_method_ref": {
+          "$ref": "#/$defs/ref"
+        },
+        "output_seal_method_ref": {
+          "$ref": "#/$defs/ref"
+        },
+        "release_method_ref": {
+          "$ref": "#/$defs/ref"
+        },
+        "permitted_nonuse_classes": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "enum": [
+              "procedural_nonuse",
+              "enforced_isolation"
+            ]
+          }
+        }
+      },
+      "required": [
+        "method_version",
+        "implementation_ref",
+        "implementation_environment_ref",
+        "implementation_qualification_ref",
+        "semantic_law_ref",
+        "whole_request_selection_ref",
+        "executor_method_ref",
+        "output_seal_method_ref",
+        "release_method_ref",
+        "permitted_nonuse_classes"
+      ]
+    },
+    "execution_observation": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "execution_request_ref": {
+          "$ref": "#/$defs/ref"
+        },
+        "committed_code_recipe_environment_ref": {
+          "$ref": "#/$defs/ref"
+        },
+        "ordered_original_input_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/ref"
+          }
+        },
+        "runner_binding_ref": {
+          "$ref": "#/$defs/ref"
+        },
+        "launch_record_ref": {
+          "$ref": "#/$defs/ref"
+        },
+        "process_identity_ref": {
+          "$ref": "#/$defs/ref"
+        },
+        "actual_command_source_ref": {
+          "$ref": "#/$defs/ref"
+        },
+        "actual_environment_ref": {
+          "$ref": "#/$defs/ref"
+        },
+        "execution_started_time_source_ref": {
+          "$ref": "#/$defs/ref"
+        },
+        "execution_finished_time_source_ref": {
+          "$ref": "#/$defs/ref"
+        },
+        "exit_status": {
+          "oneOf": [
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "kind": {
+                  "const": "exit"
+                },
+                "code": {
+                  "type": "string",
+                  "pattern": "^(0|[1-9][0-9]*)$",
+                  "maxLength": 256
+                }
+              },
+              "required": [
+                "kind",
+                "code"
+              ]
+            },
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "kind": {
+                  "const": "signal"
+                },
+                "signal": {
+                  "type": "string",
+                  "pattern": "^[1-9][0-9]*$",
+                  "maxLength": 256
+                }
+              },
+              "required": [
+                "kind",
+                "signal"
+              ]
+            }
+          ]
+        },
+        "raw_output_and_diagnostics_refs": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/ref"
+          }
+        },
+        "actual_access_order_source_ref": {
+          "$ref": "#/$defs/ref"
+        },
+        "resource_policy_ref": {
+          "$ref": "#/$defs/ref"
+        },
+        "executor_implementation_ref": {
+          "$ref": "#/$defs/ref"
+        },
+        "executor_qualification_ref": {
+          "$ref": "#/$defs/ref"
+        }
+      },
+      "required": [
+        "execution_request_ref",
+        "committed_code_recipe_environment_ref",
+        "ordered_original_input_refs",
+        "runner_binding_ref",
+        "launch_record_ref",
+        "process_identity_ref",
+        "actual_command_source_ref",
+        "actual_environment_ref",
+        "execution_started_time_source_ref",
+        "execution_finished_time_source_ref",
+        "exit_status",
+        "raw_output_and_diagnostics_refs",
+        "actual_access_order_source_ref",
+        "resource_policy_ref",
+        "executor_implementation_ref",
+        "executor_qualification_ref"
+      ]
+    },
+    "release_observation": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "execution_request_ref": {
+          "$ref": "#/$defs/ref"
+        },
+        "execution_observation_ref": {
+          "$ref": "#/$defs/ref"
+        },
+        "sealed_independent_manifest_ref": {
+          "$ref": "#/$defs/ref"
+        },
+        "ordered_independent_output_refs": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/ref"
+          }
+        },
+        "ordered_producer_output_refs": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/ref"
+          }
+        },
+        "seal_time_source_ref": {
+          "$ref": "#/$defs/ref"
+        },
+        "release_time_source_ref": {
+          "$ref": "#/$defs/ref"
+        },
+        "actual_access_order_source_ref": {
+          "$ref": "#/$defs/ref"
+        },
+        "release_method_ref": {
+          "$ref": "#/$defs/ref"
+        },
+        "release_qualification_ref": {
+          "$ref": "#/$defs/ref"
+        }
+      },
+      "required": [
+        "execution_request_ref",
+        "execution_observation_ref",
+        "sealed_independent_manifest_ref",
+        "ordered_independent_output_refs",
+        "ordered_producer_output_refs",
+        "seal_time_source_ref",
+        "release_time_source_ref",
+        "actual_access_order_source_ref",
+        "release_method_ref",
+        "release_qualification_ref"
+      ]
+    },
+    "comparison_observation": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "comparison_rule_ref": {
+          "$ref": "#/$defs/ref"
+        },
+        "execution_request_ref": {
+          "$ref": "#/$defs/ref"
+        },
+        "release_observation_ref": {
+          "$ref": "#/$defs/ref"
+        },
+        "sealed_independent_manifest_ref": {
+          "$ref": "#/$defs/ref"
+        },
+        "ordered_independent_output_refs": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/ref"
+          }
+        },
+        "ordered_producer_output_refs": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/ref"
+          }
+        },
+        "comparison_implementation_ref": {
+          "$ref": "#/$defs/ref"
+        },
+        "comparison_environment_ref": {
+          "$ref": "#/$defs/ref"
+        },
+        "comparison_qualification_ref": {
+          "$ref": "#/$defs/ref"
+        },
+        "comparison_started_time_source_ref": {
+          "$ref": "#/$defs/ref"
+        },
+        "comparison_finished_time_source_ref": {
+          "$ref": "#/$defs/ref"
+        },
+        "whole_raw_comparison_inputs_outputs_ref": {
+          "$ref": "#/$defs/ref"
+        },
+        "outcome": {
+          "enum": [
+            "agree",
+            "diverge",
+            "inconclusive",
+            "unsupported",
+            "unclassifiable"
+          ]
+        },
+        "limitations_ref": {
+          "$ref": "#/$defs/ref"
+        }
+      },
+      "required": [
+        "comparison_rule_ref",
+        "execution_request_ref",
+        "release_observation_ref",
+        "sealed_independent_manifest_ref",
+        "ordered_independent_output_refs",
+        "ordered_producer_output_refs",
+        "comparison_implementation_ref",
+        "comparison_environment_ref",
+        "comparison_qualification_ref",
+        "comparison_started_time_source_ref",
+        "comparison_finished_time_source_ref",
+        "whole_raw_comparison_inputs_outputs_ref",
+        "outcome",
+        "limitations_ref"
+      ]
+    },
+    "challenge_issuer_rule": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "method_version": {
+          "const": "1"
+        },
+        "implementation_ref": {
+          "$ref": "#/$defs/ref"
+        },
+        "implementation_environment_ref": {
+          "$ref": "#/$defs/ref"
+        },
+        "implementation_qualification_ref": {
+          "$ref": "#/$defs/ref"
+        },
+        "semantic_law_ref": {
+          "$ref": "#/$defs/ref"
+        },
+        "issuer_identity_ref": {
+          "$ref": "#/$defs/ref"
+        },
+        "issuer_authorization_policy_ref": {
+          "$ref": "#/$defs/ref"
+        },
+        "request_selection_rule_ref": {
+          "$ref": "#/$defs/ref"
+        },
+        "challenge_issuance_method_ref": {
+          "$ref": "#/$defs/ref"
+        },
+        "challenge_completion_method_ref": {
+          "$ref": "#/$defs/ref"
+        }
+      },
+      "required": [
+        "method_version",
+        "implementation_ref",
+        "implementation_environment_ref",
+        "implementation_qualification_ref",
+        "semantic_law_ref",
+        "issuer_identity_ref",
+        "issuer_authorization_policy_ref",
+        "request_selection_rule_ref",
+        "challenge_issuance_method_ref",
+        "challenge_completion_method_ref"
+      ]
+    },
+    "execution_request": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "request_kind": {
+          "enum": [
+            "producer_context",
+            "independent_validation"
+          ]
+        },
+        "subject_ref": {
+          "$ref": "#/$defs/ref"
+        },
+        "claim_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "whole_policy_ref": {
+          "$ref": "#/$defs/ref"
+        },
+        "identity_policy_ref": {
+          "$ref": "#/$defs/ref"
+        },
+        "expected_principal_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "expected_vendor_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "expected_public_key_ref": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/ref"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "committed_code_recipe_environment_ref": {
+          "$ref": "#/$defs/ref"
+        },
+        "ordered_original_input_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/ref"
+          }
+        },
+        "comparison_rule_ref": {
+          "$ref": "#/$defs/ref"
+        },
+        "whole_conditions_and_limitations_ref": {
+          "$ref": "#/$defs/ref"
+        },
+        "resource_policy_ref": {
+          "$ref": "#/$defs/ref"
+        },
+        "executor_method_ref": {
+          "$ref": "#/$defs/ref"
+        }
+      },
+      "required": [
+        "request_kind",
+        "subject_ref",
+        "claim_id",
+        "whole_policy_ref",
+        "identity_policy_ref",
+        "expected_principal_id",
+        "expected_vendor_id",
+        "expected_public_key_ref",
+        "committed_code_recipe_environment_ref",
+        "ordered_original_input_refs",
+        "comparison_rule_ref",
+        "whole_conditions_and_limitations_ref",
+        "resource_policy_ref",
+        "executor_method_ref"
+      ]
+    },
+    "comparison_binding": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "method_version": {
+          "const": "1"
+        },
+        "implementation_ref": {
+          "$ref": "#/$defs/ref"
+        },
+        "implementation_environment_ref": {
+          "$ref": "#/$defs/ref"
+        },
+        "implementation_qualification_ref": {
+          "$ref": "#/$defs/ref"
+        },
+        "semantic_law_ref": {
+          "$ref": "#/$defs/ref"
+        },
+        "comparison_algorithm_ref": {
+          "$ref": "#/$defs/ref"
+        },
+        "whole_comparison_parameters_ref": {
+          "$ref": "#/$defs/ref"
+        },
+        "outcome_mapping_ref": {
+          "$ref": "#/$defs/ref"
+        }
+      },
+      "required": [
+        "method_version",
+        "implementation_ref",
+        "implementation_environment_ref",
+        "implementation_qualification_ref",
+        "semantic_law_ref",
+        "comparison_algorithm_ref",
+        "whole_comparison_parameters_ref",
+        "outcome_mapping_ref"
+      ]
+    },
+    "receiver_storage_binding": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "method_version": {
+          "const": "1"
+        },
+        "implementation_ref": {
+          "$ref": "#/$defs/ref"
+        },
+        "implementation_environment_ref": {
+          "$ref": "#/$defs/ref"
+        },
+        "implementation_qualification_ref": {
+          "$ref": "#/$defs/ref"
+        },
+        "semantic_law_ref": {
+          "$ref": "#/$defs/ref"
+        },
+        "root_source_ref": {
+          "$ref": "#/$defs/ref"
+        },
+        "head_location_ref": {
+          "$ref": "#/$defs/ref"
+        },
+        "namespace_environment_ref": {
+          "$ref": "#/$defs/ref"
+        },
+        "owner_identity_ref": {
+          "$ref": "#/$defs/ref"
+        },
+        "durability_rule_ref": {
+          "$ref": "#/$defs/ref"
+        },
+        "maximum_head_bytes": {
+          "type": "string",
+          "pattern": "^[1-9][0-9]*$",
+          "maxLength": 256
+        }
+      },
+      "required": [
+        "method_version",
+        "implementation_ref",
+        "implementation_environment_ref",
+        "implementation_qualification_ref",
+        "semantic_law_ref",
+        "root_source_ref",
+        "head_location_ref",
+        "namespace_environment_ref",
+        "owner_identity_ref",
+        "durability_rule_ref",
+        "maximum_head_bytes"
+      ]
+    },
+    "receiver_head_value": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "state_ref": {
+          "$ref": "#/$defs/ref"
+        },
+        "transaction_ref": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/ref"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "state_ref",
+        "transaction_ref"
+      ]
+    },
+    "receiver_head_observation": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "storage_binding_ref": {
+          "$ref": "#/$defs/ref"
+        },
+        "head_raw_ref": {
+          "$ref": "#/$defs/ref"
+        },
+        "before_stat": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "device": {
+              "type": "string",
+              "pattern": "^(0|[1-9][0-9]*)$",
+              "maxLength": 256
+            },
+            "inode": {
+              "type": "string",
+              "pattern": "^(0|[1-9][0-9]*)$",
+              "maxLength": 256
+            },
+            "uid": {
+              "type": "string",
+              "pattern": "^(0|[1-9][0-9]*)$",
+              "maxLength": 256
+            },
+            "gid": {
+              "type": "string",
+              "pattern": "^(0|[1-9][0-9]*)$",
+              "maxLength": 256
+            },
+            "mode": {
+              "type": "string",
+              "pattern": "^(0|[1-9][0-9]*)$",
+              "maxLength": 256
+            },
+            "size": {
+              "type": "string",
+              "pattern": "^(0|[1-9][0-9]*)$",
+              "maxLength": 256
+            },
+            "mtime_ns": {
+              "type": "string",
+              "pattern": "^(0|-?[1-9][0-9]*)$",
+              "maxLength": 256
+            },
+            "ctime_ns": {
+              "type": "string",
+              "pattern": "^(0|-?[1-9][0-9]*)$",
+              "maxLength": 256
+            }
+          },
+          "required": [
+            "device",
+            "inode",
+            "uid",
+            "gid",
+            "mode",
+            "size",
+            "mtime_ns",
+            "ctime_ns"
+          ]
+        },
+        "after_stat": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "device": {
+              "type": "string",
+              "pattern": "^(0|[1-9][0-9]*)$",
+              "maxLength": 256
+            },
+            "inode": {
+              "type": "string",
+              "pattern": "^(0|[1-9][0-9]*)$",
+              "maxLength": 256
+            },
+            "uid": {
+              "type": "string",
+              "pattern": "^(0|[1-9][0-9]*)$",
+              "maxLength": 256
+            },
+            "gid": {
+              "type": "string",
+              "pattern": "^(0|[1-9][0-9]*)$",
+              "maxLength": 256
+            },
+            "mode": {
+              "type": "string",
+              "pattern": "^(0|[1-9][0-9]*)$",
+              "maxLength": 256
+            },
+            "size": {
+              "type": "string",
+              "pattern": "^(0|[1-9][0-9]*)$",
+              "maxLength": 256
+            },
+            "mtime_ns": {
+              "type": "string",
+              "pattern": "^(0|-?[1-9][0-9]*)$",
+              "maxLength": 256
+            },
+            "ctime_ns": {
+              "type": "string",
+              "pattern": "^(0|-?[1-9][0-9]*)$",
+              "maxLength": 256
+            }
+          },
+          "required": [
+            "device",
+            "inode",
+            "uid",
+            "gid",
+            "mode",
+            "size",
+            "mtime_ns",
+            "ctime_ns"
+          ]
+        },
+        "read_started_time_source_ref": {
+          "$ref": "#/$defs/ref"
+        },
+        "read_finished_time_source_ref": {
+          "$ref": "#/$defs/ref"
+        },
+        "reader_process_identity_ref": {
+          "$ref": "#/$defs/ref"
+        },
+        "reader_environment_ref": {
+          "$ref": "#/$defs/ref"
+        },
+        "reader_implementation_ref": {
+          "$ref": "#/$defs/ref"
+        },
+        "reader_qualification_ref": {
+          "$ref": "#/$defs/ref"
+        }
+      },
+      "required": [
+        "storage_binding_ref",
+        "head_raw_ref",
+        "before_stat",
+        "after_stat",
+        "read_started_time_source_ref",
+        "read_finished_time_source_ref",
+        "reader_process_identity_ref",
+        "reader_environment_ref",
+        "reader_implementation_ref",
+        "reader_qualification_ref"
+      ]
+    },
+    "access_observation": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "execution_request_ref": {
+          "$ref": "#/$defs/ref"
+        },
+        "access_method_ref": {
+          "$ref": "#/$defs/ref"
+        },
+        "access_method_qualification_ref": {
+          "$ref": "#/$defs/ref"
+        },
+        "recorder_process_identity_ref": {
+          "$ref": "#/$defs/ref"
+        },
+        "environment_ref": {
+          "$ref": "#/$defs/ref"
+        },
+        "policy_and_input_boundary_ref": {
+          "$ref": "#/$defs/ref"
+        },
+        "captured_before_time_source_ref": {
+          "$ref": "#/$defs/ref"
+        },
+        "captured_after_time_source_ref": {
+          "$ref": "#/$defs/ref"
+        },
+        "events": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "sequence": {
+                "type": "string",
+                "pattern": "^(0|[1-9][0-9]*)$",
+                "maxLength": 256
+              },
+              "event_kind": {
+                "enum": [
+                  "input_open",
+                  "independent_output_publish",
+                  "producer_output_release",
+                  "producer_output_open",
+                  "comparison_start",
+                  "comparison_finish",
+                  "denied_producer_output_open"
+                ]
+              },
+              "subject_ref": {
+                "$ref": "#/$defs/ref"
+              },
+              "before_time_source_ref": {
+                "$ref": "#/$defs/ref"
+              },
+              "after_time_source_ref": {
+                "$ref": "#/$defs/ref"
+              },
+              "native_operation_source_ref": {
+                "$ref": "#/$defs/ref"
+              },
+              "native_outcome_source_ref": {
+                "$ref": "#/$defs/ref"
+              },
+              "observed_process_identity_ref": {
+                "$ref": "#/$defs/ref"
+              }
+            },
+            "required": [
+              "sequence",
+              "event_kind",
+              "subject_ref",
+              "before_time_source_ref",
+              "after_time_source_ref",
+              "native_operation_source_ref",
+              "native_outcome_source_ref",
+              "observed_process_identity_ref"
+            ]
+          }
+        }
+      },
+      "required": [
+        "execution_request_ref",
+        "access_method_ref",
+        "access_method_qualification_ref",
+        "recorder_process_identity_ref",
+        "environment_ref",
+        "policy_and_input_boundary_ref",
+        "captured_before_time_source_ref",
+        "captured_after_time_source_ref",
+        "events"
+      ]
+    },
+    "issuer_issuance_observation": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "challenge_ref": {
+          "$ref": "#/$defs/ref"
+        },
+        "previous_state_ref": {
+          "$ref": "#/$defs/ref"
+        },
+        "next_state_ref": {
+          "$ref": "#/$defs/ref"
+        },
+        "actual_head_observation_ref": {
+          "$ref": "#/$defs/ref"
+        },
+        "issuance_time_sources_ref": {
+          "$ref": "#/$defs/ref"
+        },
+        "issuer_method_ref": {
+          "$ref": "#/$defs/ref"
+        },
+        "issuer_identity_ref": {
+          "$ref": "#/$defs/ref"
+        },
+        "issuer_qualification_ref": {
+          "$ref": "#/$defs/ref"
+        }
+      },
+      "required": [
+        "challenge_ref",
+        "previous_state_ref",
+        "next_state_ref",
+        "actual_head_observation_ref",
+        "issuance_time_sources_ref",
+        "issuer_method_ref",
+        "issuer_identity_ref",
+        "issuer_qualification_ref"
+      ]
+    },
+    "comparison_raw_evidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "comparison_request_ref": {
+          "$ref": "#/$defs/ref"
+        },
+        "ordered_input_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/ref"
+          }
+        },
+        "raw_stdout_ref": {
+          "$ref": "#/$defs/ref"
+        },
+        "raw_stderr_ref": {
+          "$ref": "#/$defs/ref"
+        },
+        "exit_status": {
+          "oneOf": [
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "kind": {
+                  "const": "exit"
+                },
+                "code": {
+                  "type": "string",
+                  "pattern": "^(0|[1-9][0-9]*)$",
+                  "maxLength": 256
+                }
+              },
+              "required": [
+                "kind",
+                "code"
+              ]
+            },
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "kind": {
+                  "const": "signal"
+                },
+                "signal": {
+                  "type": "string",
+                  "pattern": "^[1-9][0-9]*$",
+                  "maxLength": 256
+                }
+              },
+              "required": [
+                "kind",
+                "signal"
+              ]
+            }
+          ]
+        },
+        "access_observation_ref": {
+          "$ref": "#/$defs/ref"
+        },
+        "native_command_source_ref": {
+          "$ref": "#/$defs/ref"
+        },
+        "process_identity_ref": {
+          "$ref": "#/$defs/ref"
+        },
+        "environment_ref": {
+          "$ref": "#/$defs/ref"
+        },
+        "time_sources_ref": {
+          "$ref": "#/$defs/ref"
+        },
+        "comparator_binding_ref": {
+          "$ref": "#/$defs/ref"
+        },
+        "launch_record_ref": {
+          "$ref": "#/$defs/ref"
+        }
+      },
+      "required": [
+        "comparison_request_ref",
+        "ordered_input_refs",
+        "raw_stdout_ref",
+        "raw_stderr_ref",
+        "exit_status",
+        "access_observation_ref",
+        "native_command_source_ref",
+        "process_identity_ref",
+        "environment_ref",
+        "time_sources_ref",
+        "comparator_binding_ref",
+        "launch_record_ref"
+      ]
+    },
+    "comparison_request": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "request_kind": {
+          "const": "comparison"
+        },
+        "execution_request_ref": {
+          "$ref": "#/$defs/ref"
+        },
+        "identity_policy_ref": {
+          "$ref": "#/$defs/ref"
+        },
+        "comparison_rule_ref": {
+          "$ref": "#/$defs/ref"
+        },
+        "release_observation_ref": {
+          "$ref": "#/$defs/ref"
+        },
+        "sealed_independent_manifest_ref": {
+          "$ref": "#/$defs/ref"
+        },
+        "ordered_independent_output_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/ref"
+          }
+        },
+        "ordered_producer_output_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/ref"
+          }
+        },
+        "expected_principal_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "expected_vendor_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "expected_public_key_ref": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/ref"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "comparison_implementation_ref": {
+          "$ref": "#/$defs/ref"
+        },
+        "comparison_environment_ref": {
+          "$ref": "#/$defs/ref"
+        },
+        "comparison_qualification_ref": {
+          "$ref": "#/$defs/ref"
+        },
+        "whole_comparison_parameters_ref": {
+          "$ref": "#/$defs/ref"
+        },
+        "outcome_mapping_ref": {
+          "$ref": "#/$defs/ref"
+        },
+        "resource_policy_ref": {
+          "$ref": "#/$defs/ref"
+        },
+        "whole_conditions_and_limitations_ref": {
+          "$ref": "#/$defs/ref"
+        }
+      },
+      "required": [
+        "request_kind",
+        "execution_request_ref",
+        "identity_policy_ref",
+        "comparison_rule_ref",
+        "release_observation_ref",
+        "sealed_independent_manifest_ref",
+        "ordered_independent_output_refs",
+        "ordered_producer_output_refs",
+        "expected_principal_id",
+        "expected_vendor_id",
+        "expected_public_key_ref",
+        "comparison_implementation_ref",
+        "comparison_environment_ref",
+        "comparison_qualification_ref",
+        "whole_comparison_parameters_ref",
+        "outcome_mapping_ref",
+        "resource_policy_ref",
+        "whole_conditions_and_limitations_ref"
+      ]
+    }
+  }
+}

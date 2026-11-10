@@ -1,0 +1,90 @@
+{
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "schema_id": {
+      "const": "evidence_manifest_toolkit.group_certificate.v1"
+    },
+    "issuer_root_key_id": {
+      "type": "string",
+      "pattern": "^ed25519:[0-9a-f]{64}$"
+    },
+    "subject_key_id": {
+      "type": "string",
+      "pattern": "^ed25519:[0-9a-f]{64}$"
+    },
+    "public_key_base64url": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9_-]{43}$"
+    },
+    "group_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "principal": {
+      "type": "string",
+      "minLength": 1
+    },
+    "roles": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "minItems": 1,
+      "uniqueItems": true
+    },
+    "permitted_tool_segments": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^[a-z][a-z0-9_]*$"
+      },
+      "minItems": 1,
+      "uniqueItems": true
+    },
+    "allowed_purposes": {
+      "type": "array",
+      "items": {
+        "enum": [
+          "evidence",
+          "deployment",
+          "human_review"
+        ]
+      },
+      "minItems": 1,
+      "uniqueItems": true
+    },
+    "not_before": {
+      "type": "string",
+      "format": "date-time",
+      "pattern": "Z$"
+    },
+    "not_after": {
+      "type": "string",
+      "format": "date-time",
+      "pattern": "Z$"
+    },
+    "serial": {
+      "type": "string",
+      "pattern": "^(0|[1-9][0-9]*)$",
+      "maxLength": 256
+    }
+  },
+  "required": [
+    "schema_id",
+    "issuer_root_key_id",
+    "subject_key_id",
+    "public_key_base64url",
+    "group_id",
+    "principal",
+    "roles",
+    "permitted_tool_segments",
+    "allowed_purposes",
+    "not_before",
+    "not_after",
+    "serial"
+  ],
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:gotm:schema:evidence_manifest_toolkit.group_certificate.v1"
+}

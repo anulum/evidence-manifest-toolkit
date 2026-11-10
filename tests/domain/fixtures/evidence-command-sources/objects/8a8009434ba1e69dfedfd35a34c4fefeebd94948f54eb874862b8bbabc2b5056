@@ -1,0 +1,8 @@
+{
+  "max_json_bytes": 1048576,
+  "max_blob_bytes": 1048576,
+  "max_total_reference_bytes": 16777216,
+  "max_reference_count": 1024,
+  "max_graph_depth": 32,
+  "max_json_depth": 64
+}

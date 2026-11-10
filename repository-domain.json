@@ -1,7 +1,12 @@
 {
   "capabilities": [],
   "claims": [],
-  "domain_runtime_dependencies": [],
+  "domain_runtime_dependencies": [
+    "jsonschema==4.26.0",
+    "referencing==0.37.0",
+    "pycryptodome==3.24.0",
+    "rfc8785==0.1.4+emt.1"
+  ],
   "evidence_maturity": "architecture_only",
   "lifecycle": "local_scaffold",
   "owner_group": "SC-NEUROMORPHIC-COMPUTING-SYSTEMS",
@@ -18,10 +23,10 @@
   "qualified_owned_schema_ids": [],
   "repository_name": "EVIDENCE-MANIFEST-TOOLKIT",
   "tooling_python": {
-    "actual_version": "3.13.16",
+    "actual_version": "3.13.18",
     "design_baseline": "3.13",
-    "development_lock_sha256": "c286e1845d961044d33225f86c24739d5d730508bd7e64c77b477c45b543dd62",
-    "supported_range": ">=3.13.16,<3.14"
+    "development_lock_sha256": "87b4805b45eeb78dd61745f7dabd39759c5e3f474c10a7acfd109051f42f05f5",
+    "supported_range": ">=3.13.18,<3.14"
   },
   "validation_profile": {
     "id": "gotm.enterprise-repository-tier0.local-scaffold",
