@@ -21,7 +21,7 @@ from ._statements import key_id
 from ._values import BlobRef, Reason
 
 PROFILE = "evidence_manifest_toolkit.jcs_sha256_ed25519.v1"
-_FIXTURE_KEY = "11qYAYKxCrfVS_7TyWQHOg7hcvPapiMlrwIaaPcHURo"
+_FIXTURE_ROOT = "11qYAYKxCrfVS_7TyWQHOg7hcvPapiMlrwIaaPcHURo"
 _FIXTURE_ID = "ed25519:21fe31dfa154a261626bf854046fd2271b7bed4b6abe45aa58877ef47f9721b9"
 _FIXTURE_DIGEST = "0b557ac5be9251645e9ab223b210dae33c359311045960927cdc32565a7d3871"
 
@@ -134,7 +134,7 @@ def parse_bootstrap(document: AcquiredDocument, *, reference: BlobRef) -> Bootst
         expected: dict[str, object] = {
             "enrolled_hardware_signer": None,
             "fixture_root_key_id": _FIXTURE_ID,
-            "fixture_root_public_key_base64url": _FIXTURE_KEY,
+            "fixture_root_public_key_base64url": _FIXTURE_ROOT,
             "operational": False,
         }
         for name, required in expected.items():
@@ -144,7 +144,7 @@ def parse_bootstrap(document: AcquiredDocument, *, reference: BlobRef) -> Bootst
             raise refuse("")
         return BootstrapDeclaration(
             "fixture",
-            decode_bytes(_FIXTURE_KEY),
+            decode_bytes(_FIXTURE_ROOT),
             _FIXTURE_ID,
             None,
             cast(Mapping[str, FrozenJson], freeze_json(value)),
@@ -172,7 +172,7 @@ def parse_bootstrap(document: AcquiredDocument, *, reference: BlobRef) -> Bootst
         "evidence_manifest_toolkit.registry_snapshot.v1",
     ):
         raise refuse("/schema_catalogue_ref")
-    if public_key == decode_bytes(_FIXTURE_KEY):
+    if public_key == decode_bytes(_FIXTURE_ROOT):
         raise ConfigurationError(
             Reason(
                 "configuration_error",

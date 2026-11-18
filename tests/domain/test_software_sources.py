@@ -171,7 +171,8 @@ def test_public_software_source_history_precedes_clock_without_protected_state(
     Notes
     -----
     Positive source initialization reaches the deliberately unknown Clock entry method.
-    It proves no key possession, curve/signature qualification, accepted Clock or authority.
+    It proves no possession of a key, no qualification of curve or signature, and no accepted
+    Clock or authority.
     No protected root is supplied and no cryptographic provider is needed for source reads.
     """
     source = _source("verify-current-whole-fixture")
