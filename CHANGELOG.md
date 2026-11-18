@@ -14,6 +14,14 @@ EVIDENCE-MANIFEST-TOOLKIT — source and configuration provenance
 
 Initial local repository metadata, deterministic infrastructure guards, safe workflow preparation, locked development tools, native documentation and public-boundary conformance tests. No runtime package or public release is declared.
 
+The evidence core conformance vectors, version 1, are one language-neutral
+JSON pack of 118 cases: the admission order the contract states and the
+reference cases for canonical bytes and both byte-reference bases. Each
+case is bytes, limits and the expected result, and the pack states its own
+case semantics, so another implementation can run it. A runner checks the
+pack's digest and its sources and runs every case through the public
+operations.
+
 The evidence core contract, version 1, states the canonical form, byte
 identity, the evidence-manifest schema and the legacy signed-statement
 profile as the source implements them. A contract test binds every value
