@@ -14,6 +14,12 @@ EVIDENCE-MANIFEST-TOOLKIT — source and configuration provenance
 
 Initial local repository metadata, deterministic infrastructure guards, safe workflow preparation, locked development tools, native documentation and public-boundary conformance tests. No runtime package or public release is declared.
 
+The evidence core contract, version 1, states the canonical form, byte
+identity, the evidence-manifest schema and the legacy signed-statement
+profile as the source implements them. A contract test binds every value
+the page states to its source. The page is a specification only; it
+changes no inventory and claims no capability.
+
 The workflow guard accepts an optional bounded local six-role outcome file.
 Passing requires both the complete static graph and six successful outcomes;
 adverse states emit the existing refusal report. Other guards retain their

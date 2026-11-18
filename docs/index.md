@@ -12,6 +12,8 @@ EVIDENCE-MANIFEST-TOOLKIT — source and configuration provenance
 
 This repository provides local validation infrastructure and an evidence runtime under development. Read the [Python API](api.md) for the six source operations and immutable values, and the [Offline CLI](offline-cli.md) for four command grammars and complete output transport. Its maturity remains `architecture_only`, with no qualified runtime inventory or released signing service.
 
+The [Evidence core contract](contracts/evidence-core-v1.md) specifies the canonical form, byte identity, the evidence-manifest schema and the legacy signed-statement profile as the source implements them. It is a specification, not a capability claim.
+
 Read [Architecture](ARCHITECTURE.md), [Validation tooling](validation-tooling.md), [Threat model](THREAT_MODEL.md) and the [Repository boundary decision](adr/0001-repository-boundary.md). Repository guard reports cover finite local repository checks. Evidence reports preserve separate common, domain and current results; scientific acceptance remains with the corresponding evidence owner.
 
 ![ANULUM](assets/anulum_logo_company.jpg)
