@@ -9,6 +9,7 @@
 """Exercise real public inventory publication with pinned native syscall faults."""
 
 import hashlib
+import json
 import os
 import subprocess
 from pathlib import Path
@@ -17,13 +18,11 @@ import pytest
 
 from tests.conftest import SOURCE, payload, run_guard, snapshots, source_python
 
-GOLDEN = (
-    b'{"capabilities": [], "claims": [], "evidence_maturity": "architecture_only", '
-    b'"lifecycle": "local_scaffold", "qualified_owned_schema_ids": [], '
-    b'"repository_name": "EVIDENCE-MANIFEST-TOOLKIT", "source_metadata": '
-    b'{"path": "repository-domain.json", "sha256": '
-    b'"1024909acee21475a074b25629267fe238a868ee407155c742874738df0fef93"}}\n'
-)
+#: The published inventory must equal the committed one, which the repository-inventory gate
+#: holds to the committed domain file. Reading it here, rather than keeping a second literal
+#: copy of its bytes and its domain digest, keeps this test current when the domain changes.
+GOLDEN = (SOURCE / "capability-inventory.json").read_bytes()
+DOMAIN_SHA256: str = json.loads(GOLDEN)["source_metadata"]["sha256"]
 
 
 @pytest.fixture(scope="module")
@@ -90,8 +89,8 @@ def test_actual_atomic_syscall_faults(
     visible: bool,
 ) -> None:
     """Actual fsync/link/unlink/signals preserve complete publication and recovery."""
-    assert hashlib.sha256((root / "repository-domain.json").read_bytes()).hexdigest() == (
-        "1024909acee21475a074b25629267fe238a868ee407155c742874738df0fef93"
+    assert (
+        hashlib.sha256((root / "repository-domain.json").read_bytes()).hexdigest() == DOMAIN_SHA256
     )
     unrelated = root / "unrelated-existing-file.txt"
     unrelated.write_bytes(b"Independent original sentinel; never replace or clean up.\n")
