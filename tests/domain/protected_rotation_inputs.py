@@ -27,6 +27,14 @@ from tests.domain.test_verification_report_sources import _object
 
 from evidence_manifest_toolkit import BlobRef
 
+#: Graph-depth bound of the "depth" case. Policy selection closes the native rule-binding
+#: graph before the rotation walker runs, and a bound below that graph's depth refuses there
+#: with the generic depth reason (a sweep on 2026-11-19 measured the depth at 3: bound 2
+#: refused there, bounds 3 to 8 reached the walker). With this bound every other closure
+#: fits, with headroom, and the chain is one rotation longer, so the walker is the first
+#: to refuse. Effective dates stay inside the grant's lifetime up to a bound of 8.
+_DEPTH_CASE_BOUND = 6
+
 type _RotationJson = (
     None | bool | int | float | str | list[_RotationJson] | dict[str, _RotationJson]
 )
@@ -123,7 +131,8 @@ def protected_rotation_input(case: str, directory: Path) -> CertificateSourceCas
 
     grant, initial = body(caller.root_grant_ref), body(caller.current_authority_snapshot_ref)
     base = dict(caller.independent_root_selection_ref.to_mapping())
-    keys = [eddsa.import_private_key(bytes([index]) * 32) for index in (1, 2, 3)]
+    key_count = _DEPTH_CASE_BOUND + 1 if case == "depth" else 3
+    keys = [eddsa.import_private_key(bytes([index]) * 32) for index in range(1, key_count + 1)]
     publics = [key.public_key().export_key(format="raw") for key in keys]
     assert all(isinstance(key, bytes) for key in publics)
     identifiers = ["ed25519:" + hashlib.sha256(key).hexdigest() for key in publics]
@@ -187,16 +196,17 @@ def protected_rotation_input(case: str, directory: Path) -> CertificateSourceCas
     head = first if single else second
     rotations: tuple[BlobRef, ...] = (first,) if single else (first, second)
     if case == "depth":
-        head = native(rotation(2, second))
-        rotations += (head,)
-        chosen = replace(chosen, limits=replace(chosen.limits, max_graph_depth=2))
+        for index in range(2, _DEPTH_CASE_BOUND + 1):
+            head = native(rotation(index, head))
+            rotations += (head,)
+        chosen = replace(chosen, limits=replace(chosen.limits, max_graph_depth=_DEPTH_CASE_BOUND))
         pointer, subject, code = "/previous_rotation_ref", second.digest, "limit_exceeded"
     snapshot = copy.deepcopy(initial)
     snapshot.update(
         current_rotation_ref=dict(head.to_mapping()),
         current_issuer_key_id=identifiers[0]
         if single
-        else identifiers[2]
+        else identifiers[_DEPTH_CASE_BOUND]
         if case == "depth"
         else identifiers[1],
         issued_at="2024-01-01T00:00:00Z",
