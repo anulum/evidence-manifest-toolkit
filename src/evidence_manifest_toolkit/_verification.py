@@ -149,12 +149,14 @@ def execute_verification(
     -------
     VerificationExecution
         Original completed report paired with the same actual invocation and budget.
-        No resolver ownership, class acceptance or current authority is inferred.
+        No resolver ownership, class acceptance or current authority is inferred. An
+        unsigned V2 caller receives the report composed without any authority state.
 
     Raises
     ------
     ConfigurationError
-        Original caller, policy, registry, provider or class method is unavailable.
+        Original caller, policy, registry, provider or class method is unavailable. A
+        software or delegated V2 caller is refused at ``/trust``; its route is not built.
     InputRefused
         Original source, signature, schema, operation quota or native check fails.
     ReferenceUnavailable
@@ -191,7 +193,17 @@ def execute_verification(
         for record in invocation.inputs.reproduction_records:
             if record.reasons:
                 raise InputRefused(record.reasons[0])
-        raise configuration_refusal("/trust")
+        if not isinstance(invocation.trust, UnsignedTrustContextV2):
+            raise configuration_refusal("/trust")
+        unsigned = compose_verification_report(
+            invocation.inputs,
+            state=None,
+            receipts=(),
+            policy=policy,
+            trust=invocation.trust,
+            registry=registry,
+        )
+        return VerificationExecution(unsigned, invocation)
     inputs = invocation.inputs
     checked_trust = invocation.trust
     state = select_trust_state(

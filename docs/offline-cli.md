@@ -30,7 +30,7 @@ Registry entry counts follow the complete caller-selected catalogue. There is no
 
 The trust file can also declare `UnsignedTrustContextV2`, `SoftwareTrustContextV2` or `DelegatedTrustContextV2` through its exact `EMT_CALLER_TRUST_UNSIGNED_V2`, `EMT_CALLER_TRUST_SOFTWARE_V2` or `EMT_CALLER_TRUST_DELEGATED_V2` namespace. The decoder retains every selected field, the complete frozen Clock entry binding, original UTC and floor strings, and ordered canonical control-envelope bytes. Software and delegated historical selections require their own archive; current selections forbid that archive field. Unknown or mixed fields refuse configuration.
 
-Verification pairs the complete V2 declaration with the whole independently selected `authority_policy.v2` before authority acquisition. A legacy policy, mismatched class or fixture policy refuses that selection; a fixture cannot omit the operational Clock requirement. Missing selected policy sources retain the original unavailable reference. These declarations do not supply qualified Clock or authority inputs. After policy/source acquisition, the current operational state method still requires the original `TrustContext` and refuses a V2 selection at `/trust` before authentication or output publication. It does not invent legacy bootstrap fields or choose a weaker class.
+Verification pairs the complete V2 declaration with the whole independently selected `authority_policy.v2` before authority acquisition. A legacy policy, mismatched class or fixture policy refuses that selection; a fixture cannot omit the operational Clock requirement. Missing selected policy sources retain the original unavailable reference. These declarations do not supply qualified Clock or authority inputs. After policy/source acquisition, an unsigned selection receives the original fifteen-field report, composed without any authority state: `authenticity` is `unsigned`, `domain_verdict` is `not_evaluated` and `current_eligibility` is always `refused`. While no accepted Clock verdict exists, the report keeps `policy_unavailable` at the policy's Clock qualification pointer, its common result is `refused`, and the command publishes it and exits `2`. A software or delegated selection is still refused at `/trust` with exit `4`, before authentication or output publication. Neither route invents legacy bootstrap fields or chooses a weaker class.
 
 Software trust configuration selects its actual current authorization source, exact current floor and historical archive when required. After policy pairing, these whole tables/histories and their key encoding, scope and time declarations are checked before Clock acquisition. Required source failures preserve their original typed errors and references; a class change is not attempted. These reads require no legacy crypto provider and do not establish signing authority.
 
@@ -38,7 +38,7 @@ Explicit software receipt inputs also check the entire manifest target and selec
 
 V2 source selection does not initialise the legacy signature provider. Missing that provider cannot replace a V2 policy, native-source or unsupported-state diagnostic with a legacy provider error. Legacy verification still checks its required provider at the original boundary. This distinction supplies no V2 authentication or successful native-state result.
 
-After command configuration decoding, public verification captures actual native entry time before reference acquisition. The fixed Linux/glibc x86-64 method compares its whole installed descriptor and implementing sources, boot source, stable PID/start identity and complete runtime environment with the caller's selected binding. It uses no received executable, callback or clock adjustment. Native source conflicts or an unknown method produce `policy_unavailable` and exit `2` at the policy's Clock qualification pointer; missing original sources remain `reference_unavailable`. No report is published on these thrown failures. With complete Clock sources, verification next checks the entire subject/context/content/receipt/registry/limits/policy joins, declared capture/window consistency and S1 → H → actual E ordering under the native tick calibration. A conflicting whole subject retains the policy Clock diagnostic and exit `2`. These checks supply no physical Clock or authority acceptance; the later V2 state boundary still refuses with exit `4`.
+After command configuration decoding, public verification captures actual native entry time before reference acquisition. The fixed Linux/glibc x86-64 method compares its whole installed descriptor and implementing sources, boot source, stable PID/start identity and complete runtime environment with the caller's selected binding. It uses no received executable, callback or clock adjustment. Native source conflicts or an unknown method produce `policy_unavailable` and exit `2` at the policy's Clock qualification pointer; missing original sources remain `reference_unavailable`. No report is published on these thrown failures. With complete Clock sources, verification next checks the entire subject/context/content/receipt/registry/limits/policy joins, declared capture/window consistency and S1 → H → actual E ordering under the native tick calibration. A conflicting whole subject retains the policy Clock diagnostic and exit `2`. These checks supply no physical Clock or authority acceptance; an unsigned selection then receives its refused report with exit `2`, and a software or delegated selection is still refused at `/trust` with exit `4`.
 
 Signed `seal` requires all three signing flags together. `SignerConfig` contains only `adapter_ref`, `signer_key_id`, `public_key` and `profile_id`. The reference names an owner-controlled, locally enrolled signing adapter. The current checkout supplies no qualified CLI adapter; selecting an unavailable adapter refuses signing. No private key or executable is loaded from these configuration fields, and a failed signed request does not become an unsigned result.
 
@@ -102,9 +102,9 @@ share the original limits. Invalid closed method configuration returns exit `4`,
 an unavailable original source returns `3`, and a whole policy/class/scope conflict
 returns `2`, without publishing the requested report. A source-consistent rule
 continues through the complete conditional Clock calculation and applicable
-ordinary signature coverage. Covered scope still reaches the pending V2 state
-refusal; rule consistency alone does not produce a successful report or qualify
-the Clock.
+ordinary signature coverage. Covered scope then reaches the unsigned report, or
+the pending V2 state refusal of a software or delegated selection; rule
+consistency alone does not produce a successful report or qualify the Clock.
 
 
 The same V2 path now reads all three complete
@@ -150,8 +150,9 @@ also enforces complete claim/purpose signature coverage. Missing required
 signatures or uncovered scope returns `2` with its full located reason and no
 requested report. Only the exact selected ordinary unsigned exception applies;
 empty scope or a class label supplies no waiver. A C0 receipt does not fulfil a
-separate validation-record signature obligation. Covered scope still reaches
-the pending V2 state refusal, and authenticates no physical/model/class source.
+separate validation-record signature obligation. Covered scope then reaches the
+unsigned report, or the pending V2 state refusal of a software or delegated
+selection, and authenticates no physical/model/class source.
 Original legacy command results and transport remain unchanged.
 
 With complete Clock calculations and applicable ordinary signature coverage,
@@ -165,8 +166,8 @@ Matching these source joins does not qualify identity, key possession or a run.
 A missing original source returns `3` with its exact unavailable
 reference; schema and located relation failures return `2`. These typed source
 errors are preserved when first found in the Clock closure. No requested report
-is published on a thrown failure. Consistent declarations still reach the
-pending V2 state refusal; they supply no authenticated independent execution,
+is published on a thrown failure. Consistent declarations then reach the
+unsigned report, or the pending V2 state refusal of the other classes; they supply no authenticated independent execution,
 physical Clock or class admission.
 
 Verification renders the exact report bytes while its original offline store

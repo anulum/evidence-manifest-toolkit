@@ -14,6 +14,16 @@ EVIDENCE-MANIFEST-TOOLKIT — source and configuration provenance
 
 Initial local repository metadata, deterministic infrastructure guards, safe workflow preparation, locked development tools, native documentation and public-boundary conformance tests. No runtime package or public release is declared.
 
+An unsigned V2 verification now returns the original fifteen-field
+report instead of a configuration refusal at /trust. The report is
+composed without any authority state: authenticity is unsigned, the
+domain verdict is not evaluated and current eligibility is always
+refused. While no accepted Clock verdict exists, it keeps the
+evaluation-time qualification reason and its common result is refused;
+the command publishes it and exits 2. Software and delegated V2 callers
+are still refused at /trust, and legacy reports are byte for byte
+unchanged.
+
 The conformance vectors gain their signed-statement part: real envelopes
 from the repository's verification fixture, changed copies of them, and
 the two published test-vector public keys. Its cases cover key identity,

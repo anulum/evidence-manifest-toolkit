@@ -250,7 +250,7 @@
     {
       "filename": "_native_entry_method.json",
       "byte_length": "1461",
-      "sha256": "a20b4e82c922cf4a871487af9795879ace03d57ad38ddbf75d9cd75fa95bffd4"
+      "sha256": "781bd22098f944dc46ff9f6e2f6e0fa0efe69c0b04ba4cc6404a8c0666e87584"
     },
     {
       "filename": "_native_installation.py",
@@ -794,8 +794,8 @@
     },
     {
       "filename": "_verification.py",
-      "byte_length": "8340",
-      "sha256": "0660d7e65dff428874b8fb45ad92337e8de24489593bda6a4ccf81c5748c3a16"
+      "byte_length": "8884",
+      "sha256": "d9677e576006e72a645f95b301a17277b0d74d7f6db8f9be4bc8a97b30c2ed4f"
     },
     {
       "filename": "_verification_inputs.py",
@@ -804,8 +804,8 @@
     },
     {
       "filename": "_verification_report.py",
-      "byte_length": "11192",
-      "sha256": "08e8450c0e8e8e3af7126ba3449befab1207af1554902d5884b576425c906bfb"
+      "byte_length": "12476",
+      "sha256": "551996adb866574e77f34749aa9f59df4328579662ee926137e6f57fff6db445"
     }
   ]
 }

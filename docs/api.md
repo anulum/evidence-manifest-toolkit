@@ -79,6 +79,8 @@ Common eligibility reports the applicable common gates. `domain_verdict` remains
 
 Thrown `EmtError` subclasses carry one complete `.reason`: `InputRefused`, `ConfigurationError`, `ReferenceUnavailable`, `SignerUnavailable` or `StorageError`. A `Reason` has `code`, `subject_digest`, `claim_id`, `pointer` and fixed `detail`. Unknown identities retain their null values. Returned verification refusals remain complete reports rather than being replaced with a successful Boolean.
 
+An unsigned V2 caller (`UnsignedTrustContextV2`) whose whole sources pass acquisition receives this same fifteen-field report. It is composed without any authority state: no bootstrap, snapshot, floor or receipt is selected, so `authenticity` is `unsigned`, and `current_eligibility` is always `refused`. The signature scope was already decided by the selected signature-obligation rule and its exact unsigned exception, so the legacy receipt rules are not applied again. While no accepted Clock verdict exists, the report keeps `policy_unavailable` at the policy's Clock qualification pointer and its common result is `refused`. Software and delegated V2 callers are still refused at `/trust`.
+
 After an eligible signing adapter is called, response failure uses the fixed
 `SignerUnavailable` reason and known content digest. Other typed operation errors
 retain their classification. Internal verifier errors are separate from adapter
@@ -115,8 +117,9 @@ preserve their original full references. Invalid whole shapes, reference metadat
 or bounds retain typed source failures; absent or changed installed grammar is a
 configuration failure. Actual implementation/environment/qualification, observed
 identity, possession, custody, execution, comparison and Clock predicates remain
-required. A consistent declaration still reaches the pending V2 state boundary;
-it does not produce an accepted class or successful verification report.
+required. A consistent declaration then reaches the unsigned report, or the pending
+V2 state boundary of the software and delegated classes; it does not produce an
+accepted class or a successful verification report.
 
 ## Selected signature-obligation method
 
@@ -126,7 +129,8 @@ The fixed data method is `emt_signature_obligations_v1`. It defines no public
 schema or executable selector. Verification validates and retains the whole
 rule. After complete Clock calculations, unsigned/software verification applies
 its exact exception and actual receipt coverage. Complete V2 class/state
-admission remains pending; a covered scope still reaches that state refusal.
+admission remains pending: a covered scope reaches the unsigned report, or the
+state refusal of the software and delegated classes.
 
 The rule is one closed JSON object with every field below. Its reference uses
 `application/json`, `raw_bytes` and no `schema_id`.
@@ -192,8 +196,8 @@ separate `signature_required` reason. A record exception needs the exact full
 record reference, that claim and the evidence purpose. Actual reproduction,
 physical acceptance and every other native predicate remain independent.
 
-A covered content scope still reaches the pending V2 state refusal. These
-checks add no report field or successful failure reason and leave legacy
+A covered content scope then reaches the unsigned report, or the pending V2 state
+refusal of the other classes. These checks add no report field or successful failure reason and leave legacy
 verification and its entire original reports unchanged.
 
 ## Whole reproduction record sources

@@ -34,6 +34,7 @@ from evidence_manifest_toolkit import (
     VerificationPolicy,
     verify,
 )
+from evidence_manifest_toolkit._serialization import report_bytes
 
 type _Wire = None | bool | int | float | str | list[_Wire] | dict[str, _Wire]
 type _OptionalRule = Literal["schema_optional", "refuse"]
@@ -284,6 +285,11 @@ def test_original_whole_public_verify_report_and_immutable_sources(
         trust=trust,
     )
     assert _mapping(result) == source["expected_entire_VerificationReport"]
+    golden = _object(json.loads((_FIXTURES / "legacy-report-bytes-783956b.json").read_bytes()))
+    pinned = _object(_object(golden["cases"])[case])
+    encoded = report_bytes(result)
+    assert hashlib.sha256(encoded).hexdigest() == pinned["sha256"]
+    assert len(encoded) == pinned["byte_length"]
     assert resolver.calls
     assert before == {
         str(path): hashlib.sha256(path.read_bytes()).hexdigest() for path in preserved

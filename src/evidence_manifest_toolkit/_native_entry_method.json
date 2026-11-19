@@ -37,8 +37,8 @@
     },
     {
       "filename": "_verification.py",
-      "byte_length": "8340",
-      "sha256": "0660d7e65dff428874b8fb45ad92337e8de24489593bda6a4ccf81c5748c3a16"
+      "byte_length": "8884",
+      "sha256": "d9677e576006e72a645f95b301a17277b0d74d7f6db8f9be4bc8a97b30c2ed4f"
     },
     {
       "filename": "_verification_inputs.py",

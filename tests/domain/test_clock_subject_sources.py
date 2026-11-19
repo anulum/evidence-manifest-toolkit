@@ -1213,6 +1213,145 @@ def assert_whole_clock_source_workflow(
             if native_expected[0] == "unavailable"
             else InputRefused
         )
+    expected: dict[str, object] = {
+        "code": "configuration_error" if matching else "policy_unavailable",
+        "subject_digest": None if matching else policy_ref.digest,
+        "claim_id": None,
+        "pointer": "/trust"
+        if matching
+        else "/required_evaluation_time_qualification/clock_qualification_ref",
+        "detail": "Invalid local configuration."
+        if matching
+        else "The required evaluation-time qualification is unavailable.",
+    }
+    if condition == "clock_subject_first_coordinate":
+        expected.update(subject_digest=witness.digest, pointer="/before/utc_epoch_ns")
+    if condition == "software_receipt_ref":
+        expected.update(
+            code="reference_mismatch",
+            subject_digest=subject_ref.digest,
+            pointer="/ordered_receipt_refs/0",
+            detail="Reference bytes conflict.",
+        )
+    if condition.removeprefix("cli_").startswith("software_receipt") and condition not in {
+        "software_receipt",
+        "software_receipt_ref",
+        "software_receipt_count",
+        "software_receipt_lower",
+        "software_receipt_historical",
+    }:
+        expected.update(
+            code="scope_missing"
+            if field
+            in {
+                "content_digest",
+                "content_byte_length",
+                "authorizing_state_ref",
+                "authorization_ref",
+                "snapshot_ref",
+                "scope_ref",
+                "claim_ids",
+            }
+            else "key_revoked"
+            if condition == "software_receipt_revocation"
+            else "invalid_signature"
+            if condition in {"software_receipt_signature", "software_receipt_signature_rows"}
+            else "invalid_delegation",
+            subject_digest=ordinary_ref.digest,
+            pointer="/signature"
+            if condition in {"software_receipt_signature", "software_receipt_signature_rows"}
+            else "/statement/"
+            + ("claim_ids/0" if field == "claim_ids" else field or "signer_key_id"),
+            detail="The software statement signature is invalid."
+            if condition in {"software_receipt_signature", "software_receipt_signature_rows"}
+            else "Software statement does not match its independently selected source or target.",
+        )
+        if condition == "software_receipt_purpose":
+            expected["pointer"] = "/statement/signer_key_id"
+    if rule_expected is not None:
+        expected = dict(rule_expected)
+        if expected["subject_digest"] is None and rule_error_kind != "unavailable":
+            expected["subject_digest"] = policy_ref.digest
+    if method_expected is not None:
+        expected = method_reason
+    if acceptance_expected is not None:
+        expected = acceptance_expected[1]
+    if annual_expected is not None:
+        expected = annual_expected[1]
+    if obligation_reason is not None:
+        expected = obligation_reason[1]
+    if reproduction_expected is not None:
+        expected = reproduction_expected[1]
+    if native_expected is not None:
+        expected = native_expected[1]
+    if math_reason is not None:
+        expected = math_reason
+    if condition in SOFTWARE_INTERVAL_CASES:
+        expected = (
+            {
+                "code": "configuration_error",
+                "subject_digest": None,
+                "claim_id": None,
+                "pointer": "/trust",
+                "detail": "Invalid local configuration.",
+            }
+            if condition.endswith(("_one_full_row", "_year_zero_lower"))
+            else {
+                "code": "invalid_delegation",
+                "subject_digest": ordinary_ref.digest,
+                "claim_id": None,
+                "pointer": "/statement/authorization_ref",
+                "detail": "Software authorization does not cover the complete verification interval.",
+            }
+        )
+    if protected_use_reason is not None:
+        expected = protected_use_reason
+    if condition == "protected_control_base":
+        expected = {
+            "code": "policy_unavailable",
+            "subject_digest": policy_ref.digest,
+            "claim_id": None,
+            "pointer": "/authority_rule_ref",
+            "detail": "Protected control rule sources conflict.",
+        }
+    # An unsigned caller whose sources reach the end of acquisition receives the composed report:
+    # exactly the cases whose final expected refusal is the generic configuration refusal at
+    # /trust. The report has no authority state, authenticity unsigned, current eligibility
+    # refused, and the evaluation-time qualification unavailable until an accepted Clock verdict.
+    unsigned_report = custody_class == "unsigned_declared" and expected == {
+        "code": "configuration_error",
+        "subject_digest": None,
+        "claim_id": None,
+        "pointer": "/trust",
+        "detail": "Invalid local configuration.",
+    }
+    assert not unsigned_report or error_type is ConfigurationError
+    unsigned_reasons: list[dict[str, object]] = [
+        {
+            "code": "policy_unavailable",
+            "subject_digest": policy_ref.digest,
+            "claim_id": None,
+            "pointer": "/required_evaluation_time_qualification/clock_qualification_ref",
+            "detail": "The required evaluation-time qualification is unavailable.",
+        },
+        {
+            "code": "domain_verifier_required",
+            "subject_digest": content_ref.digest,
+            "claim_id": None,
+            "pointer": None,
+            "detail": "Domain verification is required.",
+        },
+    ]
+    unsigned_axes = {
+        "structure": "valid",
+        "integrity": "matched",
+        "authenticity": "unsigned",
+        "availability": "complete",
+        "common_eligibility": "refused",
+        "domain_verdict": "not_evaluated",
+        "current_eligibility": "refused",
+        "evaluation_mode": caller.evaluation_mode,
+    }
     if condition.startswith("cli_"):
         exit_code, report_path = invoke_rule_cli(
             tmp_path,
@@ -1230,6 +1369,15 @@ def assert_whole_clock_source_workflow(
             envelopes=ordinary_envelopes,
         )
         captured = capfd.readouterr()
+        if unsigned_report:
+            published = _object(json.loads(captured.out))
+            assert captured.err == "" and report_path.read_bytes() == captured.out.encode()
+            assert exit_code == 2
+            assert {name: published[name] for name in unsigned_axes} == unsigned_axes
+            assert published["content_ref"] == dict(content_ref.to_mapping())
+            assert published["policy_ref"] == dict(policy_ref.to_mapping())
+            assert published["reasons"] == unsigned_reasons
+            return
         error = _object(json.loads(captured.out))
         actual_reason = _object(_array(error["reasons"])[0])
         assert captured.out.encode() == _transport(
@@ -1249,25 +1397,41 @@ def assert_whole_clock_source_workflow(
         )
     else:
         resolver = _FileResolver(population)
-        with pytest.raises(error_type) as caught:
-            verify(
+        selected_policy = VerificationPolicy(
+            policy_ref,
+            tuple(_text(x) for x in _array(original_policy["required_claim_ids"])),
+            tuple(cast(Purpose, _text(x)) for x in _array(original_policy["required_purposes"])),
+        )
+        if unsigned_report:
+            report = verify(
                 content_raw,
                 schema_id=_text(inputs["schema_id"]),
                 envelopes=ordinary_envelopes,
                 registry=registry,
                 resolver=resolver,
                 limits=limits,
-                policy=VerificationPolicy(
-                    policy_ref,
-                    tuple(_text(x) for x in _array(original_policy["required_claim_ids"])),
-                    tuple(
-                        cast(Purpose, _text(x))
-                        for x in _array(original_policy["required_purposes"])
-                    ),
-                ),
+                policy=selected_policy,
                 trust=caller,
             )
-        actual_reason = asdict(caught.value.reason)
+            assert {name: getattr(report, name) for name in unsigned_axes} == unsigned_axes
+            assert report.content_ref == content_ref and report.policy_ref == policy_ref
+            assert report.registry_ref == registry.snapshot_ref
+            assert report.evaluation_time == caller.evaluation_time
+            assert report.evaluated_claim_ids == selected_policy.required_claim_ids
+            assert [asdict(reason) for reason in report.reasons] == unsigned_reasons
+        else:
+            with pytest.raises(error_type) as caught:
+                verify(
+                    content_raw,
+                    schema_id=_text(inputs["schema_id"]),
+                    envelopes=ordinary_envelopes,
+                    registry=registry,
+                    resolver=resolver,
+                    limits=limits,
+                    policy=selected_policy,
+                    trust=caller,
+                )
+            actual_reason = asdict(caught.value.reason)
         if resolver_calls is not None:
             resolver_calls.extend(resolver.calls)
         if (
@@ -1303,6 +1467,8 @@ def assert_whole_clock_source_workflow(
                             "semantic_law_ref",
                         )
                     } <= requested
+        if unsigned_report:
+            return
         if annual_expected is not None:
             requested = {reference for reference, _ in resolver.calls}
             assert uncertainty_method in requested
@@ -1415,107 +1581,6 @@ def assert_whole_clock_source_workflow(
                 )
                 missing_ref = BlobRef.from_mapping(_object(manifest["payload_ref"]))
             assert caught.value.reference == missing_ref
-    expected: dict[str, object] = {
-        "code": "configuration_error" if matching else "policy_unavailable",
-        "subject_digest": None if matching else policy_ref.digest,
-        "claim_id": None,
-        "pointer": "/trust"
-        if matching
-        else "/required_evaluation_time_qualification/clock_qualification_ref",
-        "detail": "Invalid local configuration."
-        if matching
-        else "The required evaluation-time qualification is unavailable.",
-    }
-    if condition == "clock_subject_first_coordinate":
-        expected.update(subject_digest=witness.digest, pointer="/before/utc_epoch_ns")
-    if condition == "software_receipt_ref":
-        expected.update(
-            code="reference_mismatch",
-            subject_digest=subject_ref.digest,
-            pointer="/ordered_receipt_refs/0",
-            detail="Reference bytes conflict.",
-        )
-    if condition.removeprefix("cli_").startswith("software_receipt") and condition not in {
-        "software_receipt",
-        "software_receipt_ref",
-        "software_receipt_count",
-        "software_receipt_lower",
-        "software_receipt_historical",
-    }:
-        expected.update(
-            code="scope_missing"
-            if field
-            in {
-                "content_digest",
-                "content_byte_length",
-                "authorizing_state_ref",
-                "authorization_ref",
-                "snapshot_ref",
-                "scope_ref",
-                "claim_ids",
-            }
-            else "key_revoked"
-            if condition == "software_receipt_revocation"
-            else "invalid_signature"
-            if condition in {"software_receipt_signature", "software_receipt_signature_rows"}
-            else "invalid_delegation",
-            subject_digest=ordinary_ref.digest,
-            pointer="/signature"
-            if condition in {"software_receipt_signature", "software_receipt_signature_rows"}
-            else "/statement/"
-            + ("claim_ids/0" if field == "claim_ids" else field or "signer_key_id"),
-            detail="The software statement signature is invalid."
-            if condition in {"software_receipt_signature", "software_receipt_signature_rows"}
-            else "Software statement does not match its independently selected source or target.",
-        )
-        if condition == "software_receipt_purpose":
-            expected["pointer"] = "/statement/signer_key_id"
-    if rule_expected is not None:
-        expected = dict(rule_expected)
-        if expected["subject_digest"] is None and rule_error_kind != "unavailable":
-            expected["subject_digest"] = policy_ref.digest
-    if method_expected is not None:
-        expected = method_reason
-    if acceptance_expected is not None:
-        expected = acceptance_expected[1]
-    if annual_expected is not None:
-        expected = annual_expected[1]
-    if obligation_reason is not None:
-        expected = obligation_reason[1]
-    if reproduction_expected is not None:
-        expected = reproduction_expected[1]
-    if native_expected is not None:
-        expected = native_expected[1]
-    if math_reason is not None:
-        expected = math_reason
-    if condition in SOFTWARE_INTERVAL_CASES:
-        expected = (
-            {
-                "code": "configuration_error",
-                "subject_digest": None,
-                "claim_id": None,
-                "pointer": "/trust",
-                "detail": "Invalid local configuration.",
-            }
-            if condition.endswith(("_one_full_row", "_year_zero_lower"))
-            else {
-                "code": "invalid_delegation",
-                "subject_digest": ordinary_ref.digest,
-                "claim_id": None,
-                "pointer": "/statement/authorization_ref",
-                "detail": "Software authorization does not cover the complete verification interval.",
-            }
-        )
-    if protected_use_reason is not None:
-        expected = protected_use_reason
-    if condition == "protected_control_base":
-        expected = {
-            "code": "policy_unavailable",
-            "subject_digest": policy_ref.digest,
-            "claim_id": None,
-            "pointer": "/authority_rule_ref",
-            "detail": "Protected control rule sources conflict.",
-        }
     if condition == "reproduction_history_validation_depth_no_schema":
         allowed = expected["subject_digest"]
         assert isinstance(allowed, tuple) and actual_reason["subject_digest"] in allowed
