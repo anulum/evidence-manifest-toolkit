@@ -13,6 +13,7 @@ import json
 from copy import deepcopy
 from pathlib import Path
 
+from tests.domain.native_run_inputs import native_run_input
 from tests.domain.reproduction_history_build import HistorySources
 from tests.domain.reproduction_record_inputs import ReproductionOutcome
 from tests.domain.test_verification_report_sources import _array, _bytes, _object, _text
@@ -45,9 +46,21 @@ PARENT_HISTORY_CASES = tuple(
 
 
 def parent_history_input(
-    condition: str, inputs: dict[str, object], directory: Path, *, limits: Limits
+    condition: str,
+    inputs: dict[str, object],
+    directory: Path,
+    *,
+    limits: Limits,
+    rules: dict[str, object],
+    conditions: BlobRef,
 ) -> tuple[dict[str, object], ReproductionOutcome]:
     """Build successive complete native parents for the real public API or module CLI.
+
+    Each step's validation body names the step's own parent and claim, so each step
+    also carries its own native run: the run request names the subject and claim of
+    the body that holds it, as the run-relation rule requires. A body that a case
+    changes after the chain is built gets its run rebuilt too, so the case's own
+    contradiction is the only one it carries.
 
     Parameters
     ----------
@@ -59,6 +72,11 @@ def parent_history_input(
         Actual owned immutable source store before first S0.
     limits : Limits
         Original operation bounds, never a larger history allowance.
+    rules : dict
+        The native identity, validation, execution and comparison rules the base
+        record's run was built from.
+    conditions : BlobRef
+        The disclosure that the base record's run sources are unqualified declarations.
 
     Returns
     -------
@@ -89,6 +107,21 @@ def parent_history_input(
     current_ref = store.store(base)
     initial_ref = current_ref
     runner = _text(store.read(store.child(original_body, "runner_binding_ref"))["principal_id"])
+    runner_ref = BlobRef.from_mapping(_object(original_body["runner_binding_ref"]))
+
+    def own_run(value: dict[str, object]) -> dict[str, object]:
+        """Rebuild one body's native run from that body's own subject, claim and outputs."""
+        rebuilt, run_conflict, run_missing = native_run_input(
+            value,
+            runner=runner_ref,
+            rules=rules,
+            conditions=conditions,
+            directory=directory,
+            condition="reproduction_match",
+        )
+        assert run_conflict is None and run_missing is None
+        return rebuilt
+
     renewal = case.startswith("renewal") or case.startswith("old_") or case == "depth_no_schema"
     steps = 12 if case == "depth_no_schema" else 2
     if case in {"validation_depth_no_schema", "validation_within_depth_no_schema"}:
@@ -118,6 +151,7 @@ def parent_history_input(
             current_ref = store.store(malformed_base)
             initial_ref = current_ref
             body["subject_ref"] = dict(current_ref.to_mapping())
+        body = own_run(body)
         body_ref = store.store(body)
         body_refs.append(body_ref)
         record = deepcopy(original_record)
@@ -178,6 +212,7 @@ def parent_history_input(
         last_record = store.read(record_refs[-1])
         last_body = store.read(body_refs[-1])
         last_body["subject_ref"] = dict(initial_ref.to_mapping())
+        last_body = own_run(last_body)
         last_record.update(
             body_ref=dict(store.store(last_body).to_mapping()),
             subject_ref=dict(initial_ref.to_mapping()),
@@ -191,6 +226,7 @@ def parent_history_input(
         changed_body["raw_output_and_diagnostics_refs"] = list(
             reversed(_array(changed_body["raw_output_and_diagnostics_refs"]))
         ) + [_object(changed_body["sealed_independent_output_ref"])]
+        changed_body = own_run(changed_body)
         old["body_ref"] = dict(store.store(changed_body).to_mapping())
         changed_validation = _object(final_claims[1]["validation"])
         changed_validation["record_ref"] = dict(store.store(old).to_mapping())

@@ -537,7 +537,7 @@ def assert_whole_clock_source_workflow(
         )
     if condition in PARENT_HISTORY_CASES:
         inputs, reproduction_expected = parent_history_input(
-            condition, inputs, tmp_path, limits=limits
+            condition, inputs, tmp_path, limits=limits, rules=rule_fields, conditions=declared
         )
     if condition in SOFTWARE_RECORD_CASES:
         reproduction_expected = software_record_expected(condition, inputs, reproduction_expected)
