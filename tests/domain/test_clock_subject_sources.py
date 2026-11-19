@@ -16,7 +16,7 @@ import subprocess
 import sys
 import sysconfig
 import time
-from collections.abc import Mapping
+from collections.abc import Callable, Mapping
 from dataclasses import asdict
 from datetime import UTC, datetime, timedelta
 from importlib.resources import files
@@ -96,6 +96,7 @@ from tests.domain.test_verification_report_sources import (
     _registry,
     _text,
 )
+from tests.domain.unsigned_command_inputs import UnsignedCommandInputs
 
 from evidence_manifest_toolkit import (
     BlobRef,
@@ -312,6 +313,7 @@ def assert_whole_clock_source_workflow(
     limits_override: Mapping[str, int] | None = None,
     resolver_calls: list[tuple[BlobRef | str, int]] | None = None,
     launcher_implementation_bytes: bytes | None = None,
+    command_check: Callable[[UnsignedCommandInputs], None] | None = None,
 ) -> None:
     """Traverse complete source bodies and reject whole joins before unavailable V2 state.
 
@@ -332,6 +334,10 @@ def assert_whole_clock_source_workflow(
     launcher_implementation_bytes : bytes or None
         Entire independently frozen descriptor for real isolated physical installation faults.
         This is fixture source data, never a product hook or admission assertion.
+    command_check : callable or None
+        Receives the complete inputs of an unsigned command case whose sources reach the
+        composed report, in place of this workflow's own single invocation. It changes no
+        source, fixture or product path; it only runs further real commands on the inputs.
 
     Notes
     -----
@@ -1352,6 +1358,31 @@ def assert_whole_clock_source_workflow(
         "current_eligibility": "refused",
         "evaluation_mode": caller.evaluation_mode,
     }
+    if condition.startswith("cli_") and command_check is not None:
+        assert unsigned_report and not ordinary_envelopes
+        command_check(
+            UnsignedCommandInputs(
+                directory=tmp_path,
+                population=population,
+                schema_id=_text(inputs["schema_id"]),
+                content_raw=content_raw,
+                registry=inputs["registry"],
+                limits=inputs["limits"],
+                policy={
+                    "policy_ref": dict(policy_ref.to_mapping()),
+                    "required_claim_ids": original_policy["required_claim_ids"],
+                    "required_purposes": original_policy["required_purposes"],
+                },
+                legacy_policy=dict(original_policy),
+                trust=context,
+                capfd=capfd,
+                policy_ref=policy_ref,
+                content_ref=content_ref,
+                axes=dict(unsigned_axes),
+                reasons=unsigned_reasons,
+            )
+        )
+        return
     if condition.startswith("cli_"):
         exit_code, report_path = invoke_rule_cli(
             tmp_path,
