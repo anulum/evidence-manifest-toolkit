@@ -14,6 +14,13 @@ EVIDENCE-MANIFEST-TOOLKIT — source and configuration provenance
 
 Initial local repository metadata, deterministic infrastructure guards, safe workflow preparation, locked development tools, native documentation and public-boundary conformance tests. No runtime package or public release is declared.
 
+The conformance vectors gain their signed-statement part: real envelopes
+from the repository's verification fixture, changed copies of them, and
+the two published test-vector public keys. Its cases cover key identity,
+the scope digest with claim ids in UTF-16 order, envelope parsing and its
+refusals, the domain-prefixed message and Ed25519 verification. No
+private key is part of the pack.
+
 The evidence core conformance vectors, version 1, are one language-neutral
 JSON pack of 118 cases: the admission order the contract states and the
 reference cases for canonical bytes and both byte-reference bases. Each
