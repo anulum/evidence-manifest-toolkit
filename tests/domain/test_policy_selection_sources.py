@@ -18,6 +18,7 @@ from pathlib import Path
 from typing import cast
 
 import pytest
+from coverage import Coverage
 from tests.domain.test_cli_evidence_sources import _inputs, _run, _source, _transport
 from tests.domain.test_verification_report_sources import (
     _array,
@@ -295,6 +296,16 @@ def test_original_whole_policy_scope_refusal_and_cli_recovery(field: str, tmp_pa
     for key in ("PYTHONPATH", "MYPYPATH"):
         environment.pop(key, None)
     environment.update(PYTHONDONTWRITEBYTECODE="1", TMPDIR=str(tmp_path))
+    # The child runs in src/, where coverage finds no configuration: name the repository's
+    # configuration and an absolute data file, so the child writes nothing into src/.
+    repository = Path(__file__).resolve().parents[2]
+    active = Coverage.current()
+    environment["COVERAGE_FILE"] = (
+        os.path.abspath(active.config.data_file)
+        if active is not None
+        else str(tmp_path / "child-coverage")
+    )
+    src_entries_before = sorted(entry.name for entry in (repository / "src").iterdir())
     expected_failure = _transport(
         {
             "operation": "verify",
@@ -324,6 +335,7 @@ def test_original_whole_policy_scope_refusal_and_cli_recovery(field: str, tmp_pa
                 "run",
                 "--branch",
                 "--parallel-mode",
+                "--rcfile=" + str(repository / "pyproject.toml"),
                 "--source=evidence_manifest_toolkit._policy_selection,evidence_manifest_toolkit._verification_inputs,evidence_manifest_toolkit._successor_formats",
                 "-m",
                 "evidence_manifest_toolkit",
@@ -331,7 +343,7 @@ def test_original_whole_policy_scope_refusal_and_cli_recovery(field: str, tmp_pa
                 "--report",
                 str(report),
             ],
-            cwd=Path(__file__).resolve().parents[2] / "src",
+            cwd=repository / "src",
             env=environment,
             capture_output=True,
             timeout=30,
@@ -340,3 +352,4 @@ def test_original_whole_policy_scope_refusal_and_cli_recovery(field: str, tmp_pa
         assert (actual.returncode, actual.stdout, actual.stderr) == (status, expected, b"")
         assert report.read_bytes() == expected if status == 0 else not report.exists()
     assert path.read_bytes() == original
+    assert sorted(entry.name for entry in (repository / "src").iterdir()) == src_entries_before
