@@ -62,7 +62,8 @@ def calculate_sample_estimate(
     Raises
     ------
     InputRefused
-        Original source, packet, quota, numeric mapping or any required sample bound fails.
+        Original source, packet, quota, numeric mapping or any required sample bound fails,
+        or the packet's exchange completed (T4) after the sample that uses it.
     ConfigurationError
         The complete raw realtime capture has invalid closed grammar or field types.
     """
@@ -98,7 +99,8 @@ def calculate_sample_estimate(
         pointer=CLOCK_POINTER,
     )
     if (
-        sample.accuracy_radius_ns < estimate.radius_ns + terms["acquisition"].nanoseconds
+        estimate.measurement.destination_ns > sample.utc_ns
+        or sample.accuracy_radius_ns < estimate.radius_ns + terms["acquisition"].nanoseconds
         or sample.mapping_error_bound_ns < terms["mapping"].nanoseconds
         or sample.quantization_error_bound_ns < terms["quantization"].nanoseconds
     ):

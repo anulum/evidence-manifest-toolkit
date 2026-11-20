@@ -12,16 +12,29 @@ The acceptance body declares six checks, each ``pass``, ``fail`` or ``unavailabl
 evidence. A declared result is never the answer: each check this module can recompute is
 recomputed, and a declared ``pass`` that the evidence contradicts is refused. A declared
 ``fail`` or ``unavailable`` is kept, since a source may report less than can be shown, never
-more. Three checks have no rule here yet (synchronization and mapping, the uncertainty budget,
-and the class's authority and time); they stay ``unavailable``. The Clock is accepted only when
-all six are ``pass``.
+more. The Clock is accepted only when all six are ``pass``.
+
+Three checks are relational (whole sources, controller identity, acyclic whole target). Two are
+read from the Clock calculation, which has already refused every inconsistent NTP exchange,
+sample claim, use bound and window: synchronization and mapping holds once that calculation
+exists, and the uncertainty budget holds when the drift rate is at least RFC 5905's frequency
+tolerance, every sample's declared holdover covers its age since its NTP exchange, and the whole
+interval lies within the profile's maximum around the evaluation origin. Without a calculation
+both stay ``unavailable``. The server's identity is not captured by the selected raw source, so
+synchronization is consistency of the recorded exchange, not proof of whom it was with. The
+class's authority and time has no rule here yet and stays ``unavailable``.
 """
 
 import json
 from collections.abc import Mapping
 from dataclasses import dataclass
+from fractions import Fraction
+from math import ceil
 from typing import Literal, cast
 
+from ._clock_method_calculate import ClockMethodCalculation
+from ._clock_subject import BoundClockSubject
+from ._clock_values import ClockSample, clock_integer
 from ._errors import InputRefused
 from ._json import JsonValue
 from ._results import ReferenceObservation
@@ -37,12 +50,11 @@ CHECK_IDS = (
 )
 """The six acceptance checks, in the order the Clock format names them."""
 
-UNDECIDED = {
-    "synchronization_and_mapping": "D1",
-    "proven_uncertainty_budget": "D3",
-    "selected_class_authority_and_time": "D2",
-}
+UNDECIDED = {"selected_class_authority_and_time": "D2"}
 """The checks without a rule yet, each with the decision its rule waits for."""
+
+MINIMUM_DRIFT_RATE = Fraction(15, 1_000_000)
+"""RFC 5905's frequency tolerance PHI: the least drift rate the uncertainty budget accepts."""
 
 type CheckResult = Literal["pass", "fail", "unavailable"]
 
@@ -63,6 +75,124 @@ class ClockVerdict:
     def accepted(self) -> bool:
         """Return whether every one of the six checks passes."""
         return all(self.checks.get(check) == "pass" for check in CHECK_IDS)
+
+
+@dataclass(frozen=True, slots=True)
+class SampleAge:
+    """One Clock sample beside the NTP exchange it uses and its declared age terms.
+
+    Attributes
+    ----------
+    utc_ns, exchange_ns : int
+        The sample's UTC and its exchange's destination time T4, both Unix-epoch nanoseconds.
+    holdover_ns, adjustment_ns : int
+        The sample's declared elapsed-holdover and post-exchange-adjustment bounds.
+    """
+
+    utc_ns: int
+    exchange_ns: int
+    holdover_ns: int
+    adjustment_ns: int
+
+
+@dataclass(frozen=True, slots=True)
+class ClockEvidence:
+    """The numbers the Clock calculation proved that the uncertainty budget reads.
+
+    Attributes
+    ----------
+    samples : tuple of SampleAge
+        The acceptance's before and after samples, then the witness's.
+    drift_rate : Fraction
+        The drift record's maximum error rate, in nanoseconds per elapsed nanosecond.
+    lower_ns, upper_ns : int
+        The whole capture-through-entry interval.
+    origin_ns, maximum_ns : int
+        The evaluation origin and the profile's maximum uncertainty.
+    """
+
+    samples: tuple[SampleAge, ...]
+    drift_rate: Fraction
+    lower_ns: int
+    upper_ns: int
+    origin_ns: int
+    maximum_ns: int
+
+
+def clock_evidence(
+    calculation: ClockMethodCalculation | None, clock: BoundClockSubject
+) -> ClockEvidence | None:
+    """Collect what the uncertainty budget reads from a completed Clock calculation.
+
+    Parameters
+    ----------
+    calculation : ClockMethodCalculation or None
+        The calculation over the bound subject, absent when it was not reached.
+    clock : BoundClockSubject
+        The bound subject whose samples, origin and profile the calculation used.
+
+    Returns
+    -------
+    ClockEvidence or None
+        ``None`` without a calculation; otherwise the four samples with their exchanges and
+        declared terms, the drift rate, the whole interval, the origin and the maximum.
+    """
+    if calculation is None:
+        return None
+    acceptance = cast(dict[str, JsonValue], clock.sources.documents["acceptance"].value)
+    profile = cast(dict[str, JsonValue], clock.sources.documents["profile"].value)
+    annual = tuple(
+        ClockSample.from_value(
+            cast(dict[str, JsonValue], acceptance[name]),
+            origin=clock.native_entry.origin,
+            subject=clock.sources.fixed["acceptance"].source.reference.digest,
+            pointer="/" + name,
+        )
+        for name in ("before", "after")
+    )
+    pairs = (
+        (annual[0], calculation.acceptance.before),
+        (annual[1], calculation.acceptance.after),
+        (clock.before, calculation.before),
+        (clock.after, calculation.after),
+    )
+    return ClockEvidence(
+        tuple(
+            SampleAge(
+                sample.utc_ns,
+                estimate.measurement.destination_ns,
+                estimate.additional.elapsed_holdover_ns,
+                estimate.additional.post_exchange_adjustment_ns,
+            )
+            for sample, estimate in pairs
+        ),
+        calculation.methods.maximum_error_rate,
+        calculation.use.whole.lower_ns,
+        calculation.use.whole.upper_ns,
+        clock.evaluation_origin_ns,
+        clock_integer(
+            cast(str, profile["maximum_uncertainty_ns"]),
+            signed=False,
+            subject=clock.sources.fixed["profile"].source.reference.digest,
+            pointer="/maximum_uncertainty_ns",
+        ),
+    )
+
+
+def _budget_holds(evidence: ClockEvidence) -> bool:
+    """Return whether the rate, every sample's holdover and the whole interval are within bounds."""
+    return (
+        evidence.drift_rate >= MINIMUM_DRIFT_RATE
+        and all(
+            sample.holdover_ns
+            >= ceil(
+                evidence.drift_rate * (sample.utc_ns - sample.exchange_ns + sample.adjustment_ns)
+            )
+            for sample in evidence.samples
+        )
+        and evidence.origin_ns - evidence.maximum_ns <= evidence.lower_ns
+        and evidence.upper_ns <= evidence.origin_ns + evidence.maximum_ns
+    )
 
 
 def _refused(code: str, subject: Digest, pointer: str, detail: str) -> InputRefused:
@@ -97,8 +227,9 @@ def clock_verdict(
     closure_reasons: tuple[Reason, ...],
     missing_references: int,
     source_reasons: tuple[Reason, ...],
+    evidence: ClockEvidence | None,
 ) -> ClockVerdict:
-    """Recompute the relational checks and keep the rest as the rules allow.
+    """Recompute the relational and calculated checks and keep the rest as the rules allow.
 
     Parameters
     ----------
@@ -112,12 +243,14 @@ def clock_verdict(
         The closure's refusals and the Clock sources' acquisition refusals.
     missing_references : int
         How many required references the closure could not find.
+    evidence : ClockEvidence or None
+        What the Clock calculation proved, absent when it was not reached.
 
     Returns
     -------
     ClockVerdict
         The six results. A declared ``fail`` or ``unavailable`` is kept as declared; a check
-        without a rule here is ``unavailable``.
+        without a rule here, or a calculated check without a calculation, is ``unavailable``.
 
     Raises
     ------
@@ -138,8 +271,8 @@ def clock_verdict(
     results: dict[str, CheckResult] = {}
     for index, item in enumerate(checks):
         check = cast(str, item["check_id"])
-        evidence = cast(list[JsonValue], item["evidence_refs"])
-        if len({json.dumps(ref, sort_keys=True) for ref in evidence}) != len(evidence):
+        references = cast(list[JsonValue], item["evidence_refs"])
+        if len({json.dumps(ref, sort_keys=True) for ref in references}) != len(references):
             raise _refused(
                 "invalid_schema",
                 acceptance_digest,
@@ -147,10 +280,11 @@ def clock_verdict(
                 "A Clock acceptance check repeats an evidence reference.",
             )
         declared = cast(CheckResult, item["result"])
-        if check in UNDECIDED:
+        calculated = check in ("synchronization_and_mapping", "proven_uncertainty_budget")
+        if check in UNDECIDED or (calculated and evidence is None):
             results[check] = "unavailable"
             continue
-        resolved = _resolved(index, evidence, acceptance_digest, observations)
+        resolved = _resolved(index, references, acceptance_digest, observations)
         if check == "whole_source_match":
             holds = resolved and not source_reasons
         elif check == "controller_source_match":
@@ -161,6 +295,10 @@ def clock_verdict(
                 == subject["verification_controller_identity_ref"]
                 and acceptance["observer_identity_ref"] == witness["observer_identity_ref"]
             )
+        elif check == "synchronization_and_mapping":
+            holds = resolved
+        elif check == "proven_uncertainty_budget":
+            holds = resolved and _budget_holds(cast(ClockEvidence, evidence))
         else:
             holds = resolved and not closure_reasons and missing_references == 0
         if declared == "pass" and not holds:

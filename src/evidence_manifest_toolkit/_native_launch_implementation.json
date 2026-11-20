@@ -104,8 +104,8 @@
     },
     {
       "filename": "_clock_sample_estimate.py",
-      "byte_length": "4085",
-      "sha256": "e320fad224b2f42fff1c86598a78b421337c74a28f97cb403858565f931a75ae"
+      "byte_length": "4227",
+      "sha256": "0ffa70dcde85dad5c564cb0e982720c7d9d48ae20be7a1b6645c66708050bc7a"
     },
     {
       "filename": "_clock_sources.py",
@@ -124,8 +124,8 @@
     },
     {
       "filename": "_clock_verdict.py",
-      "byte_length": "6709",
-      "sha256": "b81ce946377999042bb80f0505ac7016b49504f0c3cb901c8c7c4fe998322c93"
+      "byte_length": "12251",
+      "sha256": "7c87bf990ad366f65141f71c31e7b335d868ba0a1957f43ba5f138e85cd2a986"
     },
     {
       "filename": "_clock_windows.py",
@@ -255,7 +255,7 @@
     {
       "filename": "_native_entry_method.json",
       "byte_length": "1461",
-      "sha256": "27b44a79cc4bfe29603619917543188932ac337294af884a706cd639d4abb551"
+      "sha256": "5cd871e7b55ef3e7630c6e5fd96547e9b3ba694287e82c71a55c341f1ed6d48f"
     },
     {
       "filename": "_native_installation.py",
@@ -804,8 +804,8 @@
     },
     {
       "filename": "_verification_inputs.py",
-      "byte_length": "19042",
-      "sha256": "050a1808fb71cfbdadd49ff017876f6fb792864a4cfa96c1912ac99287f24fc9"
+      "byte_length": "19137",
+      "sha256": "4942b505a6f529ed9465461851219989f6a665e3ae04ba2aed25791c139e9aae"
     },
     {
       "filename": "_verification_report.py",

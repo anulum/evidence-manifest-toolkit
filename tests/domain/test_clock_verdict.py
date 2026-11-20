@@ -6,24 +6,31 @@
 # Contact: www.anulum.li | protoscience@anulum.li
 # EVIDENCE-MANIFEST-TOOLKIT — the Clock acceptance verdict over its six checks
 
-"""Recompute the relational Clock checks, keep what is declared below them, refuse a false pass.
+"""Recompute the Clock checks the evidence decides, keep lesser declarations, refuse a false pass.
 
 Each case builds the documents and closure edges the verdict reads from a bound Clock subject:
-the acceptance body with its six declared checks, the witness, the evaluation subject, and the
-closure's observations and refusals. A declared ``pass`` must reproduce; a declared ``fail`` or
-``unavailable`` stays; the three checks without a rule yet stay ``unavailable``.
+the acceptance body with its six declared checks, the witness, the evaluation subject, the
+closure's observations and refusals, and the numbers the Clock calculation proved. A declared
+``pass`` must reproduce; a declared ``fail`` or ``unavailable`` stays; a check whose evidence
+is missing, or which has no rule yet, stays ``unavailable``.
 """
 
 from dataclasses import asdict
+from fractions import Fraction
 from typing import TypedDict, cast
 
 import pytest
 
 from evidence_manifest_toolkit import InputRefused, Reason
+from evidence_manifest_toolkit._clock_subject import BoundClockSubject
 from evidence_manifest_toolkit._clock_verdict import (
     CHECK_IDS,
+    MINIMUM_DRIFT_RATE,
     UNDECIDED,
+    ClockEvidence,
     ClockVerdict,
+    SampleAge,
+    clock_evidence,
     clock_verdict,
 )
 from evidence_manifest_toolkit._json import JsonValue
@@ -32,6 +39,14 @@ from evidence_manifest_toolkit._results import ReferenceObservation
 ACCEPTANCE = "sha256:" + "a" * 64
 CONTROLLER: dict[str, JsonValue] = {"name": "controller"}
 OBSERVER: dict[str, JsonValue] = {"name": "observer"}
+ORIGIN = 1_795_128_000_000_000_000
+MAXIMUM = 5_000_000_000
+AGE = 13_452_201_545
+"""UTC minus T4 of a real WS capture's acceptance sample (U11-4b design addendum 1)."""
+ADJUSTMENT = 1_000
+HOLDOVER = 201_784
+"""ceil(15/1000000 * (AGE + ADJUSTMENT)): 201783.038175 rounded up."""
+COMPUTED = ("synchronization_and_mapping", "proven_uncertainty_budget")
 
 
 def _evidence(index: int) -> dict[str, JsonValue]:
@@ -65,6 +80,30 @@ def _matched(indexes: range | list[int]) -> tuple[ReferenceObservation, ...]:
     )
 
 
+def _sample(*, age: int = AGE, holdover: int = HOLDOVER, adjustment: int = ADJUSTMENT) -> SampleAge:
+    """Return one sample taken ``age`` nanoseconds after its NTP exchange."""
+    utc = ORIGIN + 1_000_000
+    return SampleAge(utc, utc - age, holdover, adjustment)
+
+
+def _clock_evidence(
+    *,
+    samples: tuple[SampleAge, ...] | None = None,
+    drift_rate: Fraction = MINIMUM_DRIFT_RATE,
+    lower_ns: int = ORIGIN - MAXIMUM,
+    upper_ns: int = ORIGIN + MAXIMUM,
+) -> ClockEvidence:
+    """Return calculated numbers that hold at every boundary unless a case moves one."""
+    return ClockEvidence(
+        samples=samples if samples is not None else (_sample(), _sample(), _sample(), _sample()),
+        drift_rate=drift_rate,
+        lower_ns=lower_ns,
+        upper_ns=upper_ns,
+        origin_ns=ORIGIN,
+        maximum_ns=MAXIMUM,
+    )
+
+
 def _verdict(
     acceptance: dict[str, JsonValue],
     *,
@@ -74,6 +113,7 @@ def _verdict(
     closure_reasons: tuple[Reason, ...] = (),
     missing: int = 0,
     source_reasons: tuple[Reason, ...] = (),
+    evidence: ClockEvidence | None = None,
 ) -> ClockVerdict:
     """Run the verdict over a whole set of inputs, matching ones unless a case changes them."""
     return clock_verdict(
@@ -89,6 +129,7 @@ def _verdict(
         closure_reasons=closure_reasons,
         missing_references=missing,
         source_reasons=source_reasons,
+        evidence=evidence,
     )
 
 
@@ -101,30 +142,46 @@ class _Changes(TypedDict, total=False):
     closure_reasons: tuple[Reason, ...]
     missing: int
     source_reasons: tuple[Reason, ...]
+    evidence: ClockEvidence | None
 
 
 RELATIONAL = ("whole_source_match", "controller_source_match", "acyclic_whole_target")
 CYCLE = Reason("cycle_detected", ACCEPTANCE, None, None, "Reference cycle.")
 
 
-def test_the_verdict_keeps_six_slots_in_order_and_the_undecided_three_unavailable() -> None:
-    """Each relational pass reproduces; the three checks without a rule stay unavailable."""
+def test_the_verdict_keeps_six_slots_in_order_and_relational_passes_reproduce() -> None:
+    """Without a calculation, the two computed checks and the undecided one stay unavailable."""
     verdict = _verdict(_acceptance({check: "pass" for check in CHECK_IDS}))
     assert tuple(verdict.checks) == CHECK_IDS
     assert {check: verdict.checks[check] for check in RELATIONAL} == dict.fromkeys(
         RELATIONAL, "pass"
     )
-    assert {check: verdict.checks[check] for check in UNDECIDED} == dict.fromkeys(
-        UNDECIDED, "unavailable"
+    assert {check: verdict.checks[check] for check in (*COMPUTED, *UNDECIDED)} == dict.fromkeys(
+        (*COMPUTED, *UNDECIDED), "unavailable"
     )
+    assert verdict.accepted is False
+
+
+def test_with_a_calculation_synchronization_and_the_budget_pass_at_their_boundaries() -> None:
+    """Rate at the floor, holdover at its exact ceiling, interval at plus/minus the maximum."""
+    verdict = _verdict(
+        _acceptance({check: "pass" for check in CHECK_IDS}), evidence=_clock_evidence()
+    )
+    assert {check: verdict.checks[check] for check in COMPUTED} == dict.fromkeys(COMPUTED, "pass")
+    assert verdict.checks["selected_class_authority_and_time"] == "unavailable"
     assert verdict.accepted is False
 
 
 def test_a_declared_fail_or_unavailable_is_kept_even_when_it_would_pass() -> None:
     """A source may report less than can be shown, never more."""
-    verdict = _verdict(_acceptance({"whole_source_match": "fail"}))
+    verdict = _verdict(
+        _acceptance({"whole_source_match": "fail", "proven_uncertainty_budget": "fail"}),
+        evidence=_clock_evidence(),
+    )
     assert verdict.checks["whole_source_match"] == "fail"
+    assert verdict.checks["proven_uncertainty_budget"] == "fail"
     assert verdict.checks["controller_source_match"] == "unavailable"
+    assert verdict.checks["synchronization_and_mapping"] == "unavailable"
 
 
 def test_the_verdict_is_accepted_only_when_all_six_pass() -> None:
@@ -152,6 +209,45 @@ def test_the_verdict_is_accepted_only_when_all_six_pass() -> None:
         ("controller_source_match", {"subject": {"verification_controller_identity_ref": {}}}),
         ("acyclic_whole_target", {"closure_reasons": (CYCLE,)}),
         ("acyclic_whole_target", {"missing": 1}),
+        (
+            "synchronization_and_mapping",
+            {"observations": _matched([0, 1, 3, 4, 5]), "evidence": _clock_evidence()},
+        ),
+        (
+            "proven_uncertainty_budget",
+            {"observations": _matched([0, 1, 2, 4, 5]), "evidence": _clock_evidence()},
+        ),
+        (
+            "proven_uncertainty_budget",
+            {
+                "evidence": _clock_evidence(
+                    samples=(_sample(), _sample(), _sample(holdover=HOLDOVER - 1), _sample())
+                )
+            },
+        ),
+        (
+            "proven_uncertainty_budget",
+            {
+                "evidence": _clock_evidence(
+                    samples=(_sample(adjustment=1_000_000), _sample(), _sample(), _sample())
+                )
+            },
+        ),
+        (
+            "proven_uncertainty_budget",
+            {
+                "evidence": _clock_evidence(
+                    samples=(_sample(holdover=10**12),) * 4,
+                    drift_rate=Fraction(14, 1_000_000),
+                )
+            },
+        ),
+        (
+            "proven_uncertainty_budget",
+            {"evidence": _clock_evidence(drift_rate=Fraction(20, 1_000_000))},
+        ),
+        ("proven_uncertainty_budget", {"evidence": _clock_evidence(lower_ns=ORIGIN - MAXIMUM - 1)}),
+        ("proven_uncertainty_budget", {"evidence": _clock_evidence(upper_ns=ORIGIN + MAXIMUM + 1)}),
     ],
     ids=[
         "whole_source_with_source_refusal",
@@ -161,6 +257,14 @@ def test_the_verdict_is_accepted_only_when_all_six_pass() -> None:
         "controller_with_other_subject_controller",
         "acyclic_with_closure_refusal",
         "acyclic_with_missing_reference",
+        "synchronization_with_unresolved_evidence",
+        "budget_with_unresolved_evidence",
+        "budget_with_holdover_one_under_its_ceiling",
+        "budget_with_holdover_short_of_the_adjusted_age",
+        "budget_with_a_rate_under_the_floor",
+        "budget_with_holdover_short_at_the_records_higher_rate",
+        "budget_with_the_interval_one_under",
+        "budget_with_the_interval_one_over",
     ],
 )
 def test_a_declared_pass_contradicted_by_its_evidence_is_refused(
@@ -179,10 +283,16 @@ def test_a_declared_pass_contradicted_by_its_evidence_is_refused(
     }
 
 
-def test_an_undecided_check_declared_pass_is_unavailable_not_refused() -> None:
-    """A check without a rule is missing evidence, not contradicted evidence."""
-    verdict = _verdict(_acceptance({"synchronization_and_mapping": "pass"}))
-    assert verdict.checks["synchronization_and_mapping"] == "unavailable"
+def test_a_check_without_a_rule_or_without_evidence_declared_pass_is_unavailable() -> None:
+    """Missing evidence is not contradicted evidence: no refusal, the result is unavailable."""
+    undecided = _verdict(
+        _acceptance({"selected_class_authority_and_time": "pass"}), evidence=_clock_evidence()
+    )
+    assert undecided.checks["selected_class_authority_and_time"] == "unavailable"
+    uncalculated = _verdict(_acceptance(dict.fromkeys(COMPUTED, "pass")))
+    assert {check: uncalculated.checks[check] for check in COMPUTED} == dict.fromkeys(
+        COMPUTED, "unavailable"
+    )
 
 
 def test_a_repeated_evidence_reference_is_an_invalid_acceptance() -> None:
@@ -208,3 +318,8 @@ def test_the_six_checks_must_each_be_declared_once() -> None:
     with pytest.raises(InputRefused) as caught:
         _verdict(acceptance)
     assert (caught.value.reason.code, caught.value.reason.pointer) == ("invalid_schema", "/checks")
+
+
+def test_without_a_calculation_there_is_no_clock_evidence() -> None:
+    """A verification that did not reach the Clock calculation gives the budget nothing to read."""
+    assert clock_evidence(None, cast(BoundClockSubject, None)) is None

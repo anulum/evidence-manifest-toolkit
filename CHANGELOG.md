@@ -14,6 +14,21 @@ EVIDENCE-MANIFEST-TOOLKIT — source and configuration provenance
 
 Initial local repository metadata, deterministic infrastructure guards, safe workflow preparation, locked development tools, native documentation and public-boundary conformance tests. No runtime package or public release is declared.
 
+The Clock verdict now reads synchronization and the uncertainty budget
+from the Clock calculation. Synchronization and mapping holds once that
+calculation completes, since it already refuses every inconsistent
+exchange, sample claim and window; the server's identity is not
+captured, so it shows that the recorded exchange is consistent, not whom
+it was with. The uncertainty budget holds when the drift record's rate
+is at least RFC 5905's 15/1000000, when every sample's declared holdover
+covers its age since its NTP exchange plus its post-exchange adjustment
+at that rate, and when the whole interval lies within the profile's
+maximum uncertainty around the evaluation origin. A declared pass that
+does not hold is refused at its check. The calculation now also refuses
+a sample whose NTP exchange completed after the sample. The class's
+authority and time still has no rule, so no verdict is accepted yet and
+report bytes are unchanged.
+
 A verification with a bound Clock subject now computes a Clock verdict
 over the six checks its acceptance declares. The three relational checks
 (whole sources, controller identity, acyclic whole target) are

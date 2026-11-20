@@ -112,6 +112,7 @@ from evidence_manifest_toolkit import (
     reference_bytes,
     verify,
 )
+from evidence_manifest_toolkit._clock_verdict import CHECK_IDS
 from evidence_manifest_toolkit._immutable import FrozenJson
 from evidence_manifest_toolkit._trust_types import Purpose
 
@@ -178,13 +179,18 @@ def _sample(
     }, raw
 
 
-def _synchronization(directory: Path) -> tuple[BlobRef, int]:
+def _synchronization(directory: Path, *, exchange_after_us: int = 0) -> tuple[BlobRef, int]:
     """Retain the actual whole daemon reply and independently calculate its reported offset.
 
     Parameters
     ----------
     directory : Path
         Owned immutable raw source store.
+    exchange_after_us : int
+        Zero keeps the actual reply. Otherwise all four timestamps move forward together until
+        T4 lies this many microseconds after the current realtime clock: a synthetic reply,
+        used only by the case whose exchange completes after the samples that use it. Offset
+        and delay are unchanged by the move.
 
     Returns
     -------
@@ -209,8 +215,14 @@ def _synchronization(directory: Path) -> tuple[BlobRef, int]:
     assert not result.stderr
     tokens = result.stdout.decode("ascii").split()
     assert len(tokens) == 20 and tokens[0] == "(uuuuittayttttbtt)" and tokens[8] == "4"
+    raw = result.stdout
+    if exchange_after_us:
+        shift = time.clock_gettime_ns(time.CLOCK_REALTIME) // 1000 + exchange_after_us
+        shift -= int(tokens[16])
+        tokens[13:17] = [str(int(value) + shift) for value in tokens[13:17]]
+        raw = (" ".join(tokens) + "\n").encode("ascii")
     t1, t2, t3, t4 = map(int, tokens[13:17])
-    return _native_source(result.stdout, directory, "text/plain"), ((t2 - t1) + (t3 - t4)) * 500
+    return _native_source(raw, directory, "text/plain"), ((t2 - t1) + (t3 - t4)) * 500
 
 
 @pytest.mark.parametrize(
@@ -255,6 +267,7 @@ def _synchronization(directory: Path) -> tuple[BlobRef, int]:
         "clock_subject_first_raw",
         "clock_subject_first_coordinate",
         "clock_subject_capture_bounds",
+        "clock_exchange_after_sample",
         "protected_control_base",
         "protected_ordinary_matching",
         "cli_protected_ordinary_matching",
@@ -314,6 +327,8 @@ def assert_whole_clock_source_workflow(
     resolver_calls: list[tuple[BlobRef | str, int]] | None = None,
     launcher_implementation_bytes: bytes | None = None,
     command_check: Callable[[UnsignedCommandInputs], None] | None = None,
+    declared_checks: Mapping[str, str] | None = None,
+    contradicted_check: str | None = None,
 ) -> None:
     """Traverse complete source bodies and reject whole joins before unavailable V2 state.
 
@@ -338,10 +353,15 @@ def assert_whole_clock_source_workflow(
         Receives the complete inputs of an unsigned command case whose sources reach the
         composed report, in place of this workflow's own single invocation. It changes no
         source, fixture or product path; it only runs further real commands on the inputs.
+    declared_checks : Mapping or None
+        Acceptance results a case declares, by check id; every other check is unavailable.
+    contradicted_check : str or None
+        The declared check whose evidence contradicts it: the case then expects the
+        verdict's refusal at that check's result instead of its ordinary outcome.
 
     Notes
     -----
-    All six acceptance outcomes are explicitly unavailable. Bounds and rule references
+    Acceptance outcomes are unavailable unless a case declares them. Bounds and rule references
     are unqualified declarations; these are source-consistency cases, never a Clock pass.
     No private production helper, substituted clock or fabricated protected source runs.
     """
@@ -715,15 +735,12 @@ def assert_whole_clock_source_workflow(
         "issuer_authorization_ref": issuer_authorization,
         "rule_implementation_ref": ref,
         "checks": [
-            {"check_id": name, "result": "unavailable", "evidence_refs": [ref]}
-            for name in (
-                "whole_source_match",
-                "controller_source_match",
-                "synchronization_and_mapping",
-                "proven_uncertainty_budget",
-                "selected_class_authority_and_time",
-                "acyclic_whole_target",
-            )
+            {
+                "check_id": name,
+                "result": (declared_checks or {}).get(name, "unavailable"),
+                "evidence_refs": [ref],
+            }
+            for name in CHECK_IDS
         ],
         "custody_class": custody_class,
     }
@@ -995,7 +1012,10 @@ def assert_whole_clock_source_workflow(
         },
         tmp_path,
     )
-    synchronization_ref, _ = _synchronization(tmp_path)
+    synchronization_ref, _ = _synchronization(
+        tmp_path,
+        exchange_after_us=60_000_000 if condition == "clock_exchange_after_sample" else 0,
+    )
     after, _ = _sample(tmp_path, accuracy_radius_ns=sample_accuracy)
     use, raw_use = _sample(tmp_path, accuracy_radius_ns=sample_accuracy)
     use_method = clock_use_input(
@@ -1320,6 +1340,16 @@ def assert_whole_clock_source_workflow(
             "pointer": "/authority_rule_ref",
             "detail": "Protected control rule sources conflict.",
         }
+    if contradicted_check is not None:
+        expected = {
+            "code": "policy_unavailable",
+            "subject_digest": acceptance.digest,
+            "claim_id": None,
+            "pointer": f"/checks/{CHECK_IDS.index(contradicted_check)}/result",
+            "detail": f"The declared Clock acceptance check {contradicted_check} is "
+            "contradicted by its evidence.",
+        }
+        error_type = InputRefused
     # An unsigned caller whose sources reach the end of acquisition receives the composed report:
     # exactly the cases whose final expected refusal is the generic configuration refusal at
     # /trust. The report has no authority state, authenticity unsigned, current eligibility

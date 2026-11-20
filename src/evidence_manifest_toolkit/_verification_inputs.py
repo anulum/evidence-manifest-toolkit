@@ -19,7 +19,7 @@ from ._caller_config import validate_policy_argument, validate_verification_trus
 from ._clock_method_calculate import ClockMethodCalculation
 from ._clock_method_types import ClockMethodInputs
 from ._clock_subject import BoundClockSubject, bind_clock_subject
-from ._clock_verdict import ClockVerdict, clock_verdict
+from ._clock_verdict import ClockVerdict, clock_evidence, clock_verdict
 from ._content import CompleteContent, prepare_content
 from ._context_sources import ContextSource
 from ._entry_binding import BoundNativeEntry, bind_native_entry
@@ -446,5 +446,6 @@ def _acquire_selected_inputs(
             closure_reasons=clock_subject.sources.closure.reasons,
             missing_references=len(clock_subject.sources.closure.missing_references),
             source_reasons=clock_subject.sources.reasons,
+            evidence=clock_evidence(details.clock_calculation, clock_subject),
         ),
     )
