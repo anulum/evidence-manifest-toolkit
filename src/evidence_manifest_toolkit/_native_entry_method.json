@@ -42,8 +42,8 @@
     },
     {
       "filename": "_verification_inputs.py",
-      "byte_length": "17961",
-      "sha256": "27f99dcbdc0ff5e574044f1add4138c0a3dfd8d7adbc5f717595470e1a30d2fe"
+      "byte_length": "19042",
+      "sha256": "050a1808fb71cfbdadd49ff017876f6fb792864a4cfa96c1912ac99287f24fc9"
     },
     {
       "filename": "_clock_subject.py",

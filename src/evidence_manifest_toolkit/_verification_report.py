@@ -219,7 +219,9 @@ def compose_verification_report(
                 "Required local verification policy is unavailable.",
             )
         )
-    elif declaration.requires_clock:
+    elif declaration.requires_clock and not (
+        inputs.clock_verdict is not None and inputs.clock_verdict.accepted
+    ):
         reasons.append(
             Reason(
                 "policy_unavailable",

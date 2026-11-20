@@ -14,6 +14,16 @@ EVIDENCE-MANIFEST-TOOLKIT — source and configuration provenance
 
 Initial local repository metadata, deterministic infrastructure guards, safe workflow preparation, locked development tools, native documentation and public-boundary conformance tests. No runtime package or public release is declared.
 
+A verification with a bound Clock subject now computes a Clock verdict
+over the six checks its acceptance declares. The three relational checks
+(whole sources, controller identity, acyclic whole target) are
+recomputed, and a declared pass that the evidence contradicts is refused
+at that check; a declared fail or unavailable is kept, and a repeated
+check or evidence reference is an invalid acceptance. The other three
+checks have no rule yet and stay unavailable, so no verdict is accepted
+and every report keeps the evaluation-time qualification reason; the
+report drops it only for an accepted verdict.
+
 An unsigned V2 verification now returns the original fifteen-field
 report instead of a configuration refusal at /trust. The report is
 composed without any authority state: authenticity is unsigned, the

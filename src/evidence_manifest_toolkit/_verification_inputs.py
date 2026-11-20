@@ -12,13 +12,14 @@ from __future__ import annotations
 
 from collections.abc import Mapping
 from dataclasses import dataclass
-from typing import TYPE_CHECKING
+from typing import TYPE_CHECKING, cast
 
 from ._budget import ReferenceBudget
 from ._caller_config import validate_policy_argument, validate_verification_trust
 from ._clock_method_calculate import ClockMethodCalculation
 from ._clock_method_types import ClockMethodInputs
 from ._clock_subject import BoundClockSubject, bind_clock_subject
+from ._clock_verdict import ClockVerdict, clock_verdict
 from ._content import CompleteContent, prepare_content
 from ._context_sources import ContextSource
 from ._entry_binding import BoundNativeEntry, bind_native_entry
@@ -26,7 +27,7 @@ from ._entry_observation import NativeEntryCapture
 from ._envelopes import ParsedEnvelope, parse_envelope
 from ._interfaces import Resolver
 from ._invocation_wire import CallerTrust, SuccessorTrust
-from ._json import validate_limits
+from ._json import JsonValue, validate_limits
 from ._native_rule_bindings import NativeRuleBindings
 from ._policy_selection import PolicySelection, acquire_policy_selection
 from ._policy_source import PolicyDeclaration
@@ -109,6 +110,9 @@ class VerificationInputs:
         Entire four selected method declarations and their original bounded graph,
         retained from actual acquisition for later class/state/report composition.
         No source qualification, execution, identity or authority follows from shape.
+    clock_verdict : ClockVerdict or None
+        The six Clock acceptance checks after recomputation, for a bound Clock subject;
+        accepted only when all six pass.
     """
 
     schemas: Mapping[str, StaticSchema]
@@ -130,6 +134,7 @@ class VerificationInputs:
     reproduction_records: tuple[ReproductionRecordSources, ...]
     reproduction_history: ReproductionHistory | None = None
     native_method_bindings: NativeRuleBindings | None = None
+    clock_verdict: ClockVerdict | None = None
 
 
 @dataclass(frozen=True, slots=True)
@@ -428,4 +433,18 @@ def _acquire_selected_inputs(
         details.reproduction_records,
         details.reproduction_history,
         details.native_method_bindings,
+        None
+        if clock_subject is None
+        else clock_verdict(
+            acceptance=cast(
+                dict[str, JsonValue], clock_subject.sources.documents["acceptance"].value
+            ),
+            acceptance_digest=clock_subject.sources.fixed["acceptance"].source.reference.digest,
+            witness=cast(dict[str, JsonValue], clock_subject.sources.documents["witness"].value),
+            subject=cast(dict[str, JsonValue], clock_subject.sources.documents["subject"].value),
+            observations=clock_subject.sources.closure.observations,
+            closure_reasons=clock_subject.sources.closure.reasons,
+            missing_references=len(clock_subject.sources.closure.missing_references),
+            source_reasons=clock_subject.sources.reasons,
+        ),
     )
