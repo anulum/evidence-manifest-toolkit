@@ -78,6 +78,21 @@ Before publication, failures remove only the transaction's unchanged owned stagi
 
 Observed failures use precedence `4 > 3 > 2 > 0`. A report's successful publication clears no gate. Common or historical exit `0` does not establish scientific or current acceptance; read the complete report.
 
+### Reasons that do not refuse
+
+A report's reasons are refusals, except the three below. A report states them after its common
+eligibility is decided from every other reason, so a common mode can be eligible, and `verify` can
+exit `0`, while one of them is listed.
+
+| Code | What it states |
+|---|---|
+| `historical_only` | A historical verification does not establish current eligibility. |
+| `domain_verifier_required` | Domain verification is required; the common result says nothing of the domain. |
+| `time_consistency_only` | An unsigned caller's evaluation time is qualified only by the consistency of its own NTP records: no authority and no server identity is shown. |
+
+An unsigned caller's exit `0` means exactly what `time_consistency_only` states and no more: its
+authenticity stays `unsigned` and its current eligibility stays `refused`.
+
 Thrown failures produce stdout `{"operation": ..., "reasons": [...]}` with the full located reasons and no success field. They create no requested successful report or seal destination. A well-formed returned refusal report can be published in full. Malformed invocations name a recognized command when available and otherwise use `operation="emt"`. Caller diagnostics use fixed authored details rather than interpreter messages or local paths.
 
 V2 verification also reads the complete selected identity and validation rules, and the optional foreign rule, before Clock acquisition. Their private formats, class and source joins share the original reference quota. Missing required rules preserve their exact original references. Consistent rule declarations do not authenticate their referenced procedures or authorize foreign execution, identity, reproduction or Clock use.

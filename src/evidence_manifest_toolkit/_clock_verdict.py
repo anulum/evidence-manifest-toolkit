@@ -10,9 +10,11 @@
 
 The acceptance body declares six checks, each ``pass``, ``fail`` or ``unavailable`` with its
 evidence. A declared result is never the answer: each check this module can recompute is
-recomputed, and a declared ``pass`` that the evidence contradicts is refused. A declared
-``fail`` or ``unavailable`` is kept, since a source may report less than can be shown, never
-more. The Clock is accepted only when all six are ``pass``.
+recomputed, and a declared ``pass`` that the evidence contradicts is refused. For the checks
+with a rule, a declared ``fail`` or ``unavailable`` is kept, since a source may report less than
+can be shown, never more; a check without a rule for the acceptance's class, or a calculated check
+without a calculation, is ``unavailable`` whatever was declared. The Clock is accepted only when
+all six are ``pass``.
 
 Three checks are relational (whole sources, controller identity, acyclic whole target). Two are
 read from the Clock calculation, which has already refused every inconsistent NTP exchange,
@@ -21,8 +23,13 @@ exists, and the uncertainty budget holds when the drift rate is at least RFC 590
 tolerance, every sample's declared holdover covers its age since its NTP exchange, and the whole
 interval lies within the profile's maximum around the evaluation origin. Without a calculation
 both stay ``unavailable``. The server's identity is not captured by the selected raw source, so
-synchronization is consistency of the recorded exchange, not proof of whom it was with. The
-class's authority and time has no rule here yet and stays ``unavailable``.
+synchronization is consistency of the recorded exchange, not proof of whom it was with.
+
+The class's authority and time follows the owner's decision for an unsigned caller: its time may
+be qualified without any authority, by the consistency of its own records alone. For an
+``unsigned_declared`` acceptance that claims no issuer, the check holds when synchronization and
+the uncertainty budget both hold as recomputed. Every other class has no rule here yet and stays
+``unavailable``.
 """
 
 import json
@@ -50,8 +57,8 @@ CHECK_IDS = (
 )
 """The six acceptance checks, in the order the Clock format names them."""
 
-UNDECIDED = {"selected_class_authority_and_time": "D2"}
-"""The checks without a rule yet, each with the decision its rule waits for."""
+UNSIGNED_CLASS = "unsigned_declared"
+"""The custody class whose time the owner's decision qualifies by consistency, without authority."""
 
 MINIMUM_DRIFT_RATE = Fraction(15, 1_000_000)
 """RFC 5905's frequency tolerance PHI: the least drift rate the uncertainty budget accepts."""
@@ -250,7 +257,8 @@ def clock_verdict(
     -------
     ClockVerdict
         The six results. A declared ``fail`` or ``unavailable`` is kept as declared; a check
-        without a rule here, or a calculated check without a calculation, is ``unavailable``.
+        without a rule for the acceptance's class, or a calculated check without a calculation,
+        is ``unavailable``.
 
     Raises
     ------
@@ -268,9 +276,8 @@ def clock_verdict(
             "/checks",
             "The Clock acceptance must declare each of its six checks once.",
         )
-    results: dict[str, CheckResult] = {}
+    resolved: dict[str, bool] = {}
     for index, item in enumerate(checks):
-        check = cast(str, item["check_id"])
         references = cast(list[JsonValue], item["evidence_refs"])
         if len({json.dumps(ref, sort_keys=True) for ref in references}) != len(references):
             raise _refused(
@@ -279,29 +286,43 @@ def clock_verdict(
                 f"/checks/{index}/evidence_refs",
                 "A Clock acceptance check repeats an evidence reference.",
             )
+        resolved[cast(str, item["check_id"])] = _resolved(
+            index, references, acceptance_digest, observations
+        )
+    synchronized = None if evidence is None else resolved["synchronization_and_mapping"]
+    budgeted = (
+        None
+        if evidence is None
+        else resolved["proven_uncertainty_budget"] and _budget_holds(evidence)
+    )
+    holds: dict[str, bool | None] = {
+        "whole_source_match": resolved["whole_source_match"] and not source_reasons,
+        "controller_source_match": resolved["controller_source_match"]
+        and acceptance["controller_identity_ref"]
+        == witness["controller_identity_ref"]
+        == subject["verification_controller_identity_ref"]
+        and acceptance["observer_identity_ref"] == witness["observer_identity_ref"],
+        "synchronization_and_mapping": synchronized,
+        "proven_uncertainty_budget": budgeted,
+        "selected_class_authority_and_time": None
+        if evidence is None or acceptance["custody_class"] != UNSIGNED_CLASS
+        else resolved["selected_class_authority_and_time"]
+        and acceptance["issuer_identity_ref"] is None
+        and acceptance["issuer_authorization_ref"] is None
+        and bool(synchronized)
+        and bool(budgeted),
+        "acyclic_whole_target": resolved["acyclic_whole_target"]
+        and not closure_reasons
+        and missing_references == 0,
+    }
+    results: dict[str, CheckResult] = {}
+    for index, item in enumerate(checks):
+        check = cast(str, item["check_id"])
         declared = cast(CheckResult, item["result"])
-        calculated = check in ("synchronization_and_mapping", "proven_uncertainty_budget")
-        if check in UNDECIDED or (calculated and evidence is None):
+        if holds[check] is None:
             results[check] = "unavailable"
             continue
-        resolved = _resolved(index, references, acceptance_digest, observations)
-        if check == "whole_source_match":
-            holds = resolved and not source_reasons
-        elif check == "controller_source_match":
-            holds = (
-                resolved
-                and acceptance["controller_identity_ref"]
-                == witness["controller_identity_ref"]
-                == subject["verification_controller_identity_ref"]
-                and acceptance["observer_identity_ref"] == witness["observer_identity_ref"]
-            )
-        elif check == "synchronization_and_mapping":
-            holds = resolved
-        elif check == "proven_uncertainty_budget":
-            holds = resolved and _budget_holds(cast(ClockEvidence, evidence))
-        else:
-            holds = resolved and not closure_reasons and missing_references == 0
-        if declared == "pass" and not holds:
+        if declared == "pass" and not holds[check]:
             raise _refused(
                 "policy_unavailable",
                 acceptance_digest,

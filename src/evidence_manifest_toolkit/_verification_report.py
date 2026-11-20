@@ -21,6 +21,18 @@ from ._trust_types import TrustContext, VerificationPolicy
 from ._values import Reason, Utc
 from ._verification_inputs import VerificationInputs
 
+INFORMATIONAL_REASON_CODES = (
+    "historical_only",
+    "domain_verifier_required",
+    "time_consistency_only",
+)
+"""Reasons a report states without refusing common eligibility.
+
+Each is appended after common eligibility is decided from every other reason, so its presence
+never turns an eligible common mode into a refused one. ``time_consistency_only`` says that an
+unsigned caller's evaluation time is qualified by the consistency of its own records alone.
+"""
+
 
 def _observations(
     inputs: VerificationInputs,
@@ -268,6 +280,24 @@ def compose_verification_report(
         else "untrusted"
     )
     eligible = not reasons
+    if (
+        unsigned
+        and declaration is not None
+        and declaration.requires_clock
+        and inputs.clock_subject is not None
+        and inputs.clock_verdict is not None
+        and inputs.clock_verdict.accepted
+    ):
+        reasons.append(
+            Reason(
+                "time_consistency_only",
+                inputs.clock_subject.sources.fixed["acceptance"].source.reference.digest,
+                None,
+                "/required_evaluation_time_qualification/clock_qualification_ref",
+                "The evaluation time is qualified only by the consistency of unsigned NTP records; "
+                "no authority and no server identity is shown.",
+            )
+        )
     if trust.evaluation_mode == "historical":
         reasons.append(
             Reason(

@@ -26,7 +26,7 @@ from evidence_manifest_toolkit._clock_subject import BoundClockSubject
 from evidence_manifest_toolkit._clock_verdict import (
     CHECK_IDS,
     MINIMUM_DRIFT_RATE,
-    UNDECIDED,
+    UNSIGNED_CLASS,
     ClockEvidence,
     ClockVerdict,
     SampleAge,
@@ -47,6 +47,7 @@ ADJUSTMENT = 1_000
 HOLDOVER = 201_784
 """ceil(15/1000000 * (AGE + ADJUSTMENT)): 201783.038175 rounded up."""
 COMPUTED = ("synchronization_and_mapping", "proven_uncertainty_budget")
+AUTHORITY = "selected_class_authority_and_time"
 
 
 def _evidence(index: int) -> dict[str, JsonValue]:
@@ -54,9 +55,17 @@ def _evidence(index: int) -> dict[str, JsonValue]:
     return {"evidence": index}
 
 
-def _acceptance(results: dict[str, str]) -> dict[str, JsonValue]:
+def _acceptance(
+    results: dict[str, str],
+    *,
+    custody_class: str = UNSIGNED_CLASS,
+    issuer: JsonValue = None,
+) -> dict[str, JsonValue]:
     """Return an acceptance body declaring the given results, ``unavailable`` elsewhere."""
     return {
+        "custody_class": custody_class,
+        "issuer_identity_ref": issuer,
+        "issuer_authorization_ref": None,
         "controller_identity_ref": CONTROLLER,
         "observer_identity_ref": OBSERVER,
         "checks": [
@@ -156,8 +165,8 @@ def test_the_verdict_keeps_six_slots_in_order_and_relational_passes_reproduce() 
     assert {check: verdict.checks[check] for check in RELATIONAL} == dict.fromkeys(
         RELATIONAL, "pass"
     )
-    assert {check: verdict.checks[check] for check in (*COMPUTED, *UNDECIDED)} == dict.fromkeys(
-        (*COMPUTED, *UNDECIDED), "unavailable"
+    assert {check: verdict.checks[check] for check in (*COMPUTED, AUTHORITY)} == dict.fromkeys(
+        (*COMPUTED, AUTHORITY), "unavailable"
     )
     assert verdict.accepted is False
 
@@ -168,8 +177,45 @@ def test_with_a_calculation_synchronization_and_the_budget_pass_at_their_boundar
         _acceptance({check: "pass" for check in CHECK_IDS}), evidence=_clock_evidence()
     )
     assert {check: verdict.checks[check] for check in COMPUTED} == dict.fromkeys(COMPUTED, "pass")
-    assert verdict.checks["selected_class_authority_and_time"] == "unavailable"
+    assert verdict.checks[AUTHORITY] == "pass"
+    assert verdict.accepted is True
+
+
+def test_unsigned_time_is_qualified_by_the_recomputed_checks_not_the_declared_ones() -> None:
+    """Synchronization and the budget declared unavailable still qualify the unsigned time."""
+    verdict = _verdict(_acceptance({AUTHORITY: "pass"}), evidence=_clock_evidence())
+    assert verdict.checks[AUTHORITY] == "pass"
+    assert {check: verdict.checks[check] for check in COMPUTED} == dict.fromkeys(
+        COMPUTED, "unavailable"
+    )
     assert verdict.accepted is False
+
+
+def test_another_class_has_no_rule_for_its_authority_and_time() -> None:
+    """A software or protected acceptance keeps the check unavailable even with every bound held."""
+    for custody_class in ("software_local_unprotected", "protected_delegated"):
+        verdict = _verdict(
+            _acceptance({check: "pass" for check in CHECK_IDS}, custody_class=custody_class),
+            evidence=_clock_evidence(),
+        )
+        assert verdict.checks[AUTHORITY] == "unavailable"
+        assert verdict.accepted is False
+
+
+def test_the_check_order_of_the_acceptance_does_not_change_the_verdict() -> None:
+    """The authority check reads the recomputed time checks wherever they are declared."""
+    acceptance = _acceptance({check: "pass" for check in CHECK_IDS})
+    checks = acceptance["checks"]
+    assert isinstance(checks, list)
+    reordered = {**acceptance, "checks": list(reversed(checks))}
+    observations = tuple(
+        ReferenceObservation(
+            ACCEPTANCE, "checks", f"/checks/{i}/evidence_refs/0", True, None, "matched", ()
+        )
+        for i in range(len(CHECK_IDS))
+    )
+    verdict = _verdict(reordered, observations=observations, evidence=_clock_evidence())
+    assert verdict.accepted is True
 
 
 def test_a_declared_fail_or_unavailable_is_kept_even_when_it_would_pass() -> None:
@@ -283,12 +329,57 @@ def test_a_declared_pass_contradicted_by_its_evidence_is_refused(
     }
 
 
+@pytest.mark.parametrize(
+    ("acceptance", "changes"),
+    [
+        (
+            _acceptance({AUTHORITY: "pass"}, issuer={"name": "issuer"}),
+            {"evidence": _clock_evidence()},
+        ),
+        (
+            _acceptance({AUTHORITY: "pass"}),
+            {"evidence": _clock_evidence(drift_rate=Fraction(14, 1_000_000))},
+        ),
+        (
+            _acceptance({AUTHORITY: "pass"}),
+            {"observations": _matched([0, 1, 3, 4, 5]), "evidence": _clock_evidence()},
+        ),
+        (
+            _acceptance({AUTHORITY: "pass"}),
+            {"observations": _matched([0, 1, 2, 3, 5]), "evidence": _clock_evidence()},
+        ),
+    ],
+    ids=[
+        "an_unsigned_acceptance_that_names_an_issuer",
+        "unsigned_with_the_budget_not_holding",
+        "unsigned_with_synchronization_unresolved",
+        "unsigned_with_its_own_evidence_unresolved",
+    ],
+)
+def test_a_declared_unsigned_authority_and_time_is_refused_when_it_does_not_hold(
+    acceptance: dict[str, JsonValue], changes: dict[str, object]
+) -> None:
+    """No issuer, both time checks holding and its own evidence resolved, or the pass is refused."""
+    with pytest.raises(InputRefused) as caught:
+        _verdict(acceptance, **cast(_Changes, changes))
+    assert asdict(caught.value.reason) == {
+        "code": "policy_unavailable",
+        "subject_digest": ACCEPTANCE,
+        "claim_id": None,
+        "pointer": f"/checks/{CHECK_IDS.index(AUTHORITY)}/result",
+        "detail": f"The declared Clock acceptance check {AUTHORITY} is contradicted by its evidence.",
+    }
+
+
 def test_a_check_without_a_rule_or_without_evidence_declared_pass_is_unavailable() -> None:
     """Missing evidence is not contradicted evidence: no refusal, the result is unavailable."""
     undecided = _verdict(
-        _acceptance({"selected_class_authority_and_time": "pass"}), evidence=_clock_evidence()
+        _acceptance({AUTHORITY: "pass"}, custody_class="software_local_unprotected"),
+        evidence=_clock_evidence(),
     )
-    assert undecided.checks["selected_class_authority_and_time"] == "unavailable"
+    assert undecided.checks[AUTHORITY] == "unavailable"
+    unbound = _verdict(_acceptance({AUTHORITY: "pass"}))
+    assert unbound.checks[AUTHORITY] == "unavailable"
     uncalculated = _verdict(_acceptance(dict.fromkeys(COMPUTED, "pass")))
     assert {check: uncalculated.checks[check] for check in COMPUTED} == dict.fromkeys(
         COMPUTED, "unavailable"

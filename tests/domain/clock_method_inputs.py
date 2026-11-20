@@ -13,7 +13,7 @@ from fractions import Fraction
 from math import ceil
 from pathlib import Path
 
-from tests.domain.clock_annual_method_inputs import clock_annual_method_input
+from tests.domain.clock_annual_method_inputs import capture_holdover, clock_annual_method_input
 from tests.domain.clock_method_cases import clock_method_body, clock_method_reference
 from tests.domain.test_successor_provider_boundary import _stored
 from tests.domain.test_verification_report_sources import _object
@@ -63,6 +63,7 @@ def clock_model_inputs(
     annual: dict[str, object],
     ntp: BlobRef,
     original_samples: tuple[dict[str, object], dict[str, object]],
+    qualified_rate: Fraction | None = None,
 ) -> tuple[BlobRef, BlobRef]:
     """Store whole original annual data and both models before profile/context creation.
 
@@ -82,6 +83,8 @@ def clock_model_inputs(
         Explicit actual annual daemon acquisition, without list-position packet selection.
     original_samples : tuple of dict
         Genuine original captures retained before any deliberate malformed raw substitution.
+    qualified_rate : Fraction or None
+        When set, the drift record declares this rate and the annual holdovers follow it.
 
     Returns
     -------
@@ -91,6 +94,7 @@ def clock_model_inputs(
     """
     common = _common(identity, environment, boot, custody_class)
     ref: dict[str, object] = dict(identity.to_mapping())
+    rate = Fraction(1, 1_000_000) if qualified_rate is None else qualified_rate
     drift = _stored(
         clock_method_body(
             condition,
@@ -99,7 +103,10 @@ def clock_model_inputs(
                 **common,
                 "method_id": "emt_monotonic_raw_drift_v1",
                 "units": "nanoseconds_per_elapsed_nanosecond",
-                "maximum_error_rate": {"numerator": "1", "denominator": "1000000"},
+                "maximum_error_rate": {
+                    "numerator": str(rate.numerator),
+                    "denominator": str(rate.denominator),
+                },
                 "rate_source_ref": ref,
                 "calibration_source_ref": ref,
                 "monotonic_mapping_rule_ref": ref,
@@ -119,6 +126,7 @@ def clock_model_inputs(
         ntp=ntp,
         annual=annual,
         original_samples=original_samples,
+        qualified_rate=qualified_rate,
     )
     uncertainty = _stored(
         clock_method_body(
@@ -161,6 +169,7 @@ def clock_use_input(
     after: dict[str, object],
     use: dict[str, object],
     request_id: str,
+    qualified_rate: Fraction | None = None,
 ) -> BlobRef:
     """Store all full per-invocation terms after actual S1/H and before the witness.
 
@@ -184,6 +193,8 @@ def clock_use_input(
         Actual bracketed local captures, whose numerical error declarations are unqualified.
     request_id : str
         Whole original request from the actual first-sample source.
+    qualified_rate : Fraction or None
+        When set, the sample holdovers and the declared use error follow this drift rate.
 
     Returns
     -------
@@ -232,17 +243,21 @@ def clock_use_input(
         source, duration = bracket(sample)
         samples[name] = {
             "source_encoding": term("6000", ref),
-            "elapsed_holdover": term("1000", ref),
+            "elapsed_holdover": term(
+                "1000"
+                if qualified_rate is None
+                else capture_holdover(directory, ntp, sample, qualified_rate),
+                ref,
+            ),
             "post_exchange_adjustment": term("1000", ref),
             "acquisition": term(duration, source),
             "mapping": term("1000", ref),
             "quantization": term("1000", ref),
         }
     use_source, use_duration = bracket(use)
+    rate = Fraction(1, 1_000_000) if qualified_rate is None else qualified_rate
     declared_use_error = str(
-        ceil(
-            Fraction(int(str(use["monotonic_ticks"])) - int(str(after["monotonic_ticks"])), 1000000)
-        )
+        ceil(rate * (int(str(use["monotonic_ticks"])) - int(str(after["monotonic_ticks"]))))
         + int(use_duration)
         + 3000
     )

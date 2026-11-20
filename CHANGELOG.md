@@ -14,6 +14,20 @@ EVIDENCE-MANIFEST-TOOLKIT — source and configuration provenance
 
 Initial local repository metadata, deterministic infrastructure guards, safe workflow preparation, locked development tools, native documentation and public-boundary conformance tests. No runtime package or public release is declared.
 
+An unsigned V2 caller's evaluation time can now be qualified without
+authority, by the consistency of its own NTP records. For an
+`unsigned_declared` acceptance that names no issuer, the class's
+authority and time holds when synchronization and the uncertainty
+budget both hold as recomputed; other classes keep it unavailable. With
+all six checks holding, the verdict is accepted, the report drops the
+evaluation-time refusal and states instead, as `time_consistency_only`,
+that the time is qualified only by that consistency, with no authority
+and no server identity shown. That reason, like `historical_only` and
+`domain_verifier_required`, is stated after common eligibility is
+decided, so the common mode is eligible and `verify` exits 0, while
+authenticity stays unsigned and current eligibility refused. The CLI
+documentation lists the three reasons that do not refuse.
+
 The Clock verdict now reads synchronization and the uncertainty budget
 from the Clock calculation. Synchronization and mapping holds once that
 calculation completes, since it already refuses every inconsistent

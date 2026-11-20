@@ -19,6 +19,7 @@ import time
 from collections.abc import Callable, Mapping
 from dataclasses import asdict
 from datetime import UTC, datetime, timedelta
+from fractions import Fraction
 from importlib.resources import files
 from pathlib import Path
 from typing import cast
@@ -329,6 +330,8 @@ def assert_whole_clock_source_workflow(
     command_check: Callable[[UnsignedCommandInputs], None] | None = None,
     declared_checks: Mapping[str, str] | None = None,
     contradicted_check: str | None = None,
+    qualified_rate: Fraction | None = None,
+    qualified_time: bool = False,
 ) -> None:
     """Traverse complete source bodies and reject whole joins before unavailable V2 state.
 
@@ -358,6 +361,12 @@ def assert_whole_clock_source_workflow(
     contradicted_check : str or None
         The declared check whose evidence contradicts it: the case then expects the
         verdict's refusal at that check's result instead of its ordinary outcome.
+    qualified_rate : Fraction or None
+        A drift rate the case declares, with every sample's holdover derived from its own age
+        since its capture's exchange at that rate; ``None`` keeps the fixture's 1/1000000 and 1000.
+    qualified_time : bool
+        The case expects an accepted Clock verdict: the unsigned report replaces the qualification
+        refusal with the consistency-only statement and its common mode is eligible.
 
     Notes
     -----
@@ -698,6 +707,7 @@ def assert_whole_clock_source_workflow(
         annual=annual_capture,
         ntp=acceptance_raw,
         original_samples=(acceptance_before, acceptance_after),
+        qualified_rate=qualified_rate,
     )
     profile = {
         "format_version": "autonomous-evaluation-clock-profile-source-r4",
@@ -1035,6 +1045,7 @@ def assert_whole_clock_source_workflow(
         after=after,
         use=use,
         request_id=_text(first_value["request_id"]),
+        qualified_rate=qualified_rate,
     )
     use_method_value = _object(json.loads((tmp_path / use_method.digest[7:]).read_bytes()))
     raw_use = BlobRef.from_mapping(_object(use_method_value["use_raw_ref"]))
@@ -1388,6 +1399,16 @@ def assert_whole_clock_source_workflow(
         "current_eligibility": "refused",
         "evaluation_mode": caller.evaluation_mode,
     }
+    if qualified_time:
+        unsigned_reasons[0] = {
+            "code": "time_consistency_only",
+            "subject_digest": acceptance.digest,
+            "claim_id": None,
+            "pointer": "/required_evaluation_time_qualification/clock_qualification_ref",
+            "detail": "The evaluation time is qualified only by the consistency of unsigned NTP "
+            "records; no authority and no server identity is shown.",
+        }
+        unsigned_axes["common_eligibility"] = "eligible"
     if condition.startswith("cli_") and command_check is not None:
         assert unsigned_report and not ordinary_envelopes
         command_check(
