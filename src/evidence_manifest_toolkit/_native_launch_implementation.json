@@ -644,8 +644,8 @@
     },
     {
       "filename": "_self_bound_records.py",
-      "byte_length": "29626",
-      "sha256": "fc2ab21f45e3ff1406adea356d07edb56afb3c15f3049d0f3fb3e98e83e81b26"
+      "byte_length": "29660",
+      "sha256": "23bf09dcdaca61e5e9ab023765007ababbb43ef90a3f92f9182e225830e740a7"
     },
     {
       "filename": "_semantics.py",
