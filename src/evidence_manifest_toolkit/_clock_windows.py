@@ -23,6 +23,9 @@ from ._clock_values import (
 from ._utc import utc_key
 from ._values import BlobRef, Digest
 
+EVALUATION_BUDGET_NS = 5 * NANOSECONDS_PER_SECOND
+"""Half-width of the budget around the evaluation origin that every Clock interval must fit."""
+
 
 @dataclass(frozen=True, slots=True)
 class ClockInterval:
@@ -258,7 +261,7 @@ def require_five_second_budget(
     InputRefused
         Either full endpoint exceeds five seconds around the fixed origin.
     """
-    radius = 5 * NANOSECONDS_PER_SECOND
+    radius = EVALUATION_BUDGET_NS
     if interval.lower_ns > interval.upper_ns or not (
         evaluation_origin_ns - radius <= interval.lower_ns
         and interval.upper_ns <= evaluation_origin_ns + radius

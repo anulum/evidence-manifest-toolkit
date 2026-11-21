@@ -6,7 +6,13 @@
 # Contact: www.anulum.li | protoscience@anulum.li
 # EVIDENCE-MANIFEST-TOOLKIT — source and configuration provenance
 
-"""Retain native static findings and admit only two source-bound provider attributions."""
+"""Retain native static findings and admit only four exact source-bound attributions.
+
+Two are the reviewed provider imports of the signature module (B413). Two are the import and
+the single call of the fixed NTP capture (B404, B603): one constant argument vector with an
+absolute executable, no shell, standard input from /dev/null and a one-variable environment.
+Each is admitted only at its exact line and only while its whole module matches its digest.
+"""
 
 from __future__ import annotations
 
@@ -17,7 +23,6 @@ import sys
 import tempfile
 import time
 from pathlib import Path
-from typing import cast
 
 from .audit_context import encode, trusted_root
 from .audit_store import open_store
@@ -31,10 +36,18 @@ from .reports import Fault, Report
 _SIGNATURE = "src/evidence_manifest_toolkit/_native_signature.py"
 _SIGNATURE_SHA256 = "e92a70ce9b1fb1b95eb9a685f55c7508d084fa092648c41e264247c01fcc7b17"
 _SOURCE_LINES = frozenset({14, 15})
+_CAPTURE = "src/evidence_manifest_toolkit/_timesyncd_capture.py"
+_CAPTURE_SHA256 = "085bb4b2b145cddfa96a94df609edff853f70f5a510cf506bf2f27dbb685178a"
+_CAPTURE_FINDINGS = frozenset({("B404", 20), ("B603", 83)})
 
 
 def inspect_findings(
-    data: bytes, native_exit: int, signature: bytes | None, provider_version: str, report: Report
+    data: bytes,
+    native_exit: int,
+    signature: bytes | None,
+    provider_version: str,
+    report: Report,
+    capture: bytes | None = None,
 ) -> None:
     """Classify complete native findings against the exact reviewed provider source.
 
@@ -50,6 +63,8 @@ def inspect_findings(
         Actual installed provider version already bound by the full producer guard.
     report : Report
         Receives schema, native failure and every unreviewed finding.
+    capture : bytes | None
+        Exact source bytes delivered to the scanner for the reviewed NTP capture module.
 
     Raises
     ------
@@ -73,25 +88,34 @@ def inspect_findings(
         report.add("tool_failed", "native-static-report")
     if (native_exit == 0) != (findings == []):
         report.add("tool_failed", "native-static-report")
-    seen: set[int] = set()
+    seen: set[tuple[object, object]] = set()
     for finding in findings:
         if not isinstance(finding, dict):
             raise Fault("configuration_invalid", "native-static-report", 4)
         line = finding.get("line_number")
-        accepted = (
-            finding.get("test_id") == "B413"
-            and finding.get("filename") == _SIGNATURE
-            and type(line) is int
-            and line in _SOURCE_LINES
-            and line not in seen
-            and signature is not None
-            and hashlib.sha256(signature).hexdigest() == _SIGNATURE_SHA256
-            and provider_version == "3.24.0"
+        place = (finding.get("filename"), line)
+        accepted = place not in seen and (
+            (
+                finding.get("test_id") == "B413"
+                and finding.get("filename") == _SIGNATURE
+                and type(line) is int
+                and line in _SOURCE_LINES
+                and signature is not None
+                and hashlib.sha256(signature).hexdigest() == _SIGNATURE_SHA256
+                and provider_version == "3.24.0"
+            )
+            or (
+                finding.get("filename") == _CAPTURE
+                and type(line) is int
+                and (finding.get("test_id"), line) in _CAPTURE_FINDINGS
+                and capture is not None
+                and hashlib.sha256(capture).hexdigest() == _CAPTURE_SHA256
+            )
         )
         if not accepted:
             report.add("policy_refusal", "native-static-report")
         else:
-            seen.add(cast(int, line))
+            seen.add(place)
 
 
 def verify(root: Path, report: Report, timeout: float = LEAF_SECONDS) -> None:
@@ -118,6 +142,9 @@ def verify(root: Path, report: Report, timeout: float = LEAF_SECONDS) -> None:
     independently reviewed PyCryptodome 3.24.0 provider. Whole source identity,
     exact native locations and the complete installed producer graph must agree;
     other B413 findings remain refusals. Native severity and confidence stay all.
+    The NTP capture module's subprocess import and its one fixed call are admitted
+    the same way, at their two exact lines and only while the module matches its
+    reviewed digest; any other subprocess finding remains a refusal.
     """
     if isinstance(timeout, bool) or not math.isfinite(timeout) or not 0 < timeout <= LEAF_SECONDS:
         raise Fault("configuration_invalid", exit_code=4)
@@ -196,6 +223,7 @@ def verify(root: Path, report: Report, timeout: float = LEAF_SECONDS) -> None:
             selected.get(_SIGNATURE),
             importlib.metadata.version("pycryptodome"),
             report,
+            selected.get(_CAPTURE),
         )
         if time.monotonic() >= deadline:
             raise Fault("tool_timeout", exit_code=3)

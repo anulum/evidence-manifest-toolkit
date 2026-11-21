@@ -29,6 +29,7 @@ from tests.conftest import SOURCE, payload, run_guard, snapshots, source_python
 from tests.conftest import actual_strace as actual_strace
 
 _SIGNATURE = "src/evidence_manifest_toolkit/_native_signature.py"
+_CAPTURE = "src/evidence_manifest_toolkit/_timesyncd_capture.py"
 
 
 @pytest.fixture(scope="module")
@@ -58,6 +59,8 @@ def native_report() -> bytes:
     assert {(row["filename"], row["line_number"], row["test_id"]) for row in actual["results"]} == {
         (_SIGNATURE, 14, "B413"),
         (_SIGNATURE, 15, "B413"),
+        (_CAPTURE, 20, "B404"),
+        (_CAPTURE, 83, "B603"),
     }
     return data
 
@@ -71,6 +74,7 @@ def test_genuine_result_reader_and_unchanged_public_scan(native_report: bytes, r
         (SOURCE / _SIGNATURE).read_bytes(),
         importlib.metadata.version("pycryptodome"),
         report,
+        (SOURCE / _CAPTURE).read_bytes(),
     )
     assert report.exit_code == 0
     before = snapshots(root)
@@ -97,12 +101,22 @@ def test_genuine_result_reader_and_unchanged_public_scan(native_report: bytes, r
         "line",
         "boolean-line",
         "duplicate",
+        "capture-missing",
+        "capture-changed",
+        "capture-rule",
+        "capture-line",
+        "capture-path",
+        "capture-duplicate",
     ),
 )
 def test_actual_report_and_source_disagreements_refuse(native_report: bytes, case: str) -> None:
     """Mutate one original producer or source fact; no synthetic accepting result exists."""
     value = copy.deepcopy(json.loads(native_report))
     signature: bytes | None = (SOURCE / _SIGNATURE).read_bytes()
+    capture: bytes | None = (SOURCE / _CAPTURE).read_bytes()
+    capture_index = next(
+        index for index, row in enumerate(value["results"]) if row["filename"] == _CAPTURE
+    )
     provider = importlib.metadata.version("pycryptodome")
     status = 1
     expected = 2
@@ -143,6 +157,21 @@ def test_actual_report_and_source_disagreements_refuse(native_report: bytes, cas
             value["results"][0]["line_number"] = 13
         elif case == "boolean-line":
             value["results"][0]["line_number"] = True
+        elif case == "capture-missing":
+            capture = None
+        elif case == "capture-changed":
+            assert capture is not None
+            capture += b"\n"
+        elif case == "capture-rule":
+            value["results"][capture_index]["test_id"] = "B602"
+        elif case == "capture-line":
+            value["results"][capture_index]["line_number"] = 84
+        elif case == "capture-path":
+            value["results"][capture_index]["filename"] = (
+                "src/evidence_manifest_toolkit/_self_bound_launch.py"
+            )
+        elif case == "capture-duplicate":
+            value["results"].append(copy.deepcopy(value["results"][capture_index]))
         else:
             assert case == "duplicate"
             value["results"].append(copy.deepcopy(value["results"][0]))
@@ -150,15 +179,22 @@ def test_actual_report_and_source_disagreements_refuse(native_report: bytes, cas
     report = Report("static_security")
     if case in {"json", "top-level", "results", "finding", "native-false"}:
         with pytest.raises(Fault) as error:
-            inspect_findings(data, status, signature, provider, report)
+            inspect_findings(data, status, signature, provider, report, capture)
         assert error.value.exit_code == expected
     else:
-        inspect_findings(data, status, signature, provider, report)
+        inspect_findings(data, status, signature, provider, report, capture)
         assert report.exit_code == expected
 
 
 @pytest.mark.parametrize(
-    "case", ("unsafe-python", "syntax-error", "changed-reviewed-source", "wrong-lock")
+    "case",
+    (
+        "unsafe-python",
+        "syntax-error",
+        "changed-reviewed-source",
+        "changed-reviewed-capture",
+        "wrong-lock",
+    ),
 )
 def test_real_public_scan_refuses_new_source_and_inputs(root: Path, case: str) -> None:
     """Exercise actual additional findings and native parse failures without executing input."""
@@ -172,6 +208,9 @@ def test_real_public_scan_refuses_new_source_and_inputs(root: Path, case: str) -
         (root / "src/evidence_manifest_toolkit/source_tripwire.py").write_text("def invalid(:\n")
     elif case == "changed-reviewed-source":
         source = root / _SIGNATURE
+        source.write_bytes(source.read_bytes() + b"\n")
+    elif case == "changed-reviewed-capture":
+        source = root / _CAPTURE
         source.write_bytes(source.read_bytes() + b"\n")
     else:
         source = root / "requirements-dev.txt"

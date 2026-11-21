@@ -129,8 +129,8 @@
     },
     {
       "filename": "_clock_windows.py",
-      "byte_length": "11239",
-      "sha256": "5dd05505b98e5b19eda268a10c0d1208eb33fdfcc63e3259ec6e009e3b3317b6"
+      "byte_length": "11380",
+      "sha256": "83972827990d1764eaa62ba8e5e1f6cc38b3b0467d651c64df0784088dd8c61f"
     },
     {
       "filename": "_closure.py",
@@ -633,6 +633,21 @@
       "sha256": "c0ba105cafd0bff7c3c7195fe1e367978e85cda41413d4c088a1367bc4ed40c2"
     },
     {
+      "filename": "_self_bound_declaration.py",
+      "byte_length": "16800",
+      "sha256": "4b39f804ce9c4166e4f0b9d6f94bd10deeb4da99b3b0ab12b7ae708454768a97"
+    },
+    {
+      "filename": "_self_bound_launch.py",
+      "byte_length": "22951",
+      "sha256": "f5f67cbf23081ad46e271bc7595499e1235abf19d47afc7452f6164bc4bebcac"
+    },
+    {
+      "filename": "_self_bound_records.py",
+      "byte_length": "29626",
+      "sha256": "fc2ab21f45e3ff1406adea356d07edb56afb3c15f3049d0f3fb3e98e83e81b26"
+    },
+    {
       "filename": "_semantics.py",
       "byte_length": "6455",
       "sha256": "6979637001e34e72c3d3da9d97d7330a4dc9a0801f0759bac43de12c303c2093"
@@ -761,6 +776,11 @@
       "filename": "_temporal_semantics.py",
       "byte_length": "4080",
       "sha256": "40b526d93bff87fd3a5bbbfdcc9b10a36f2c5d42322e3559efc359fc5096eba2"
+    },
+    {
+      "filename": "_timesyncd_capture.py",
+      "byte_length": "4824",
+      "sha256": "085bb4b2b145cddfa96a94df609edff853f70f5a510cf506bf2f27dbb685178a"
     },
     {
       "filename": "_timesyncd_estimate.py",

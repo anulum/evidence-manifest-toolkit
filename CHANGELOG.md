@@ -14,6 +14,29 @@ EVIDENCE-MANIFEST-TOOLKIT — source and configuration provenance
 
 Initial local repository metadata, deterministic infrastructure guards, safe workflow preparation, locked development tools, native documentation and public-boundary conformance tests. No runtime package or public release is declared.
 
+A self-bound launch builds a whole unsigned V2 request inside the
+process that verifies it, since a request binds the process that built
+it and refuses in any other. `verify_self_bound` reads the launcher's
+declaration (`evidence_manifest_toolkit.self_bound_declaration.v1`:
+the policy's rules and claims, and every number, rule reference and
+check result an `unsigned_declared` caller states about its Clock). It
+then captures this process's identity with the native entry method, a
+fresh acceptance from an NTP reply taken before its samples, the first
+sample, and the later reply and samples, builds every record from them,
+and verifies in the same process. A declared check names its evidence
+by a store reference or by one of twelve closed roles, the records
+stored before the acceptance body. Nothing is written until verification
+returns. Then the new records are linked into the store under their
+digests, never replacing a file, and a fresh request directory receives
+`policy.json` and `trust.json`, as `emt verify` takes them, and
+`request.json`, which states that the acceptance holds for this boot
+only. Replaying the request from another process refuses. The NTP reply
+comes from one fixed `/usr/bin/busctl` call with standard input from
+/dev/null, an environment of `LC_ALL=C` alone, a 10 s bound and a real
+4096-byte output bound. The static security gate admits its subprocess
+import and that one call at their exact lines, while the module matches
+its reviewed digest.
+
 An unsigned V2 caller's evaluation time can now be qualified without
 authority, by the consistency of its own NTP records. For an
 `unsigned_declared` acceptance that names no issuer, the class's
