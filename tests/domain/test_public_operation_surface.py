@@ -15,6 +15,7 @@ import json
 from collections.abc import Callable
 from dataclasses import asdict, replace
 from pathlib import Path
+from types import ModuleType
 from typing import Literal, cast
 
 import pytest
@@ -209,12 +210,25 @@ def _call(operation: str) -> tuple[Callable[..., object], _FileResolver | None]:
 
 
 def test_the_exported_names_are_the_pinned_thirty_nine() -> None:
-    """A name added to or removed from the package is a visible change of this list."""
+    """A name added to or removed from the package is a visible change of this list.
+
+    Notes
+    -----
+    An imported submodule becomes an attribute of the package; it is not an export. The only
+    public submodule is ``self_bound``, whose own surface ``test_self_bound_surface`` pins.
+    """
     assert tuple(toolkit.__all__) == _EXPORTED
     assert len(set(_EXPORTED)) == 39
     assert all(hasattr(toolkit, name) for name in _EXPORTED)
-    public = {name for name in vars(toolkit) if not name.startswith("_")}
+    attributes = {name: value for name, value in vars(toolkit).items() if not name.startswith("_")}
+    public = {name for name, value in attributes.items() if not isinstance(value, ModuleType)}
     assert public == set(_EXPORTED)
+    assert {name for name, value in attributes.items() if isinstance(value, ModuleType)} <= {
+        "self_bound"
+    }
+    assert toolkit.__file__ is not None
+    package = Path(toolkit.__file__).parent
+    assert sorted(path.stem for path in package.glob("[!_]*.py")) == ["self_bound"]
 
 
 def test_the_operations_are_the_six_functions() -> None:

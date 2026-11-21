@@ -15,7 +15,7 @@ from collections.abc import Sequence
 from pathlib import Path
 from typing import Never
 
-from ._cli_operations import seal_command, verify_command
+from ._cli_operations import seal_command, self_bound_command, verify_command
 from ._difference import diff
 from ._errors import ConfigurationError, EmtError, InputRefused
 from ._file_io import read_file, read_limits
@@ -40,6 +40,8 @@ class _Arguments(argparse.Namespace):
         Explicit independently selected schema for seal and verify.
     registry, objects, output, policy, trust, signing_request, signer_config : Path or None
         Complete applicable caller configurations, read-only store and fresh destination.
+    declaration, request : Path or None
+        The self-bound launch's declaration and its fresh request directory.
     signature : list of Path
         All original verify receipts, retaining explicit caller order.
     """
@@ -63,6 +65,8 @@ class _Arguments(argparse.Namespace):
         self.signing_request: Path | None = None
         self.signer_config: Path | None = None
         self.signature: list[Path] = []
+        self.declaration: Path | None = None
+        self.request: Path | None = None
 
 
 class _Parser(argparse.ArgumentParser):
@@ -87,7 +91,7 @@ class _Parser(argparse.ArgumentParser):
 
 
 def _parser() -> _Parser:
-    """Construct the original four-command grammar with explicit complete caller selections.
+    """Construct the five-command grammar with explicit complete caller selections.
 
     Returns
     -------
@@ -105,7 +109,10 @@ def _parser() -> _Parser:
     verification.add_argument("--policy", type=Path, required=True, metavar="FILE")
     verification.add_argument("--trust", type=Path, required=True, metavar="FILE")
     verification.add_argument("--signature", type=Path, action="append", default=[], metavar="FILE")
-    for command in (sealing, verification):
+    self_bound = commands.add_parser("verify-self-bound", allow_abbrev=False)
+    self_bound.add_argument("--declaration", type=Path, required=True, metavar="FILE")
+    self_bound.add_argument("--request", type=Path, required=True, metavar="NEW_DIR")
+    for command in (sealing, verification, self_bound):
         command.add_argument("--content", type=Path, required=True, metavar="FILE")
         command.add_argument("--schema-id", required=True, metavar="ID")
         command.add_argument("--registry", type=Path, required=True, metavar="FILE")
@@ -121,9 +128,9 @@ def _parser() -> _Parser:
     difference.add_argument(
         "--right-signature", type=Path, action="append", default=[], metavar="FILE"
     )
-    for command in (inspection, difference, sealing, verification):
+    for command in (inspection, difference, sealing, verification, self_bound):
         command.add_argument("--limits", type=Path, required=True, metavar="FILE")
-    for command in (inspection, difference, verification):
+    for command in (inspection, difference, verification, self_bound):
         command.add_argument("--report", type=Path, required=True, metavar="NEW_FILE")
     return parser
 
@@ -179,6 +186,17 @@ def _execute(arguments: _Arguments) -> tuple[bytes, int]:
     ):
         raise ConfigurationError(
             Reason("configuration_error", None, None, None, "Invalid command invocation.")
+        )
+    if arguments.command == "verify-self-bound":
+        return self_bound_command(
+            declaration=_path(arguments.declaration),
+            content=_path(arguments.content),
+            schema_id=arguments.schema_id,
+            registry=_path(arguments.registry),
+            objects=_path(arguments.objects),
+            limits=_path(arguments.limits),
+            request=_path(arguments.request),
+            report=_path(arguments.report),
         )
     limits = read_limits(_path(arguments.limits))
     if arguments.command == "seal":
@@ -266,7 +284,9 @@ def main(argv: Sequence[str] | None = None) -> int:
     """
     supplied = list(sys.argv[1:] if argv is None else argv)
     operation = (
-        supplied[0] if supplied and supplied[0] in {"seal", "verify", "inspect", "diff"} else "emt"
+        supplied[0]
+        if supplied and supplied[0] in {"seal", "verify", "verify-self-bound", "inspect", "diff"}
+        else "emt"
     )
     try:
         arguments = _Arguments()

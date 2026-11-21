@@ -39,13 +39,13 @@
     },
     {
       "filename": "_cli.py",
-      "byte_length": "11422",
-      "sha256": "2a6eef9ebd5ca6eef18ab6e28f8ac2f07964ae1054b3b5c201599486eddc53d1"
+      "byte_length": "12425",
+      "sha256": "8004931259b6a883ed4970529caffc2354332fb9c57615b2a9ec4dfc6ff2b5e5"
     },
     {
       "filename": "_cli_operations.py",
-      "byte_length": "8157",
-      "sha256": "3dadb08125f610918a717b3d1de5550292c6c986d4c4af2cf815f9c429ce80de"
+      "byte_length": "10182",
+      "sha256": "c673ffa5bca377b1800d6b6dc2f72e2615c641556a594179c9972a12a064e7c3"
     },
     {
       "filename": "_clock_acceptance.py",
@@ -831,6 +831,11 @@
       "filename": "_verification_report.py",
       "byte_length": "13745",
       "sha256": "c16ff99215f648f8d97186612febd613caa9350c1138213b77eb5ac7e1dbc5ac"
+    },
+    {
+      "filename": "self_bound.py",
+      "byte_length": "1056",
+      "sha256": "95f1f15554168422d72a5881f2e82b304712242d67050aa2eede26d4ca120fba"
     }
   ]
 }

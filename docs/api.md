@@ -89,6 +89,26 @@ response failures.
 The complete selected V2 identity and validation method rules are acquired after class source initialization and before Clock acquisition, using their known private format bindings and the same operation quota. Verification checks the rule classes, permitted minimum identity, full identity-rule reference, compatible non-use classes and the optional foreign-rule/trust-reference pair. Every whole rule and its declared procedure edges remains in the source closure. Required rule absence preserves the original full unavailable reference; malformed rules and contradictory selections retain located typed errors. These checks establish source consistency, not authenticated identity, reproduction, foreign trust or Clock acceptance. No foreign verifier, root refresh or network operation is launched by this selection.
 
 
+
+## The self-bound launch: a route that reads the host and writes files
+
+The module `evidence_manifest_toolkit.self_bound` holds `verify_self_bound` and its result `SelfBoundRequest`. The package root does not export them. **This is not one of the six pure operations above.** Those take bytes and a resolver; this route reads the host and writes files:
+
+- **It reads the host:** the boot identifier, this process's `/proc/self/stat`, the runtime environment through the native entry method, the installed native entry method record, the realtime and raw monotonic clocks, and timesyncd's NTP reply through one fixed `/usr/bin/busctl` call.
+- **It writes,** only after verification returns: the request's new records into the object store, linked under their digests and never replacing a file; and a fresh request directory with `policy.json`, `trust.json` and `request.json`.
+
+| Keyword | Content |
+|---|---|
+| `declaration` | The launcher's declaration file (`evidence_manifest_toolkit.self_bound_declaration.v1`, described with the [command](offline-cli.md#self-bound-unsigned-verification)). |
+| `content`, `schema_id` | The content to verify and its known schema identifier. |
+| `registry`, `limits` | The registry and limits files, as the command takes them. |
+| `objects` | The object store directory, which holds the declared static objects. |
+| `request` | A fresh directory name. |
+
+**The result.** It returns the `VerificationReport` and a `SelfBoundRequest` with `request_id`, the `policy` and the unsigned `trust` it verified under, and `records`, the reference of every record stored, by name.
+
+**Refusals and repeats.** A refusal before or during verification writes nothing. A request binds the process that built it, so a second process cannot verify it. A launch in the same process builds a new request with a fresh acceptance each time.
+
 ## Native method declaration sources
 
 Before Clock acquisition, V2 reads the whole selected launcher or observer,

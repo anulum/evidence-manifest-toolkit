@@ -133,6 +133,8 @@ def test_the_cli_documentation_lists_exactly_the_reasons_that_do_not_refuse() ->
     text = (Path(__file__).resolve().parents[2] / "docs" / "offline-cli.md").read_text(
         encoding="utf-8"
     )
-    section = text.split("### Reasons that do not refuse", 1)[1].split("\n## ", 1)[0]
+    section = re.split(
+        r"\n#{1,6} ", text.split("### Reasons that do not refuse", 1)[1], maxsplit=1
+    )[0]
     documented = tuple(re.findall(r"^\| `(\w+)` \|", section, flags=re.MULTILINE))
     assert documented == INFORMATIONAL_REASON_CODES

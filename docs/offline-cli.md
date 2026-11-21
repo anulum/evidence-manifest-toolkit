@@ -14,6 +14,7 @@ The source checkout runs the commands through `python -m evidence_manifest_toolk
 ```text
 emt seal --content FILE --schema-id ID --registry FILE --objects DIR --limits FILE --output NEW_DIR [--signing-request FILE --signer-config FILE --trust FILE]
 emt verify --content FILE --schema-id ID --registry FILE --objects DIR --limits FILE --policy FILE --trust FILE --report NEW_FILE [--signature FILE]...
+emt verify-self-bound --declaration FILE --content FILE --schema-id ID --registry FILE --objects DIR --limits FILE --request NEW_DIR --report NEW_FILE
 emt inspect --content FILE --limits FILE --report NEW_FILE
 emt diff --left FILE --right FILE --limits FILE --report NEW_FILE [--left-signature FILE]... [--right-signature FILE]...
 ```
@@ -48,6 +49,92 @@ A missing local verification provider produces `configuration_error` and exit `4
 before authentication, with null subject, claim and pointer. It creates no requested
 report. Restoring the provider permits evaluation of the complete original input;
 the command retains every verification gate and requires a fresh report destination.
+
+## Self-bound unsigned verification
+
+An unsigned V2 request binds the process that built it: its Clock entry binding names that process's start identity, boot and environment, and verification compares them with its own. A request built in one process is therefore refused in any other. `verify-self-bound` is the command a launcher starts as the child that is verified. Inside that one process it builds the whole request from the launcher's declaration and verifies it.
+
+The steps run in this order, all before verification starts:
+
+1. The native entry method observes this process: its `/proc/self/stat`, the boot identifier and the runtime environment. A launcher identity record naming this process's identifier is added.
+2. A fresh Clock acceptance is captured: timesyncd's NTP reply first, then two realtime samples bracketed by `CLOCK_MONOTONIC_RAW`. Its drift, annual and uncertainty models and its profile are built, then the acceptance body with the declared checks. Its window starts at the verification budget (5 s) before its first sample and lasts one civil year. It holds for this boot only.
+3. A second NTP reply is captured, then the first sample, then the entry binding, the trust context and the evaluation subject.
+4. The later "after" and use samples are taken, then the use method, the witness, the final local policy (the base policy with its Clock qualification naming the witness) and the V2 policy.
+
+Each reply is captured before the samples aged from it, so a timesyncd poll during the launch cannot leave a sample older than its exchange. Verification's own entry observation and monotonic handoff stay its own.
+
+The NTP reply comes from one fixed command, `/usr/bin/busctl --system get-property org.freedesktop.timesync1 /org/freedesktop/timesync1 org.freedesktop.timesync1.Manager NTPMessage`. It runs with no shell, standard input from `/dev/null`, an environment of `LC_ALL=C` only and a 10 s bound. At most 4097 bytes are read, and a reply over 4096 bytes is refused. Anything on standard error, a non-zero exit or the timeout makes the capture unavailable.
+
+### The declaration
+
+`--declaration` is one closed JSON object. It states what the launcher declares, as an `unsigned_declared` caller; the command computes and captures everything else. Every number is a decimal integer string without sign or leading zero, and every reference is a whole reference into `--objects`.
+
+| Field | Content |
+|---|---|
+| `schema_id` | `evidence_manifest_toolkit.self_bound_declaration.v1`. |
+| `required_claim_ids`, `required_purposes` | The verification policy's scope. |
+| `base_policy_ref` | The local policy body. Its `required_evaluation_time_qualification.clock_qualification_ref` must be null; the launch fills it. |
+| `policy_rules` | The V2 policy's `identity_rule_ref`, `validation_rule_ref`, `whole_conditions_and_limitations_ref` and `signature_obligation_rule_ref`; `foreign_rule_ref` and `independent_foreign_trust_ref`, each a reference or null; `minimum_identity_class`; `allowed_nonuse_classes`. |
+| `clock.time_source` | The profile's time source. |
+| `clock.drift_rate` | `numerator` and `denominator` of the maximum drift, in nanoseconds per elapsed nanosecond; both positive. |
+| `clock.maximum_uncertainty_ns` | The profile's maximum uncertainty; positive. |
+| `clock.model_valid_from`, `clock.model_valid_until` | The validity window of the declared models, as UTC lexemes. |
+| `clock.sample_bounds` | `accuracy_radius_ns`, `mapping_ns`, `quantization_ns`, `source_encoding_ns`, `post_exchange_adjustment_ns` and `use_adjustment_ns`. |
+| `clock.entry_bounds` | `acquisition_ns`, `mapping_ns`, `quantization_ns` and `adjustment_ns` at verification entry. |
+| `clock.rule_refs` | `accepted_ntp_configuration_ref`, `acquisition_rule_ref`, `monotonic_mapping_rule_ref`, `independence_rule_ref`, `daemon_field_mapping_rule_ref`, `ntp_resolution_and_rotation_rule_ref`, `automatic_reacceptance_rule_ref`, `sample_mapping_and_quantization_rule_ref`, `rate_source_ref`, `calibration_source_ref`, `adjustment_rule_ref`, `rule_implementation_ref`, `complete_authorization_obligations_ref`, `assumptions_and_limitations_ref` and `term_source_ref`. |
+| `clock.provenance_refs` | A non-empty array of the models' provenance references. |
+| `clock.checks` | The six acceptance checks, each `check_id`, `result` (`pass`, `fail` or `unavailable`) and a non-empty `evidence` array. |
+
+The command computes each sample's holdover from the declared rate, as the rate times the sample's age since the exchange's destination time plus the declared adjustment, rounded up. It computes the use error, the witness's bounds and a fresh request identifier.
+
+A declared result is kept exactly as declared. The Clock verdict recomputes the checks it can, and a declared `pass` that the evidence contradicts is refused at `/checks/<index>/result`.
+
+An evidence item is either `{"ref": <reference>}` for an object of the store, or `{"role": <name>}` for a record this launch stores before the acceptance body:
+
+| Role | Record |
+|---|---|
+| `environment` | The runtime environment the native entry method reported. |
+| `boot_domain` | The boot identifier. |
+| `process_start` | This process's `/proc/self/stat`. |
+| `entry_method` | The installed native entry method record. |
+| `identity_declaration` | The launcher identity record naming this process. |
+| `annual_before_raw_sample`, `annual_after_raw_sample` | The acceptance's two raw samples. |
+| `annual_ntp_reply` | The acceptance's NTP reply. |
+| `drift_method`, `annual_derivation`, `uncertainty_method` | The acceptance's models. |
+| `profile` | The Clock profile. |
+
+The later records cannot be evidence. These are the first sample, the subject, the second reply, the later samples and the witness. They are stored after the acceptance body, and the witness names that body. Any other role is refused.
+
+### What is written, and when
+
+Nothing is written while the request is built or verified. The records are held by digest and served to verification ahead of the store.
+
+After verification returns, each new record is written whole under a private name and linked to its digest name, which never replaces an existing file. Records the store already holds with equal bytes are kept. Then `--request` is published as a fresh directory holding:
+
+- `policy.json` and `trust.json`, exactly as `emt verify` takes them;
+- `request.json`, which lists every stored record and states that the acceptance was captured at this launch and holds for this boot only.
+
+`--report` receives the same report bytes as stdout.
+
+### Refusals
+
+The command refuses before anything is captured in these cases:
+
+- an existing `--request` or `--report`;
+- a declaration of another schema;
+- an unknown field or role;
+- a base policy whose Clock qualification is already filled.
+
+Two more refusals come from the store and the host:
+
+- A store file holding different bytes under a record's digest is refused before verification, at `/objects/<digest>`.
+- A host without the native entry method is refused at `/clock/identity_capture`, and an unavailable NTP capture at `/clock/ntp_capture`.
+
+A verification refusal writes nothing, and its exits are those of `verify`.
+
+Replaying `policy.json` and `trust.json` with `emt verify` from any other process is refused with `policy_unavailable` and exit `2`. That refusal is the binding working as intended.
+
+The report's `time_consistency_only` reason, when the declared checks hold, means what the table below says and no more.
 
 ## Read-only object store
 

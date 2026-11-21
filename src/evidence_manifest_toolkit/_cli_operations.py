@@ -29,7 +29,9 @@ from ._offline_store import OfflineStore
 from ._publication import publish_report
 from ._reference_paths import configuration_refusal
 from ._references import reference_bytes
+from ._results import VerificationReport
 from ._sealing import seal
+from ._self_bound_launch import verify_self_bound
 from ._serialization import reference_mapping, report_bytes
 from ._signer_installation import installed_signer
 from ._signing_request import validate_signing_request
@@ -207,7 +209,26 @@ def verify_command(
         )
         result = execution.report
         output = report_bytes(result)
-    status = (
+    status = report_status(result)
+    publish_report(report, output)
+    return output, status
+
+
+def report_status(result: VerificationReport) -> int:
+    """Return the common-mode exit status of a published verification report.
+
+    Parameters
+    ----------
+    result : VerificationReport
+        The complete report.
+
+    Returns
+    -------
+    int
+        4 for a configuration reason, 3 for an unavailable reference, signer or storage, 0 when
+        the common mode is eligible, and 2 otherwise.
+    """
+    return (
         4
         if any(reason.code == "configuration_error" for reason in result.reasons)
         else 3
@@ -219,5 +240,54 @@ def verify_command(
         if result.common_eligibility == "eligible"
         else 2
     )
+
+
+def self_bound_command(
+    *,
+    declaration: Path,
+    content: Path,
+    schema_id: str,
+    registry: Path,
+    objects: Path,
+    limits: Path,
+    request: Path,
+    report: Path,
+) -> tuple[bytes, int]:
+    """Build and verify a self-bound unsigned request in this process, then publish its report.
+
+    Parameters
+    ----------
+    declaration, content, registry, objects, limits : Path
+        The launcher's declaration, the content and the configurations, as for ``verify``.
+    schema_id : str
+        The content's known schema identifier.
+    request : Path
+        A fresh directory name for the request.
+    report : Path
+        A fresh file receiving the same complete report bytes as stdout.
+
+    Returns
+    -------
+    tuple of bytes and int
+        The report bytes and the common-mode exit status.
+
+    Raises
+    ------
+    EmtError
+        A configuration, capture, verification or publication refuses. ``report`` is checked
+        before anything is captured, so a taken report name refuses with nothing written.
+    """
+    if report.exists() or report.is_symlink():
+        raise configuration_refusal("/report")
+    result, _ = verify_self_bound(
+        declaration=declaration,
+        content=content,
+        schema_id=schema_id,
+        registry=registry,
+        limits=limits,
+        objects=objects,
+        request=request,
+    )
+    output = report_bytes(result)
     publish_report(report, output)
-    return output, status
+    return output, report_status(result)

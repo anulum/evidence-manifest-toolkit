@@ -14,6 +14,19 @@ EVIDENCE-MANIFEST-TOOLKIT — source and configuration provenance
 
 Initial local repository metadata, deterministic infrastructure guards, safe workflow preparation, locked development tools, native documentation and public-boundary conformance tests. No runtime package or public release is declared.
 
+`emt verify-self-bound` is the command a launcher starts as the child
+that is verified. It takes the declaration, the content and the
+configurations, the object store, a fresh `--request` directory and a
+fresh `--report` file. It exits as `verify` does, and a taken report
+name refuses before anything is captured. The function is public as the
+module `evidence_manifest_toolkit.self_bound` (`verify_self_bound`,
+`SelfBoundRequest`), whose own surface is pinned. The package root keeps
+its 39 names and its six pure operations. The CLI documentation
+describes the declaration field by field, with the evidence roles, the
+capture order and what is written. The Python API documentation states
+that this route reads the host and writes files. The test of the
+reasons table now stops at the next heading of any level.
+
 A self-bound launch builds a whole unsigned V2 request inside the
 process that verifies it, since a request binds the process that built
 it and refuses in any other. `verify_self_bound` reads the launcher's
