@@ -12,6 +12,8 @@ EVIDENCE-MANIFEST-TOOLKIT — source and configuration provenance
 
 Local repository validation infrastructure and a Python evidence runtime under development. The source module exports canonicalization, byte references, inspection, difference, seal and verification operations, with four offline command grammars. Read the [Python API](docs/api.md) and [Offline CLI](docs/offline-cli.md) for their inputs and result semantics.
 
+Evidence Manifest Toolkit is part of the **SC Neuromorphic Computing Systems** group (SC-NEUROMORPHIC-COMPUTING-SYSTEMS). The [group and project map](https://github.com/anulum/sc-neurocore/blob/main/docs/ecosystem.md) shows the whole programme and where this repository sits in it.
+
 The repository records `architecture_only` maturity. Its qualified capability, claim and schema inventories remain empty. Installed packaging and operational root, signer, clock and domain qualification are not supplied by this checkout. Common report eligibility and command completion do not establish scientific acceptance.
 
 The implemented infrastructure checks local metadata, attribution, workflows, dependency alignment, documentation and inventory. The preflight command combines those gates with the complete development-tool checks. A successful report covers only the requested local repository operation.

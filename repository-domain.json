@@ -8,7 +8,8 @@
     "rfc8785==0.1.4+emt.1"
   ],
   "evidence_maturity": "architecture_only",
-  "lifecycle": "local_scaffold",
+  "lifecycle": "public_repository",
+  "public_remote": "https://github.com/anulum/evidence-manifest-toolkit",
   "owner_group": "SC-NEUROMORPHIC-COMPUTING-SYSTEMS",
   "planned_owned_schema_ids": [
     "evidence_manifest_toolkit.adapter_conformance.v1",

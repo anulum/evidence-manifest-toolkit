@@ -16,6 +16,12 @@ REPOSITORY: Final = "EVIDENCE-MANIFEST-TOOLKIT"
 
 GROUP: Final = "SC-NEUROMORPHIC-COMPUTING-SYSTEMS"
 
+#: The Tier-0 lifecycle phase: the repository is published at its canonical public remote.
+LIFECYCLE: Final = "public_repository"
+
+#: The canonical public remote: the lower-case repository name under the owner account.
+PUBLIC_REMOTE: Final = "https://github.com/anulum/evidence-manifest-toolkit"
+
 
 PROFILE: Final = {
     "id": "gotm.enterprise-repository-tier0.local-scaffold",
