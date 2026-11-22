@@ -58,18 +58,18 @@ WORKFLOW_POLICY: Final[WorkflowPolicy] = {
     "workflow_inputs_sha256": {
         "ci.yml": {"sha256": "64445a0ef5fe296928ae6f30370aaf2626703dfe06bc2d8c8f8f17500b45baaa"},
         "codeql.yml": {
-            "sha256": "4d9e59d5c1967853b3087cfdb3ce85843fa77c95c17f4ea6a8b75bf7bd81b5c6"
+            "sha256": "f77be302ce58512b249f486b7a37fec89f899d3a0904bd41598bfdb758ed5241"
         },
-        "docs.yml": {"sha256": "c3a89f2a9d0666574fb9aaad6add60365f4519959fdfa4706b26fd3f2feaac18"},
+        "docs.yml": {"sha256": "3f93033e81f711247312cc58a2f7d394aa213a4e7df72edb92a82ef5c85d2e30"},
         "pre-commit.yml": {
-            "sha256": "09909ed703a39f5ff942e2e351408c7e5c4a543b988829d4e4bd009c3f033d28"
+            "sha256": "3560bae76c8dfdcbf321e481da6a3bcecdb0b1d40ce5d333012913d584402e21"
         },
-        "sbom.yml": {"sha256": "8e040cdaf78e3cc5718d14ff8a257b50af267a73ebfc72c0f7b9cee77dfb9fc2"},
+        "sbom.yml": {"sha256": "77cad75ae0ad7de45d5c062e164535248d57c7c0cdb38309db5d23fc28e002d9"},
         "scorecard.yml": {
-            "sha256": "0fe4059e00a9a0fdcdd06da1997f549adc9b1d0cecd943c47bad5373dafc6b1e"
+            "sha256": "181b2a86d8c2de91c84e6c1e073abc910ee74502d23575a1cd3ee03ae4760056"
         },
         "security-audit.yml": {
-            "sha256": "1dc809a18c23821c2769d196133b05b9ae2843a72495baf16575519c660b319b"
+            "sha256": "a146f8d5aaf2d411ea0d7c90f4c4b0434187e5a33e57ebcc9d45e32d5204c2b7"
         },
     },
     "platform": "github.com",
