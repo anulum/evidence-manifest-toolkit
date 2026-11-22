@@ -31,3 +31,19 @@ Read [CONTRIBUTING.md](CONTRIBUTING.md) for the locked development environment, 
 The licence is [AGPL-3.0-or-later](LICENSE). Commercial licensing enquiries use protoscience@anulum.li. Security reports use the private route in [SECURITY.md](SECURITY.md). No donor roster has been supplied; no sponsorship identities are claimed.
 
 <p align="center"><img src="docs/assets/anulum_logo_company.jpg" alt="ANULUM" width="240"> <img src="docs/assets/fortis_studio_logo.jpg" alt="Fortis Studio" width="160"></p>
+
+## Text and data mining reservation
+
+The rightsholder, Miroslav Šotek (ANULUM), expressly reserves the use of the
+works in this repository for text and data mining, including the collection of
+this content for, and its use in, training, fine-tuning or evaluating machine
+learning and artificial intelligence models, in accordance with Article 4(3) of
+Directive (EU) 2019/790 and the national provisions transposing it.
+
+No permission for such use has been granted beyond what the licence in
+`LICENSE` grants. This reservation does not change that licence: uses the
+licence permits remain permitted on its terms, including its attribution and
+share-alike conditions.
+
+Reservation made on 2026-11-22. Requests for permission: contact the
+rightsholder through the contact listed in this repository.
