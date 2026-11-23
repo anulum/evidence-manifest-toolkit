@@ -58,18 +58,18 @@ WORKFLOW_POLICY: Final[WorkflowPolicy] = {
     "workflow_inputs_sha256": {
         "ci.yml": {"sha256": "64445a0ef5fe296928ae6f30370aaf2626703dfe06bc2d8c8f8f17500b45baaa"},
         "codeql.yml": {
-            "sha256": "f77be302ce58512b249f486b7a37fec89f899d3a0904bd41598bfdb758ed5241"
+            "sha256": "b2362efac2b35c8fc8257108b60970237e12b9a7c827433e94e3268ecfd4cb89"
         },
-        "docs.yml": {"sha256": "3f93033e81f711247312cc58a2f7d394aa213a4e7df72edb92a82ef5c85d2e30"},
+        "docs.yml": {"sha256": "303bb0e5fd0fbc7e4d4774c4d12a37b2ad8f367b74ec4e29d2dbec56a8fe235b"},
         "pre-commit.yml": {
-            "sha256": "3560bae76c8dfdcbf321e481da6a3bcecdb0b1d40ce5d333012913d584402e21"
+            "sha256": "273f5233669c27ea87ca6f2f048c56e00959400ce751972d7b3516ab71925112"
         },
-        "sbom.yml": {"sha256": "77cad75ae0ad7de45d5c062e164535248d57c7c0cdb38309db5d23fc28e002d9"},
+        "sbom.yml": {"sha256": "9b701faa7bf00c526ab1a8c153af5d986acd3afb81308610f31b2d790a2fbb3f"},
         "scorecard.yml": {
-            "sha256": "181b2a86d8c2de91c84e6c1e073abc910ee74502d23575a1cd3ee03ae4760056"
+            "sha256": "53e4ae8f558338d32437287edbf6a9ee20c49b6554e1c6bf870f10d41a2501b8"
         },
         "security-audit.yml": {
-            "sha256": "a146f8d5aaf2d411ea0d7c90f4c4b0434187e5a33e57ebcc9d45e32d5204c2b7"
+            "sha256": "96067e119d27255c33241574d3df40958a39cf25c69c2c70f380b48ba566eb70"
         },
     },
     "platform": "github.com",
@@ -78,34 +78,34 @@ WORKFLOW_POLICY: Final[WorkflowPolicy] = {
             "sha256": "27a8d67d28e7c37496270963292e378b2f9afa3bafdf3f98948e101a0851c1aa"
         },
         "codeql.yml/analysis": {
-            "sha256": "884bed723e086a6923a218362f9cee1dd3f049dd5e45bec24e955d8d8bb90fb8"
+            "sha256": "5a952105403e67e8098cad4af05a99517e5eacab9a5c5784d60656dacba84fad"
         },
         "docs.yml/render": {
-            "sha256": "e1011e03c2511611ceb72c5e16b2b80b99bf9b561d041619b5706ead2c587483"
+            "sha256": "c8682675b183eae2b0bf26949ee6bbcacfcbaadcf56487f59853db0fb7fdbe34"
         },
         "pre-commit.yml/quality": {
-            "sha256": "c44679639c17c44916babe8db80ae5544e309ed4514d5163d1ba1dae01bac946"
+            "sha256": "e176f493f00dd17432220c750d94920b24f4e99e2862e6b0b1c2d52682e36d8d"
         },
         "pre-commit.yml/tests": {
-            "sha256": "bbaeb2bfd36ddddd984d7473abd9b70d6ea6f0454ddc8fc75090d478cc74cfb5"
+            "sha256": "d6a2b6a5400c5b015c5aae61fbff29216afa2573e6b63ae0c09fc9adea81df28"
         },
         "sbom.yml/inventory": {
-            "sha256": "7d640589341cdfee1a73356baff4771cc43723d88b7ef84d48282aaf55351153"
+            "sha256": "ae638eab92e33a12f46b694029c6e3aa6d4d4e6bb8b7c8b0b95965e88c67a9d3"
         },
         "scorecard.yml/configuration": {
-            "sha256": "f076b392005ec797b3478957e5ae62696362c668e9d7b6c199d35ef031f3078b"
+            "sha256": "374b74e8689289a2272f469f0b0a4852e54b9db4618efbb199351b9619a3ff4a"
         },
         "security-audit.yml/dependency": {
-            "sha256": "cf5082b1aada6554f2e25a9f49c5867d482e78e7e6c5218d960f9097ed38e37f"
+            "sha256": "c06a5231cbd6a38cb4d0868cdaefd23963c9b20e7aa25e40ddd962299dc3bb47"
         },
         "security-audit.yml/secrets": {
-            "sha256": "3d9d52a314345882b6afa9b36fda3f12305c4762b8626739ea08332212c4238b"
+            "sha256": "8fb0a9025c09a506a1b3ccedf86bb1076b5fea0711b09518978e1edcff80fac1"
         },
         "security-audit.yml/static": {
-            "sha256": "c0b9486a5aa883cad45b3404b989f0a75f62668fc067ab2a84fea51d9cc08044"
+            "sha256": "94c6097477fe89193eafc04538cbd27964435b275841fa370a61d453c843258e"
         },
         "security-audit.yml/workflow": {
-            "sha256": "6b3fbfa2952cfd7670a2b4f242d269e810082ec77fd2807f0b0d9068a7425ae5"
+            "sha256": "4c0e7312e3880afe37fd0bd30559bfb0a8bc54d573584275283edabfc9a07b21"
         },
     },
     "schema_revision": "emt.local-workflow-policy.v1",

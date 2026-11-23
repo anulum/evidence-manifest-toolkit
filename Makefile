@@ -62,7 +62,7 @@ supply-chain:
 	$(PYTHON) tools/check_dependency_alignment.py --root . --json
 
 
-.PHONY: environment prepare-native prepare-codeql prepare-test-fixtures prepare-test-wheels prepare-interpreter-fixture prepare-major-interpreter-fixture prepare-test-inputs produce-audit prepare-uv check-environment-inputs
+.PHONY: environment prepare-native prepare-codeql prepare-test-fixtures prepare-test-wheels prepare-interpreter-fixture prepare-major-interpreter-fixture prepare-test-inputs produce-audit prepare-uv check-environment-inputs fetch-environment-inputs
 
 environment:
 	test ! -L "$(ENVIRONMENT_DIR)"
@@ -80,6 +80,13 @@ environment:
 	$(UV) --no-config pip install --python "$(ENVIRONMENT_DIR)/bin/python" --cache-dir "$(UV_CACHE)" --link-mode hardlink --require-hashes --no-deps --no-build-isolation --no-index --find-links "$(ENVIRONMENT_INPUTS)" -r requirements-dev.txt
 	$(UV) --no-config pip check --python "$(ENVIRONMENT_DIR)/bin/python"
 	"$(ENVIRONMENT_DIR)/bin/python" -B -I -c 'import pathlib,sys; files=list(pathlib.Path(sys.prefix).glob("lib/python3.13/site-packages/*.dist-info/METADATA")); assert files and all(p.stat().st_nlink>1 for p in files), "Package hardlink verification failed"'
+
+fetch-environment-inputs:
+	test ! -L .tool-cache
+	test ! -L "$(ENVIRONMENT_INPUTS)"
+	$(BASE_PYTHON) -B -I -c 'import platform; assert platform.python_version() == "3.13.18"'
+	mkdir -p .tool-cache
+	$(BASE_PYTHON) -B -I tools/fetch_environment_inputs.py --root . --artifacts "$(ENVIRONMENT_INPUTS)" --json
 
 check-environment-inputs:
 	$(BASE_PYTHON) -B -I -c 'import platform; assert platform.python_version() == "3.13.18"'

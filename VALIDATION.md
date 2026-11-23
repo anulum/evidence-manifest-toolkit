@@ -74,8 +74,22 @@ Inventory generation requires a new destination: `--mode generate --output NEW_F
 
 All guards operate offline. Dependency security consumes the separately produced, digest-bound real pip-audit snapshot; acquisition is an explicit network operation before validation. Missing or stale accepted inputs remain unavailable. Native quality, test coverage, REUSE, secrets, Actionlint, workflow security, strict rendering and SBOM gates use real installed tools. Hosted checks and unsupported operating systems have no local acceptance claim.
 
-On a clean Linux amd64 checkout, run `make environment`, then
-`make prepare-test-inputs` before tests. The second command acquires the pinned
+On a clean Linux amd64 checkout, run `make fetch-environment-inputs`, then
+`make environment`, then `make prepare-test-inputs` before tests.
+
+The first command acquires every artifact that `dependency-provenance.json`
+selects into a new `ENVIRONMENT_INPUTS` directory, and it needs the network.
+Registry artifacts come only over verified HTTPS from `files.pythonhosted.org`,
+with no credentials, port, query or fragment. Any status other than 200,
+including every redirect, is unavailable (exit 3). The declared length and the
+received bytes must equal the pins (exit 2), and the read stops one byte after
+the pinned length. The maintained RFC wheel is copied from its tracked path.
+Every origin and tracked-file check completes before the directory is created
+or a connection is made, an existing directory is never written into, and any
+failure removes the directory the command created. Its tests also use the
+network; without it they fail and are not skipped.
+
+The third command acquires the pinned
 fixtures and separately produces the strict audit snapshot. It preserves the
 trusted snapshot digest and original production timestamp; acquisition does
 not automatically admit changed bytes or refresh an expired seal.

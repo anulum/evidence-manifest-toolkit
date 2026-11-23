@@ -30,6 +30,8 @@ jobs:
           python-version: "3.13.18"
           cache: pip
           cache-dependency-path: requirements-dev.txt
+      - name: Fetch the pinned environment inputs
+        run: make fetch-environment-inputs
       - name: Install the complete hash-locked development graph
         run: make environment
       - name: Validate local infrastructure
@@ -49,6 +51,8 @@ jobs:
           python-version: "3.13.18"
           cache: pip
           cache-dependency-path: requirements-dev.txt
+      - name: Fetch the pinned environment inputs
+        run: make fetch-environment-inputs
       - name: Install the complete hash-locked development graph
         run: make environment
       - name: Prepare the pinned native fixtures and actual audit input

@@ -189,14 +189,20 @@ dependencies remain exact pins; declaration agreement grants no domain
 qualification.
 
 Supply a flat directory containing every selected artifact from
-dependency-provenance.json, including the maintained RFC wheel. Then run:
+dependency-provenance.json, including the maintained RFC wheel, or let the
+first command below create it. It is the one networked step: registry
+artifacts come only over verified HTTPS from files.pythonhosted.org, any status
+other than 200 is unavailable, the declared length and the bytes must equal
+the pins, the maintained wheel is copied from its tracked path, and a failure
+leaves no directory. Then run:
 
 ~~~sh
+make fetch-environment-inputs BASE_PYTHON=/path/to/python3.13 ENVIRONMENT_INPUTS=/path/to/artifacts
 make check-environment-inputs BASE_PYTHON=/path/to/python3.13 ENVIRONMENT_INPUTS=/path/to/artifacts
 make environment BASE_PYTHON=/path/to/python3.13 ENVIRONMENT_INPUTS=/path/to/artifacts
 ~~~
 
-The first command reads only data. The same check runs before environment or
+The check command reads only data. The same check runs before environment or
 installer preparation. It binds the original lock and provenance, every
 selected artifact and all maintained RFC derivation inputs under one total
 byte budget. Missing, altered, linked or incompatible inputs refuse before
@@ -204,7 +210,7 @@ writes. Installation is offline, hash required and followed by the native
 compatibility and package hardlink checks. The installer cache and environment
 must share a filesystem.
 
-Prepared workflow definitions select the same interpreter. Their artifact
-directory must be supplied explicitly before the environment target; no
-first-party artifact download URL or hosted execution result is implied by
-these definitions.
+Prepared workflow definitions select the same interpreter and run
+`make fetch-environment-inputs` before the environment target, so each hosted
+job acquires the pinned artifacts itself. No first-party artifact download
+URL or hosted execution result is implied by these definitions.
