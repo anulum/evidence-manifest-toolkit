@@ -466,3 +466,34 @@ def test_real_cache_link_after_configuration_read_is_refused(
             held.rename(cache)
     assert snapshots(root) == before
     assert cache.is_dir() and not cache.is_symlink() and not held.exists()
+
+
+_PRIVATE_LOCATIONS = (
+    b".coordination/",
+    b"/media/anulum",
+    b"/home/anulum",
+    b"aaa_God_of_the_Math_Collection",
+)
+_PRIVATE_LOCATION_REFUSALS = frozenset(
+    {".gitignore", "tests/test_documentation.py", "tools/local_scaffold/documentation.py"}
+)
+
+
+def test_no_tracked_file_names_a_private_location() -> None:
+    """Keep every tracked file, fixtures included, free of private workstation locations.
+
+    The documentation policy refuses these locations in rendered pages. The repository is
+    public, so the same refusal holds for every tracked file; only the files that state the
+    refusal itself may hold the strings.
+    """
+    listed = subprocess.run(
+        ["git", "-C", str(SOURCE), "ls-files", "-z"], capture_output=True, check=True
+    ).stdout
+    offenders = []
+    for name in listed.decode("utf-8").split("\0"):
+        if not name or name in _PRIVATE_LOCATION_REFUSALS:
+            continue
+        content = (SOURCE / name).read_bytes()
+        if any(location in content for location in _PRIVATE_LOCATIONS):
+            offenders.append(name)
+    assert offenders == []
