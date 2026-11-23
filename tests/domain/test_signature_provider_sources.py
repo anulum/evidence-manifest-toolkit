@@ -14,7 +14,6 @@ import hashlib
 import json
 import os
 import re
-import shutil
 import subprocess
 import sys
 from importlib.metadata import distribution
@@ -105,8 +104,39 @@ def _wire(value: object) -> _Wire:
     return value
 
 
+def _console_script(original: bytes, root: Path) -> bytes:
+    """Return the console script an installer writes into ``root`` for an original one.
+
+    Parameters
+    ----------
+    original : bytes
+        Console script installed into this interpreter's own environment.
+    root : Path
+        Isolated environment that receives the same script.
+
+    Returns
+    -------
+    bytes
+        The original with its environment prefix moved to ``root``. A ``#!`` line that
+        exceeds 127 bytes with its newline, or whose interpreter path holds a space, cannot
+        start that interpreter directly, so the installer starts it through ``/bin/sh``
+        instead, as uv writes it.
+    """
+    script = original.replace(str(Path(sys.prefix)).encode(), str(root).encode())
+    first, separator, rest = script.partition(b"\n")
+    interpreter = first.removeprefix(b"#!")
+    if len(first) + 1 <= 127 and b" " not in interpreter:
+        return script
+    launcher = b"#!/bin/sh\n'''exec' '" + interpreter + b"' \"$0\" \"$@\"\n' '''"
+    return launcher + separator + rest
+
+
 def _without_provider(root: Path, environment: dict[str, str]) -> Path:
     """Install six exact original locked libraries through offline uv hardlinks.
+
+    The repository's own pinned uv installs them from the verified environment inputs
+    through the environment's uv cache, as ``make environment`` does; nothing comes
+    from the host's uv, its home cache or an index.
 
     Parameters
     ----------
@@ -140,8 +170,13 @@ def _without_provider(root: Path, environment: dict[str, str]) -> Path:
         "pycryptodome",
     }
     del pins["pycryptodome"]
-    uv = shutil.which("uv")
-    assert uv is not None
+    uv = str(_SOURCE / ".tool-cache/bootstrap-uv/uv")
+    artifacts = Path(
+        os.environ.get(
+            "EMT_TEST_ENVIRONMENT_ARTIFACTS", str(_SOURCE / ".tool-cache/environment-inputs")
+        )
+    )
+    assert artifacts.is_dir()
     uv_environment = {
         **environment,
         "UV_CONCURRENT_INSTALLS": "1",
@@ -150,10 +185,7 @@ def _without_provider(root: Path, environment: dict[str, str]) -> Path:
         "RAYON_NUM_THREADS": "1",
         "TOKIO_WORKER_THREADS": "1",
     }
-    cache_result = subprocess.run(
-        [uv, "cache", "dir"], env=uv_environment, capture_output=True, timeout=30, check=True
-    )
-    cache = Path(cache_result.stdout.decode().strip())
+    cache = Path(os.environ.get("EMT_TEST_UV_CACHE", str(_SOURCE / ".tool-cache/uv-cache")))
     assert cache.is_dir()
     requirements = root.parent / (root.name + "-runtime-lock.txt")
     selected: list[str] = []
@@ -199,6 +231,9 @@ def _without_provider(root: Path, environment: dict[str, str]) -> Path:
             "pip",
             "sync",
             "--offline",
+            "--no-index",
+            "--find-links",
+            str(artifacts),
             "--no-build",
             "--require-hashes",
             "--link-mode",
@@ -248,7 +283,7 @@ def _without_provider(root: Path, environment: dict[str, str]) -> Path:
                     else:
                         assert recorded == destination and length == ""
             elif str(entry).startswith("../"):
-                assert actual == raw.replace(str(Path(sys.prefix)).encode(), str(root).encode())
+                assert actual == _console_script(raw, root)
             else:
                 assert actual == raw
                 if entry.name not in {"INSTALLER", "REQUESTED", "uv_cache.json"}:
