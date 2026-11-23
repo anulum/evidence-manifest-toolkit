@@ -221,7 +221,7 @@ def genuine_graph_python() -> Path:
             )
             assert json.loads(marker.read_text()) == {
                 "source_graph_sha256": fingerprint,
-                "producer_count": 103,
+                "producer_count": 105,
                 "native_clone": "complete-original-package-copy",
             }
         else:
@@ -244,7 +244,7 @@ def genuine_graph_python() -> Path:
                 json.dump(
                     {
                         "source_graph_sha256": fingerprint,
-                        "producer_count": 103,
+                        "producer_count": 105,
                         "native_clone": "complete-original-package-copy",
                     },
                     stream,
@@ -260,7 +260,7 @@ def genuine_graph_python() -> Path:
 
 
 def qualify_complete_graph(python: Path) -> None:
-    """Read the full actual 103-producer graph and exact original METADATA bytes."""
+    """Read the full actual 105-producer graph and exact original METADATA bytes."""
     check = subprocess.run(
         [
             str(python),
@@ -280,7 +280,7 @@ def qualify_complete_graph(python: Path) -> None:
         canonicalize_name(x["name"]): x["version"]
         for x in json.loads((SOURCE / "dependency-provenance.json").read_text())["packages"]
     }
-    assert actual == expected and len(actual) == len(observed) == 103
+    assert actual == expected and len(actual) == len(observed) == 105
     expected_metadata = {
         canonicalize_name(x["name"]): x["metadata_sha256"]
         for x in json.loads((SOURCE / "dependency-provenance.json").read_text())["packages"]

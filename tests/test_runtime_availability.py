@@ -10,6 +10,7 @@
 
 import hashlib
 import json
+import os
 import subprocess
 import sys
 from pathlib import Path
@@ -22,7 +23,16 @@ from tests.conftest import SOURCE, payload, source_python
 
 @pytest.fixture(scope="module")
 def partial_tool_python(tmp_path_factory: pytest.TempPathFactory) -> Path:
-    """Install only three verified genuine wheels in a real isolated interpreter."""
+    """Install only three verified genuine wheels in a real isolated interpreter.
+
+    The wheels come from the verified environment inputs, which hold every artifact
+    the dependency provenance selects; each digest is checked against that record.
+    """
+    artifacts = Path(
+        os.environ.get(
+            "EMT_TEST_ENVIRONMENT_ARTIFACTS", str(SOURCE / ".tool-cache/environment-inputs")
+        )
+    )
     directory = tmp_path_factory.mktemp("partial-actual-tool-producers")
     python = directory / "bin/python"
     records = [
@@ -34,7 +44,7 @@ def partial_tool_python(tmp_path_factory: pytest.TempPathFactory) -> Path:
     wheels = []
     for record in records:
         artifact = record["source_artifact"]
-        wheel = SOURCE / ".tool-cache/wheelhouse" / artifact["filename"]
+        wheel = artifacts / artifact["filename"]
         assert wheel.is_file() and not wheel.is_symlink()
         assert hashlib.sha256(wheel.read_bytes()).hexdigest() == artifact["sha256"]
         wheels.append(str(wheel))
