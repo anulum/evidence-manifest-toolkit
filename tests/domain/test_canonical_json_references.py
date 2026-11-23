@@ -83,6 +83,7 @@ class SourceCase(TypedDict):
 
 
 _FIXTURE = Path(__file__).parent / "fixtures/json-reference-source-vectors.json"
+_PACKAGE_SOURCE = Path(__file__).resolve().parents[2] / "src"
 _CASES = cast(list[SourceCase], json.loads(_FIXTURE.read_bytes())["cases"])
 _BY_ID = {case["case_id"]: case for case in _CASES}
 
@@ -271,6 +272,7 @@ def test_cli_native_recursion_refuses_before_report_publication(tmp_path: Path) 
             "--report",
             str(report),
         ],
+        cwd=_PACKAGE_SOURCE,
         capture_output=True,
         timeout=20,
         check=False,
