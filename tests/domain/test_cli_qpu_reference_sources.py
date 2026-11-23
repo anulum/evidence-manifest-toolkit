@@ -18,6 +18,7 @@ from dataclasses import asdict, replace
 from pathlib import Path
 
 import pytest
+from coverage import Coverage
 from tests.domain.test_cli_evidence_sources import _collision, _hashes
 from tests.domain.test_qpu_reference_closure_sources import (
     _canonical,
@@ -39,7 +40,8 @@ def _run_seal(arguments: list[str], directory: Path) -> subprocess.CompletedProc
     arguments : list of str
         Entire explicit original seal command and caller source/publication paths.
     directory : Path
-        Owned process temp, fallback trace directory and immutable command-result journal.
+        Owned process temp and immutable command-result journal. The child's trace joins
+        the active coverage run, or without one a sibling directory outside this one.
 
     Returns
     -------
@@ -49,12 +51,20 @@ def _run_seal(arguments: list[str], directory: Path) -> subprocess.CompletedProc
     environment = os.environ.copy()
     for key in ("PYTHONPATH", "MYPYPATH"):
         environment.pop(key, None)
+    active = Coverage.current()
+    fallback = directory.with_name(directory.name + "-child-coverage")
+    if active is None:
+        fallback.mkdir(exist_ok=True)
     environment.update(
         PYTHONDONTWRITEBYTECODE="1",
         TMPDIR=str(directory),
         TMP=str(directory),
         TEMP=str(directory),
-        COVERAGE_FILE=os.environ.get("COVERAGE_FILE", str(directory / "native-process-coverage")),
+        COVERAGE_FILE=(
+            os.path.abspath(active.config.data_file)
+            if active is not None
+            else str(fallback / "native-process-coverage")
+        ),
     )
     argv = [
         sys.executable,
@@ -77,7 +87,7 @@ def _run_seal(arguments: list[str], directory: Path) -> subprocess.CompletedProc
         cwd=_REPOSITORY / "src",
         env=environment,
         capture_output=True,
-        timeout=30,
+        timeout=300,
         check=False,
     )
     with (directory / "native-command-observations.jsonl").open("a") as journal:

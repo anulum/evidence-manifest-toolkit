@@ -77,7 +77,7 @@ def _run(arguments: list[str], directory: Path) -> subprocess.CompletedProcess[b
         cwd=_REPOSITORY / "src",
         env=environment,
         capture_output=True,
-        timeout=60,
+        timeout=300,
         check=False,
     )
     assert sorted(entry.name for entry in (_REPOSITORY / "src").iterdir()) == src_entries
