@@ -22,7 +22,7 @@ authors = [{name = "Miroslav Šotek", email = "protoscience@anulum.li"}]
 dependencies = [
     "jsonschema==4.26.0",
     "referencing==0.37.0",
-    "pycryptodome==3.24.0",
+    "pycryptodome==4.5.0",
     "rfc8785==0.1.4+emt.1",
 ]
 
