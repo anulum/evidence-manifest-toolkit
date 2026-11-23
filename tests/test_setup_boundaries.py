@@ -6,7 +6,12 @@
 # Contact: www.anulum.li | protoscience@anulum.li
 # EVIDENCE-MANIFEST-TOOLKIT — source and configuration provenance
 
-"""Exercise actual setup Make targets against owned external symlink sentinels."""
+"""Exercise actual setup Make targets against owned external symlink sentinels.
+
+The audit producer owns its store and opens it without following links, so
+``produce-audit`` has no Make guard of its own; ``tests/test_audit_store.py``
+exercises that boundary.
+"""
 
 import subprocess
 from pathlib import Path
@@ -14,6 +19,9 @@ from pathlib import Path
 import pytest
 
 from tests.conftest import SOURCE
+
+QUOTED = {("environment", ".venv")}
+"""Guards over an overridable Make variable, which the recipe quotes."""
 
 
 @pytest.mark.parametrize(
@@ -105,14 +113,6 @@ from tests.conftest import SOURCE
             ".tool-cache/wheelhouse",
             ".tool-cache/wheelhouse/coverage-7.16.2-cp314-cp314-manylinux1_x86_64.manylinux_2_28_x86_64.manylinux_2_5_x86_64.whl",
         )
-    ]
-    + [
-        ("produce-audit", name)
-        for name in (
-            ".tool-cache",
-            ".tool-cache/security",
-            ".tool-cache/security/pip-audit.json",
-        )
     ],
 )
 def test_native_setup_refuses_external_symlinks(tmp_path: Path, target: str, relative: str) -> None:
@@ -132,7 +132,8 @@ def test_native_setup_refuses_external_symlinks(tmp_path: Path, target: str, rel
         ["make", "--no-print-directory", target], cwd=root, capture_output=True, timeout=10
     )
     assert result.returncode == 2
-    assert result.stdout.splitlines()[-1] == b"test ! -L " + relative.encode()
+    guarded = f'"{relative}"' if (target, relative) in QUOTED else relative
+    assert result.stdout.splitlines()[-1] == b"test ! -L " + guarded.encode()
     assert b"curl " not in result.stdout and b"pip_audit" not in result.stdout
     assert sentinel.read_bytes() == before
     assert list(outside.iterdir()) == [sentinel]
