@@ -77,6 +77,14 @@ All guards operate offline. Dependency security consumes the separately produced
 On a clean Linux amd64 checkout, run `make fetch-environment-inputs`, then
 `make environment`, then `make prepare-test-inputs` before tests.
 
+The whole-workflow Clock tests read the host's live systemd-timesyncd sample
+through `busctl`. They need systemd-timesyncd with a sample that is not
+ignored, unchanged while they run; without one they fail and are not skipped.
+The hosted tests job installs systemd-timesyncd, sets its poll interval to
+2048 seconds, longer than the job's 20-minute bound, waits for a sample that is
+not ignored, and runs the suite with `TEST_WORKERS=4`, one worker per processor
+of the hosted runner.
+
 The first command acquires every artifact that `dependency-provenance.json`
 selects into a new `ENVIRONMENT_INPUTS` directory, and it needs the network.
 Registry artifacts come only over verified HTTPS from `files.pythonhosted.org`,

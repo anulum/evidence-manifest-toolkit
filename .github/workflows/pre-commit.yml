@@ -57,5 +57,27 @@ jobs:
         run: make environment
       - name: Prepare the pinned native fixtures and actual audit input
         run: make prepare-test-inputs
+      - name: Provide the host clock sample the clock tests read
+        run: |
+          sudo apt-get update
+          sudo apt-get install --yes --no-install-recommends systemd-timesyncd
+          sudo mkdir -p /etc/systemd/timesyncd.conf.d
+          conf=/etc/systemd/timesyncd.conf.d/hold-one-sample.conf
+          printf '[Time]\nPollIntervalMinSec=2048\nPollIntervalMaxSec=2048\n' | sudo tee "$conf"
+          sudo systemctl restart systemd-timesyncd
+          manager=(org.freedesktop.timesync1 /org/freedesktop/timesync1 org.freedesktop.timesync1.Manager)
+          for attempt in $(seq 120); do
+            reply=$(busctl --system get-property "${manager[@]}" NTPMessage 2>/dev/null || true)
+            read -r -a sample <<< "$reply"
+            if [ "${#sample[@]}" -eq 20 ] && [ "${sample[17]}" = false ] && [ "${sample[16]}" != 0 ]; then
+              echo "clock sample ready after ${attempt} s"
+              exit 0
+            fi
+            sleep 1
+          done
+          echo "no clock sample that is not ignored"
+          exit 1
       - name: Validate local infrastructure
+        env:
+          TEST_WORKERS: "4"
         run: make test

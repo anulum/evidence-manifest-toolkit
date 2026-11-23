@@ -214,3 +214,14 @@ Prepared workflow definitions select the same interpreter and run
 `make fetch-environment-inputs` before the environment target, so each hosted
 job acquires the pinned artifacts itself. No first-party artifact download
 URL or hosted execution result is implied by these definitions.
+
+The hosted tests job provides the host clock sample that the whole-workflow
+Clock tests read: it installs systemd-timesyncd, sets its poll interval to
+2048 seconds so no exchange replaces the sample during the job, and waits for a
+sample that is not ignored. It then runs `make test` with `TEST_WORKERS=4`.
+
+Dependabot updates the pinned GitHub Actions only. The development lock pins
+the maintained RFC wheel by a local version that the public registry does not
+serve, so a pip lane could resolve no update. Dependency versions change
+through a reviewed lock change that re-pins `dependency-provenance.json` and
+passes the environment input check.

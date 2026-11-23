@@ -62,7 +62,7 @@ WORKFLOW_POLICY: Final[WorkflowPolicy] = {
         },
         "docs.yml": {"sha256": "303bb0e5fd0fbc7e4d4774c4d12a37b2ad8f367b74ec4e29d2dbec56a8fe235b"},
         "pre-commit.yml": {
-            "sha256": "273f5233669c27ea87ca6f2f048c56e00959400ce751972d7b3516ab71925112"
+            "sha256": "8365069582d289a9be22d8cdf3fea0b5821a64aabeb394fc93e2e78dbf9fd5ac"
         },
         "sbom.yml": {"sha256": "9b701faa7bf00c526ab1a8c153af5d986acd3afb81308610f31b2d790a2fbb3f"},
         "scorecard.yml": {
@@ -87,7 +87,7 @@ WORKFLOW_POLICY: Final[WorkflowPolicy] = {
             "sha256": "e176f493f00dd17432220c750d94920b24f4e99e2862e6b0b1c2d52682e36d8d"
         },
         "pre-commit.yml/tests": {
-            "sha256": "d6a2b6a5400c5b015c5aae61fbff29216afa2573e6b63ae0c09fc9adea81df28"
+            "sha256": "82084c228041aa8854a7c97ce3699fabdd50b3072bd49f1410c3ccf09c5fef2e"
         },
         "sbom.yml/inventory": {
             "sha256": "ae638eab92e33a12f46b694029c6e3aa6d4d4e6bb8b7c8b0b95965e88c67a9d3"
